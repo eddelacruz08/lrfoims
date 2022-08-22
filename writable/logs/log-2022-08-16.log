@@ -1,0 +1,148 @@
+CRITICAL - 2022-08-16 10:55:37 --> Undefined index: permission_type
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Views\Ingredient\index.php(26): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 26, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Ingredi...', Array, true)
+#4 C:\xampp\htdocs\rmfs\app\Views\templates\index.php(12): view('Modules\\Ingredi...')
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(26): view('templates/index', Array)
+#9 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->index()
+#10 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#11 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-08-16 11:13:54 --> Class 'App\Controllers\PermissionsModel' not found
+#0 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(907): App\Controllers\BaseController->__construct()
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(421): CodeIgniter\CodeIgniter->createController()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-08-16 11:47:14 --> Call to undefined function Modules\IngredientManagement\Controllers\alert()
+#0 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-08-16 11:51:31 --> Call to undefined function Modules\IngredientManagement\Controllers\alert()
+#0 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-08-16 12:51:31 --> Undefined index: ingredients
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:22:50 --> Undefined index: role_id
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(34): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 34, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:25:54 --> Undefined variable: type
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(42): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 42, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:37:48 --> Undefined index: permissions
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:38:17 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:38:46 --> Undefined index: permissions
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:41:46 --> Undefined variable: permissions
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:41:52 --> Undefined variable: permissions
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:42:24 --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-08-16 13:42:44 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 36, Array)
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-08-16 13:43:00 --> syntax error, unexpected 'as' (T_AS)
+#0 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Autoloader\Autoloader.php(274): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Autoloader\Autoloader.php(228): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Ingredi...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Ingredi...')
+#3 [internal function]: spl_autoload_call('Modules\\Ingredi...')
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(892): class_exists('\\Modules\\Ingred...', true)
+#5 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(416): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2022-08-16 14:45:36 --> json_decode() expects parameter 1 to be string, array given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'json_decode() e...', 'C:\\xampp\\htdocs...', 35, Array)
+#1 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(35): json_decode(Array)
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#7 {main}
+CRITICAL - 2022-08-16 14:45:52 --> json_decode() expects parameter 1 to be string, array given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'json_decode() e...', 'C:\\xampp\\htdocs...', 35, Array)
+#1 C:\xampp\htdocs\rmfs\modules\IngredientManagement\Controllers\Ingredient.php(35): json_decode(Array)
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#3 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#7 {main}
+CRITICAL - 2022-08-16 14:46:05 --> Call to undefined function Modules\IngredientManagement\Controllers\json()
+#0 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientManagement\Controllers\Ingredient->add()
+#1 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientManagement\Controllers\Ingredient))
+#2 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\rmfs\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\rmfs\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
