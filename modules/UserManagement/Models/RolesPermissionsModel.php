@@ -27,6 +27,19 @@ class RolesPermissionsModel extends BaseModel
 
     return $this->findAll();
   }
+    
+  public function getSecurityPermissions($conditions = [])
+  {
+      $this->select('frbs_roles_permissions.*');
+      $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
+      $this->join('frbs_modules as m', 'm.id = p.module_id');
+      
+      foreach($conditions as $field => $value){
+          $this->where($field, $value);
+      }
+
+      return $this->findAll();
+  }
 
   public function getPermissionsTypes($conditions = []){
     $this->select('pt.type, pt.slug as type_slug, pt.id as type_id');

@@ -14,6 +14,44 @@ function alert_success(message){
 	);
 }
 
+function alert_success_no_flash(message){
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+		  toast.addEventListener('mouseenter', Swal.stopTimer)
+		  toast.addEventListener('mouseleave', Swal.resumeTimer)
+		}
+	  })
+	  
+	  Toast.fire({ 
+		icon: 'success',
+		title: message
+	  })
+}
+
+function alert_error_no_flash(message){
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+		  toast.addEventListener('mouseenter', Swal.stopTimer)
+		  toast.addEventListener('mouseleave', Swal.resumeTimer)
+		}
+	  })
+	  
+	  Toast.fire({ 
+		icon: 'error',
+		title: message
+	  })
+}
+
 function alert_login_success(message){
 	 Swal.fire(
 	  'Login Success!',
@@ -69,22 +107,23 @@ function confirmDelete(route, id){
 	});
 }
 
-function confirmReassess(route){
+function confirmPlaceOrder(route, id, valueId){
 	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can revert this action anytime.",
+		title: 'Do you want to continue?',
+		text: "You won't be able to revert this!",
 		icon: 'question',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
+		confirmButtonText: 'Yes, place order!',
+		allowOutsideClick: false,
 	}).then((result) => {
 		if (result.isConfirmed) {
 			Swal.fire({
 				title: 'Processing...',
 				html: 'Please wait.',
 				icon: 'info',
-				timer: 2000,
+				timer: 1000,
 				timerProgressBar: true,
 				allowOutsideClick: false,
 				didOpen: () => {
@@ -92,7 +131,7 @@ function confirmReassess(route){
 				},
 			}).then((result) => {
 				$.ajax({
-					url: route,
+					url: route + id + valueId,
 					success: function (response) {
 						Swal.fire({
 							title: response.status,
@@ -102,27 +141,27 @@ function confirmReassess(route){
 							window.location.reload();
 						});
 					},
-					error: function (response) {
+					error: function () {
 						Swal.fire({
 							title: response.status,
 							text: response.status_text,
 							icon: response.status_icon,
-							allowOutsideClick: false,
 						});
 					}
 				});
-			})
+			});
 		}
 	});
 }
 
-function approveReservation(route){
-	var remarks = $("#remarks-app").val()
-	var fee = $("#fee").val()
+function applyPayment(route){
+	var c_cash = $("#customer_cash").val()
+	var id = $("#modal_id").val()
+	var total_amount = $("#total_amount").val()
 
 	Swal.fire({
 		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
+		text: "You want to apply this payment?",
 		icon: 'question',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
@@ -146,8 +185,8 @@ function approveReservation(route){
 					url: route,
 					type: "POST",
 					data: {
-						remarks: remarks,
-						reservation_fee: fee,
+						c_cash: c_cash,
+						total_amount: total_amount,
 					},
 					cache: false,
 					success: function (response) {
@@ -157,18 +196,20 @@ function approveReservation(route){
 							icon: response.status_icon,
 							allowOutsideClick: false,
 						}).then((confirm) => {
-							$("#approve").modal("hide");
-							window.location.reload();
+							$("#addPaymentModal"+id).modal("hide");
+							// window.location.reload();
+							console.log(total_amount);
 						});
 					},
-					error: function (response) {
+					warning: function (response) {
 						Swal.fire({
 							title: response.status,
 							text: response.status_text,
 							icon: response.status_icon,
 							allowOutsideClick: false,
 						}).then((confirm) => {
-							$("#approve").modal("hide");
+							$("#addPaymentModal"+id).modal("show");
+							console.log(total_amount);
 						});
 					}
 				});
@@ -176,6 +217,136 @@ function approveReservation(route){
 		}
 	});
 }
+
+function applyPaymentOrders(route){
+	var c_cash = $("#payment_customer_cash").val()
+	var id = $("#payment_modal_id").val()
+	var total_amount = $("#payment_total_amount").val()
+
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to apply this payment?",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, continue',
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 2000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route,
+					type: "POST",
+					data: {
+						c_cash: c_cash,
+						total_amount: total_amount,
+					},
+					cache: false,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							$("#addPaymentOrdersModal"+id).modal("hide");
+							window.location.reload();
+							console.log(total_amount);
+						});
+					},
+					warning: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							$("#addPaymentOrdersModal"+id).modal("show");
+							console.log(total_amount);
+						});
+					}
+				});
+			})
+		}
+	});
+}
+
+function applyPaymentServeOrders(route){
+	var c_cash = $("#serve_payment_customer_cash").val()
+	var id = $("#serve_payment_modal_id").val()
+	var total_amount = $("#serve_payment_total_amount").val()
+
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to apply this payment?",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, continue',
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 2000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route,
+					type: "POST",
+					data: {
+						c_cash: c_cash,
+						total_amount: total_amount,
+					},
+					cache: false,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							$("#addPaymentServeOrdersModal"+id).modal("hide");
+							window.location.reload();
+							console.log(total_amount);
+						});
+					},
+					warning: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							$("#addPaymentServeOrdersModal"+id).modal("show");
+							window.location.reload();
+							console.log(total_amount);
+						});
+					}
+				});
+			})
+		}
+	});
+}
+
 function approveReservationByOffice(route){
 	Swal.fire({
 		title: 'Are you sure?',

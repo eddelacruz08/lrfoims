@@ -26,4 +26,25 @@ class ProductCategoryModel extends BaseModel
 
 	    return $this->findAll();
     }
+    
+    public function getProductSortByCategory($conditions = []){
+        $this->select('lrfoims_product_categories.*');
+        $this->join('lrfoims_products as p', 'lrfoims_product_categories.id = p.product_category_id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+	    return $this->findAll();
+    }
+
+    public function getProductCategoryId($conditions = []){
+        $this->select('lrfoims_product_categories.*');
+        
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+	    return $this->findAll();
+    }
 }

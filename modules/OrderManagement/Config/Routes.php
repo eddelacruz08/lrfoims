@@ -1,52 +1,24 @@
 <?php
 $routes->group('orders', ['namespace' => 'Modules\OrderManagement\Controllers'], function ($routes) {
     $routes->add('/', 'Order::index');
-    $routes->match(['get', 'post'], 'a', 'Order::add');
+    $routes->add('admin-menu', 'Order::menu');
+    $routes->match(['get', 'post'], 'a', 'Order::addOrder');
+    $routes->match(['get', 'post'], 'admin/create-order/a', 'Order::addAdminOrderNumber');
+    $routes->match(['get', 'post'], 'admin/add-to-cart/a', 'Order::addOrderToCartInMenuList');
+    $routes->match(['get', 'post'], 'add-to-cart/(:num)', 'Order::addToCart');
     $routes->match(['get', 'post'], 'u/(:num)', 'Order::edit/$1');
-    $routes->match(['get', 'post'], 'qty/(:num)', 'Order::editQty/$1');
+    $routes->match(['get', 'post'], 'admin/submit-orders/(:num)', 'Order::submitAdminOrderCarts/$1');
+    $routes->match(['get', 'post'], 'admin/qty/(:num)', 'Order::editQty/$1');
+    // $routes->match(['get', 'post'], 'admin/add-payment/u/(:num)', 'Order::addAdminPayment/$1');
+    $routes->match(['get', 'post'], 'admin/cart/qty/(:num)', 'Order::editCartQty/$1');
     $routes->add('d/(:num)', 'Order::delete/$1');
-    $routes->add('r', 'Order::retrieve');
+    $routes->add('place-order/(:num)/(:num)', 'Order::placeOrder/$1/$2');
+    $routes->add('admin/add-payment/u/(:num)', 'Order::addAdminPayment/$1');
+    $routes->add('cart/d/(:num)', 'Order::deleteCart/$1');
+    $routes->add('admin/cart/d/(:num)', 'Order::deleteAdminCart/$1');
+    $routes->add('order', 'Order::retrieveOrder');
+    $routes->add('place-order', 'Order::retrievePlaceOrder');
+    $routes->add('serve-order', 'Order::retrieveServeOrder');
+    $routes->add('payment-order', 'Order::retrievePaymentOrder');
+    $routes->add('payment-history-order', 'Order::retrievePaymentHistoryOrder');
 });
-
-// $routes->group('facility', ['namespace' => 'Modules\ReservationManagement\Controllers'], function ($routes) {
-//     $routes->add('/', 'Facility::index');
-//     $routes->match(['get', 'post'], 'a', 'Facility::add');
-//     $routes->match(['get', 'post'], 'u/(:num)', 'Facility::edit/$1');
-//     $routes->add('d/(:num)', 'Facility::delete/$1');
-// });
-
-// $routes->group('reservations', ['namespace' => 'Modules\ReservationManagement\Controllers'], function ($routes) {
-//     $routes->add('/', 'Reservation::index');
-//     $routes->match(['get', 'post'], 'a', 'Reservation::add');
-//     $routes->match(['get', 'post'], 'u/(:num)', 'Reservation::edit/$1');
-//     $routes->add('d/(:num)', 'Reservation::delete/$1');
-//     $routes->add('v/(:num)', 'Reservation::view/$1');
-//     $routes->add('app/(:num)', 'Reservation::approve/$1');
-//     $routes->add('appo/(:num)', 'Reservation::approveByOffice/$1');
-//     $routes->add('free/(:num)', 'Reservation::approvedFree/$1');
-//     $routes->add('rej/(:num)', 'Reservation::reject/$1');
-//     $routes->add('rejo/(:num)', 'Reservation::rejectByOffice/$1');
-//     $routes->add('res/(:num)', 'Reservation::reset/$1');
-//     $routes->add('g/(:num)', 'Reservation::generateReceipt/$1');
-//     $routes->add('r', 'Reservation::generateReport');
-//     $routes->add('f/(:num)', 'Reservation::generateForm/$1');
-//     $routes->add('p/(:num)', 'Reservation::generatePermit/$1');
-//     $routes->add('t', 'Reservation::calendar');
-//     $routes->add('submit-receipt/(:num)', 'Reservation::submitReceipt/$1');
-//     $routes->add('verify/(:num)', 'Reservation::verify/$1');
-//     $routes->add('end/(:num)', 'Reservation::end/$1');
-//     $routes->add('cancel/(:num)', 'Reservation::cancel/$1');
-//     $routes->add('reupload/(:num)', 'Reservation::reupload/$1');
-//     $routes->add('return/(:num)', 'Reservation::return/$1');
-//     $routes->add('undo-return/(:num)', 'Reservation::undoReturn/$1');
-//     $routes->post('preview', 'Reservation::preview');
-//     $routes->post('check/(:num)', 'Reservation::check/$1');
-// });
-
-// $routes->group('facility-maintenances', ['namespace' => 'Modules\ReservationManagement\Controllers'], function ($routes) {
-//     $routes->add('/', 'FacilityMaintenances::index');
-//     $routes->match(['get', 'post'], 'a', 'FacilityMaintenances::add');
-//     $routes->match(['get', 'post'], 'u/(:num)', 'FacilityMaintenances::edit/$1');
-//     $routes->add('d/(:num)', 'FacilityMaintenances::delete/$1');
-//     $routes->post('check/(:num)', 'FacilityMaintenances::check/$1');
-// });

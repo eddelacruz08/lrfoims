@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" type="image/png" href="/assets/img/pup_logo.png" />
+    <link rel="shortcut icon" type="image/png" href="/assets/img/lamon_logo.png" />
     <title><?= $page_title ?></title>
         <?php if ($page_title == "generate") : ?>
-          <meta http-equiv="Content-Type" content="text/html;" charset=utf-8"/>
+          <meta http-equiv="Content-Type" content="text/html;" charset="utf-8"/>
             <style>
                 @page {
                     margin: 0.2cm 0.2cm;
@@ -91,10 +91,11 @@
         <?php else : ?>
         <link rel="stylesheet" href="/assets/css/style.css">
         <?php endif; ?>
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
-        <?php if($page_title == 'LRFOIS | Dashboard'):?>
+        <?php if($page_title == 'LRFOIMS | Dashboard'):?>
           <link rel="stylesheet" href="/assets/css/adminlte.min.css">
           <?php endif;?>
         <link rel="stylesheet" href="/assets/css/bootstrap-image-checkbox.css">
@@ -108,13 +109,14 @@
 
 </head>
 
-<body id="<?= $page_title == 'LRFOIS | Sign in' ? 'bg-image' : null ?>">
+<body id="<?= $page_title == 'LRFOIMS | Sign in' ? 'bg-image' : null ?>">
     <div id="wrapper">
         <?= $this->rendersection('content') ?>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
@@ -122,9 +124,9 @@
     <script src="https://kit.fontawesome.com/9cef9fee62.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js" integrity="sha256-AOrsg7pOO9zNtKymdz4LsI+KyLEHhTccJrZVU4UFwIU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js" integrity="sha256-GMN9UIJeUeOsn/Uq4xDheGItEeSpI5Hcfp/63GclDZk=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.esm.js" integrity="sha256-OsWibt46P+gzQrnjYvWGnUi5tggkmMv4ZHXzU3g6uJk=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.esm.js" integrity="sha256-OsWibt46P+gzQrnjYvWGnUi5tggkmMv4ZHXzU3g6uJk=" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.js" integrity="sha256-+s2W82x5uCYS4k+d4CN6IUKJ5lWiPJFsOTr5vYqnf4Y=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/helpers.esm.js" integrity="sha256-DBLfWTRw9KgCTW52S2DJ/h/ApFpgL06+MzZONT3BUL0=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/helpers.esm.js" integrity="sha256-DBLfWTRw9KgCTW52S2DJ/h/ApFpgL06+MzZONT3BUL0=" crossorigin="anonymous"></script> -->
     <?= $this->rendersection('dashboard_data'); ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
@@ -136,7 +138,7 @@
     <script src="/assets/js/datatables.js"></script>
     <script src="/assets/js/myAlerts.js"></script>
     <script src="/assets/js/script.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <!-- <script src="/assets/js/main.js"></script> -->
     <script src="/assets/js/incrementer.js"></script>
     <script src="/assets/js/submitReceipt.js"></script>
     <script src="/assets/js/imageCheckbox.js"></script>
@@ -145,6 +147,21 @@
     <script src="/assets/js/datepicker.js"></script>
     <script src="/assets/js/datepickerReports.js"></script>
     <script src="/assets/js/tabbable.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+          $('.js-example-basic-single').select2();
+      });
+      $(document).ready(function(){
+          $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+              localStorage.setItem('activeTab', $(e.target).attr('href'));
+          });
+          var activeTab = localStorage.getItem('activeTab');
+          if(activeTab){
+              $('#myTab a[href="' + activeTab + '"]').tab('show');
+          }
+      });
+    </script>
 </body>
 </html>
 <?= $this->include('templates/notifications'); ?>

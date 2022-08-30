@@ -96,56 +96,6 @@ class Validation
 		]
 	];
 
-	public $tasks = [
-		'task' => [
-			'rules' => 'required|min_length[5]|max_length[50]|is_unique[frbs_tasks.task]',
-			'label' => 'Task',
-			'errors' => [
-                'is_unique' => 'Task already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-
-		'module_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Module',
-			'errors' => [
-				'numeric' => '{field} field is required.'
-			]
-		]  
-	];
-
-	public $departments = [
-		'department' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Department',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
-	public $eventTypes = [
-		'event_type' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Event Types',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
 	public $extensions = [
 		'extension_name' => [
 			'rules' => 'required|min_length[1]|max_length[10]',
@@ -157,94 +107,6 @@ class Validation
 		'description' => [
 			'rules' => 'required|min_length[5]|max_length[50]',
 			'label' => 'Description'
-		],
-	];
-
-	public $levels = [
-		'year' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Year',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
-	public $organizationTypes = [
-		'organization_type' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Organization Type',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
-	public $positions = [
-		'position' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Position',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
-	public $remarks = [
-		'reservation_remarks' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Reservation Remarks',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
-	public $courses = [
-		'course_name' => [
-			'rules' => 'required|min_length[3]|max_length[100]|is_unique[frbs_courses.course_name,id,{courseID}]',
-			'label' => 'Course',
-		],
-		'description' => [
-			'rules' => 'required|min_length[6]|max_length[100]',
-			'label' => 'Description'
-		],
-	];
-
-	public $organizations = [
-		'organization_name' => [
-			'rules' => 'required|min_length[2]|max_length[100]|is_unique[frbs_organizations.organization_name,id,{organizationID}]',
-			'label' => 'Organization Name',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[6]|max_length[100]',
-			'label' => 'Description'
-		],
-		'organization_type_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Organization Type',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
 		],
 	];
 
@@ -319,267 +181,6 @@ class Validation
 		],
 	];
 
-	public $faculties = [
-		'employee_number' => [
-			'rules' => 'required|min_length[7]|max_length[50]',
-			'label' => 'Employee Number',
-		],
-		'last_name' => [
-			'rules' => 'required|min_length[2]|max_length[50]',
-			'label' => 'Last Name'
-		],
-
-		'first_name' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'First Name'
-		],
-
-		'middle_name' => [
-			'rules' => 'max_length[50]',
-			'label' => 'Middle Name'
-		],
-
-		'email_address' => [
-			'rules' => 'required|min_length[5]|max_length[50]|valid_email',
-			'label' => 'Email Address'
-		],
-
-		'contact_number' => [
-			'rules' => 'required|min_length[9]|max_length[50]|numeric',
-			'label' => 'Contact Number'
-		],
-
-		'extension_name_id' => [
-			'rules' => 'numeric',
-			'label' => 'Extension Name',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-
-		'position_id' => [
-			'rules' => 'numeric',
-			'label' => 'Position',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-
-		'department_id' => [
-			'rules' => 'numeric',
-			'label' => 'Department',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-	];
-
-	public $facilities = [
-		'facility_code' => [
-			'rules' => 'required|min_length[5]|max_length[50]|is_unique[frbs_facilities.facility_code,id,{facilityID}]',
-			'label' => 'Facility Code',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'facility_name' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Facility Name',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'image' => [
-			'rules' => 'uploaded[image]|max_size[image, 10240]|ext_in[image,png,jpg,gif]|is_image[image]', 
-			'label' => 'Image'
-		],
-		'facility_status_id' => [
-			'rules' => 'numeric',
-			'label' => 'Facility Status',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'facility_fee' => [
-			'rules' => 'numeric',
-			'label' => 'Facility Fee',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'capacity' => [
-			'rules' => 'numeric',
-			'label' => 'Capacity',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'description' => [
-			'rules' => 'required|min_length[6]|max_length[50]',
-			'label' => 'Description',
-		],
-	];
-	public $facilitiesEdit = [
-		'facility_code' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Facility Code',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'facility_name' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Facility Name',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'facility_status_id' => [
-			'rules' => 'numeric',
-			'label' => 'Facility Status',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'facility_fee' => [
-			'rules' => 'numeric',
-			'label' => 'Facility Fee',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'capacity' => [
-			'rules' => 'numeric',
-			'label' => 'Capacity',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'description' => [
-			'rules' => 'required|min_length[6]|max_length[50]',
-			'label' => 'Description',
-		],
-	];
-
-	public $reservations = [
-		'reservation_code' => [
-			'rules'  => 'required',
-			'label' => 'Reservation Code',
-		],
-		'event_name' => [
-			'rules'  => 'required|max_length[100]',
-			'label' => 'Event Name',
-		],
-		'budget' => [
-			'rules' => 'min_length[0]|max_length[50]|numeric|greater_than_equal_to[{initialFee}]',
-			'label' => 'Budget',
-			'errors' => [
-                'greater_than_equal_to' => '{field} is not enough to cover the fees of the chosen facility.'      
-            ]
-		],
-		'participants_count' => [
-			'rules' => 'required|numeric|less_than_equal_to[{size}]',
-			'label' => 'Number of Participants',
-			'errors' => [
-                'less_than_equal_to' => '{field} exceeds the maximum capacity of the chosen facility.'      
-            ]
-		],
-		'reservation_date' => [
-			'rules' => 'required',
-			'label' => 'Reservation Date',
-		],
-		'reservation_starting_time' => [
-			'rules' => 'required',
-			'label' => 'Reservation starting time',
-		],
-		'reservation_end_time' => [
-			'rules' => 'required',
-			'label' => 'Reservation end time',
-		],
-		'organization_id' => [
-			'rules' => 'numeric',
-			'label' => 'Organization',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-		'course_id' => [
-			'rules' => 'numeric',
-			'label' => 'Course',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-		'event_type_id' => [
-			'rules' => 'numeric',
-			'label' => 'Event Type',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-		'facility_id' => [
-			'rules' => 'numeric',
-			'label' => 'Facility',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-		'faculty_id' => [
-			'rules' => 'numeric',
-			'label' => 'Faculty',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-		'student_id' => [
-			'rules' => 'numeric',
-			'label' => 'Student',
-			'errors' => [
-                'numeric' => '{field} field is required'      
-            ]
-		],
-	];
-
-	public $facilityStatus = [
-		'facility_status' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Facility Status',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-	public $equipmentStatus = [
-		'equipment_status' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Equipment Status',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-	public $equipmentConditions = [
-		'equipment_condition' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Equipment Condition',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'description' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-
 	public $products = [
 		'product_name' => [
 			'rules' => 'required',
@@ -589,22 +190,35 @@ class Validation
             ]
 		],
 		'product_category_id' => [
-			'rules' => 'numeric',
+			'rules' => 'required',
 			'label' => 'Product Category',
 			'errors' => [
-				'numeric' => '{field} field is required'
+                'required' => '{field} field is required'      
+            ]
+		],
+		'quantity' => [
+			'rules' => 'required|numeric',
+			'label' => 'Quantity',
+			'errors' => [
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'
 			]
 		],
-		'product_quantity_description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
+		'product_description_id' => [
+			'rules' => 'required',
 			'label' => 'Description',
 		],
-		'product_status_id' => [
-			'rules' => 'numeric',
-			'label' => 'Product Status',
+		'price' => [
+			'rules' => 'required|numeric',
+			'label' => 'Price',
 			'errors' => [
-				'numeric' => '{field} field is required'
-			]
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'    
+            ]
+		],
+		'product_status_id' => [
+			'rules' => 'required',
+			'label' => 'Product Status',
 		],
 	];
 
@@ -621,56 +235,76 @@ class Validation
 			'label' => 'Description',
 		],
 	];
-	public $equipmentsEdit = [
-		'equipment_code' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Equipment Code',
+	
+	public $menuCategory = [
+		'name' => [
+			'rules' => 'required',
+			'label' => 'Menu Category Name',
 			'errors' => [
                 'is_unique' => '{field} already exist'      
             ]
-		],
-		'equipment_name' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Equipment Name',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'status_id' => [
-			'rules' => 'numeric',
-			'label' => 'Equipment Status',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'condition_id' => [
-			'rules' => 'numeric',
-			'label' => 'Equipment Condition',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		'quantity' => [
-			'rules' => 'numeric',
-			'label' => 'Quantity',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
 		],
 		'description' => [
 			'rules' => 'required|min_length[5]|max_length[50]',
 			'label' => 'Description',
 		],
 	];
-	public $borrowedEquipments = [
-		'reservation_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Reserved Event'
+
+	public $menu = [
+		'image' => [
+			'rules' => 'uploaded[image]|max_size[image, 10240]|ext_in[image,png,jpg,gif]|is_image[image]', 
+			'label' => 'Image',
+			'errors' => [
+                'is_unique' => '{field} already exist'      
+            ]
 		],
-		'equipments' => [
+		'menu' => [
+			'rules' => 'required',
+			'label' => 'Menu name',
+			'errors' => [
+                'is_unique' => '{field} already exist'      
+            ]
+		],
+		'menu_category_id' => [
 			'rules' => 'required|numeric',
-			'label' => 'Equipment'
-		]
+			'label' => 'Menu Category',
+		],
+		'price' => [
+			'rules' => 'required|numeric',
+			'label' => 'Price',
+		],
+	];
+
+	public $addToCartAdmin = [
+		'menu_id' => [
+			'rules' => 'required',
+			'label' => 'Menu',
+		],
+		'quantity' => [
+			'rules' => 'required|numeric',
+			'label' => 'Quantity',
+		],
+	];
+
+	public $addAdminPayment = [
+		'c_cash' => [
+			'rules' => 'required|numeric',
+			'label' => 'Cash Amount',
+		],
+	];
+
+	public $addAdminOrderNumber = [
+		'order_number_id' => [
+			'rules' => 'required',
+			'label' => 'Order Number',
+		],
+	];
+
+	public $addOrderToCartInMenuList = [
+		'quantity' => [
+			'rules' => 'required',
+			'label' => 'Quantity',
+		],
 	];
 
 	public $permissionTypes = [
@@ -735,52 +369,4 @@ class Validation
 		],
 	];
 
-	public $organizationPositions = [
-		'position' => [
-			'rules' => 'required|min_length[5]|max_length[50]|is_unique[frbs_organization_positions.position,id,{positionID}]',
-			'label' => 'Position',
-		],
-		'description' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Description'
-		],
-	];
-	public $organizationOfficers = [
-		'student_id' => [
-			'rules' => 'numeric',
-			'label' => 'Student',
-			'errors' => [
-				'numeric' => '{field} is required.'
-			]
-		],
-		'org_position_id' => [
-			'rules' => 'numeric',
-			'label' => 'Org Position',
-			'errors' => [
-				'numeric' => '{field} is required.'
-			]
-		],
-	];
-	
-	public $facilityMaintenances = [
-		'facility_id' => [
-			'rules' => 'numeric',
-			'label' => 'Facility',
-			'errors' => [
-				'numeric' => '{field} is required.'
-			]
-		],
-		'maintenance_date' => [
-			'rules' => 'required',
-			'label' => 'Maintenance Date',
-		],
-		'scheduled_starting_time' => [
-			'rules' => 'required',
-			'label' => 'scheduled starting time',
-		],
-		'scheduled_end_time' => [
-			'rules' => 'required',
-			'label' => 'scheduled end time',
-		],
-	];
 }

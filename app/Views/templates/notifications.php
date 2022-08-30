@@ -15,3 +15,15 @@
         alert_error('<?= $_SESSION['error']; ?>');
     </script>
 <?php endif; ?>
+
+<?php if (isset($_SESSION['success_no_flash'])) : ?>
+    <script type="text/javascript">
+        alert_success_no_flash('<?= $_SESSION['success_no_flash']; ?>');
+    </script>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error_no_flash'])) : ?>
+    <script type="text/javascript">
+        alert_error_no_flash('<?= $_SESSION['error_no_flash']; ?>');
+    </script>
+<?php endif; ?>

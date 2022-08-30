@@ -16,13 +16,14 @@ class CartModel extends BaseModel
     
     public function getDetails($conditions = []){
 
-        $this->select('u.id');
+        $this->select('u.id, on.number');
         $this->join('frbs_users as u', 'u.id = lrfoims_carts.user_id');
+        $this->join('lrfoims_order_numbers as on', 'lrfoims_orders.order_number_id = on.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->groupBy('lrfoims_orders.order_number');
+        $this->groupBy('on.number');
 
         return $this->findAll();
     }
@@ -44,14 +45,41 @@ class CartModel extends BaseModel
 
     public function getCartTotalPrice($conditions = []){
 
-        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price');
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+        $this->join('lrfoims_order_numbers as on', 'o.order_number_id = on.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->groupBy('lrfoims_carts.order_id');
+
+        return $this->findAll();
+    }
+    
+    public function getAdminCartLists($conditions = []){
+
+        $this->select('lrfoims_carts.*, m.menu, m.image, m.price, m.menu_category_id');
         $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->groupBy('lrfoims_orders.order_number');
+        // $this->groupBy('lrfoims_carts.order_id');
+
+        return $this->findAll();
+    }
+    
+    public function getAdminCountCartLists($conditions = []){
+
+        $this->select('COUNT(lrfoims_carts.id) as count_unavailable_admin_carts');
+        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->groupBy('lrfoims_carts.order_id');
 
         return $this->findAll();
     }

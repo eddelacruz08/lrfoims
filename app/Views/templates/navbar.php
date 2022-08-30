@@ -3,19 +3,19 @@
     <?php if ($page_title != 'LRFOIS | Sign in') : ?>
 
         <a class="navbar-brand ml-2" href="">
-            <img src="/assets/img/pup_logo.png" width="30" height="30" class="d-inline-block align-top" alt=""> LRFOIS
+            <img src="/assets/img/lamon_logo.png" width="50" height="40" class="d-inline-block align-top m-0" alt=""> LRFOIS
         </a>
     <?php endif; ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <?php if ($page_title != 'RFEIS | Sign in') : ?>
+    <div class="collapse navbar-collapse p-0 m-0" id="navbarNavDropdown">
+        <?php if ($page_title != 'LRFOIS | Sign in') : ?>
             <ul class="navbar-nav <?=(session()->get('role_id') <= 2)?'ml-auto':'m-auto'?>">
             <?php if (isset($_SESSION['modules'])): ?>
                 <?php foreach ($_SESSION['modules']as $modules): ?>
-                    <li class="nav-item mr-3">
+                    <li class="nav-item">
                         <div class="dropdown">
                             <a class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?=$modules['icon']?>

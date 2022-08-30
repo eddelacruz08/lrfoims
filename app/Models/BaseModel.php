@@ -32,6 +32,12 @@ class BaseModel extends Model
         $data['status'] = 'a';
         return $this->save($data);
     }
+    
+    public function addStatusUnavailable($data)
+    {
+        $data['status'] = 'u';
+        return $this->save($data);
+    }
 
     public function edit($id, $data)
     {

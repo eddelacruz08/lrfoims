@@ -23,7 +23,7 @@
                 <?php endif;?>
                 <div class="card shadow-sm bg-white rounded" id="main-holder">
             <div class="card-header">
-                <a class="btn btn-info mb-4 float-right" href="/ingredient-category/a" role="button">
+                <a class="btn btn-info mb-4 float-right" href="/product-category/a" role="button">
                     <i class="fas fa-plus"></i> add
                 </a>
             </div>

@@ -13,8 +13,8 @@ class Security extends BaseController{
 
     public function index(){
         $data = [
-            'page_title' => 'LRFOIS | Sign in',
-            'title' => 'Lamon Restaurant Food Ordering and Inventory System'
+            'page_title' => 'LRFOIMS | Sign in',
+            'title' => 'Lamon Restaurant Food Ordering and Ingredients Management System'
         ];
         helper(['form']);
 
@@ -46,7 +46,7 @@ class Security extends BaseController{
                 ];
                 $this->logsModel->add($logData);
                 if(session()->get('role_id') <= 2){
-                    return redirect()->to('/dashboard');
+                    return redirect()->to('/orders');
                 }else{
                     return redirect()->to('/reservations/t');
                 }
@@ -75,7 +75,7 @@ class Security extends BaseController{
 
     public function register(){
         $data = [
-            'page_title' => 'LRFOIS | Register',
+            'page_title' => 'LRFOIMS | Register',
             'title' => 'Lamon Restaurant Food Ordering and Inventory System'
         ];
         helper(['form']);
@@ -111,6 +111,12 @@ class Security extends BaseController{
 
         return view('register',$data);
     }
+
+    public function fileNotFound()
+	{
+		return view('errors/html/error_404');
+	}
+
     public function signOut(){
         $session = session();
         $session->destroy();

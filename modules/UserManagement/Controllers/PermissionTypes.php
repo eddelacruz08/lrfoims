@@ -15,7 +15,7 @@ class PermissionTypes extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permission Types',
+            'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
             'action' => 'Add PermissionType',
             'view' => 'Modules\UserManagement\Views\PermissionTypes\index',
@@ -29,7 +29,7 @@ class PermissionTypes extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permission Types',
+            'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
             'action' => 'Add PermissionType',
             'view' => 'Modules\UserManagement\Views\PermissionTypes\form',
@@ -57,7 +57,7 @@ class PermissionTypes extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permission Types',
+            'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
             'action' => 'Edit PermissionType',
             'view' => 'Modules\UserManagement\Views\PermissionTypes\form',

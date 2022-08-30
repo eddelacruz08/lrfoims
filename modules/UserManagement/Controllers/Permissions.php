@@ -16,7 +16,7 @@ class Permissions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permissions',
+            'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
             'action' => 'Add Permission',
             'view' => 'Modules\UserManagement\Views\Permissions\index',
@@ -30,7 +30,7 @@ class Permissions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permissions',
+            'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
             'action' => 'Add Permission',
             'view' => 'Modules\UserManagement\Views\Permissions\form',
@@ -59,7 +59,7 @@ class Permissions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Permissions',
+            'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
             'action' => 'Edit Permission',
             'view' => 'Modules\UserManagement\Views\Permissions\form',

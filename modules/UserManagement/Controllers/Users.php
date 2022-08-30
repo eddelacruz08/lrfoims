@@ -15,7 +15,7 @@ class Users extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Users',
+            'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
             'view' => 'Modules\UserManagement\Views\Users\index',
             'users' => $this->usersModel->getDetails()
@@ -27,7 +27,7 @@ class Users extends BaseController
     public function add()
     {
         $data = [
-            'page_title' => 'RMFS | Users',
+            'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
             'action' => 'Add User',
             'view' => 'Modules\UserManagement\Views\Users\form',
@@ -53,7 +53,7 @@ class Users extends BaseController
     public function edit($id)
     {
         $data = [
-            'page_title' => 'RMFS | Users',
+            'page_title' => 'LRFOIMS | Users',
             'title' => 'User',
             'action' => 'Edit User',
             'view' => 'Modules\UserManagement\Views\Users\form',
@@ -95,7 +95,7 @@ class Users extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Users',
+            'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
             'action' => 'View User',
             'users' => $usersModel->getUser($id)->getRow()

@@ -14,7 +14,7 @@ class Modules extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Modules',
+            'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
             'action' => 'Add Module',
             'view' => 'Modules\UserManagement\Views\Modules\index',
@@ -28,7 +28,7 @@ class Modules extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Modules',
+            'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
             'action' => 'Add Module',
             'view' => 'Modules\UserManagement\Views\Modules\form',
@@ -52,7 +52,7 @@ class Modules extends BaseController
     public function edit($id)
     {
         $data = [
-            'page_title' => 'RMFS | Modules',
+            'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
             'action' => 'Edit Module',
             'view' => 'Modules\UserManagement\Views\Modules\form',

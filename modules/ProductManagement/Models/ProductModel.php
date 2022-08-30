@@ -8,7 +8,9 @@ class ProductModel extends BaseModel
     protected $allowedFields = [
         'product_name',
         'product_category_id',
-        'product_quantity_description',
+        'quantity',
+        'product_description_id',
+        'price',
         'product_status_id',
         'status',
         'created_at',
@@ -30,14 +32,15 @@ class ProductModel extends BaseModel
     
     public function getProduct($conditions = []){
         
-        $this->select('lrfoims_products.*, pc.product_description, es.equipment_status');
+        $this->select('lrfoims_products.*, pc.product_description, ps.name, pd.name as description');
         $this->join('lrfoims_product_categories as pc', 'pc.id = lrfoims_products.product_category_id');
-        $this->join('frbs_equipment_status as es', 'es.id = lrfoims_products.product_status_id');
+        $this->join('lrfoims_product_description as pd', 'pd.id = lrfoims_products.product_description_id');
+        $this->join('lrfoims_product_status as ps', 'ps.id = lrfoims_products.product_status_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->orderBy('lrfoims_products.product_name', 'ASC');
+        $this->orderBy('lrfoims_products.id', 'ASC');
 
         return $this->findAll();
     }

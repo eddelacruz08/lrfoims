@@ -13,7 +13,7 @@ class Roles extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Roles',
+            'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
             'action' => 'Add Role',
             'view' => 'Modules\UserManagement\Views\Roles\index',
@@ -27,7 +27,7 @@ class Roles extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Roles',
+            'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
             'action' => 'Add Role',
             'view' => 'Modules\UserManagement\Views\Roles\form',
@@ -52,7 +52,7 @@ class Roles extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Roles',
+            'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
             'action' => 'Edit Role',
             'view' => 'Modules\UserManagement\Views\Roles\form',

@@ -14,7 +14,7 @@
                     <div class="col-12 col-md-12 col-lg-12 mx-auto">
              <!-- Sign In Form -->
                         <center>
-                            <img src="/assets/img/pup_logo.png" class="img-fluid w-25 mb-2">
+                            <img src="/assets/img/lamon_logo.png" class="img-fluid w-25 mb-2">
                             <div class="h5 mb-5"><b><?= strtoupper($title) ?></b></div>
                         </center>
                         <form method="post" action="/" class="mt-5">
@@ -42,7 +42,7 @@
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <button type="submit" id="btnSignIn" class="btn btn-lg btn-success w-100"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                            <button type="submit" id="btnSignIn" class="btn btn-md btn-success float-right"><i class="fas fa-sign-in-alt"></i> Sign In</button>
                         </form>
                     </div>
                 </div>

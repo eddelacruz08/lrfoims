@@ -60,7 +60,7 @@
                                     <div class="row">
                                     <div class="col-md-12">
                                         <div id="canvas-holder">
-                                            <canvas id="canvas-month"></canvas>
+                                            <!-- <canvas id="canvas-month"></canvas> -->
                                         </div>
                                         <!-- /.chart-responsive -->
                                     </div>
@@ -104,14 +104,6 @@
                                                 </thead>
                                                 <tbody>
                                                 <?php $ctr=1;?>
-                                                <?php foreach($activity as $log):?>
-                                                    <tr>
-                                                    <td><?=$ctr?></td>
-                                                    <td><?=$log['role_name'] . ' ' . $log['first_name'] . ' ' . $log['description']?></td>
-                                                    <td><?=$log['created_at']?></td>
-                                                    </tr>
-                                                    <?php $ctr++;?>
-                                                <?php endforeach;?>
                                                 </tbody>
                                             </table>
                                             </div>
@@ -134,14 +126,6 @@
                                                 </thead>
                                                 <tbody>
                                                 <?php $ctr=1;?>
-                                                <?php foreach($signin as $log):?>
-                                                    <tr>
-                                                    <td><?=$ctr?></td>
-                                                    <td><?=$log['role_name'] . ' ' . $log['first_name'] . ' ' . $log['description']?></td>
-                                                    <td><?=$log['created_at']?></td>
-                                                    </tr>
-                                                    <?php $ctr++;?>
-                                                <?php endforeach;?>
                                                 </tbody>
                                             </table>
                                             </div>
@@ -186,15 +170,7 @@
                                 <label for="inputEmail4"><b>Select Facility:</b></label>
                                 <select class="custom-select form-control <?= isset($errors['event_name']) ? 'is-invalid':'is-valid' ?>" name="facility_id">
                                     <option <?= isset($validation) ? null : 'selected' ?> value="0">Select All</option>
-                                    <?php foreach ($facilities as $option) : ?>
-                                        <?php $selected = false; ?>
-                                        <?php if(isset($value['facility_id'])):?>
-                                            <?php if($value['facility_id'] == $option['id']): ?>
-                                                <?php $selected = true; ?>
-                                            <?php endif;?>
-                                        <?php endif;?>
-                                        <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : '' ?>><?= $option['facility_name'] ?></option>
-                                    <?php endforeach; ?>
+                                   
                                 </select>
                                 <?php if(isset($errors['facility_id'])):?>
                                     <small class="text-danger"><?=esc($errors['facility_id'])?></small>
@@ -232,6 +208,5 @@
 <?= $this->endsection('content'); ?>
 
 <?= $this->section('dashboard_data'); ?>
-<?= $this->include('Scripts/dashboardData'); ?>
 <?= $this->endsection('dashboard_data'); ?>
 

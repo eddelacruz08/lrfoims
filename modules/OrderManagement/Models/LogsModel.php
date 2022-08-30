@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ReservationManagement\Models;
+namespace Modules\OrderManagement\Models;
 
 use App\Models\BaseModel;
 

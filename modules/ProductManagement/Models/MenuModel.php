@@ -1,4 +1,4 @@
-<?php namespace Modules\IngredientManagement\Models;
+<?php namespace Modules\ProductManagement\Models;
 
 use App\Models\BaseModel;
 
@@ -10,10 +10,23 @@ class MenuModel extends BaseModel
         'menu',
         'menu_category_id',
         'price',
-        'product_id',
         'status',
         'created_at',
         'updated_at',
         'deleted_at'];
+
+    public function getDetails($conditions = []){
+
+        $this->select('lrfoims_menus.*');
+        // $this->join('lrfoims_menu_category as mc', 'mc.id = lrfoims_menus.menu_category_id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->groupBy('lrfoims_menus.id');
+
+        return $this->findAll();
+    }
+    
 
 }

@@ -1,8 +1,8 @@
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <h3 class="mb-3"><?= $title ?></h3>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb float-right">

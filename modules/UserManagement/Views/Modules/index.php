@@ -23,8 +23,8 @@
                 <?php endif;?>
                 <div class="card shadow-sm bg-white rounded" id="main-holder">
             <div class="card-header">
-                <a class="btn btn-info mb-4" href="/modules/a" role="button">
-                    <i class="fas fa-plus-circle"></i> add 
+                <a class="btn btn-primary float-right" href="/modules/a" role="button">
+                    <i class="fas fa-plus"></i> add 
                 </a>
             </div>
             <div class="card-body">

@@ -1,12 +1,9 @@
 <?= $this->extend('layout/main') ?>
 <?= $this->section('content'); ?>
 <?= $this->include('templates/navbar'); ?>
-<?php if(session()->get('role_id') <= 2):?>
-    <?= $this->include('templates/sidenav'); ?>
-<?php endif;?>
 
-<main class="page-content">
-    <div class="container mt-3">
+<main class="page-content mt-2">
+    <div class="container-sm">
         <div class="row">
             <div class="col-md-12">
                 <?= view(esc($view)) ?>

@@ -38,7 +38,7 @@ $routes->match(['get','post'],'register', 'Security::register');
 $routes->add('/dashboard', 'Dashboard::index');
 // $routes->add('/send', 'SendMail::send');
 $routes->get('/import', 'Import::index');
-$routes->get('/error', 'Home::index');
+$routes->get('/error', 'Security::fileNotFound');
 /**
  * --------------------------------------------------------------------
  * Additional Routing
