@@ -13,7 +13,7 @@ $routes->group('orders', ['namespace' => 'Modules\OrderManagement\Controllers'],
     $routes->match(['get', 'post'], 'admin/cart/qty/(:num)', 'Order::editCartQty/$1');
     $routes->add('d/(:num)', 'Order::delete/$1');
     $routes->add('place-order/(:num)/(:num)', 'Order::placeOrder/$1/$2');
-    $routes->add('admin/add-payment/u/(:num)', 'Order::addAdminPayment/$1');
+    $routes->add('admin/add-payment/u/(:num)/(:num)', 'Order::addAdminPayment/$1/$2');
     $routes->add('cart/d/(:num)', 'Order::deleteCart/$1');
     $routes->add('admin/cart/d/(:num)', 'Order::deleteAdminCart/$1');
     $routes->add('order', 'Order::retrieveOrder');

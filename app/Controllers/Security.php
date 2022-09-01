@@ -17,7 +17,6 @@ class Security extends BaseController{
             'title' => 'Lamon Restaurant Food Ordering and Ingredients Management System'
         ];
         helper(['form']);
-
         if ($this->request->getMethod() == 'post') {
             //validation
             $rules = [
@@ -62,6 +61,7 @@ class Security extends BaseController{
             'id' => $user['id'],
             'role_id' => $user['role_id'],
             'first_name' => $user['first_name'],
+            'last_name' => $user['last_name'],
             'email_address' => $user['email_address'],
             'isLoggedIn' => true,
             'permissions' => $this->rolesPermissionsModel->getPermissions(['role_id' => $user['role_id']]),
@@ -112,9 +112,12 @@ class Security extends BaseController{
         return view('register',$data);
     }
 
-    public function fileNotFound()
+    public function fileNotFound($slugs)
 	{
-		return view('errors/html/error_404');
+		$data['view'] = 'errors/403';
+		$data['slugs'] = $slugs;
+        $data['page_title'] = 'LRFOIMS | Permissions!';
+        return view('templates/index',$data);
 	}
 
     public function signOut(){

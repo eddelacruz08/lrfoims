@@ -1,7 +1,7 @@
 <?php namespace Modules\OrderManagement\Controllers;
 
 use Modules\OrderManagement\Models as OrderManagement;
-use Modules\ProductManagement\Models as ProductManagement;
+use Modules\MenuManagement\Models as MenuManagement;
 use Modules\SystemSettings\Models as SystemSettings;
 use App\Controllers\BaseController;
 
@@ -10,8 +10,8 @@ class Order extends BaseController
 	function __construct(){
 		$this->ordersModel = new OrderManagement\OrderModel();
 		$this->cartsModel = new OrderManagement\CartModel();
-        $this->menusModel = new ProductManagement\MenuModel();
-        $this->menuCategoryModel = new ProductManagement\MenuCategoryModel();
+        $this->menusModel = new MenuManagement\MenuModel();
+        $this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
         $this->orderNumbersModel = new SystemSettings\OrderNumberModel();
 		helper(['form']);
 	}
@@ -19,6 +19,8 @@ class Order extends BaseController
 	public function index()
 	{
         $this->hasPermissionRedirect('orders');
+        $time = new \DateTime();
+        $dateAndTime = $time->format('Y-m-d');
 		$data = [
 			'page_title' => 'LRFOIMS | Orders',
 			'title' => 'Orders',
@@ -27,7 +29,7 @@ class Order extends BaseController
             'countPlaceOrders' => $this->ordersModel->getCountPerOrderDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 2]),
             'countServeOrders' => $this->ordersModel->getCountPerOrderDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 3]),
             'countPaymentOrders' => $this->ordersModel->getCountPerOrderDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 4]),
-            'countPaymentHistoryOrders' => $this->ordersModel->getCountPerOrderDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 5]),
+            'countPaymentHistoryOrders' => $this->ordersModel->getCountPerOrderDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 'lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 5]),
             'orders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 1]),
             'placeOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 2]),
             'serveOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 3]),
@@ -71,10 +73,12 @@ class Order extends BaseController
     }
     
     public function retrievePaymentHistoryOrder(){
+        $time = new \DateTime();
+        $dateAndTime = $time->format('Y-m-d');
         $data['menuLists'] = $this->menusModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 5]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 'lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
         return view('Modules\OrderManagement\Views\order\paymentHistoryOrder', $data);
     }
 
@@ -134,47 +138,55 @@ class Order extends BaseController
     public function menu()
 	{
 		$data = [
-			'page_title' => 'LRFOIMS | Menu List',
-			'title' => 'Menu List',
+			'page_title' => 'LRFOIMS | Order Menu',
+			'title' => 'Order Menu',
 			'view' => 'Modules\OrderManagement\Views\menuList\index',
             'menuLists' => $this->menusModel->getDetails(['lrfoims_menus.status'=>'a']),
             'menuCategory' => $this->menuCategoryModel->get(),
             'adminUnavailableOrders' => $this->ordersModel->get(['lrfoims_orders.status'=>'u']),
             'adminCartLists' => $this->cartsModel->getAdminCartLists(['lrfoims_carts.status'=>'a']),
             'adminCountCartLists' => $this->cartsModel->getAdminCountCartLists(['o.status'=>'u']),
-            'availableOrderNumbers' => $this->orderNumbersModel->getDetails(['lrfoims_order_numbers.status'=>'a']),
+            'availableOrderNumbers' => $this->orderNumbersModel->get(['status'=>'a']),
             'getCreatedOrderNumber' => $this->ordersModel->getCreatedOrderNumber(['on.number_status' => 'u', 'lrfoims_orders.status'=>'u']),
 		];
 
 		return view('templates/index', $data);
 	}
 
-    public function addAdminOrderNumber(){
-        $data['page_title'] = 'LRFOIMS | Menu List';
-        $data['title'] = 'Menu List';
-        $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
+    public function addAdminOrderNumber(){ 
+        $jdata['page_title'] = 'LRFOIMS | Order Menu';
+        $jdata['title'] = 'Order Menu';
+        $jdata['view'] = 'Modules\OrderManagement\Views\menuList\index';
 
         $_POST['user_id'] = session()->get('id');
         $_POST['number_status'] = 'u';
         $orderNumberId = $_POST['order_number_id'];
-        $_POST['order_status_id'] = 1;
+
+        $data['order_number_id'] = $orderNumberId;
+        $data['user_id'] = session()->get('id');
+        $data['order_status_id'] = 1;
+        // die(session()->get('id'));
         if ($this->request->getMethod() == 'post') {
             if (!$this->validate('addAdminOrderNumber')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                $this->orderNumbersModel->update($orderNumberId, $_POST);
-                $this->ordersModel->addStatusUnavailable($_POST);
-                $this->session->setFlashdata('success_no_flash', 'Order successfully added!');
+                if($this->ordersModel->addStatusUnavailable($data)){
+                    $this->orderNumbersModel->update($orderNumberId, $_POST);
+                    $this->session->setFlashdata('success_no_flash', 'Order successfully added!');
+                }else{
+                    $this->session->setFlashdata('error_no_flash', 'Can\'t assign number!');
+                }
+                return redirect()->to('/orders/admin-menu');
             }
             return redirect()->to('/orders/admin-menu');
         }
-        return view('templates/index', $data);
+        return view('templates/index', $jdata);
     }
     
     public function addOrderToCartInMenuList(){
-        $data['page_title'] = 'LRFOIMS | Menu List';
-        $data['title'] = 'Menu List';
+        $data['page_title'] = 'LRFOIMS | Order Menu';
+        $data['title'] = 'Order Menu';
         $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
         $data['getCreatedOrderNumber'] = $this->ordersModel->getCreatedOrderNumber(['on.number_status' => 'u', 'lrfoims_orders.status'=>'u']);
 
@@ -206,6 +218,7 @@ class Order extends BaseController
             'title' => 'Orders',
             'view' => 'Modules\OrderManagement\Views\orders\order'
         ];
+        $_POST['order_status_id'] = 2;
         $_POST['status'] = 'a';
         if ($this->request->getMethod() == 'post') {
             $this->ordersModel->update($id, $_POST);
@@ -216,17 +229,17 @@ class Order extends BaseController
         return view('templates/index', $data);
     }
     
-    public function addAdminPayment($id)
+    public function addAdminPayment($id, $totalAmount)
 	{
         $orders = $this->ordersModel->get(['id' => $id, 'status' => 'a'])[0];
 
         if ($this->request->getMethod() == 'post') 
         {
-            if($_POST['total_amount'] < $_POST['c_cash']){
+            if($totalAmount < $_POST['c_cash']){
                 $data = [
-                    'total_amount' => $_POST['total_amount'],
+                    'total_amount' => $totalAmount,
                     'c_cash' => $_POST['c_cash'],
-                    'c_balance' => $_POST['c_cash'] - $_POST['total_amount']
+                    'c_balance' => $_POST['c_cash'] - $totalAmount
                 ];
                 if($this->ordersModel->update($orders['id'], $data)){
                     
@@ -257,8 +270,8 @@ class Order extends BaseController
     public function editCartQty($id)
     {
         $data = [
-            'page_title' => 'LRFOIMS | Menu List',
-            'title' => 'Menu List',
+            'page_title' => 'LRFOIMS | Order Menu',
+            'title' => 'Order Menu',
             'view' => 'Modules\OrderManagement\Views\menuList\index'
         ];
         if ($this->request->getMethod() == 'post') {

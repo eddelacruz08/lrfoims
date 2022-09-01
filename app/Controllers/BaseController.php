@@ -73,8 +73,7 @@ class BaseController extends Controller
 
 		if($isValidSlug == 0)
 		{
-			header('Location: '.base_url().'/error');
-			// session_destroy();
+			header('Location: '.base_url().'/'.$slugs.'/403');
 			exit();
 		}
 	}

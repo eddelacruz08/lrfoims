@@ -29,7 +29,7 @@ class Users extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
-            'action' => 'Add User',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Users\form',
             'edit' => false,
             'roles' => $this->rolesModel->get(),
@@ -55,7 +55,7 @@ class Users extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Users',
             'title' => 'User',
-            'action' => 'Edit User',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Users\form',
             'edit' => true,
             'id' => $id,
@@ -95,11 +95,12 @@ class Users extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'LRFOIMS | Users',
-            'title' => 'Users',
-            'action' => 'View User',
-            'users' => $usersModel->getUser($id)->getRow()
+            'page_title' => 'LRFOIMS | Profile',
+            'title' => 'Profile',
+            'action' => 'Profile',
+            'view' => 'Modules\UserManagement\Views\Users\viewUser',
+            'users' => $this->usersModel->getDetails(['frbs_users.id' => $id, 'frbs_users.status' => 'a'])
         ];
-        echo view('Modules\UserManagement\Views\Users\viewUser', $data);
+        return view('templates/index', $data);
     }
 }

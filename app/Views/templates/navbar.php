@@ -1,55 +1,154 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm <?=(session()->get('role_id') <= 2)?'':'fixed-top'?>" id="<?= $page_title == 'ORS | Sign in' ? 'navbar-opacity' : null ?>">
-    
-    <?php if ($page_title != 'LRFOIS | Sign in') : ?>
+<!-- Topbar Start -->
+<div class="navbar-custom topnav-navbar topnav-navbar-dark">
+    <div class="container-fluid">
 
-        <a class="navbar-brand ml-2" href="">
-            <img src="/assets/img/lamon_logo.png" width="50" height="40" class="d-inline-block align-top m-0" alt=""> LRFOIS
+        <!-- LOGO -->
+        <a href="javascript: void(0);" class="topnav-logo">
+            <span class="topnav-logo-lg">
+                <img src="/assets/img/lamon_logo.png" alt="" height="65">
+            </span>
+            <span class="topnav-logo-sm">
+                <img src="/assets/img/lamon_logo.png" alt="" height="65">
+            </span>
         </a>
-    <?php endif; ?>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse p-0 m-0" id="navbarNavDropdown">
-        <?php if ($page_title != 'LRFOIS | Sign in') : ?>
-            <ul class="navbar-nav <?=(session()->get('role_id') <= 2)?'ml-auto':'m-auto'?>">
-            <?php if (isset($_SESSION['modules'])): ?>
-                <?php foreach ($_SESSION['modules']as $modules): ?>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?=$modules['icon']?>
-                                <span class="align-justify"><?=ucwords(esc($modules['module']))?></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <?php foreach ($_SESSION['permissions'] as $permissions): ?>
-                                    <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['permission_type'] == 11): ?>
-                                            <a class="dropdown-item" href="<?='/'.$permissions['slug']?>"><?=ucwords($permissions['permission'])?></a>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            <?php endif;?>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-responsive img-fluid rounded-circle mr-1" width="20" height="20" src="/assets/img/user.jpg" alt="User picture">
-                            <?= ucwords(session()->get('first_name')) ?>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <!-- <a class="dropdown-item" href="#"><i class="fas fa-user-alt"></i> Profile</a>
-                            <div class="dropdown-divider"></div> -->
-                            <a class="dropdown-item" href="/signout"><i class="fas fa-sign-out-alt"></i> Sign out</a>
-                        </div>
+        <ul class="list-unstyled topbar-menu float-end mb-0">
+
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="dripicons-bell noti-icon"></i>
+                    <span class="noti-icon-badge"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop">
+
+                    <!-- item-->
+                    <div class="dropdown-item noti-title">
+                        <h5 class="m-0">
+                            <span class="float-end">
+                                <a href="javascript: void(0);" class="text-dark">
+                                    <small>Clear All</small>
+                                </a>
+                            </span>Notification
+                        </h5>
                     </div>
-                </li>
-            </ul>
-        <?php endif; ?>
+
+                    <div style="max-height: 230px;" data-simplebar>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-primary">
+                                <i class="mdi mdi-comment-account-outline"></i>
+                            </div>
+                            <p class="notify-details">Caleb Flakelar commented on Admin
+                                <small class="text-muted">1 min ago</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-info">
+                                <i class="mdi mdi-account-plus"></i>
+                            </div>
+                            <p class="notify-details">New user registered.
+                                <small class="text-muted">5 hours ago</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon">
+                                <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">Cristina Pride</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>Hi, How are you? What about our next meeting</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-primary">
+                                <i class="mdi mdi-comment-account-outline"></i>
+                            </div>
+                            <p class="notify-details">Caleb Flakelar commented on Admin
+                                <small class="text-muted">4 days ago</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon">
+                                <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">Karen Robinson</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>Wow ! this admin looks good and awesome design</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-info">
+                                <i class="mdi mdi-heart"></i>
+                            </div>
+                            <p class="notify-details">Carlos Crouch liked
+                                <b>Admin</b>
+                                <small class="text-muted">13 days ago</small>
+                            </p>
+                        </a>
+                    </div>
+
+                    <!-- All-->
+                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        View All
+                    </a>
+
+                </div>
+            </li>
+
+            <li class="notification-list">
+                <a class="nav-link end-bar-toggle" href="javascript: void(0);">
+                    <i class="dripicons-gear noti-icon"></i>
+                </a>
+            </li>
+
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="account-user-avatar"> 
+                        <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
+                    </span>
+                    <span>
+                        <span class="account-user-name"><?= session()->get('first_name').' '.session()->get('last_name');?></span>
+                        <span class="account-position">Super Admin</span>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
+                    <!-- item-->
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Welcome !</h6>
+                    </div>
+
+                    <!-- item-->
+                    <a href="/users/v/<?= session()->get('id')?>" class="dropdown-item notify-item">
+                        <i class="mdi mdi-account-circle me-1"></i>
+                        <span>My Account</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="/signout" class="dropdown-item notify-item">
+                        <i class="mdi mdi-logout me-1"></i>
+                        <span>Logout</span>
+                    </a>
+
+                </div>
+            </li>
+
+        </ul>
+        <a class="button-menu-mobile disable-btn">
+            <div class="lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </a>
     </div>
-</nav>
-<?php if(session()->get('role_id') > 2):?>
-    <br>
-    <br>
-<?php endif;?>
+</div>
+<!-- end Topbar -->

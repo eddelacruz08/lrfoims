@@ -32,7 +32,7 @@ class Permissions extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
-            'action' => 'Add Permission',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Permissions\form',
             'edit' => false,
             'modules' => $this->modulesModel->get(),
@@ -61,7 +61,7 @@ class Permissions extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
-            'action' => 'Edit Permission',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Permissions\form',
             'edit' => true,
             'id' => $id,
@@ -88,7 +88,7 @@ class Permissions extends BaseController
         if($this->permissionsModel->softDelete($id)){
             $data =[
             'status' => 'Deleted Successfully',
-            'status_text' => 'Event successfully deleted!',
+            'status_text' => 'Successfully deleted!',
             'status_icon' => 'success'
             ];
         } else{

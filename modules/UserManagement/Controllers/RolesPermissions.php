@@ -5,33 +5,34 @@ use App\Controllers\BaseController;
 
 class RolesPermissions extends BaseController
 {
-    function __construct(){
-        $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
-        $this->permissionsModel = new UserManagement\PermissionsModel();
-        $this->modulesModel = new UserManagement\ModulesModel();
-        $this->rolesModel = new UserManagement\RolesModel();
-        $this->time = new \DateTime();
-    }
+  function __construct(){
+      $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
+      $this->permissionsModel = new UserManagement\PermissionsModel();
+      $this->modulesModel = new UserManagement\ModulesModel();
+      $this->rolesModel = new UserManagement\RolesModel();
+      $this->time = new \DateTime();
+  }
 
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
-        $data = [
-            'page_title' => 'LRFOIMS | Roles Permissions',
-            'title' => 'Roles Permissions',
-            'view' => 'Modules\UserManagement\Views\RolesPermissions\index',
-            'roles' => $this->rolesModel->get(),
-            'rolesPermissions' => $this->rolesPermissionsModel->getDetails(),
-            'permissions' => $this->permissionsModel->get(),
-            'modules' => $this->modulesModel->get(),
-        ];
-        
-        return view('templates/index',$data);
-    }
+  public function index()
+  {
+      if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+      $data = [
+          'page_title' => 'LRFOIMS | Roles Permissions',
+          'title' => 'Roles Permissions',
+          'view' => 'Modules\UserManagement\Views\RolesPermissions\index',
+          'roles' => $this->rolesModel->get(),
+          'rolesPermissions' => $this->rolesPermissionsModel->getDetails(),
+          'permissions' => $this->permissionsModel->get(),
+          'modules' => $this->modulesModel->get(),
+      ];
+      
+      return view('templates/index',$data);
+  }
 
   public function edit($id){
     $data['page_title'] = 'LRFOIMS | Roles Permissions';
     $data['title'] = 'Roles Permissions';
+    $data['action'] = 'Submit';
     $data['edit'] = true;
     $data['view'] = 'Modules\UserManagement\Views\RolesPermissions\form';
     $data['id'] = $id;

@@ -14,14 +14,12 @@ class ProductDescription extends BaseController
 
     public function index()
     {
-        
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | EquipmentConditions',
-            'title' => 'Equipment Conditions',
-            'action' => 'Add Equipment Conditions',
-            'view' => 'Modules\SystemSettings\Views\EquipmentConditions\index',
-            'equipmentConditions' => $this->equipmentConditionsModel->get()
+            'page_title' => 'LRFOIMS | Ingredient Description',
+            'title' => 'Ingredient Description',
+            'view' => 'Modules\SystemSettings\Views\productDescription\index',
+            'productDescription' => $this->productDescriptionModel->get()
         ];
         
         return view('templates/index', $data);
@@ -31,21 +29,21 @@ class ProductDescription extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | EquipmentConditions',
-            'title' => 'Equipment Conditions',
-            'action' => 'Add Equipment Conditions',
-            'view' => 'Modules\SystemSettings\Views\EquipmentConditions\form',
+            'page_title' => 'LRFOIMS | Ingredient Description',
+            'title' => 'Ingredient Description',
+            'action' => 'Submit',
+            'view' => 'Modules\SystemSettings\Views\productDescription\form',
             'edit' => false
         ];
 
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('equipmentConditions')) {
+            if (!$this->validate('productDescription')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                $this->equipmentConditionsModel->add($_POST);
-                $this->session->setFlashdata('success', 'Equipment Condition Successfully Added');
-                return redirect()->to('/equipment-conditions');
+                $this->productDescriptionModel->add($_POST);
+                $this->session->setFlashdata('success', 'Ingredient Description Successfully Added');
+                return redirect()->to('/ingredient-descriptions');
             }
         }
 
@@ -56,23 +54,23 @@ class ProductDescription extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | EquipmentConditions',
-            'title' => 'Equipment Conditions',
-            'action' => 'Edit Equipment Conditions',
-            'view' => 'Modules\SystemSettings\Views\EquipmentConditions\form',
+            'page_title' => 'LRFOIMS | Ingredient Description',
+            'title' => 'Ingredient Description',
+            'action' => 'Submit',
+            'view' => 'Modules\SystemSettings\Views\productDescription\form',
             'edit' => true,
             'id' => $id,
-            'value' => $this->equipmentConditionsModel->get(['id' => $id])[0]
+            'value' => $this->productDescriptionModel->get(['id' => $id])[0]
         ];
 
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('equipmentConditions')) {
+            if (!$this->validate('productDescription')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                $this->equipmentConditionsModel->update($id, $_POST);
-                $this->session->setFlashdata('success', 'Equipment Condition Successfully Updated');
-                return redirect()->to('/equipment-conditions');
+                $this->productDescriptionModel->update($id, $_POST);
+                $this->session->setFlashdata('success', 'Ingredient Description Successfully Updated');
+                return redirect()->to('/ingredient-descriptions');
             }
         }
 
@@ -81,7 +79,7 @@ class ProductDescription extends BaseController
     
     public function delete($id)
     {
-        $this->equipmentConditionsModel->SoftDelete($id);
+        $this->productDescriptionModel->SoftDelete($id);
         $data =[
             'status'=> 'Deleted Successfully',
             'status_text' => 'Record Successfully Deleted',

@@ -1,64 +1,97 @@
-<?= $this->extend('layout/main') ?>
-<?= $this->section('content'); ?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Log In | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        
+        <!-- App css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />
+        <link href="assets/css/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
-<div class="container" style="width: 40%;">
-  <div class="row g-0">
-    <!-- <div class="d-none d-md-flex col-md-4 col-lg-8 bg-image">
-    </div> -->
-    <div class="col-md-12 bg-light">
-      <div class="login d-flex align-items-center py-5">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-8 col-lg-10  mx-auto">
-                <div class="row">
-                    <div class="col-12 col-md-12 col-lg-12 mx-auto">
-             <!-- Sign In Form -->
-                        <center>
-                            <img src="/assets/img/lamon_logo.png" class="img-fluid w-25 mb-2">
-                            <div class="h5 mb-5"><b><?= strtoupper($title) ?></b></div>
-                        </center>
-                        <form method="post" action="/" class="mt-5">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="frm-icon-login"><i class="fas fa-user"></i></span>
+    </head>
+
+    <body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
+        <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xxl-4 col-lg-5">
+                        <div class="card">
+
+                            <div class="card-body p-4">
+                                
+                                <div class="text-center w-75 m-auto">
+                                    <h4 class="text-dark-100 text-center mt-0"><b><?= strtoupper($title) ?></b></h4>
+                                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Sign In</h4>
                                 </div>
-                                <input type="text" class="form-control form-control-md" id="frmUser" placeholder="Username" name="username" aria-label="Username" value="<?= set_value('username'); ?>" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="frm-icon-login"><i class="fas fa-unlock-alt"></i></span>
-                                </div>
-                                <input type="password" class="form-control form-control-md" id="frmPassword" placeholder="Password" name="password" aria-label="password" aria-describedby="basic-addon1">
-                                <div class="input-group-prepend" id="showPassHolder">
-                                    <span class="input-group-text" id="showPass"><a onclick="showPassword()"><i class="fas fa-eye" id="showPassIcon"></i></a></span>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <?php if (isset($validation)) : ?>
-                                    <div class="col-12">
-                                        <div class="alert alert-danger" role="alert">
+
+                                <form method="post" action="/">
+
+                                    <?php if (isset($validation)) : ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?= $validation->listErrors(); ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input class="form-control" type="text" id="username" name="username" required="" placeholder="Enter your username">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your password?</small></a>
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+                                            <div class="input-group-text" data-password="false">
+                                                <span class="password-eye"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                <?php endif; ?>
-                            </div>
-                            <button type="submit" id="btnSignIn" class="btn btn-md btn-success float-right"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                        </form>
-                    </div>
+
+                                    <div class="mb-3 mb-3">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
+                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 mb-0 text-center">
+                                        <button class="btn btn-primary" type="submit"> Log In </button>
+                                    </div>
+
+                                </form>
+                            </div> <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+
+                        <div class="row mt-3">
+                            <div class="col-12 text-center">
+                                <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-muted ms-1"><b>Sign Up</b></a></p>
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- end col -->
                 </div>
-                <div class="row mt-5">
-                    <!-- <div class="col-12 col-md-12 col-sm-12 mx-auto">
-                <div class="col-md-12" id="copyright">
-                    <span>Copyright &copy 2021 <b>MIRA</b><br>All Rights Reserved</span>
-                </div>
-                    </div> -->
-                </div>
+                <!-- end row -->
             </div>
-            </div>
-          </div>
+            <!-- end container -->
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<?= $this->endsection('content'); ?>
+        <!-- end page -->
+
+        <footer class="footer footer-alt">
+            2018 - 2021 © Hyper - Coderthemes.com
+        </footer>
+
+        <!-- bundle -->
+        <script src="/assets/js/vendor.min.js"></script>
+        <script src="/assets/js/app.min.js"></script>
+        
+    </body>
+</html>

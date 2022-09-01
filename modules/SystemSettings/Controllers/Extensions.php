@@ -16,10 +16,9 @@ class Extensions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Extensions',
+            'page_title' => 'LRFOIMS | Extensions',
             'title' => 'Extensions',
-            'action' => 'Add Extension Name',
-            'view' => 'Modules\SystemSettings\Views\Extensions\index',
+            'view' => 'Modules\SystemSettings\Views\extensions\index',
             'extensions' => $this->extensionsModel->get()
         ];
         
@@ -30,10 +29,10 @@ class Extensions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Extensions',
+            'page_title' => 'LRFOIMS | Extensions',
             'title' => 'Extensions',
-            'action' => 'Add Extension Name',
-            'view' => 'Modules\SystemSettings\Views\Extensions\form',
+            'action' => 'Submit',
+            'view' => 'Modules\SystemSettings\Views\extensions\form',
             'edit' => false,
         ];
 
@@ -55,10 +54,10 @@ class Extensions extends BaseController
     {
         if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
         $data = [
-            'page_title' => 'RMFS | Extensions',
+            'page_title' => 'LRFOIMS | Extensions',
             'title' => 'Extensions',
-            'action' => 'Edit Extension',
-            'view' => 'Modules\SystemSettings\Views\Extensions\form',
+            'action' => 'Submit',
+            'view' => 'Modules\SystemSettings\Views\extensions\form',
             'edit' => true,
             'id' => $id,
             'value' => $this->extensionsModel->get(['id' => $id])[0]

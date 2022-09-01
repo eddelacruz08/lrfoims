@@ -29,7 +29,7 @@ class Roles extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
-            'action' => 'Add Role',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Roles\form',
             'edit' => false
         ];
@@ -54,7 +54,7 @@ class Roles extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
-            'action' => 'Edit Role',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Roles\form',
             'edit' => true,
             'id' => $id,

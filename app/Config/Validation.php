@@ -286,6 +286,36 @@ class Validation
 		],
 	];
 
+	public $productStatus = [
+		'name' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Status Name',
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Status Description',
+		],
+	];
+ 
+	public $orderNumbers = [
+		'number' => [
+			'rules' => 'required|numeric',
+			'label' => 'Order Number',
+		],
+	];
+	
+	public $productDescription = [
+		'name' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Name',
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Description',
+		],
+	];
+
+
 	public $addAdminPayment = [
 		'c_cash' => [
 			'rules' => 'required|numeric',

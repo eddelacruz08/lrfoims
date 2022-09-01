@@ -30,7 +30,7 @@ class Modules extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
-            'action' => 'Add Module',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Modules\form',
             'edit' => false
         ];
@@ -54,7 +54,7 @@ class Modules extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
-            'action' => 'Edit Module',
+            'action' => 'Submit',
             'view' => 'Modules\UserManagement\Views\Modules\form',
             'edit' => true,
             'id' => $id,
