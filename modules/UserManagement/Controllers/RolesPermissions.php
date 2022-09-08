@@ -68,9 +68,9 @@ class RolesPermissions extends BaseController
   }
 
   public function retrieve(){
-    $data['own_permissions'] = $this->rolesPermissionsModel->getPermissions(['frbs_roles_permissions.role_id' => $_GET['id']]);
-    $data['permission_types'] = $this->rolesPermissionsModel->getPermissionsTypes(['frbs_roles_permissions.role_id' => $_GET['id']]);
-    $data['modules'] = $this->rolesPermissionsModel->getModules(['frbs_roles_permissions.role_id' => $_GET['id']]);
+    $data['own_permissions'] = $this->rolesPermissionsModel->getPermissions(['lrfoims_roles_permissions.role_id' => $_GET['id']]);
+    $data['permission_types'] = $this->rolesPermissionsModel->getPermissionsTypes(['lrfoims_roles_permissions.role_id' => $_GET['id']]);
+    $data['modules'] = $this->rolesPermissionsModel->getModules(['lrfoims_roles_permissions.role_id' => $_GET['id']]);
     return view('Modules\UserManagement\Views\RolesPermissions\permissions', $data);
   }
 }

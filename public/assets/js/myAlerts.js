@@ -154,9 +154,172 @@ function confirmPlaceOrder(route, id, valueId){
 	});
 }
 
+function updateIngredientReportClick(route, id, ingredientId){
+
+	Swal.fire({
+		title: 'Edit report',
+		inputLabel: 'Enter quantity for this field.',
+		input: 'number',
+		inputAttributes: {
+			min: 0
+		  },
+		showCancelButton: true,
+		inputPlaceholder: 'Enter quantity . . .',
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, continue',
+		allowOutsideClick: false,
+		inputValidator: (value) => {
+		  return new Promise((resolve) => {
+			if (value == '') {
+				resolve('Quantity field is required!')
+			} else{
+				resolve()
+			}
+		  })
+		}
+	}).then((result) => {
+		const inputValueQuantity = result.value
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 2000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route + id + ingredientId,
+					type: "POST",
+					data:{
+						id: id,
+						quantity: inputValueQuantity
+					},
+					cache: false,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							window.location.reload();
+							console.log(inputValueQuantity);
+							console.log(true);
+						});
+						$("#ingredientReports"+id).modal("show");
+					},
+					warning: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							console.log(inputValueQuantity);
+							console.log(false);
+						});
+						$("#ingredientReports"+id).modal("show");
+					},
+					
+				});
+			})
+		}
+		$("#ingredientReports"+id).modal("show");
+	});
+	$("#ingredientReports"+id).modal("show");
+}
+
+function addIngredientReportClick(route, id, quantity){
+
+	const quantityValue = quantity.split("/")
+	const ingredientQuantity =  Number(quantityValue[1]);
+
+	Swal.fire({
+		title: 'Apply Used Ingredient!',
+		inputLabel: 'Enter total quantity for this field.',
+		input: 'number',
+		inputAttributes: {
+			min: 0
+		  },
+		showCancelButton: true,
+		inputPlaceholder: 'Enter quantity . . .',
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, continue',
+		allowOutsideClick: false,
+		inputValidator: (value) => {
+		  return new Promise((resolve) => {
+			if (value == '') {
+				resolve('Quantity field is required!')
+			} else if (ingredientQuantity >= value){
+				resolve()
+			} else{
+				resolve('Please check your stock of this ingredient! <br> You have low stock of ingredients.')
+			}
+		  })
+		}
+	}).then((result) => {
+		const inputValueQuantity = result.value
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 1500,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route + id,
+					type: "POST",
+					data:{
+						ingredient_id: id,
+						quantity: inputValueQuantity
+					},
+					cache: false,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							window.location.reload();
+							// $("#placeOrderPayment").load(location.href + "#placeOrderPayment");
+							console.log(ingredientQuantity);
+							console.log(inputValueQuantity);
+							console.log(true);
+						});
+					},
+					warning: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+							allowOutsideClick: false,
+						}).then((confirm) => {
+							console.log(inputValueQuantity);
+							console.log(false);
+						});
+					}
+				});
+			})
+		}
+	});
+}
+
 function applyPayment(route, id, totalAmount){
 
 	const totalPrice = totalAmount.split("/")
+	const totaPriceAmount =  Number(totalPrice[1]);
 
 	Swal.fire({
 		title: 'Customer Payment',
@@ -175,10 +338,10 @@ function applyPayment(route, id, totalAmount){
 		  return new Promise((resolve) => {
 			if (value == '') {
 				resolve('Payment field is required!')
-			} else if (totalPrice[1] > value){
-				resolve('Please pay higher than your bill!')
-			} else{
+			} else if (totaPriceAmount < value || totaPriceAmount == value){
 				resolve()
+			} else{
+				resolve('Please pay higher than your bill!')
 			}
 		  })
 		}
@@ -215,7 +378,7 @@ function applyPayment(route, id, totalAmount){
 						}).then((confirm) => {
 							window.location.reload();
 							// $("#placeOrderPayment").load(location.href + "#placeOrderPayment");
-							console.log(totalPrice[1]);
+							console.log(totaPriceAmount);
 						});
 					},
 					warning: function (response) {

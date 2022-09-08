@@ -4,7 +4,7 @@ use App\Models\BaseModel;
 
 class PermissionTypesModel extends BaseModel
 {
-    protected $table = 'frbs_permission_types';
+    protected $table = 'lrfoims_permission_types';
     protected $allowedFields = [
         'type',
         'slug',

@@ -4,7 +4,7 @@ use App\Models\BaseModel;
 
 class ModulesModel extends BaseModel
 {
-    protected $table = 'frbs_modules';
+    protected $table = 'lrfoims_modules';
     protected $allowedFields = [
         'module', 
         'description',

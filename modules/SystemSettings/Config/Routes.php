@@ -28,11 +28,11 @@ $routes->group('ingredient-status', ['namespace' => 'Modules\SystemSettings\Cont
     $routes->add('d/(:num)', 'ProductStatus::delete/$1');
 });
 
-$routes->group('ingredient-descriptions', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
-    $routes->add('/', 'ProductDescription::index');
-    $routes->match(['get', 'post'], 'a', 'ProductDescription::add');
-    $routes->match(['get', 'post'], 'u/(:num)', 'ProductDescription::edit/$1');
-    $routes->add('d/(:num)', 'ProductDescription::delete/$1');
+$routes->group('ingredient-measures', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'ProductMeasure::index');
+    $routes->match(['get', 'post'], 'a', 'ProductMeasure::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'ProductMeasure::edit/$1');
+    $routes->add('d/(:num)', 'ProductMeasure::delete/$1');
 });
 
 $routes->group('order-numbers', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {

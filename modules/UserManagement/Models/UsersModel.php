@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class UsersModel extends BaseModel
 {
-    protected $table = 'frbs_users';
+    protected $table = 'lrfoims_users';
     protected $allowedFields = [
         'role_id', 
         'first_name',
@@ -46,8 +46,8 @@ class UsersModel extends BaseModel
 
     public function getDetails($condition = [])
     {
-        $this->select('frbs_users.*, frbs_roles.role_name');
-        $this->join('frbs_roles', ' frbs_roles.id = frbs_users.role_id');
+        $this->select('lrfoims_users.*, lrfoims_roles.role_name');
+        $this->join('lrfoims_roles', ' lrfoims_roles.id = lrfoims_users.role_id');
         
         foreach($condition as $field => $value){
             $this->where($field, $value);

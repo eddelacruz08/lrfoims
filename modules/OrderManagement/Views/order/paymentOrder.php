@@ -4,7 +4,7 @@
         <?php foreach ($getOrderDetails as $details): ?>
             <div class="accordion custom-accordion p-0 m-0" id="custom-accordion-one<?=$details['id']?>">
                 <div class="card p-0 m-1">
-                    <div class="card-header m-0 p-0" id="headingFour<?=$details['id']?>">
+                    <div class="card-header m-0 p-0 d-print-none" id="headingFour<?=$details['id']?>">
                         <h5 class="m-0 p-0 d-flex">
                             <a class="btn btn-dark flex-grow-1"
                                 data-bs-toggle="collapse" href="#collapseFour<?=$details['id']?>"
@@ -21,7 +21,7 @@
                                         </button>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
-                                <a class="btn btn-sm btn-info"><i class="dripicons-print"></i>&nbspInvoice</a>
+                                <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info"><i class="dripicons-print"></i>&nbspInvoice</a>
                                 <a onclick="confirmPlaceOrder('/orders/place-order/',<?=$details['id']?>,'/5')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex">
                                 Done&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                 </a>
@@ -34,11 +34,11 @@
                         data-bs-parent="#custom-accordion-one<?=$details['id']?>">
                         <div class="card-body  p-0 m-0">
                         
-                        <div class="table-responsive-sm">
-                            <table class="table table-hover responsive table-sm mb-0 pb-0" width="100%">
+                        <div class="table-responsive-sm" id="<?= $details['id'] ?><?= $details['number'] ?>">
+                            <table class="table table-borderless responsive table-sm mb-0 pb-0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">
+                                        <th scope="col" class="d-print-none">
                                             <center>Image</center>
                                         </th>
                                         <th scope="col">
@@ -59,7 +59,7 @@
                                     <?php foreach ($getCarts as $carts) : ?>
                                         <?php if($carts['order_id'] == $details['id']):?>
                                             <tr>
-                                                <td>
+                                                <td class="d-print-none">
                                                     <center>
                                                         <img src="<?= '/assets/uploads/menu/'.$carts['image'] ?>" width="80" height="80" class="img-fluid rounded-start" alt="...">
                                                     </center>
@@ -79,35 +79,40 @@
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
-                                    <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
-                                        <?php if($totalPrice['order_id'] == $details['id']):?>
-                                            <tr>
-                                                <th scope="col" colspan="4">
-                                                    <p class="float-end"><b>Total Price:</b></p>
-                                                </th>
-                                                <td scope="col">
-                                                    <center> ₱ <?= number_format($totalPrice['total_price']);?></center>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col" colspan="4">
-                                                    <p class="float-end"><b>Cash:</b></p>
-                                                </th>
-                                                <td scope="col">
-                                                    <center> ₱ <?= number_format($totalPrice['c_cash']);?></center>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col" colspan="4">
-                                                    <p class="float-end"><b>Change:</b></p>
-                                                </th>
-                                                <td scope="col">
-                                                    <center> ₱ <?= number_format($totalPrice['c_balance']);?></center>
-                                                </td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
                                 </tbody>
+                                <tfoot>
+                                    <?php if ($details['order_status_id'] == 4): ?>
+                                        <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
+                                                <?php if($totalPrice['order_id'] == $details['id']):?>
+                                                    <tr>
+                                                        <td scope="col" class="d-print-none">
+                                                        </td>
+                                                        <td scope="col">
+                                                            <center>
+                                                                <p><b>Order#<?= $details['number'] ?>&nbsp | &nbsp<?= (empty($details['total_amount']))? 'Not Paid':'Paid' ?></b></p>
+                                                            </center>
+                                                        </td>
+                                                        <td scope="col">
+                                                            <center>
+                                                                <p><b>Change:</b>&nbsp ₱ <?= number_format($totalPrice['c_balance']);?></p>
+                                                            </center>
+                                                        </td>
+                                                        <td scope="col">
+                                                            <center>
+                                                                <p><b>Cash:</b>&nbsp ₱ <?= number_format($totalPrice['c_cash']);?></p>
+                                                            </center>
+                                                        </td>
+                                                        <td scope="col">
+                                                            <center>
+                                                                <p><b>Order Total:</b>&nbsp ₱ <?= number_format($totalPrice['total_price']);?></p>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <?php endif; ?>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

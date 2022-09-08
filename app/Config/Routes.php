@@ -31,11 +31,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //login page
-$routes->add('/', 'Security::index');
+$routes->add('/login', 'Security::index');
 $routes->add('/signout', 'Security::signOut');
 //for registration
 $routes->match(['get','post'],'register', 'Security::register');
-$routes->add('/dashboard', 'Dashboard::index');
 // $routes->add('/send', 'SendMail::send');
 $routes->get('/import', 'Import::index');
 $routes->get('/(:alpha)/403', 'Security::fileNotFound/$1');

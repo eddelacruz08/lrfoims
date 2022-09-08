@@ -99,7 +99,7 @@ class Users extends BaseController
             'title' => 'Profile',
             'action' => 'Profile',
             'view' => 'Modules\UserManagement\Views\Users\viewUser',
-            'users' => $this->usersModel->getDetails(['frbs_users.id' => $id, 'frbs_users.status' => 'a'])
+            'users' => $this->usersModel->getDetails(['lrfoims_users.id' => $id, 'lrfoims_users.status' => 'a'])
         ];
         return view('templates/index', $data);
     }

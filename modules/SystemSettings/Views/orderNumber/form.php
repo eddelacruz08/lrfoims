@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputEmail4">Order number <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control  <?= isset($errors['number']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" number="number" placeholder="Order Number" value="<?= isset($value['number']) ? $value['number'] : '' ?>">
+                                <input type="text" class="form-control <?= isset($errors['number']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" name="number" placeholder="Order Number" value="<?= isset($value['number']) ? $value['number'] : '' ?>">
                                 <?php if(isset($errors['number'])):?>
                                     <small class="text-danger"><?=esc($errors['number'])?></small>
                                 <?php endif;?>

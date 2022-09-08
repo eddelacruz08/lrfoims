@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputEmail4">Order Status Name <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control  <?= isset($errors['order_status']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" order_status="order_status" placeholder="Order Status Name" value="<?= isset($value['order_status']) ? $value['order_status'] : '' ?>">
+                                <input type="text" class="form-control  <?= isset($errors['order_status']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" name="order_status" placeholder="Order Status Name" value="<?= isset($value['order_status']) ? $value['order_status'] : '' ?>">
                                 <?php if(isset($errors['order_status'])):?>
                                     <small class="text-danger"><?=esc($errors['order_status'])?></small>
                                 <?php endif;?>
@@ -45,7 +45,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputAddress2">Description <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control  <?= isset($errors['description']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" order_status="description" placeholder="Description" value="<?= isset($value['description']) ? $value['description'] : '' ?>">
+                                <input type="text" class="form-control  <?= isset($errors['description']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="description" placeholder="Description" value="<?= isset($value['description']) ? $value['description'] : '' ?>">
                                 <?php if(isset($errors['description'])):?>
                                     <small class="text-danger"><?=esc($errors['description'])?></small>
                                 <?php endif;?>

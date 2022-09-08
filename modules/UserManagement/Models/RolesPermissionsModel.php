@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class RolesPermissionsModel extends BaseModel
 {
-  protected $table = 'frbs_roles_permissions';
+  protected $table = 'lrfoims_roles_permissions';
   protected $allowedFields = [
       'role_id',
       'permission_id',
@@ -17,9 +17,9 @@ class RolesPermissionsModel extends BaseModel
 
   public function getDetails($conditions = [])
   {
-    $this->select('frbs_roles_permissions.*, p.permission, r.role_name');
-    $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
-    $this->join('frbs_roles as r', 'r.id = frbs_roles_permissions.role_id');
+    $this->select('lrfoims_roles_permissions.*, p.permission, r.role_name');
+    $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
+    $this->join('lrfoims_roles as r', 'r.id = lrfoims_roles_permissions.role_id');
 
     foreach($conditions as $field => $value){
         $this->where([$field => $value]);
@@ -30,21 +30,21 @@ class RolesPermissionsModel extends BaseModel
     
   public function getSecurityPermissions($conditions = [])
   {
-      $this->select('frbs_roles_permissions.*');
-      $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
-      $this->join('frbs_modules as m', 'm.id = p.module_id');
+      $this->select('lrfoims_roles_permissions.*');
+      $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
+      $this->join('lrfoims_modules as m', 'm.id = p.module_id');
       
       foreach($conditions as $field => $value){
           $this->where($field, $value);
       }
 
       return $this->findAll();
-  }
+  } 
 
   public function getPermissionsTypes($conditions = []){
     $this->select('pt.type, pt.slug as type_slug, pt.id as type_id');
-    $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
-    $this->join('frbs_permission_types as pt', 'pt.id = p.permission_type');
+    $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
+    $this->join('lrfoims_permission_types as pt', 'pt.id = p.permission_type');
     foreach ($conditions as $condition => $value) {
       $this->where($condition , $value);
     }
@@ -54,20 +54,20 @@ class RolesPermissionsModel extends BaseModel
 
   public function getModules($conditions = []){
 
-    $this->select('m.id as module_id, m.module, p.permission_type, p.icon');
-    $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
-    $this->join('frbs_modules as m', 'm.id = p.module_id');
+    $this->select('m.id as module_id, m.module, p.permission_type, p.slug, p.icon, p.id');
+    $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
+    $this->join('lrfoims_modules as m', 'm.id = p.module_id');
     foreach ($conditions as $condition => $value) {
       $this->where($condition , $value);
     }
     $this->groupBy('m.id');
-    $this->orderBy('m.module', 'ASC');
+    $this->orderBy('m.id', 'ASC');
     return $this->findAll();
   }
 
   public function getPermissions($conditions = []){
-    $this->select('p.id, p.permission, p.module_id, p.permission_type, p.slug');
-    $this->join('frbs_permissions as p', 'p.id = frbs_roles_permissions.permission_id');
+    $this->select('p.id, p.permission, p.module_id, p.permission_type, p.slug, p.icon, p.selection_id');
+    $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
     foreach ($conditions as $condition => $value) {
       $this->where($condition , $value);
     }
@@ -75,15 +75,6 @@ class RolesPermissionsModel extends BaseModel
     $this->orderBy('p.permission', 'ASC');
     return $this->findAll();
   }
-
-  // public function getPermissionType($roleId, $server){
-  //   $this->select('p.id, p.permission, p.module_id, p.permission_type, p.slug');
-  //   $this->join('frbs_permissions as p', 'frbs_roles_permissions.permission_id = p.id ');
-  //   $this->where([ 'frbs_roles_permissions.role_id' => $roleId]);
-  //   $this->where([ 'p.slug'=> $server]);
-  //   $this->where([ 'frbs_roles_permissions.deleted_at'=> null]);
-  //   return $this->findAll();
-  // }
 
   public function softDeleteByRoleId($id){
     return $this->where('role_id', $id)->delete();

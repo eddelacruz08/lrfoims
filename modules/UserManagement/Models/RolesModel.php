@@ -4,7 +4,7 @@ use App\Models\BaseModel;
 
 class RolesModel extends BaseModel
 {
-    protected $table = 'frbs_roles';
+    protected $table = 'lrfoims_roles';
     protected $allowedFields = [
         'role_name', 
         'description',

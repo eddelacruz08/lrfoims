@@ -52,19 +52,20 @@ class BaseController extends Controller
 	public function __construct()
 	{
 		$this->session = \Config\Services::session();
+
 		helper(['link', 'namesearch', 'paging', 'document']);
 	}
 
 	protected function hasPermissionRedirect($slugs)
 	{
-		$isValidSlug = 0;
-
 		$this->modulesModel = new UserManagement\ModulesModel();
 		$this->permissionsModel = new UserManagement\PermissionsModel();
-		$this->rolePermissionsModel = new UserManagement\RolesPermissionsModel();
+		$this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
+		
+		$isValidSlug = 0;
 
-		$this->permissions = $this->rolePermissionsModel->getSecurityPermissions(['frbs_roles_permissions.role_id' => session()->get('role_id'), 'p.slug'=> $slugs]);
-		if(!empty($this->permissions))
+		$permissions = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id'), 'p.slug'=> $slugs]);
+		if(!empty($permissions))
 		{
 			$isValidSlug = 1;
 		}else{
@@ -77,6 +78,5 @@ class BaseController extends Controller
 			exit();
 		}
 	}
-
 
 }

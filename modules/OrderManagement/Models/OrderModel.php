@@ -22,13 +22,13 @@ class OrderModel extends BaseModel
     public function getDetails($conditions = []){
 
         $this->select('u.id, lrfoims_orders.order_number_id');
-        $this->join('frbs_users as u', 'u.id = lrfoims_orders.user_id');
+        $this->join('lrfoims_users as u', 'u.id = lrfoims_orders.user_id');
         // $this->join('lrfoims_order_numbers as on', 'on.id = lrfoims_orders.order_number_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->groupBy('lrfoims_orders.id');
+        $this->groupBy('lrfoims_orders.order_number_id');
 
         return $this->findAll();
     }
@@ -36,7 +36,7 @@ class OrderModel extends BaseModel
     public function getCountPerOrderDetails($conditions = []){
 
         $this->select('COUNT(lrfoims_orders.id) as order_total, u.id');
-        $this->join('frbs_users as u', 'u.id = lrfoims_orders.user_id');
+        $this->join('lrfoims_users as u', 'u.id = lrfoims_orders.user_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
@@ -47,6 +47,20 @@ class OrderModel extends BaseModel
     }
 
     public function getOrderDetails($conditions = []){
+
+        $this->select('lrfoims_orders.*, os.order_status, on.number');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
+        $this->join('lrfoims_order_numbers as on', 'lrfoims_orders.order_number_id = on.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->groupBy('lrfoims_orders.id');
+
+        return $this->findAll();
+    }
+
+    public function getOrderPaymentHistoryDetails($conditions = []){
 
         $this->select('lrfoims_orders.*, os.order_status, on.number');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');

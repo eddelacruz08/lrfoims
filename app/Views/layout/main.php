@@ -47,95 +47,94 @@
 
 <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
   
-  <?= $this->include('templates/navbar'); ?>
-  <div class="container-fluid">
-      <?= $this->rendersection('content') ?>
-  </div>
-  <!-- Right Sidebar -->
-  <div class="end-bar">
+  
+    <?= $this->rendersection('content') ?>
 
-    <div class="rightbar-title">
-        <a href="javascript:void(0);" class="end-bar-toggle float-end">
-            <i class="dripicons-cross noti-icon"></i>
-        </a>
-        <h5 class="m-0">Settings</h5>
-    </div>
+    <!-- Right Sidebar -->
+    <div class="end-bar">
 
-    <div class="rightbar-content h-100" data-simplebar>
+        <div class="rightbar-title">
+            <a href="javascript:void(0);" class="end-bar-toggle float-end">
+                <i class="dripicons-cross noti-icon"></i>
+            </a>
+            <h5 class="m-0">Settings</h5>
+        </div>
 
-        <div class="p-3">
-            <div class="alert alert-warning" role="alert">
-                <strong>Customize </strong> the overall color scheme, sidebar menu, etc.
-            </div>
+        <div class="rightbar-content h-100" data-simplebar>
 
-            <!-- Settings -->
-            <h5 class="mt-3">Color Scheme</h5>
-            <hr class="mt-1" />
+            <div class="p-3">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Customize </strong> the overall color scheme, sidebar menu, etc.
+                </div>
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="color-scheme-mode" value="light" id="light-mode-check" checked>
-                <label class="form-check-label" for="light-mode-check">Light Mode</label>
-            </div>
+                <!-- Settings -->
+                <h5 class="mt-3">Color Scheme</h5>
+                <hr class="mt-1" />
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="color-scheme-mode" value="dark" id="dark-mode-check">
-                <label class="form-check-label" for="dark-mode-check">Dark Mode</label>
-            </div>
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="color-scheme-mode" value="light" id="light-mode-check" checked>
+                    <label class="form-check-label" for="light-mode-check">Light Mode</label>
+                </div>
 
-
-            <!-- Width -->
-            <h5 class="mt-4">Width</h5>
-            <hr class="mt-1" />
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="width" value="fluid" id="fluid-check" checked>
-                <label class="form-check-label" for="fluid-check">Fluid</label>
-            </div>
-
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="width" value="boxed" id="boxed-check">
-                <label class="form-check-label" for="boxed-check">Boxed</label>
-            </div>
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="color-scheme-mode" value="dark" id="dark-mode-check">
+                    <label class="form-check-label" for="dark-mode-check">Dark Mode</label>
+                </div>
 
 
-            <!-- Left Sidebar-->
-            <h5 class="mt-4">Left Sidebar</h5>
-            <hr class="mt-1" />
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="theme" value="default" id="default-check">
-                <label class="form-check-label" for="default-check">Default</label>
-            </div>
+                <!-- Width -->
+                <h5 class="mt-4">Width</h5>
+                <hr class="mt-1" />
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="width" value="fluid" id="fluid-check" checked>
+                    <label class="form-check-label" for="fluid-check">Fluid</label>
+                </div>
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="theme" value="light" id="light-check" checked>
-                <label class="form-check-label" for="light-check">Light</label>
-            </div>
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="width" value="boxed" id="boxed-check">
+                    <label class="form-check-label" for="boxed-check">Boxed</label>
+                </div>
 
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" name="theme" value="dark" id="dark-check">
-                <label class="form-check-label" for="dark-check">Dark</label>
-            </div>
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="compact" value="fixed" id="fixed-check" checked>
-                <label class="form-check-label" for="fixed-check">Fixed</label>
-            </div>
+                <!-- Left Sidebar-->
+                <h5 class="mt-4">Left Sidebar</h5>
+                <hr class="mt-1" />
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="theme" value="default" id="default-check">
+                    <label class="form-check-label" for="default-check">Default</label>
+                </div>
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="compact" value="condensed" id="condensed-check">
-                <label class="form-check-label" for="condensed-check">Condensed</label>
-            </div>
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="theme" value="light" id="light-check" checked>
+                    <label class="form-check-label" for="light-check">Light</label>
+                </div>
 
-            <div class="form-check form-switch mb-1">
-                <input class="form-check-input" type="checkbox" name="compact" value="scrollable" id="scrollable-check">
-                <label class="form-check-label" for="scrollable-check">Scrollable</label>
-            </div>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" name="theme" value="dark" id="dark-check">
+                    <label class="form-check-label" for="dark-check">Dark</label>
+                </div>
 
-            <div class="d-grid mt-2">
-                <button class="btn btn-primary" id="resetBtn">Reset to Default</button>
-            </div>
-        </div> <!-- end padding-->
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="compact" value="fixed" id="fixed-check" checked>
+                    <label class="form-check-label" for="fixed-check">Fixed</label>
+                </div>
 
-      </div>
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="compact" value="condensed" id="condensed-check">
+                    <label class="form-check-label" for="condensed-check">Condensed</label>
+                </div>
+
+                <div class="form-check form-switch mb-1">
+                    <input class="form-check-input" type="checkbox" name="compact" value="scrollable" id="scrollable-check">
+                    <label class="form-check-label" for="scrollable-check">Scrollable</label>
+                </div>
+
+                <div class="d-grid mt-2">
+                    <button class="btn btn-primary" id="resetBtn">Reset to Default</button>
+                </div>
+            </div> <!-- end padding-->
+
+        </div>
     </div>
 
     <div class="rightbar-overlay"></div>
@@ -191,16 +190,19 @@
     <script src="assets/js/vendor/buttons.print.min.js"></script>
     <script src="assets/js/vendor/dataTables.keyTable.min.js"></script>
     <script src="assets/js/vendor/dataTables.select.min.js"></script>
+    <script src="assets/js/vendor/Chart.bundle.min.js"></script>
     <!-- third party js ends -->
 
 
     <!-- demo app -->
     <script src="/assets/js/pages/demo.dashboard.js"></script>
+        <script src="assets/js/pages/demo.chartjs.js"></script>
     <!-- end demo js-->
 
-    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script> -->
     <script src="/assets/js/permissions.js"></script>
     <script src="/assets/js/orders.js"></script>
+    <!-- <script src="/assets/js/invoiceOrders.js"></script> -->
     
     <script>
       $(document).ready(function() {
@@ -216,6 +218,19 @@
           }
       });
     </script>
+    <script>
+		function printOrders(divName){
+			var printContents = document.getElementById(divName).innerHTML;
+			var originalContents = document.body.innerHTML;
+
+			document.body.innerHTML = printContents;
+
+			window.print();
+
+			document.body.innerHTML = originalContents;
+
+		}
+	</script>
 </body>
 </html>
 <?= $this->include('templates/notifications'); ?>

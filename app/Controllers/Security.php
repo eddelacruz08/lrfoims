@@ -2,19 +2,18 @@
 
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models as UserManagement;
-use Modules\ReservationManagement\Models as ReservationManagement;
 
 class Security extends BaseController{
 
     function __construct(){
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
-        $this->logsModel = new ReservationManagement\LogsModel();
     }
 
     public function index(){
         $data = [
             'page_title' => 'LRFOIMS | Sign in',
-            'title' => 'Lamon Restaurant Food Ordering and Ingredients Management System'
+            'title' => 'Lamon Restaurant Food Ordering and Ingredients Management System',
+            'view' => 'Login/login'
         ];
         helper(['form']);
         if ($this->request->getMethod() == 'post') {
@@ -24,7 +23,7 @@ class Security extends BaseController{
                 'password' => 'required|min_length[8]|max_length[50]|validateUser[username,password]',
             ];
             $errors = [
-                'password' => [
+                'password' => [ 
                     'validateUser' => 'Username or Password don\'t match.'
                 ]
             ];
@@ -39,21 +38,21 @@ class Security extends BaseController{
 
                 $this->setUserMethod($user);
                 $this->session->setFlashdata('success_login', 'Successfully logged in!');
-                $logData = [
-                    'user_id' => session()->get('id'),
-                    'description' => 'signed in'
-                ];
-                $this->logsModel->add($logData);
+                // $logData = [
+                //     'user_id' => session()->get('id'),
+                //     'description' => 'signed in'
+                // ];
+                // $this->logsModel->add($logData);
                 if(session()->get('role_id') <= 2){
-                    return redirect()->to('/orders');
+                    return redirect()->to('/dashboard');
                 }else{
-                    return redirect()->to('/reservations/t');
+                    return redirect()->to('/');
                 }
 
             }
         }
 
-        return view('Login/login', $data);
+        return view('templates/landingPage', $data);
     }
 
     private function setUserMethod($user){
@@ -76,7 +75,8 @@ class Security extends BaseController{
     public function register(){
         $data = [
             'page_title' => 'LRFOIMS | Register',
-            'title' => 'Lamon Restaurant Food Ordering and Inventory System'
+            'title' => 'Lamon Restaurant Food Ordering and Inventory System',
+            'view' => 'register'
         ];
         helper(['form']);
 
@@ -109,7 +109,7 @@ class Security extends BaseController{
 
         }
 
-        return view('register',$data);
+        return view('templates/landingPage',$data);
     }
 
     public function fileNotFound($slugs)

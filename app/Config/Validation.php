@@ -181,7 +181,7 @@ class Validation
 		],
 	];
 
-	public $products = [
+	public $ingredients = [
 		'product_name' => [
 			'rules' => 'required',
 			'label' => 'Product Name',
@@ -195,6 +195,14 @@ class Validation
 			'errors' => [
                 'required' => '{field} field is required'      
             ]
+		],
+		'unit' => [
+			'rules' => 'required|numeric',
+			'label' => 'Unit Number',
+			'errors' => [
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'
+			]
 		],
 		'quantity' => [
 			'rules' => 'required|numeric',
@@ -215,10 +223,6 @@ class Validation
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'    
             ]
-		],
-		'product_status_id' => [
-			'rules' => 'required',
-			'label' => 'Product Status',
 		],
 	];
 
@@ -299,19 +303,22 @@ class Validation
  
 	public $orderNumbers = [
 		'number' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|is_unique[lrfoims_order_numbers.number,{number}]',
 			'label' => 'Order Number',
+			'errors' => [
+				'is_unique' => '{field} already exist'      
+			]
 		],
 	];
 	
-	public $productDescription = [
+	public $productMeasure = [
 		'name' => [
 			'rules' => 'required',
-			'label' => 'Ingredient Name',
+			'label' => 'Measure Name',
 		],
 		'description' => [
 			'rules' => 'required',
-			'label' => 'Ingredient Description',
+			'label' => 'Measure Description',
 		],
 	];
 

@@ -17,7 +17,7 @@ class CartModel extends BaseModel
     public function getDetails($conditions = []){
 
         $this->select('u.id, on.number');
-        $this->join('frbs_users as u', 'u.id = lrfoims_carts.user_id');
+        $this->join('lrfoims_users as u', 'u.id = lrfoims_carts.user_id');
         $this->join('lrfoims_order_numbers as on', 'lrfoims_orders.order_number_id = on.id');
 
         foreach($conditions as $field => $value){

@@ -37,7 +37,7 @@ class Order extends BaseController
             'paymentHistoryOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 5])
 		];
 
-		return view('templates/index', $data);
+		return view('templates/index', $data); 
 	}
     
     public function retrieveOrder(){
@@ -78,7 +78,8 @@ class Order extends BaseController
         $data['menuLists'] = $this->menusModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 5]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 'lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderPaymentHistoryDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 
+            'lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
         return view('Modules\OrderManagement\Views\order\paymentHistoryOrder', $data);
     }
 
@@ -121,15 +122,22 @@ class Order extends BaseController
         $data['title'] = 'Orders';
         $data['view'] = 'Modules\OrderManagement\Views\order\index';
 
-        if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('addToCartAdmin')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-                $this->session->setFlashdata('error', 'Please complete all fields!');
-            } else {
-                $this->cartsModel->add($_POST);
-                $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+        $checkDuplicateMenuId = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'menu_id' => $_POST['menu_id'], 'status' => 'a']);
+        if(empty($checkDuplicateMenuId)){
+            if ($this->request->getMethod() == 'post') {
+                if (!$this->validate('addToCartAdmin')) {
+                    $data['errors'] = $this->validation->getErrors();
+                    $data['value'] = $_POST;
+                    $this->session->setFlashdata('error', 'Please complete all fields!');
+                } else {
+                    $this->cartsModel->add($_POST);
+                    $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                }
+                return redirect()->to('/orders');
             }
+            return redirect()->to('/orders');
+        }else{
+            $this->session->setFlashdata('error_no_flash', 'You\'ve already added this menu! Please check your orders to apply changes.');
             return redirect()->to('/orders');
         }
         return view('templates/index', $data);
@@ -235,7 +243,7 @@ class Order extends BaseController
 
         if ($this->request->getMethod() == 'post') 
         {
-            if($totalAmount < $_POST['c_cash']){
+            if($totalAmount <= $_POST['c_cash']){
                 $data = [
                     'total_amount' => $totalAmount,
                     'c_cash' => $_POST['c_cash'],

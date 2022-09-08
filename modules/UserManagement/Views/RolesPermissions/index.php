@@ -40,7 +40,7 @@
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
+                        <table id="basic-datatable" class="table table-hover dt-responsive w-100">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">

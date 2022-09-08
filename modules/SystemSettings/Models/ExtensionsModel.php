@@ -4,7 +4,7 @@ use App\Models\BaseModel;
 
 class ExtensionsModel extends BaseModel
 {
-    protected $table = 'frbs_extension_names';
+    protected $table = 'lrfoims_extension_names';
     protected $allowedFields = [
         'extension_name', 
         'description',
