@@ -101,7 +101,7 @@
                     <div id="orders" class="tab-pane fade show active">
                         <?php if(!empty($orders)):?>
                             <?php foreach ($orders as $row) : ?>
-                                <div class="orders-data" id="<?=$row['order_number_id']?>"></div>
+                                <div class="orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
                                 No Orders
@@ -110,7 +110,7 @@
                     <div id="placeOrders" class="tab-pane fade">
                         <?php if(!empty($placeOrders)):?>
                             <?php foreach ($placeOrders as $row) : ?>
-                                    <div class="place-orders-data" id="<?=$row['order_number_id']?>"></div>
+                                    <div class="place-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
                                 No Place Orders
@@ -119,7 +119,7 @@
                     <div id="serveOrder" class="tab-pane fade">
                         <?php if(!empty($serveOrders)):?>
                             <?php foreach ($serveOrders as $row) : ?>
-                                    <div class="serve-orders-data" id="<?=$row['order_number_id']?>"></div>
+                                    <div class="serve-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
                                 No Served
@@ -128,7 +128,7 @@
                     <div id="payments" class="tab-pane fade">
                         <?php if(!empty($paymentOrders)):?>
                             <?php foreach ($paymentOrders as $row) : ?>
-                                    <div class="payment-orders-data" id="<?=$row['order_number_id']?>"></div>
+                                    <div class="payment-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
                                 No Order Payments
@@ -137,7 +137,7 @@
                     <div id="history" class="tab-pane fade">
                         <?php if(!empty($paymentHistoryOrders)):?>
                             <?php foreach ($paymentHistoryOrders as $row) : ?>
-                                    <div class="payment-history-orders-data" id="<?=$row['order_number_id']?>"></div>
+                                    <div class="payment-history-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
                                 No Payment Order History

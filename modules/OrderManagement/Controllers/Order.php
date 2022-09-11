@@ -40,19 +40,19 @@ class Order extends BaseController
 		return view('templates/index', $data); 
 	}
     
-    public function retrieveOrder(){
-        $data['menuLists'] = $this->menusModel->get();
-        $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a', 'lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 1]);
-        return view('Modules\OrderManagement\Views\order\orders', $data);
-    }
+    // public function retrieveOrder(){
+    //     $data['menuLists'] = $this->menusModel->get();
+    //     $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
+    //     $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]);
+    //     $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a', 'lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 1]);
+    //     return view('Modules\OrderManagement\Views\order\orders', $data);
+    // }
 
     public function retrievePlaceOrder(){
         $data['menuLists'] = $this->menusModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 2]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 2]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 2]);
         return view('Modules\OrderManagement\Views\order\orders', $data);
     }
     
@@ -60,7 +60,7 @@ class Order extends BaseController
         $data['menuLists'] = $this->menusModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 3]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 3]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 3]);
         return view('Modules\OrderManagement\Views\order\serveOrder', $data);
     }
     
@@ -68,7 +68,7 @@ class Order extends BaseController
         $data['menuLists'] = $this->menusModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 4]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 4]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 4]);
         return view('Modules\OrderManagement\Views\order\paymentOrder', $data);
     }
     
@@ -79,7 +79,7 @@ class Order extends BaseController
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 5]);
         $data['getOrderDetails'] = $this->ordersModel->getOrderPaymentHistoryDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 
-            'lrfoims_orders.status' => 'a','lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
+            'lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
         return view('Modules\OrderManagement\Views\order\paymentHistoryOrder', $data);
     }
 
@@ -145,58 +145,57 @@ class Order extends BaseController
 
     public function menu()
 	{
+        // $highestOrderNumber = $this->ordersModel->getHighestOrderNumber(['status'=>'a'])[0];
+        // die($highestOrderNumber['max_order_number']);
 		$data = [
 			'page_title' => 'LRFOIMS | Order Menu',
 			'title' => 'Order Menu',
 			'view' => 'Modules\OrderManagement\Views\menuList\index',
             'menuLists' => $this->menusModel->getDetails(['lrfoims_menus.status'=>'a']),
             'menuCategory' => $this->menuCategoryModel->get(),
-            'adminUnavailableOrders' => $this->ordersModel->get(['lrfoims_orders.status'=>'u']),
+            'adminUnavailableOrders' => $this->ordersModel->get(['order_status_id'=> 1, 'status'=>'a']),
             'adminCartLists' => $this->cartsModel->getAdminCartLists(['lrfoims_carts.status'=>'a']),
             'adminCountCartLists' => $this->cartsModel->getAdminCountCartLists(['o.status'=>'u']),
             'availableOrderNumbers' => $this->orderNumbersModel->get(['status'=>'a']),
-            'getCreatedOrderNumber' => $this->ordersModel->getCreatedOrderNumber(['on.number_status' => 'u', 'lrfoims_orders.status'=>'u']),
+            'getCreatedOrderNumber' => $this->ordersModel->get(['order_status_id' => 1, 'status'=>'a']),
 		];
 
 		return view('templates/index', $data);
 	}
 
-    public function addAdminOrderNumber(){ 
-        $jdata['page_title'] = 'LRFOIMS | Order Menu';
-        $jdata['title'] = 'Order Menu';
-        $jdata['view'] = 'Modules\OrderManagement\Views\menuList\index';
+    public function createOrderNumber(){ 
 
-        $_POST['user_id'] = session()->get('id');
-        $_POST['number_status'] = 'u';
-        $orderNumberId = $_POST['order_number_id'];
+        $highestOrderNumber = $this->ordersModel->getHighestOrderNumber(['status'=>'a'])[0];
 
-        $data['order_number_id'] = $orderNumberId;
-        $data['user_id'] = session()->get('id');
-        $data['order_status_id'] = 1;
-        // die(session()->get('id'));
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('addAdminOrderNumber')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-            } else {
-                if($this->ordersModel->addStatusUnavailable($data)){
-                    $this->orderNumbersModel->update($orderNumberId, $_POST);
-                    $this->session->setFlashdata('success_no_flash', 'Order successfully added!');
-                }else{
-                    $this->session->setFlashdata('error_no_flash', 'Can\'t assign number!');
-                }
-                return redirect()->to('/orders/admin-menu');
+            $orderNumberId = $highestOrderNumber['max_order_number'] + 1;
+
+            $data['number'] = $orderNumberId;
+            $data['user_id'] = session()->get('id');
+            $data['order_status_id'] = 1;
+            if($this->ordersModel->add($data)){
+                $jdata =[
+                    'status' => 'Success',
+                    'status_text' => 'Successfully added an order!',
+                    'status_icon' => 'success'
+                ];
+            }else{
+                $jdata =[
+                    'status' => 'Opss',
+                    'status_text' => 'Something went wrong!',
+                    'status_icon' => 'warning'
+                ];
             }
-            return redirect()->to('/orders/admin-menu');
+            return $this->response->setJSON($jdata);
         }
-        return view('templates/index', $jdata);
+        return $this->response->setJSON($jdata);
     }
     
     public function addOrderToCartInMenuList(){
         $data['page_title'] = 'LRFOIMS | Order Menu';
         $data['title'] = 'Order Menu';
         $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
-        $data['getCreatedOrderNumber'] = $this->ordersModel->getCreatedOrderNumber(['on.number_status' => 'u', 'lrfoims_orders.status'=>'u']);
+        $data['getCreatedOrderNumber'] = $this->ordersModel->get(['lrfoims_orders.order_status_id' => 1, 'lrfoims_orders.status'=>'a']);
 
         $checkDuplicateMenuId = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'menu_id' => $_POST['menu_id'], 'status' => 'a']);
         if(empty($checkDuplicateMenuId)){

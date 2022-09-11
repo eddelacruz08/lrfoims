@@ -127,6 +127,7 @@ function filterDateClick(route){
 	})
 
 }
+
 function updateIngredientReportClick(route, id, ingredientId){
 
 	Swal.fire({

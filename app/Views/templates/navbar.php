@@ -3,7 +3,7 @@
     <div class="container-fluid">
 
         <!-- LOGO -->
-        <a href="javascript: void(0);" class="topnav-logo">
+        <a href="/" class="topnav-logo">
             <span class="topnav-logo-lg">
                 <img src="/assets/img/lamon_logo.png" alt="" height="65">
             </span>
@@ -28,7 +28,7 @@
                     </span>
                     <span>
                         <span class="account-user-name"><?= session()->get('first_name').' '.session()->get('last_name');?></span>
-                        <span class="account-position">Super Admin</span>
+                        <span class="account-position"><?= session()->get('role_name')?></span>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">

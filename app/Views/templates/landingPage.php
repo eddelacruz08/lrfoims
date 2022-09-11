@@ -5,7 +5,7 @@
     <div class="container">
 
         <!-- logo -->
-        <a href="/home" class="navbar-brand me-lg-5 m-0">
+        <a href="/" class="navbar-brand me-lg-5 m-0">
             <img src="assets/img/lamon_logo.png" alt="" class="logo-dark" height="70" />
         </a>
 
@@ -19,18 +19,26 @@
 
             <!-- left menu -->
             <ul class="navbar-nav me-auto align-items-center">
-                <li class="nav-item mx-lg-1">
-                    <a class="nav-link active" href="/home">Home</a>
-                </li>
-                <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="/menu">Menu</a>
-                </li>
-                <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="/cart">Cart</a>
-                </li>
-                <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
+                <?php if (isset($_SESSION['modules'])): ?>
+                    <?php foreach ($_SESSION['modules']as $modules): ?>
+                            <?php foreach ($_SESSION['permissions'] as $permissions): ?>
+                                <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 5
+                                            && $permissions['permission_type'] == 11): ?>
+                                    <li class="nav-item mx-lg-1">
+                                        <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                            <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
+                                                <?php if ($permissions['slug'] == 'cart'): ?>
+                                                    <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                                        <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </ul>
 
             <!-- right menu -->

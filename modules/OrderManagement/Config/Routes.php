@@ -3,7 +3,7 @@ $routes->group('orders', ['namespace' => 'Modules\OrderManagement\Controllers'],
     $routes->add('/', 'Order::index');
     $routes->add('admin-menu', 'Order::menu');
     $routes->match(['get', 'post'], 'a', 'Order::addOrder');
-    $routes->match(['get', 'post'], 'admin/create-order/a', 'Order::addAdminOrderNumber');
+    // $routes->match(['get', 'post'], 'admin/create-order/a', 'Order::addAdminOrderNumber');
     $routes->match(['get', 'post'], 'admin/add-to-cart/a', 'Order::addOrderToCartInMenuList');
     $routes->match(['get', 'post'], 'add-to-cart/(:num)', 'Order::addToCart');
     $routes->match(['get', 'post'], 'u/(:num)', 'Order::edit/$1');
@@ -21,4 +21,5 @@ $routes->group('orders', ['namespace' => 'Modules\OrderManagement\Controllers'],
     $routes->add('serve-order', 'Order::retrieveServeOrder');
     $routes->add('payment-order', 'Order::retrievePaymentOrder');
     $routes->add('payment-history-order', 'Order::retrievePaymentHistoryOrder');
+    $routes->add('create-order-number', 'Order::createOrderNumber');
 });

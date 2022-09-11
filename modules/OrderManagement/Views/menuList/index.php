@@ -61,35 +61,9 @@
                     <div id="admiMenu" class="tab-pane fade show active">
                         <?php if(empty($getCreatedOrderNumber)):?>
                             <div class="card p-2">
-                                <label for="inputAddress2">Select&nbspOrder&nbspNumber<small class="text-danger">*</small></label>
-                                <div class="row">
-                                    <?php foreach ($availableOrderNumbers as $option) : ?>
-                                        <div class="col m-1 p-1">
-                                            <?php if ($option['number_status'] == 'a') : ?>
-                                                <form method="POST" action="/orders/admin/create-order/a">
-                                                    <button type="submit" class="btn btn-lg p-2 btn-primary h2">
-                                                        Order#<?= $option['number'];?><p>Available</p>
-                                                        <input type="hidden" value="<?= $option['id'];?>" name="order_number_id">
-                                                    </button> 
-                                                </form>  
-                                            <?php elseif($option['number_status'] == 'w') : ?>
-                                                <form method="POST" action="/orders/admin/create-order/a">
-                                                    <button type="submit" class="btn btn-lg p-2 btn-dark h2">
-                                                        Order#<?= $option['number'];?><p>Waiting</p>
-                                                        <input type="hidden" value="<?= $option['id'];?>" name="order_number_id">
-                                                    </button> 
-                                                </form>
-                                            <?php else: ?>
-                                                <button type="submit" class="btn btn-lg p-2 btn-dark h2" disabled>
-                                                    Order#<?= $option['number'];?><p>Unavailable</p>
-                                                </button>
-                                            <?php endif; ?>
-                                        </div>
-                                        <?php endforeach; ?>
-                                    <?php if(isset($errors['order_number_id'])):?>
-                                        <small class="text-danger"><?=esc($errors['order_number_id'])?></small>
-                                    <?php endif;?>
-                                </div> 
+                                <a onclick="createOrderNumber('/orders/create-order-number')" title="Add an Order" animation="true" class="btn btn-lg btn-dark">
+                                    Add an Order 
+                                </a>
                             </div>
                         <?php else: ?>
                             <?php foreach ($getCreatedOrderNumber as $orderNumberDetails) : ?>

@@ -64,7 +64,7 @@
                             <div class="col-md-6">
                                 <label for="inputEmail4">Unit of Measure <small class="text-danger">*</small></label>
                                 <div class="input-group">
-                                    <input type="number" aria-describedby="basic-addon1" min="0" class="form-control <?= isset($errors['unit']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit" placeholder="Enter Unit Number" value="<?= isset($value['unit']) ? $value['unit'] : '' ?>">
+                                    <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit" placeholder="Enter Unit Number" value="<?= isset($value['unit']) ? $value['unit'] : '' ?>">
                                     <select class="form-control <?= isset($errors['product_description_id']) ? 'is-invalid':'is-valid' ?>" name="product_description_id">
                                         <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select measure --</option>
                                         <?php foreach ($productDescription as $option) : ?>

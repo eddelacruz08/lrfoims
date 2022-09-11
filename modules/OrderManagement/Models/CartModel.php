@@ -16,14 +16,13 @@ class CartModel extends BaseModel
     
     public function getDetails($conditions = []){
 
-        $this->select('u.id, on.number');
-        $this->join('lrfoims_users as u', 'u.id = lrfoims_carts.user_id');
-        $this->join('lrfoims_order_numbers as on', 'lrfoims_orders.order_number_id = on.id');
+        $this->select('u.id');
+        $this->join('lrfoims_orders as u', 'u.id = lrfoims_carts.user_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->groupBy('on.number');
+        // $this->groupBy('on.number');
 
         return $this->findAll();
     }
@@ -48,7 +47,6 @@ class CartModel extends BaseModel
         $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
         $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
-        $this->join('lrfoims_order_numbers as on', 'o.order_number_id = on.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

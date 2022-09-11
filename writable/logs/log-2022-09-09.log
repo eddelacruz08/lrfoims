@@ -1,0 +1,421 @@
+CRITICAL - 2022-09-09 12:40:39 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 12:57:52 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:19:38 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:35:16 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:37:30 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:41:53 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:42:42 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 13:52:12 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:00:45 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:09:16 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:10:30 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:17:42 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:38:59 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:46:59 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:47:37 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:47:56 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:48:06 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:48:18 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:48:37 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:49:18 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:50:37 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 48, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:55:02 --> Undefined index: filteredDate
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(40): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 40, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 14:55:10 --> Undefined variable: totalIngredients
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Views\ingredientReport\index.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 29, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Ingredi...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Ingredi...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(48): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 15:00:15 --> Undefined variable: totalIngredients
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Views\ingredientReport\index.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 29, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Ingredi...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Ingredi...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(62): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 15:00:53 --> Undefined variable: date
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 55, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 15:01:21 --> Undefined variable: date
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 55, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 15:01:45 --> Undefined variable: date
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 55, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 15:04:25 --> Call to undefined function Modules\IngredientReportManagement\Controllers\index()
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-09-09 15:06:48 --> Undefined variable: date
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 52, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 15:13:05 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 52, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate('2022-09-09')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 15:16:21 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 52, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->filterDate('2022-09-09')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\IngredientReportManagement\Controllers\IngredientReport))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-09-09 16:57:11 --> Class 'Modules\HomeManagement\Models\CartModel' not found
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(907): Modules\HomeManagement\Controllers\Home->__construct()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(421): CodeIgniter\CodeIgniter->createController()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-09-09 16:58:14 --> Class 'Modules\HomeManagement\Controllers\SystemSettings\MenuCategoryModel' not found
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(907): Modules\HomeManagement\Controllers\Home->__construct()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(421): CodeIgniter\CodeIgniter->createController()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-09-09 17:11:25 --> Undefined index: product_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:16 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:18 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:18 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:19 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:19 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:19 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:20 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-09-09 17:12:20 --> Undefined index: menu_category_id
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 33, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage.php(62): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(41): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}

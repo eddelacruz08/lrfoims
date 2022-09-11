@@ -107,6 +107,96 @@ function confirmDelete(route, id){
 	});
 }
 
+function convert(str) {
+	var date = new Date(str),
+	mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+	day = ("0" + date.getDate()).slice(-2);
+	return [date.getFullYear(), mnth, day].join("-");
+}
+
+function filterDateClick(route){
+	let flatpickrInstance
+	// const inputValue = $('#filter-date').val()
+
+	Swal.fire({
+		title: 'Filter Date',
+		html: '<input class="swal2-input" id="filter-date" placeholder="Select a date">',
+		stopKeydownPropagation: false,
+		inputValidator: (value) => {
+			return new Promise((resolve) => {
+				if ($('#filter-date').val() == null) {
+					resolve('Please select date!');
+				}else{
+					resolve()
+				}
+            })
+		},
+		willOpen: () => {
+			flatpickrInstance = flatpickr(
+				Swal.getPopup().querySelector('#filter-date')
+			)
+		}
+	}).then((result) => {
+		const date = $('#filter-date').val()
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 1000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route + '/' + date,
+				});
+			});
+		}
+	});
+
+}
+
+function createOrderNumber(route){
+	Swal.fire({
+		title: 'Processing...',
+		html: 'Please wait.',
+		icon: 'info',
+		timer: 1000,
+		timerProgressBar: true,
+		allowOutsideClick: false,
+		didOpen: () => {
+			Swal.showLoading()
+		},
+	}).then((result) => {
+		$.ajax({
+			url: route,
+			type: "POST",
+			data:{},
+			cache: false,
+			success: function (response) {
+				Swal.fire({
+					title: response.status,
+					text: response.status_text,
+					icon: response.status_icon,
+				}).then((confirm) => {
+					window.location.reload();
+					console.log(route);
+				});
+			},
+			warning: function (response) {
+				Swal.fire({
+					title: response.status,
+					text: response.status_text,
+					icon: response.status_icon,
+				});
+			}
+		});
+	});
+}
+
 function confirmPlaceOrder(route, id, valueId){
 	Swal.fire({
 		title: 'Do you want to continue?',
@@ -526,389 +616,5 @@ function applyPaymentServeOrders(route){
 	});
 }
 
-function approveReservationByOffice(route){
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-		allowOutsideClick: false,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						officeIsChecked: 1
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							
-						});
-					}
-				});
-			})
-		}
-	});
-}
-
-function freeReservation(route){
-	var remarks = $("#remarks-app").val()
-
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						remarks: remarks
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#approve").modal("hide");
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#approve").modal("hide");
-						});
-					}
-				});
-			});
-		}
-	});
-}
-
-function rejectReservation(route){
-	var remarks = $("#remarks-rej").val()
-
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						remarks: remarks
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#reject").modal("hide");
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#reject").modal("hide");
-						});
-					},
-				});
-			})
-		}
-	});
-}
-function rejectReservationByOffice(route){
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						officeIsChecked: 2
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-						});
-					},
-				});
-			})
-		}
-	});
-}
-
-function endReservation(route){
-	var remarks = $("#remarks-end").val();
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					type: "post",
-					url: route,
-					data: {
-						remarks: remarks,
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#end").modal("hide");
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#end").modal("hide");
-						});
-					},
-				});
-			})
-		}
-	});
-}
-function cancelReservation(route){
-	var remarks = $("#remarks-cancel").val();
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					type: "post",
-					url: route,
-					data: {
-						remarks: remarks,
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#cancel").modal("hide");
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#cancel").modal("hide");
-						});
-					}
-				});
-			})
-		}
-	});
-}
-
-function verifyReservation(route){
-	var remarks = $("#remarks-verify").val();
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You can't revert this action anymore.",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					type: "post",
-					url: route,
-					data: {
-						remarks: remarks,
-					},
-					cache: false,
-					success: function (response) {
-						console.log("OK");
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#verify").modal("hide");
-							window.location.reload();
-						});
-					},
-					error: function (response) {
-						console.log("OK");
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							$("#verify").modal("hide");
-						});
-					}
-				});
-			})
-		}
-	});
-}
 
 

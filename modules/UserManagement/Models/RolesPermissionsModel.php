@@ -72,7 +72,7 @@ class RolesPermissionsModel extends BaseModel
       $this->where($condition , $value);
     }
     $this->groupBy('p.id');
-    $this->orderBy('p.permission', 'ASC');
+    $this->orderBy('p.id', 'ASC');
     return $this->findAll();
   }
 

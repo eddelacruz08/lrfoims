@@ -33,8 +33,8 @@
                                     </div>
                                     <div class="col">
                                         <div>
-                                            <h4 class="mt-1 mb-1 text-white">Erjohn Espuerta</h4>
-                                            <p class="font-13 text-white-50"> Customer</p>
+                                            <h4 class="mt-1 mb-1 text-white"><?= session()->get('first_name').' '.session()->get('last_name');?></h4>
+                                            <p class="font-13 text-white-50"><?= session()->get('role_name')?></p>
 
                                             <ul class="mb-0 list-inline text-light">
                                                 <li class="list-inline-item">

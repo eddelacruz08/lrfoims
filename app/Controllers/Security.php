@@ -2,11 +2,13 @@
 
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models as UserManagement;
+use Modules\HomeManagement\Models as HomeManagement;
 
 class Security extends BaseController{
 
     function __construct(){
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
+		$this->cartsModel = new HomeManagement\CartModel();
     }
 
     public function index(){
@@ -33,8 +35,7 @@ class Security extends BaseController{
             } else {
                 $model = new UsersModel();
 
-                $user = $model->where('username', $this->request->getVar('username'))
-                              ->first();
+                $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
 
                 $this->setUserMethod($user);
                 $this->session->setFlashdata('success_login', 'Successfully logged in!');
@@ -43,7 +44,7 @@ class Security extends BaseController{
                 //     'description' => 'signed in'
                 // ];
                 // $this->logsModel->add($logData);
-                if(session()->get('role_id') <= 2){
+                if(session()->get('role_id') <= 3){
                     return redirect()->to('/dashboard');
                 }else{
                     return redirect()->to('/');
@@ -59,6 +60,7 @@ class Security extends BaseController{
         $data = [
             'id' => $user['id'],
             'role_id' => $user['role_id'],
+            'role_name' => $user['role_name'],
             'first_name' => $user['first_name'],
             'last_name' => $user['last_name'],
             'email_address' => $user['email_address'],

@@ -5,5 +5,5 @@ $routes->group('ingredient-reports',['namespace' => 'Modules\IngredientReportMan
     $routes->match(['get', 'post'], 'a', 'IngredientReport::add');
     $routes->match(['get', 'post'], 'u/(:num)', 'IngredientReport::edit/$1');
     $routes->add('d/(:num)', 'IngredientReport::delete/$1');
-    $routes->add('filter-date', 'IngredientReport::filterDate');
+    $routes->add('filter-date/(:alphanum)', 'IngredientReport::filterDate/$1');
 });

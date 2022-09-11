@@ -125,10 +125,16 @@ class Product extends BaseController
     public function updateIngredientReport($id, $ingredientId)
 	{
         $ingredients = $this->productsModel->get(['id' => $id, 'status' => 'a'])[0];
+        $ingredientReports = $this->ingredientReportModel->get(['id' => $ingredientId, 'status' => 'a'])[0];
 
         if ($this->request->getMethod() == 'post') 
         {
             if($ingredients['quantity'] >= $_POST['quantity']){
+                $quantityReport = $ingredients['quantity'] + $ingredientReports['quantity'];
+
+                $qdata = [
+                    'quantity' => $quantityReport - $_POST['quantity'],
+                ];
 
                 $data = [
                     'quantity' => $_POST['quantity'],
@@ -136,6 +142,7 @@ class Product extends BaseController
                 ];
 
                 if($this->ingredientReportModel->update($ingredientId, $data)){
+                    $this->productsModel->update($id, $qdata);
                     $jdata =[
                         'status' => 'Success',
                         'status_text' => 'Successfully added a report to ingredients!',

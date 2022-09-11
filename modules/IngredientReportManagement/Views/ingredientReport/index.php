@@ -7,7 +7,6 @@
                     <a onclick="filterDateClick('/ingredient-reports/filter-date')" class="btn btn-primary ms-2">
                         Filter Date <i class="mdi mdi-calendar-range"></i>
                     </a>
-                    <a onclick="updateIngredientReportClick('/ingredient-reports/filter-date')" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-warning"><i class=" dripicons-pencil"></i></a>
                 </div>
             </div>
             <h4 class="page-title"><?=$title;?></h4>

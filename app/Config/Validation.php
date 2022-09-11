@@ -197,7 +197,7 @@ class Validation
             ]
 		],
 		'unit' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Unit Number',
 			'errors' => [
 				'required' => '{field} field is required',
@@ -217,7 +217,7 @@ class Validation
 			'label' => 'Description',
 		],
 		'price' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Price',
 			'errors' => [
 				'required' => '{field} field is required',
