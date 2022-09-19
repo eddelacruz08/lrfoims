@@ -33,3 +33,10 @@
     </div>
 </div>
 <?= $this->endsection('content'); ?>
+<?= $this->section('ordersReportCharts'); ?>
+<?= $this->include('Modules\OrderReportManagement\Views\orderReport\orderReportCharts'); ?>
+<?= $this->endsection('ordersReportCharts'); ?>
+<?= $this->section('ingredientReportCharts'); ?>
+<?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\ingredientReportCharts'); ?>
+<?= $this->endsection('ingredientReportCharts'); ?>
+

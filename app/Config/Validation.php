@@ -392,18 +392,10 @@ class Validation
 	];
 
 	public $report = [
-		'facility_id' => [
-			'rules' => 'numeric',
-			'label' => 'Facility'
-		],
-		'starting_date' => [
+		'date' => [
 			'rules' => 'required',
-			'label' => 'Start Date'
-		],
-		'ending_date' => [
-			'rules' => 'required',
-			'label' => 'End Date'
-		],
+			'label' => 'Date'
+		]
 	];
 
 }

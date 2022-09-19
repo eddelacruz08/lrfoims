@@ -56,6 +56,15 @@
         .select2-results__option[aria-selected="true"] {
             background-color: #eee !important; 
         }
+        .ui-datepicker-calendar {
+            display: none;
+        }
+        .ui-datepicker-month {
+            display: none;
+        }
+        .ui-datepicker-next,.ui-datepicker-prev {
+            display:none;
+        }
     </style>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -171,13 +180,13 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.esm.js" integrity="sha256-OsWibt46P+gzQrnjYvWGnUi5tggkmMv4ZHXzU3g6uJk=" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.js" integrity="sha256-+s2W82x5uCYS4k+d4CN6IUKJ5lWiPJFsOTr5vYqnf4Y=" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/helpers.esm.js" integrity="sha256-DBLfWTRw9KgCTW52S2DJ/h/ApFpgL06+MzZONT3BUL0=" crossorigin="anonymous"></script> -->
-    <!-- <?= $this->rendersection('dashboard_data'); ?> -->
+    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
-    <script src="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@2.0.0/dist/mdtimepicker.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@2.0.0/dist/mdtimepicker.js"></script> -->
     <!-- <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script> -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
     <!-- <script src="/assets/js/adminlte.js"></script>
     <script src="/assets/js/sidenav.js"></script>
     <script src="/assets/js/datatables.js"></script> -->
@@ -187,9 +196,9 @@
     <!-- <script src="/assets/js/incrementer.js"></script>
     <script src="/assets/js/submitReceipt.js"></script>
     <script src="/assets/js/imageCheckbox.js"></script> -->
-    <!-- <script src="/assets/js/datepicker.js"></script>
-    <script src="/assets/js/datepickerReports.js"></script>
-    <script src="/assets/js/tabbable.js"></script> -->
+    <!-- <script src="/assets/js/datepicker.js"></script> -->
+    <!-- <script src="/assets/js/datepickerReports.js"></script> -->
+    <!-- <script src="/assets/js/tabbable.js"></script> -->
     <!-- bundle -->
     <script src="/assets/js/vendor.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
@@ -202,20 +211,22 @@
     <script src="/assets/js/vendor/dataTables.bootstrap5.js"></script>
     <script src="/assets/js/vendor/dataTables.responsive.min.js"></script>
     <script src="/assets/js/vendor/responsive.bootstrap5.min.js"></script>
-    <script src="assets/js/vendor/dataTables.buttons.min.js"></script>
-    <script src="assets/js/vendor/buttons.bootstrap5.min.js"></script>
-    <script src="assets/js/vendor/buttons.html5.min.js"></script>
-    <script src="assets/js/vendor/buttons.flash.min.js"></script>
-    <script src="assets/js/vendor/buttons.print.min.js"></script>
-    <script src="assets/js/vendor/dataTables.keyTable.min.js"></script>
-    <script src="assets/js/vendor/dataTables.select.min.js"></script>
-    <script src="assets/js/vendor/Chart.bundle.min.js"></script>
+    <script src="/assets/js/vendor/dataTables.buttons.min.js"></script>
+    <script src="/assets/js/vendor/buttons.bootstrap5.min.js"></script>
+    <script src="/assets/js/vendor/buttons.html5.min.js"></script>
+    <script src="/assets/js/vendor/buttons.flash.min.js"></script>
+    <script src="/assets/js/vendor/buttons.print.min.js"></script>
+    <script src="/assets/js/vendor/dataTables.keyTable.min.js"></script>
+    <script src="/assets/js/vendor/dataTables.select.min.js"></script>
+    <script src="/assets/js/vendor/Chart.bundle.min.js"></script>
     <!-- third party js ends -->
 
 
     <!-- demo app -->
     <script src="/assets/js/pages/demo.dashboard.js"></script>
-        <script src="assets/js/pages/demo.chartjs.js"></script>
+    <!-- <script src="assets/js/pages/demo.chartjs.js"></script> -->
+    <?= $this->rendersection('ingredientReportCharts'); ?>
+    <?= $this->rendersection('ordersReportCharts'); ?>
     <!-- end demo js-->
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script> -->
@@ -252,6 +263,12 @@
 			document.body.innerHTML = originalContents;
 
 		}
+        $("#dateYearPicker").datepicker({
+            format: "yyyy",
+            viewMode: "years", 
+            minViewMode: "years",
+            autoclose:true
+        });
 	</script>
 </body>
 </html>

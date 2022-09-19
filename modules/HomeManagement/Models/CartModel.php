@@ -40,19 +40,21 @@ class CartModel extends BaseModel
 
         return $this->findAll();
     }
-    
-    public function getCustomerCartTotalPrice($conditions = []){
 
-        $this->select('lrfoims_carts.*, SUM(m.price * lrfoims_carts.quantity) as total_price');
+    public function getCartTotalPrice($conditions = []){
+
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
+        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->groupBy('on.number');
+        $this->groupBy('lrfoims_carts.order_id');
 
         return $this->findAll();
     }
-
+    
     public function getCustomerCountCarts($conditions = []){
 
         $this->select('COUNT(lrfoims_carts.id) as customer_count_carts');

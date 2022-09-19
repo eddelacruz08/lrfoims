@@ -48,7 +48,41 @@
                     </form>
                     <hr>
                     <div class="mb-0 text-center">
-                        <button class="btn btn-secondary" type="submit"> Guest Mode </button>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#info-alert-modal">Guest Mode</button>
+                    </div>
+                    <div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row p-3 text-center">
+                                        <div class="col-sm-12">
+                                            <form method="post" action="/search-guest-order-number">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="ordernumber">Search for Order Number</label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" name="ordernumber" id="ordernumber" placeholder="Enter order number . . ." aria-label="Enter order number . . .">
+                                                        <button class="btn btn-dark" type="submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <hr class="m-0 p-0">
+                                        <div class="col-sm-12">
+                                            <form method="post" action="/guest-mode">
+                                                <label class="form-label m-0 p-0" for="ordernumber">Or</label>
+                                                <hr class="m-0 p-0">
+                                                <input type="hidden" class="form-control" name="username" value="<?=$random_name;?>">
+                                                <button class="btn btn-secondary mt-3" type="submit"> Guest Mode </button><br>
+                                                <span class="text-muted"><em>*Click Guest Mode if you want to order anonymously.</em></span>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div class="mb-0 text-center">
+                        
                     </div>
                 </div> <!-- end card-body -->
             </div>

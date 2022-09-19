@@ -152,6 +152,29 @@ function filterDateClick(route){
 			}).then((result) => {
 				$.ajax({
 					url: route + '/' + date,
+					type: "POST",
+					data:{},
+					cache: false,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						}).then((confirm) => {
+							window.location.href = route + '/' + date;
+							// window.location.reload();
+							console.log(route + '/' + date)
+						});
+					},
+					warning: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						}).then((confirm) => {
+							console.log(route + '/' + date)
+						});
+					}
 				});
 			});
 		}
@@ -346,6 +369,8 @@ function addIngredientReportClick(route, id, quantity){
 		  return new Promise((resolve) => {
 			if (value == '') {
 				resolve('Quantity field is required!')
+			} else if (value < ingredientQuantity){
+				resolve('Please check your stock of this ingredient! <br> You have low stock of ingredients.')
 			} else if (ingredientQuantity >= value){
 				resolve()
 			} else{

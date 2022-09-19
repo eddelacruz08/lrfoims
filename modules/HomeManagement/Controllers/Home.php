@@ -1,5 +1,6 @@
 <?php namespace Modules\HomeManagement\Controllers;
 
+use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
 use Modules\MenuManagement\Models as MenuManagement;
 use Modules\OrderManagement\Models as OrderManagement;
@@ -13,6 +14,8 @@ class Home extends BaseController
 		$this->cartsModel = new HomeManagement\CartModel();
 		$this->menuModel = new MenuManagement\MenuModel();
 		$this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
+        $this->usersModel = new UserManagement\UsersModel();
+        $this->rolesModel = new UserManagement\RolesModel();
 		helper(['form']);
 	}
 
@@ -51,6 +54,7 @@ class Home extends BaseController
         $data['title'] = 'Menu';
         $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
 
+        $highestOrderNumber = $this->ordersModel->getHighestOrderNumber(['status' => 'a'])[0];
         $checkHaveOrders = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a']);
 		if(!empty($checkHaveOrders)){
 			$checkHaveOrderId = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
@@ -84,14 +88,15 @@ class Home extends BaseController
 					$this->session->setFlashdata('error', 'Please complete all fields!');
 				} else {
 					$orderNumberId = $highestOrderNumber['max_order_number'] + 1;
-					$orderId = $highestOrderNumber['id'] + 1;
 					$postData = [
 						'number' => $orderNumberId,
 						'user_id' => session()->get('id'),
 						'order_status_id' => 1
 					];
 					$this->ordersModel->add($postData);
-					$_POST['order_id'] = $orderId;
+					
+					$checkHaveOrderId = $this->ordersModel->get(['number' => $orderNumberId, 'user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
+					$_POST['order_id'] = $checkHaveOrderId['id'];
 					$this->cartsModel->add($_POST);
 					$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
 				}
@@ -116,6 +121,7 @@ class Home extends BaseController
 			'title' => 'Cart',
 			'view' => 'Modules\HomeManagement\Views\home\cart',
 			'getCustomerCartDetails' => $this->cartsModel->getCustomerCartDetails(['lrfoims_carts.status' => 'a']),
+			'getCartTotalPrice' => $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]),
 			'getCustomerOrderDetails' => $this->ordersModel->get(['lrfoims_orders.user_id' => session()->get('id'),'lrfoims_orders.order_status_id' => 1,'lrfoims_orders.status' => 'a']),
 		];
 		
@@ -163,5 +169,35 @@ class Home extends BaseController
 
 		return view('templates/landingPage',$data);
 	}
+	
+    public function editProfile($id)
+    {
+        $data = [
+            'page_title' => 'LRFOIMS | Edit Profile',
+            'title' => 'Edit Profile',
+            'action' => 'Submit',
+            'view' => 'Modules\HomeManagement\Views\home\editProfile',
+            'edit' => true,
+            'id' => $id,
+            'roles' => $this->rolesModel->get(),
+            'value' => $this->usersModel->get(['id' => $id])[0]
+        ];
+
+        if(empty($data['value'])){
+            die('Some Error Code Here (No Record)');
+        }
+
+        if ($this->request->getMethod() == 'post') {
+            if (!$this->validate('users')) {
+                $data['value'] = $_POST;
+                $data['errors'] = $this->validation->getErrors();
+            } else {
+                $this->usersModel->update($id, $_POST);
+                $this->session->setFlashdata('success', 'Record Succesfully Updated');
+                return redirect()->to('/profile');
+            }
+        }
+        return view('templates/landingPage', $data);
+    }
 	//--------------------------------------------------------------------
 }

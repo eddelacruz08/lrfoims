@@ -158,7 +158,10 @@ function hexToRGB(a,r){
                                 borderColor:r,
                                 hoverBackgroundColor:r,
                                 hoverBorderColor:r,
-                                data:[65,59,80,81,56,89,40,32,65,59,80,81]
+                                data:[
+                                       34,
+                                            44,59,80,81,56,89,40,32,65,59,80,81
+                                    ]
                             },{
                                 label:"Dollar Rate",
                                 backgroundColor:"#e3eaef",

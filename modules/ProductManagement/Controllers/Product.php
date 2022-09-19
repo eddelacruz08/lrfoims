@@ -78,6 +78,7 @@ class Product extends BaseController
                 $data = [
                     'ingredient_id' => $id,
                     'quantity' => $_POST['quantity'],
+                    'unit_price' => $ingredients['price'],
                     'total_unit_price' => $_POST['quantity'] * $ingredients['price'],
                 ];
 
@@ -187,6 +188,8 @@ class Product extends BaseController
             } else {
                 if($_POST['quantity'] == 0){
                     $_POST['product_status_id'] = 2;
+                }else{
+                    $_POST['product_status_id'] = 1;
                 }
                 $this->productsModel->update($id, $_POST);
                 $this->session->setFlashdata('success', 'Ingredient Successfully Updated');

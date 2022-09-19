@@ -119,11 +119,11 @@
                                                             <!-- <a href="/ingredients/v/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="View" animation="true" class="btn btn-sm btn-info"><i class="mdi mdi-eye"></i></a> -->
                                                             <!-- Info Header Modal -->
                                                             <button  type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" title="View" data-bs-target="#ingredientReports<?=$row['id']?>"><i class="mdi mdi-file-eye-outline"></i></button>
-                                                            <div id="ingredientReports<?=$row['id']?>" class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                                            <div id="ingredientReports<?=$row['id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                                     <div class="modal-content">
-                                                                        <div class="modal-header modal-colored-header bg-info">
-                                                                            <h4 class="modal-title" id="info-header-modalLabel"><?= ucfirst($row['product_name']); ?></h4>
+                                                                        <div class="modal-header modal-colored-header bg-primary">
+                                                                            <h4 class="modal-title" id="primary-header-modalLabel"><?= ucfirst($row['product_name']); ?></h4>
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                                         </div>
                                                                         <div class="modal-body">
@@ -132,6 +132,7 @@
                                                                                     <tr>
                                                                                         <th><center>Ingredient Name</center></th>
                                                                                         <th><center>Quantity</center></th>
+                                                                                        <th><center>Unit Price</center></th>
                                                                                         <th><center>Total Price</center></th>
                                                                                         <th><center>Date & Time</center></th>
                                                                                         <th><center>Action</center></th>
@@ -146,6 +147,9 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <center>x<?= $reports['quantity'];?></center>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <center>₱ <?= number_format($reports['unit_price']); ?></center>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <center>₱ <?= number_format($reports['total_unit_price']); ?></center>

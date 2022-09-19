@@ -4,7 +4,7 @@ use App\Models\BaseModel;
 
 class DashboardModel extends BaseModel
 {
-    // protected $table = 'lrfoims_menu_category';
+    // protected $table = 'lrfoims_users';
     // protected $allowedFields = [
     //     'name',
     //     'description',
@@ -13,15 +13,13 @@ class DashboardModel extends BaseModel
     //     'updated_at',
     //     'deleted_at'];
         
-    // public function getDetails($conditions = []){
+    // public function getTotalUsers($conditions = []){
 
-    //     $this->select('lrfoims_menu_category.*, m.name');
-    //     $this->join('lrfoims_menus as m', 'lrfoims_menu_category.id = m.menu_category_id');
+    //     $this->select('lrfoims_users.*, COUNT(lrfoims_users.id) as getTotalUsers');
 
     //     foreach($conditions as $field => $value){
     //         $this->where([$field => $value]);
     //     }
-    //     // $this->groupBy('lrfoims_menus.id');
 
     //     return $this->findAll();
     // }

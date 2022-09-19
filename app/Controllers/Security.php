@@ -3,19 +3,34 @@
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
+use Modules\OrderManagement\Models as OrderManagement;
 
 class Security extends BaseController{
 
     function __construct(){
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
 		$this->cartsModel = new HomeManagement\CartModel();
+		$this->ordersModel = new OrderManagement\OrderModel();
     }
 
     public function index(){
+        
+        function random_string($length) {
+            $key = '';
+            $keys = array_merge(range(0, 9), range('a', 'z'));
+        
+            for ($i = 0; $i < $length; $i++) {
+                $key .= $keys[array_rand($keys)];
+            }
+        
+            return 'Anonymous_'.$key;
+        }
+
         $data = [
             'page_title' => 'LRFOIMS | Sign in',
-            'title' => 'Lamon Restaurant Food Ordering and Ingredients Management System',
-            'view' => 'Login/login'
+            'title' => 'Lamon Restaurant Food Ordering and Ingredient Management System',
+            'view' => 'Login/login',
+            'random_name' => random_string(25)
         ];
         helper(['form']);
         if ($this->request->getMethod() == 'post') {
@@ -63,10 +78,12 @@ class Security extends BaseController{
             'role_name' => $user['role_name'],
             'first_name' => $user['first_name'],
             'last_name' => $user['last_name'],
-            'email_address' => $user['email_address'],
+            'last_name' => $user['last_name'],
+            'username' => $user['username'],
             'isLoggedIn' => true,
             'permissions' => $this->rolesPermissionsModel->getPermissions(['role_id' => $user['role_id']]),
             'modules' => $this->rolesPermissionsModel->getModules(['role_id' => $user['role_id']]),
+            'getOrderCounts' => $this->ordersModel->getCountOrdersHome(['user_id' => $user['id'], 'status'=>'a'])[0],
         ];
 
         session()->set($data);
@@ -77,7 +94,7 @@ class Security extends BaseController{
     public function register(){
         $data = [
             'page_title' => 'LRFOIMS | Register',
-            'title' => 'Lamon Restaurant Food Ordering and Inventory System',
+            'title' => 'Lamon Restaurant Food Ordering and Ingredient System',
             'view' => 'register'
         ];
         helper(['form']);
@@ -85,7 +102,7 @@ class Security extends BaseController{
         if($this->request->getMethod() == 'post'){
             //validation
             $rules=[
-                'username' => 'required|min_length[5]|max_length[25]|is_unique[ors_users.username]',
+                'username' => 'required|min_length[5]|max_length[25]|is_unique[lrfoims_users.username]',
                 'password' => 'required|min_length[8]|max_length[50]',
                 'confirm_password' => 'matches[password]',
             ];
@@ -113,13 +130,41 @@ class Security extends BaseController{
 
         return view('templates/landingPage',$data);
     }
+    
+    public function guestMode(){
+        helper(['form']);
+
+        if($this->request->getMethod() == 'post'){
+            $model = new UsersModel();
+
+            $newData = [
+                'username' => $this->request->getVar('username'),
+                'role_id' => 5,
+                'status' => 'u'
+            ];
+
+            $model->save($newData);
+            $session = session();
+            $session->setFlashdata('success','Successfully Registered!');
+            $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
+
+            $this->setUserMethod($user);
+            return redirect()->to('/');
+        }
+
+        return view('templates/landingPage',$data);
+    }
 
     public function fileNotFound($slugs)
 	{
 		$data['view'] = 'errors/403';
 		$data['slugs'] = $slugs;
         $data['page_title'] = 'LRFOIMS | Permissions!';
-        return view('templates/index',$data);
+        if(session()->get('role_id') <= 3){
+            return view('templates/index',$data);
+        }else{
+            return view('templates/landingPage',$data);
+        }
 	}
 
     public function signOut(){

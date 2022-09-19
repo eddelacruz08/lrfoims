@@ -162,7 +162,7 @@
                                                             </td>
                                                             <td scope="col">
                                                                 <center>
-                                                                    <p><b>Order#<?= $details['number'] ?>&nbsp | &nbsp<?= (empty($details['total_amount']))? 'Not Paid':'Paid' ?></b></p>
+                                                                    <p><b>Order#<?= $details['number'] ?>&nbsp | &nbsp<?= (empty($details['total_amount']))? '<span class="badge bg-danger">Not Paid<span>':'<span class="badge bg-success">Paid<span>' ?></b></p>
                                                                 </center>
                                                             </td>
                                                             <td scope="col">

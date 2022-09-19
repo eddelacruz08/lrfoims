@@ -34,19 +34,19 @@ class Order extends BaseController
             'placeOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 2]),
             'serveOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 3]),
             'paymentOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 4]),
-            'paymentHistoryOrders' => $this->ordersModel->getDetails(['lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 5])
+            'paymentHistoryOrders' => $this->ordersModel->getDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime,'lrfoims_orders.status'=>'a', 'lrfoims_orders.order_status_id' => 5])
 		];
 
 		return view('templates/index', $data); 
 	}
     
-    // public function retrieveOrder(){
-    //     $data['menuLists'] = $this->menusModel->get();
-    //     $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-    //     $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]);
-    //     $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a', 'lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 1]);
-    //     return view('Modules\OrderManagement\Views\order\orders', $data);
-    // }
+    public function retrieveOrder(){
+        $data['menuLists'] = $this->menusModel->get();
+        $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
+        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]);
+        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a', 'lrfoims_orders.order_number_id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 1]);
+        return view('Modules\OrderManagement\Views\order\orders', $data);
+    }
 
     public function retrievePlaceOrder(){
         $data['menuLists'] = $this->menusModel->get();

@@ -38,6 +38,19 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                     <?php endforeach; ?>
+                <?php else: ?>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="javascript:void(0);">Menu</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="javascript:void(0);">Cart</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="javascript:void(0);">Profile</a>
+                    </li>
                 <?php endif; ?>
             </ul>
 

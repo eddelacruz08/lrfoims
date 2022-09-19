@@ -19,6 +19,8 @@ class IngredientReport extends BaseController
 	public function index()
 	{
 		$date = $this->dateAndTime;
+        $time = new \DateTime();
+        $dateYear = $time->format('Y');
 		$data = [
 			'page_title' => 'LRFOIMS | Ingredient Reports',
 			'title' => 'Ingredient Reports',
@@ -31,6 +33,15 @@ class IngredientReport extends BaseController
             'totalIngredientReportToday' => $this->ingredientReportModel->getTotalIngredientReports(['lrfoims_ingredient_out.status'=>'a','CAST(lrfoims_ingredient_out.created_at AS DATE)' => $date])[0],
 		];
 
+		session()->set([
+			'ingredientsPerMonth' => $this->productsModel->getTotalIngredientPerMonth(['YEAR(stock_out_date)'=>$dateYear, 'status'=>'a'])
+		]);
+		for($ctr = 1; $ctr <= 12; $ctr++){
+			$ingredientReportBar='ingredientReports'.$ctr;
+			session()->set([
+				'ingredientReportBar' => $this->ingredientReportModel->getTotalIngredientReportPerMonth(['YEAR(created_at)'=>'YEAR(CURDATE())', 'status'=>'a'])
+			]);
+		}
 		return view('templates/index', $data);
 	}
 	

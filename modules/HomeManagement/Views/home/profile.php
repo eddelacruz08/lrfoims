@@ -38,7 +38,11 @@
 
                                             <ul class="mb-0 list-inline text-light">
                                                 <li class="list-inline-item">
-                                                    <h5 class="mb-1">1</h5>
+                                                    <h5 class="mb-1">
+                                                        <?php foreach (session()->get('getOrderCounts') as $getOrderCounts):?>
+                                                            <?= ($getOrderCounts)? $getOrderCounts : '0'?>
+                                                        <?php endforeach;?>
+                                                    </h5>
                                                     <p class="mb-0 font-13 text-white-50">Number of Orders</p>
                                                 </li>
                                             </ul>
@@ -49,9 +53,9 @@
 
                             <div class="col-sm-4">
                                 <div class="text-center mt-sm-0 mt-3 text-sm-end">
-                                    <button type="button" class="btn btn-light">
+                                    <a href="/edit-profile/u/<?= session()->get('id')?>" type="button" class="btn btn-light">
                                         <i class="mdi mdi-account-edit me-1"></i> Edit Profile
-                                    </button>
+                                    </a>
                                 </div>
                             </div> <!-- end col-->
                         </div> <!-- end row -->

@@ -54,7 +54,8 @@ class OrderModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->groupBy('lrfoims_orders.id');
+        // $this->groupBy('lrfoims_orders.id');
+        // $this->orderBy('lrfoims_orders.total_amount', 'ASC');
 
         return $this->findAll();
     }
@@ -81,6 +82,102 @@ class OrderModel extends BaseModel
             $this->where([$field => $value]);
         }
         // $this->groupBy('lrfoims_orders.order_number');
+
+        return $this->findAll();
+    }
+
+    public function getCountOrdersHome($conditions = []){
+
+        $this->select('COUNT(lrfoims_orders.id) as customer_count_orders');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->groupBy('lrfoims_orders.order_number');
+
+        return $this->findAll();
+    }
+
+    public function getTotalOrderPerYears($conditions = []){
+        
+        $this->select('
+            SUM(YEAR(created_at) = YEAR(created_at)) AS total_orders,
+            SUM(YEAR(created_at) = DATE_SUB( YEAR(CURDATE()), INTERVAL 1 YEAR )) AS total_orders_last_year,
+        ');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+
+    public function getCountOrdersPerMonth($conditions = []){
+        
+        $this->select('
+            SUM(MONTH(created_at) = 1) AS Jan, 
+            SUM(MONTH(created_at) = 2) AS Feb,
+            SUM(MONTH(created_at) = 3) AS Mar, 
+            SUM(MONTH(created_at) = 4) AS Apr, 
+            SUM(MONTH(created_at) = 5) AS May, 
+            SUM(MONTH(created_at) = 6) AS Jun, 
+            SUM(MONTH(created_at) = 7) AS Jul, 
+            SUM(MONTH(created_at) = 8) AS Aug, 
+            SUM(MONTH(created_at) = 9) AS Sept,
+            SUM(MONTH(created_at) = 10) AS Oct, 
+            SUM(MONTH(created_at) = 11) AS Nov, 
+            SUM(MONTH(created_at) = 12) AS December
+        ');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+    
+    public function getSumTotalAmountOrdersPerMonth($conditions = []){
+        
+        $this->select('SUM(total_amount) AS total_amount_per_month');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+
+    public function getTotalOrders($conditions = []){
+
+        $this->select('lrfoims_orders.*, COUNT(lrfoims_orders.id) as getTotalOrders');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
+    
+    public function getOrderReports($conditions = []){
+
+        $this->select('lrfoims_orders.*, os.order_status');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->groupBy('lrfoims_orders.number');
+
+        return $this->findAll();
+    }
+    
+    public function getTotalAmountOrderReports($conditions = []){
+
+        $this->select('lrfoims_orders.*, SUM(lrfoims_orders.total_amount) as total_amount_price');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
 
         return $this->findAll();
     }

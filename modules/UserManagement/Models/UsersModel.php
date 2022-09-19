@@ -59,4 +59,15 @@ class UsersModel extends BaseModel
         $this->select('count(id) as user');
         return $this->findAll();
     }
+
+    public function getTotalUsers($conditions = []){
+
+        $this->select('lrfoims_users.*, COUNT(lrfoims_users.id) as getTotalUsers');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
 }
