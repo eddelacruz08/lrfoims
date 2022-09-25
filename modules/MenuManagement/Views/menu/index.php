@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xxl-8">
+    <div class="col-xxl-12">
 
         <!-- start page title -->
         <div class="row">
@@ -27,7 +27,7 @@
     </div> <!-- end col -->
 
     <!-- task details -->
-    <div class="col-xxl-4">
+    <div class="col-xxl-12">
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">

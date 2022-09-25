@@ -83,16 +83,16 @@
 <?= view(esc($view)) ?>
 
 <!-- START FOOTER -->
-<footer class="bg-dark py-5">
+<footer class="bg-dark py-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <img src="assets/img/lamon_logo.png" alt="" class="logo-dark" height="68" />
-                <p class="text-muted mt-4">Hyper makes it easier to build better websites with
-                    <br> great speed. Save hundreds of hours of design
-                    <br> and development by using it.</p>
+                <!-- <img src="assets/img/lamon_logo.png" alt="" class="logo-dark" height="68" /> -->
+                <p class="text-muted mt-2">Catch this newest addition to our menu! 👌🏻 Available at Lamon-Mantahan, Maasin.
+                    <br> We are also open at Lamon-Macrohon starting 5PM.🤗
+                    <br> Kitakits! 😉</p>
 
-                <ul class="social-list list-inline mt-3">
+                <ul class="social-list list-inline mt-2">
                     <li class="list-inline-item text-center">
                         <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
                     </li>
@@ -110,48 +110,39 @@
             </div>
 
             <div class="col-lg-2 mt-3 mt-lg-0">
-                <h5 class="text-light">Company</h5>
+                <h5 class="text-light">Location</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">About Us</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Documentation</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Blog</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Affiliate Program</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Mantahan, Maasin, Philippines, 6600</a></li>
                 </ul>
 
             </div>
 
             <div class="col-lg-2 mt-3 mt-lg-0">
-                <h5 class="text-light">Apps</h5>
+                <h5 class="text-light">Contact</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Ecommerce Pages</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Email</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Social Feed</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Projects</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Tasks Management</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">0966 291 0632</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-2 mt-3 mt-lg-0">
-                <h5 class="text-light">Discover</h5>
+                <h5 class="text-light">Email</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Help Center</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Our Products</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Privacy</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">ronylee.escol16@gmail.com</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <div class="mt-5">
                     <p class="text-muted mt-4 text-center mb-0">© 2018 - 2021 Hyper. Design and coded by
                         Coderthemes</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </footer>
 <!-- END FOOTER -->
