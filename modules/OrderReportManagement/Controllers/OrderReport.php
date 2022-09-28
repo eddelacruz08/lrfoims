@@ -10,7 +10,7 @@ class MYPDF extends TCPDF {
     //Page header
     public function Header() {
         // Logo
-        $image_file = FCPATH.'assets/img/header-long.png';
+        $image_file = FCPATH.'assets/img/header-long-lamon.png';
         $this->Image($image_file, 5, 5, '350', '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
@@ -26,7 +26,7 @@ class MYPDF extends TCPDF {
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $image_file = FCPATH.'assets/img/footer-long.png';
+        $image_file = FCPATH.'assets/img/footer-long-lamon.png';
         $this->Image($image_file, 5, 195, '350', '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Page number
     }
