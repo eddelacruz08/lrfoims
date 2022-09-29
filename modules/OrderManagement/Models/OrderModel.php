@@ -101,8 +101,7 @@ class OrderModel extends BaseModel
     public function getTotalOrderPerYears($conditions = []){
         
         $this->select('
-            SUM(YEAR(created_at) = YEAR(created_at)) AS total_orders,
-            SUM(YEAR(created_at) = DATE_SUB( YEAR(CURDATE()), INTERVAL 1 YEAR )) AS total_orders_last_year,
+            SUM(YEAR(created_at) = YEAR(created_at)) AS total_orders
         ');
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
@@ -155,7 +154,7 @@ class OrderModel extends BaseModel
             $this->where([$field => $value]);
         }
 
-        return $this->findAll();
+        return $this->findAll(); 
     }
     
     public function getOrderReports($conditions = []){

@@ -3,11 +3,17 @@
     <div class="col-12">
         <div class="page-title-box">
             <div class="page-title-right">
-                <div class="d-flex">
-                    <a onclick="filterDateClick('/ingredient-reports/filter-date')" class="btn btn-primary ms-2">
-                        Filter Date <i class="mdi mdi-calendar-range"></i>
+                <form method="POST" action="/ingredient-reports/date-filter" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-light" value="<?=session()->get('dateYear')?>" id="dateYearPicker" name="date" autocomplete="off">
+                        <button type="submit" class="input-group-text bg-primary border-primary text-white">
+                            <i class="mdi mdi-calendar-range font-13"></i>
+                        </button>
+                    </div>
+                    <a href="/ingredient-reports" class="btn btn-primary ms-2" title="Reset Filter">
+                        <i class="mdi mdi-autorenew"></i>
                     </a>
-                </div>
+                </form>
             </div>
             <h4 class="page-title"><?=$title;?></h4>
         </div>
@@ -26,8 +32,10 @@
                             <i class="mdi mdi-food-variant widget-icon"></i>
                         </div>
                         <h5 class="text-muted fw-normal mt-0" title="Total Ingredients">Total Stock Ingredients</h5>
-                        <h3 class="mt-2 mb-2"><?=$totalIngredients['total_ingredients']?></h3>
-                        <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($totalIngredients['total_ingredients_price'])?></h4>
+                        <?php foreach(session()->get('getTotalStockIngredientPerYears') as $data):?>
+                            <h3 class="mt-3 mb-3"><?= $data['total_ingredients'];?></h3>
+                            <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($data['total_ingredients_price'])?></h4>
+                        <?php endforeach;?>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col-->
@@ -39,8 +47,10 @@
                             <i class="mdi mdi-food widget-icon bg-primary-lighten text-primary"></i>
                         </div>
                         <h5 class="text-muted fw-normal mt-0" title="Total Stock Out">Total of Goods Sold</h5>
-                        <h3 class="mt-2 mb-2"><?=$totalIngredientReports['total_ingredient_report']?></h3>
-                        <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($totalIngredientReports['total_ingredient_report_price'])?></h4>
+                        <?php foreach(session()->get('getTotalGoodSoldIngredientPerYears') as $data):?>
+                            <h3 class="mt-3 mb-3"><?= $data['total_ingredients_report'];?></h3>
+                            <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($data['total_ingredients_report_price'])?></h4>
+                        <?php endforeach;?>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col-->
@@ -52,8 +62,10 @@
                             <i class="mdi mdi-food widget-icon bg-success-lighten text-success"></i>
                         </div>
                         <h5 class="text-muted fw-normal mt-0" title="Total Stock Out">Goods Sold Today</h5>
-                        <h3 class="mt-2 mb-2"><?=$totalIngredientReportToday['total_ingredient_report']?></h3>
-                        <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($totalIngredientReportToday['total_ingredient_report_price'])?></h4>
+                        <?php foreach(session()->get('getTotalGoodSoldIngredientToday') as $data):?>
+                            <h3 class="mt-3 mb-3"><?= $data['total_ingredients_report'];?></h3>
+                            <h4 class="text-muted fw-normal mt-0 mb-0">₱ <?=number_format($data['total_ingredients_report_price'])?></h4>
+                        <?php endforeach;?>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
             </div> <!-- end col-->
@@ -68,20 +80,125 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title mb-4">Bar Chart</h4>
-
-                <div dir="ltr">
-                    <div class="mt-3 chartjs-chart" style="height: 320px;">
-                        <canvas id="bar-chart-example" data-colors="#fa5c7c,#35b8e0"></canvas>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="header-title mt-1">Generate <?=$title;?></h4>
+                    </div>
+                    <div class="col-sm-8 d-flex">
+                        <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                            <div class="input-group float-end ml-1">
+                                <input type="hidden" name="date_status" value="1">
+                                <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
+                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
+                                </button>
+                            </div>       
+                        </form>
+                        
+                        <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                            <div class="input-group float-end">
+                                <input type="hidden" name="date_status" value="0">
+                                <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
+                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspRange Report
+                                </button>
+                            </div>       
+                        </form>
                     </div>
                 </div>
-
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-
+            </div>
+        </div>
     </div> <!-- end col -->
 </div>
 <!-- end row -->
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="header-title mb-2">Total Stock Ingredients Yearly | <?=$dateYear;?></h4>
+
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
+                <div dir="ltr">
+                    <div class="mt-3 chartjs-chart" style="height: 320px;">
+                        <canvas id="bar-chart-total-stock-ingredients" data-colors="#fa5c7c,#35b8e0"></canvas>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+
+            <div class="col-xl-6 col-lg-6">
+                <div dir="ltr">
+                    <div class="mt-3 chartjs-chart" style="height: 320px;">
+                        <canvas id="bar-chart-total-stock-ingredients-amount" data-colors="#fa5c7c,green"></canvas>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+
+    </div> <!-- end card body-->
+</div> <!-- end card -->
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="header-title mt-1">Generate Goods Sold Report</h4>
+                    </div>
+                    <div class="col-sm-8 d-flex">
+                        <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                            <div class="input-group float-end ml-1">
+                                <input type="hidden" name="date_status" value="1">
+                                <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
+                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
+                                </button>
+                            </div>       
+                        </form>
+                        
+                        <form method="POST" action="/order-reports/generate-report" target="_blank">
+                            <div class="input-group float-end">
+                                <input type="hidden" name="date_status" value="0">
+                                <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
+                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspRange Report
+                                </button>
+                            </div>       
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="header-title mb-2">Total of Goods Sold Yearly | <?=$dateYear;?></h4>
+
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
+                <div dir="ltr">
+                    <div class="mt-3 chartjs-chart" style="height: 320px;">
+                        <canvas id="bar-chart-total-good-sold" data-colors="#fa5c7c,#35b8e0"></canvas>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+
+            <div class="col-xl-6 col-lg-6">
+                <div dir="ltr">
+                    <div class="mt-3 chartjs-chart" style="height: 320px;">
+                        <canvas id="bar-chart-total-good-sold-amount" data-colors="#fa5c7c,green"></canvas>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+
+    </div> <!-- end card body-->
+</div> <!-- end card -->
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <?php foreach ($ingredientSortByCategory as $category) : ?>

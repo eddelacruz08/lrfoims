@@ -369,12 +369,14 @@ function addIngredientReportClick(route, id, quantity){
 		  return new Promise((resolve) => {
 			if (value == '') {
 				resolve('Quantity field is required!')
-			} else if (value < ingredientQuantity){
-				resolve('Please check your stock of this ingredient! <br> You have low stock of ingredients.')
+			} else if (value <= 0){
+				resolve('Please input higher than 0.')
+			} else if (value > ingredientQuantity){
+				resolve('Please check this ingredient! <br> You dont have enough stocks.')
 			} else if (ingredientQuantity >= value){
 				resolve()
 			} else{
-				resolve('Please check your stock of this ingredient! <br> You have low stock of ingredients.')
+				resolve('Please check this ingredient! <br> You dont have enough stocks.')
 			}
 		  })
 		}

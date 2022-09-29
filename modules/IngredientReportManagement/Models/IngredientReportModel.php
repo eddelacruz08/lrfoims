@@ -48,14 +48,42 @@ class IngredientReportModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->orderBy('lrfoims_ingredient_out.created_at');
 
         return $this->findAll();
     }
     
-    public function getTotalIngredientReportPerMonth($arg){
-        $this->select('count(id) as count');
-        $this->where(['month(created_at)' => $arg]);
+    public function getTotalGoodSoldIngredientPerYears($conditions = []){
+        
+        $this->select('
+            COUNT(id) AS total_ingredients_report,
+            SUM(total_unit_price) AS total_ingredients_report_price,
+        ');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
         return $this->findAll();
     }
+    
+    public function getCountTotalAmountIngredientPerMonth($conditions = []){
+        
+        $this->select('COUNT(id) AS total_count_per_month_ingredients');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
+
+    public function getTotalAmountIngredientPerMonth($conditions = []){
+        
+        $this->select('SUM(total_unit_price) AS total_amount_per_month_ingredients');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
+    
 }

@@ -46,6 +46,20 @@ class ProductModel extends BaseModel
         return $this->findAll();
     }
 
+    public function getTotalStockIngredientPerYears($conditions = []){
+        
+        $this->select('
+            COUNT(id) AS total_ingredients,
+            SUM(price) as total_ingredients_price
+        ');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        // $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+
     public function getTotalProduct($conditions = []){
         
         $this->select('lrfoims_products.*, COUNT(lrfoims_products.id) as total_ingredients,
@@ -88,7 +102,29 @@ class ProductModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+    
+    public function getTotalIngredientReportPerMonth($conditions = []){
+        
+        $this->select('
+            SUM(MONTH(stock_out_date) = 1) AS Jan, 
+            SUM(MONTH(stock_out_date) = 2) AS Feb,
+            SUM(MONTH(stock_out_date) = 3) AS Mar, 
+            SUM(MONTH(stock_out_date) = 4) AS Apr, 
+            SUM(MONTH(stock_out_date) = 5) AS May, 
+            SUM(MONTH(stock_out_date) = 6) AS Jun, 
+            SUM(MONTH(stock_out_date) = 7) AS Jul, 
+            SUM(MONTH(stock_out_date) = 8) AS Aug, 
+            SUM(MONTH(stock_out_date) = 9) AS Sept,
+            SUM(MONTH(stock_out_date) = 10) AS Oct, 
+            SUM(MONTH(stock_out_date) = 11) AS Nov, 
+            SUM(MONTH(stock_out_date) = 12) AS December,
+        ');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
 
         return $this->findAll();
     }
@@ -100,6 +136,31 @@ class ProductModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
+
+        return $this->findAll();
+    }
+    
+    public function getTotalAmountStockIngredientPerMonth($conditions = []){
+        
+        $this->select('SUM(price) AS total_amount_stock_per_month_ingredients');
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
+    
+    public function getIngredientReports($conditions = []){
+        
+        $this->select('lrfoims_products.*, pc.product_name as product_category, ps.name, pd.name as description');
+        $this->join('lrfoims_product_categories as pc', 'pc.id = lrfoims_products.product_category_id');
+        $this->join('lrfoims_product_measures as pd', 'pd.id = lrfoims_products.product_description_id');
+        $this->join('lrfoims_product_status as ps', 'ps.id = lrfoims_products.product_status_id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->orderBy('lrfoims_products.product_category_id', 'ASC');
 
         return $this->findAll();
     }

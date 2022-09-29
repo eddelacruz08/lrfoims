@@ -147,10 +147,10 @@
                         }
                     }
                     ))),
-      0<d("#bar-chart-example").length&&(
-          n=(o=d("#bar-chart-example").data("colors"))?
+      0<d("#bar-chart-total-stock-ingredients").length&&(
+          n=(o=d("#bar-chart-total-stock-ingredients").data("colors"))?
           o.split(","):i.concat(),(
-              r=document.getElementById("bar-chart-example").getContext("2d").createLinearGradient(0,500,0,150)).addColorStop(0,n[0]),
+              r=document.getElementById("bar-chart-total-stock-ingredients").getContext("2d").createLinearGradient(0,500,0,150)).addColorStop(0,n[0]),
               r.addColorStop(1,n[1]),
               t={labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
               datasets:[{
@@ -160,8 +160,8 @@
                   hoverBackgroundColor:r,
                   hoverBorderColor:r,
                   data:[
-                        <?php if(session()->get('ingredientsPerMonth') !== null):?>
-                            <?php foreach(session()->get('ingredientsPerMonth') as $data):?>
+                        <?php if(session()->get('totalIngredientsPerMonth') !== null):?>
+                            <?php foreach(session()->get('totalIngredientsPerMonth') as $data):?>
                                 <?= $data['Jan'];?>,
                                 <?= $data['Feb'];?>,
                                 <?= $data['Mar'];?>,
@@ -177,33 +177,237 @@
                             <?php endforeach;?>
                         <?php endif;?>
                       ]
-              },{
-                  label:"Total Stock Ingredient Reports",
-                  backgroundColor:"#e3eaef",
-                  borderColor:"#e3eaef",
-                  hoverBackgroundColor:"#e3eaef",
-                  hoverBorderColor:"#e3eaef",
-                  data:[
-                        <?php if(session()->get('ingredientsPerMonth') !== null):?>
-                            <?php foreach(session()->get('ingredientsPerMonth') as $data):?>
-                                <?= $data['Jan'];?>,
-                                <?= $data['Feb'];?>,
-                                <?= $data['Mar'];?>,
-                                <?= $data['Apr'];?>,
-                                <?= $data['May'];?>,
-                                <?= $data['Jun'];?>,
-                                <?= $data['Jul'];?>,
-                                <?= $data['Aug'];?>,
-                                <?= $data['Sept'];?>,
-                                <?= $data['Oct'];?>,
-                                <?= $data['Nov'];?>,
-                                <?= $data['December'];?>,
-                            <?php endforeach;?>
-                        <?php endif;?>
-                    ]
               }]
           },
-                  l.push(this.respChart(d("#bar-chart-example"),"Bar",
+                  l.push(this.respChart(d("#bar-chart-total-stock-ingredients"),"Bar",
+                  t,
+                  {maintainAspectRatio:!1,
+                      legend:{display:!1},
+                      scales:{
+                          yAxes:[{
+                              gridLines:{
+                                  display:!1,
+                                  color:"rgba(0,0,0,0.05)"},
+                              stacked:!1,ticks:{
+                                  stepSize:20
+                              }}],
+                          xAxes:[{
+                              barPercentage:.7,
+                              categoryPercentage:.5,
+                              stacked:!1,
+                              gridLines:{
+                                  color:"rgba(0,0,0,0.01)"
+                              }
+                          }]
+                          }
+                      }))),
+      0<d("#bar-chart-total-stock-ingredients-amount").length&&(
+          n=(o=d("#bar-chart-total-stock-ingredients-amount").data("colors"))?
+          o.split(","):i.concat(),(
+              r=document.getElementById("bar-chart-total-stock-ingredients-amount").getContext("2d").createLinearGradient(0,500,0,150)).addColorStop(0,n[0]),
+              r.addColorStop(1,n[1]),
+              t={labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+              datasets:[{
+                  label:"Total Amount of Ingredients",
+                  backgroundColor:r,
+                  borderColor:r,
+                  hoverBackgroundColor:r,
+                  hoverBorderColor:r,
+                  data:[
+                        <?php if(session()->get('totalAmountStockIngredientsJan') !== null):?>
+                            <?php foreach(session()->get('totalAmountStockIngredientsJan')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsFeb')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsMar')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsApr')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsMay')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsJun')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsJul')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsAug')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsSept')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsOct')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsNov')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountStockIngredientsDec')as $data):?>
+                                <?= $data['total_amount_stock_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                        <?php endif;?>
+                      ]
+              }]
+          },
+                  l.push(this.respChart(d("#bar-chart-total-stock-ingredients-amount"),"Bar",
+                  t,
+                  {maintainAspectRatio:!1,
+                      legend:{display:!1},
+                      scales:{
+                          yAxes:[{
+                              gridLines:{
+                                  display:!1,
+                                  color:"rgba(0,0,0,0.05)"},
+                              stacked:!1,ticks:{
+                                  stepSize:20
+                              }}],
+                          xAxes:[{
+                              barPercentage:.7,
+                              categoryPercentage:.5,
+                              stacked:!1,
+                              gridLines:{
+                                  color:"rgba(0,0,0,0.01)"
+                              }
+                          }]
+                          }
+                      }))),
+      0<d("#bar-chart-total-good-sold").length&&(
+          n=(o=d("#bar-chart-total-good-sold").data("colors"))?
+          o.split(","):i.concat(),(
+              r=document.getElementById("bar-chart-total-good-sold").getContext("2d").createLinearGradient(0,500,0,150)).addColorStop(0,n[0]),
+              r.addColorStop(1,n[1]),
+              t={labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+              datasets:[{
+                  label:"Total Goods Sold",
+                  backgroundColor:r,
+                  borderColor:r,
+                  hoverBackgroundColor:r,
+                  hoverBorderColor:r,
+                  data:[
+                        <?php if(session()->get('totalCountIngredientsJan') !== null):?>
+                            <?php foreach(session()->get('totalCountIngredientsJan')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsFeb')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsMar')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsApr')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsMay')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsJun')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsJul')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsAug')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsSept')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsOct')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsNov')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalCountIngredientsDec')as $data):?>
+                                <?= $data['total_count_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                        <?php endif;?>
+                      ]
+              }]
+          },
+                  l.push(this.respChart(d("#bar-chart-total-good-sold"),"Bar",
+                  t,
+                  {maintainAspectRatio:!1,
+                      legend:{display:!1},
+                      scales:{
+                          yAxes:[{
+                              gridLines:{
+                                  display:!1,
+                                  color:"rgba(0,0,0,0.05)"},
+                              stacked:!1,ticks:{
+                                  stepSize:20
+                              }}],
+                          xAxes:[{
+                              barPercentage:.7,
+                              categoryPercentage:.5,
+                              stacked:!1,
+                              gridLines:{
+                                  color:"rgba(0,0,0,0.01)"
+                              }
+                          }]
+                          }
+                      }))),
+      0<d("#bar-chart-total-good-sold-amount").length&&(
+          n=(o=d("#bar-chart-total-good-sold-amount").data("colors"))?
+          o.split(","):i.concat(),(
+              r=document.getElementById("bar-chart-total-good-sold-amount").getContext("2d").createLinearGradient(0,500,0,150)).addColorStop(0,n[0]),
+              r.addColorStop(1,n[1]),
+              t={labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+              datasets:[{
+                  label:"Total Amount of Goods Sold",
+                  backgroundColor:r,
+                  borderColor:r,
+                  hoverBackgroundColor:r,
+                  hoverBorderColor:r,
+                  data:[
+                        <?php if(session()->get('totalAmountIngredientsJan') !== null):?>
+                            <?php foreach(session()->get('totalAmountIngredientsJan')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsFeb')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsMar')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsApr')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsMay')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsJun')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsJul')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsAug')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsSept')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsOct')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsNov')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                            <?php foreach(session()->get('totalAmountIngredientsDec')as $data):?>
+                                <?= $data['total_amount_per_month_ingredients'];?>
+                            <?php endforeach;?>,
+                        <?php endif;?>
+                      ]
+              }]
+          },
+                  l.push(this.respChart(d("#bar-chart-total-good-sold-amount"),"Bar",
                   t,
                   {maintainAspectRatio:!1,
                       legend:{display:!1},

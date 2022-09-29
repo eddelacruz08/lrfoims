@@ -65,9 +65,7 @@ class OrderReport extends BaseController
 				'totalAmountOrdersOct' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 10, 'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
 				'totalAmountOrdersNov' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 11, 'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
 				'totalAmountOrdersDec' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 12, 'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
-				// 'ordersPerMonthLastYear' => $this->ordersModel->getCountOrdersPerMonth(['order_status_id'=>5,'YEAR(created_at)'=>'DATE_SUB( YEAR('.$dateYear.'), INTERVAL 1 YEAR )', 'status'=>'a']),
 				'totalAmountOrdersUsed' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
-				// 'totalAmountOrdersSoldLastYear' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'YEAR(created_at)'=>'DATE_SUB( YEAR('.$dateYear.'), INTERVAL 1 YEAR )', 'status'=>'a']),
 			]);
 		}else{
 			$time = new \DateTime();
@@ -94,9 +92,7 @@ class OrderReport extends BaseController
 				'totalAmountOrdersOct' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 10, 'YEAR(created_at)'=>$dateYears, 'status'=>'a']),
 				'totalAmountOrdersNov' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 11, 'YEAR(created_at)'=>$dateYears, 'status'=>'a']),
 				'totalAmountOrdersDec' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'MONTH(created_at)'=> 12, 'YEAR(created_at)'=>$dateYears, 'status'=>'a']),
-				// 'ordersPerMonthLastYear' => $this->ordersModel->getTotalOrderPerYears(['order_status_id'=>5,'YEAR(created_at)'=>'DATE_SUB( YEAR('.$dateYears.'), INTERVAL 1 YEAR )', 'status'=>'a']),
 				'totalAmountOrdersUsed' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5, 'status'=>'a']),
-				// 'totalAmountOrdersRevenueLastYear' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>5,'YEAR(created_at)'=>'DATE_SUB( YEAR('.$dateYears.'), INTERVAL 1 YEAR )', 'status'=>'a']),
 			]);
 		}
 		return view('templates/index', $data);
@@ -159,7 +155,6 @@ class OrderReport extends BaseController
 				return redirect()->to('/order-reports');
 			}
 		}
-		// return redirect()->to('/order-reports');
 	}
 	//--------------------------------------------------------------------
 }
