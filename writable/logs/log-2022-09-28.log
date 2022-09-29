@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CRITICAL - 2022-09-28 10:49:16 --> Undefined property: Modules\IngredientReportManagement\Controllers\IngredientReport::$ordersModel
 #0 C:\xampp\htdocs\lrfoims\modules\IngredientReportManagement\Controllers\IngredientReport.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 55, Array)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\IngredientReportManagement\Controllers\IngredientReport->index('2022')
@@ -316,3 +317,20 @@ CRITICAL - 2022-09-28 16:31:06 --> Undefined index: thead
 #6 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #8 {main}
+=======
+CRITICAL - 2022-09-28 22:41:32 --> Invalid argument supplied for foreach()
+#0 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(5682): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'E:\\xampp\\htdocs...', 5682, Array)
+#1 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(5314): TCPDF->getCellBorder(45, 0, 295.6, 10, 10)
+#2 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(5126): TCPDF->getCellCode(295.6, 10, 'Lamon Food Orde...', 10, false, 'C', 0, '', 0, true, 'M', 'M')
+#3 E:\xampp\htdocs\lrfoims\modules\OrderReportManagement\Controllers\OrderReport.php(18): TCPDF->Cell(0, 10, 'Lamon Food Orde...', 10, false, 'C', 0, '', 0, false, 'M', 'M')
+#4 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(3617): Modules\OrderReportManagement\Controllers\MYPDF->Header()
+#5 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(3284): TCPDF->setHeader()
+#6 E:\xampp\htdocs\lrfoims\vendor\tecnickcom\tcpdf\tcpdf.php(3196): TCPDF->startPage('', '', false)
+#7 E:\xampp\htdocs\lrfoims\modules\OrderReportManagement\Controllers\OrderReport.php(151): TCPDF->AddPage()
+#8 E:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderReportManagement\Controllers\OrderReport->generateOrderReport()
+#9 E:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderReportManagement\Controllers\OrderReport))
+#10 E:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 E:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#12 E:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('E:\\xampp\\htdocs...')
+#13 {main}
+>>>>>>> 34b97966a2fd39765eadf63b790ff9550de2f0ea

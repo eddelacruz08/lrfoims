@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-
+    
     <h3 style="text-align:center; margin-top:-50px; line-height: 70%">Order Report as of</h3>
     <h3 style="text-align:center; margin-top:-50px; line-height: 70%"><?= $date_status == 1 ? date('F d, Y',strtotime($date)) : date('F d, Y',strtotime($strStartDate)).' to '.date('F d, Y',strtotime($strEndDate))?></h3><br>
     <p style="line-height: 70%; font-size: 10pt;"><b>Date generated: </b><?= date('F d, Y')?></p>
