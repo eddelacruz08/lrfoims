@@ -53,9 +53,13 @@
 
                         <div class="col-sm-4">
                             <div class="text-center mt-sm-0 mt-3 text-sm-end">
-                                <a href="/users/u/<?= $user['id'] ?>" type="button" class="btn btn-light">
-                                    <i class="mdi mdi-account-edit me-1"></i> Edit Profile
-                                </a>
+                                <?php if(user_link('users/u', session()->get('userPermissionView'))):?>
+                                    <a href="/users/u/<?= $user['id'] ?>" type="button" class="btn btn-light">
+                                        <i class="mdi mdi-account-edit me-1"></i> Edit Profile
+                                    </a>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit Button</button>
+                                <?php endif; ?>
                             </div>
                         </div> <!-- end col-->
                     </div> <!-- end row -->

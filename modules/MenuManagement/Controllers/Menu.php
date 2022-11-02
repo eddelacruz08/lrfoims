@@ -30,6 +30,7 @@ class Menu extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Menu List',
             'title' => 'Menu List',
+            'action' => 'Submit',
             'view' => 'Modules\MenuManagement\Views\menu\form',
             'edit' => false,
             'menuCategory' => $this->menuCategoryModel->get()
@@ -62,6 +63,7 @@ class Menu extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Menu List',
             'title' => 'Menu List',
+            'action' => 'Submit',
             'view' => 'Modules\MenuManagement\Views\menu\form',
             'edit' => true,
             'id' => $id,
@@ -99,6 +101,22 @@ class Menu extends BaseController
         }
 
         return view('templates/index', $data);
+    }
+
+    public function editMenuStatus($id) {
+        if ($this->request->getMethod() == 'post') {
+            if(!empty($_POST['menu_status'])) {
+                $data['menu_status'] = $_POST['menu_status'];
+                $this->menuModel->update($id, $data);
+                $this->session->setFlashdata('success', 'Menu status successfully updated!');
+                return redirect()->to('/menu-list');
+            }else{
+                $data['menu_status'] = 'u';
+                $this->menuModel->update($id, $data);
+                $this->session->setFlashdata('success', 'Menu status successfully updated!');
+                return redirect()->to('/menu-list');
+            }
+        }
     }
 
     public function delete($id)

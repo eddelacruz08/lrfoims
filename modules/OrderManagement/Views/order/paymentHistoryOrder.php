@@ -17,7 +17,9 @@
                                 </p>
                             </a>
                             <?php if ($details['order_status_id'] == 5): ?>
-                                <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info d-print-none"><i class="dripicons-print"></i>&nbspInvoice</a>
+                                <?php if(user_link('orders/print-order-invoice', session()->get('userPermissionView'))):?>
+                                    <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info d-print-none"><i class="dripicons-print"></i>&nbspInvoice</a>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </h5>
                     </div>
@@ -78,7 +80,14 @@
                                         <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
                                                 <?php if($totalPrice['order_id'] == $details['id']):?>
                                                     <tr>
-                                                        <td scope="col" class="d-print-none">
+                                                        <td scope="col">
+                                                            <center>
+                                                                <?php foreach ($orderType as $type) : ?>
+                                                                    <?php if($details['order_type'] == $type['id']): ?>
+                                                                        <h4><span class="badge bg-success"><?= ucfirst($type['type']); ?></span></h4>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </center>
                                                         </td>
                                                         <td scope="col">
                                                             <center>

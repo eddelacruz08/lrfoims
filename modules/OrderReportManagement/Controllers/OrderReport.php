@@ -36,11 +36,11 @@ class OrderReport extends BaseController
 {
 	function __construct(){
 		$this->ordersModel = new OrderManagement\OrderModel();
-		helper(['form']);
+		helper(['link','form']);
 	}
 
-	public function index($year = null)
-	{
+	public function index($year = null){
+        $this->hasPermissionRedirect('order-reports');
 		if($year != null){
 			$dateYear = $year;
 			$data = [
@@ -98,21 +98,21 @@ class OrderReport extends BaseController
 		return view('templates/index', $data);
 	}
 
-	public function indexDateFilter()
-	{
+	public function indexDateFilter() {
         if ($this->request->getMethod() == 'post') {
 			return redirect()->to('/order-reports/'.$_POST['date']);
 		}
 	}
 
-	public function generateOrderReport()
-	{
+	public function generateOrderReport() {
+        $this->hasPermissionRedirect('order-reports/generate-report');
+
         if($this->request->getMethod() == 'post'){
 			// die($_POST['date'].' '.$_POST['date_status']);
 			if($this->validate('report')){
 				$data = [
 					'page_title' => 'generate',
-					'title' => 'List of Reservations',
+					'title' => 'Order Reports',
 					'type' => 'report',
 				];
 				if($_POST['date_status'] == 1){

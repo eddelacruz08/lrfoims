@@ -7,31 +7,36 @@ class Roles extends BaseController
 {
     function __construct(){
         $this->rolesModel = new UserManagement\RolesModel();
-        helper(['form']);
+        $this->permissionsModel = new UserManagement\PermissionsModel();
+        $this->modulesModel = new UserManagement\ModulesModel();
+        helper(['form','link']);
     }
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+
+    public function index() {
+        $this->hasPermissionRedirect('roles');
+
         $data = [
             'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
             'action' => 'Add Role',
             'view' => 'Modules\UserManagement\Views\Roles\index',
-            'roles' => $this->rolesModel->get()
+            'roles' => $this->rolesModel->getDetails()
         ];
 
         return view('templates/index',$data);
     }
 
-    public function add()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function add() {
+        $this->hasPermissionRedirect('roles/a');
+
         $data = [
             'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
             'action' => 'Submit',
+            'edit' => false,
             'view' => 'Modules\UserManagement\Views\Roles\form',
-            'edit' => false
+            'permissions' => $this->permissionsModel->get(['permission_type' => 16, 'status' => 'a']),
+            'modules' => $this->modulesModel->get(['status' => 'a'])
         ];
 
         if ($this->request->getMethod() == 'post') {
@@ -48,9 +53,9 @@ class Roles extends BaseController
         return view('templates/index',$data);
     }
 
-    public function edit($id)
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function edit($id) {
+        $this->hasPermissionRedirect('roles/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Roles',
             'title' => 'Roles',
@@ -58,7 +63,9 @@ class Roles extends BaseController
             'view' => 'Modules\UserManagement\Views\Roles\form',
             'edit' => true,
             'id' => $id,
-            'value' => $this->rolesModel->get(['id' => $id])[0]
+            'value' => $this->rolesModel->get(['id' => $id])[0],
+            'permissions' => $this->permissionsModel->get(['permission_type' => 16, 'status' => 'a']),
+            'modules' => $this->modulesModel->get(['status' => 'a'])
         ];
         if ($this->request->getMethod() == 'post') {
             if (!$this->validate('roles')) {
@@ -73,8 +80,9 @@ class Roles extends BaseController
         return view('templates/index',$data);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
+        $this->hasPermissionRedirect('roles/d');
+
         $this->rolesModel->softDelete($id);
         $data =[
             'status'=> 'Deleted Successfully',

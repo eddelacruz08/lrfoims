@@ -1,3 +1,13 @@
+<?php if (session()->get('addCartAdminOpenModal')) : ?>
+    <script type="text/javascript">
+        // var myModalEl = document.getElementById('<?=session()->get('addCartAdminOpenModal')?>')
+        // myModalEl.addEventListener('show.bs.modal', function (e) {
+        //     var modalToggle = $(e.target).attr('id') // relatedTarget
+        //     myModalEl.show(modalToggle)
+        // })
+    </script>
+<?php endif; ?>
+
 <?php if (session()->get('success_login')) : ?>
     <script type="text/javascript">
         alert_login_success('<?= session()->get('success_login') ?>');

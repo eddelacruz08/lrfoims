@@ -8,12 +8,12 @@ class PermissionTypes extends BaseController
     function __construct(){
         $this->permissionTypesModel = new UserManagement\PermissionTypesModel();
         $this->modulesModel = new UserManagement\ModulesModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function index() {
+        $this->hasPermissionRedirect('permission-types');
+
         $data = [
             'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
@@ -25,9 +25,9 @@ class PermissionTypes extends BaseController
         return view('templates/index',$data);
     }
 
-    public function add()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function add() {
+        $this->hasPermissionRedirect('permission-types/a');
+
         $data = [
             'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
@@ -53,9 +53,9 @@ class PermissionTypes extends BaseController
         return view('templates/index',$data);
     }
 
-    public function edit($id)
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function edit($id) {
+        $this->hasPermissionRedirect('permission-types/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Permission Types',
             'title' => 'Permission Types',
@@ -80,21 +80,22 @@ class PermissionTypes extends BaseController
         return view('templates/index',$data);
     }
     
-    public function delete($id)
-    {
-      if($this->permissionTypesModel->softDelete($id)){
-        $data =[
-          'status' => 'Deleted Successfully',
-          'status_text' => 'Successfully deleted!',
-          'status_icon' => 'success'
-        ];
-    } else{
-        $data =[
-          'status' => 'Oops!',
-          'status_text' => 'Something went wrong!',
-          'status_icon' => 'warning'
-        ];
-      }
-    return $this->response->setJSON($data);
+    public function delete($id) {
+        $this->hasPermissionRedirect('permission-types/d');
+
+        if($this->permissionTypesModel->softDelete($id)){
+            $data =[
+            'status' => 'Deleted Successfully',
+            'status_text' => 'Successfully deleted!',
+            'status_icon' => 'success'
+            ];
+        } else{
+            $data =[
+            'status' => 'Oops!',
+            'status_text' => 'Something went wrong!',
+            'status_icon' => 'warning'
+            ];
+        }
+        return $this->response->setJSON($data);
     }
 }

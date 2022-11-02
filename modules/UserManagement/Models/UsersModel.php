@@ -23,31 +23,28 @@ class UsersModel extends BaseModel
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
 
-    protected function beforeInsert(array $data)
-    {
+    protected function beforeInsert(array $data) {
         $data = $this->passwordHash($data);
 
         return $data;
     }
 
-    protected function beforeUpdate(array $data)
-    {
+    protected function beforeUpdate(array $data) {
         $data = $this->passwordHash($data);
         return $data;
     }
 
-    protected function passwordHash(array $data)
-    {
+    protected function passwordHash(array $data) {
         if (isset($data['data']['password']))
             $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
 
         return $data;
     }
 
-    public function getDetails($condition = [])
-    {
-        $this->select('lrfoims_users.*, lrfoims_roles.role_name');
+    public function getDetails($condition = []) {
+        $this->select('lrfoims_users.*, lrfoims_roles.role_name, lrfoims_permissions.slug');
         $this->join('lrfoims_roles', ' lrfoims_roles.id = lrfoims_users.role_id');
+        $this->join('lrfoims_permissions', ' lrfoims_roles.landing_page_id = lrfoims_permissions.id');
         
         foreach($condition as $field => $value){
             $this->where($field, $value);
@@ -55,12 +52,13 @@ class UsersModel extends BaseModel
 
         return $this->findAll();  
     }
-    public function getUserData(){
+
+    public function getUserData() {
         $this->select('count(id) as user');
         return $this->findAll();
     }
 
-    public function getTotalUsers($conditions = []){
+    public function getTotalUsers($conditions = []) {
 
         $this->select('lrfoims_users.*, COUNT(lrfoims_users.id) as getTotalUsers');
 

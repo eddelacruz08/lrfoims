@@ -48,7 +48,7 @@ class Validation
 			'label' => 'Email Address'
 		],
         'username' => [
-			'rules' => 'required|min_length[5]|max_length[100]|is_unique[frbs_users.username,id,{userID}]',
+			'rules' => 'required|min_length[5]|max_length[100]|is_unique[lrfoims_users.username,id,{userID}]',
 			'label' => 'Username'
 		],
         'password' => [
@@ -70,7 +70,7 @@ class Validation
 
 	public $roles = [
 		'role_name' => [
-			'rules' => 'required|min_length[3]|max_length[50]|is_unique[frbs_roles.role_name,id,{roleID}]',
+			'rules' => 'required|min_length[3]|max_length[50]|is_unique[lrfoims_roles.role_name,id,{roleID}]',
 			'label' => 'Role name',
 			'errors' => [
                 'is_unique' => 'Role already exist'      
@@ -79,12 +79,16 @@ class Validation
 		'description' => [
 			'rules' => 'required|min_length[5]|max_length[50]',
 			'label' => 'Description'
+		],
+		'landing_page_id' => [
+			'rules' => 'required',
+			'label' => 'Landing Page'
 		]
 	];
 
 	public $modules = [
 		'module' => [
-			'rules' => 'required|min_length[5]|max_length[50]|is_unique[frbs_modules.module,id,{moduleID}]',
+			'rules' => 'required|min_length[4]|max_length[50]|is_unique[lrfoims_modules.module,id,{moduleID}]',
 			'label' => 'Module',
 			'errors' => [
                 'is_unique' => 'Module already exist'      
@@ -110,77 +114,6 @@ class Validation
 		],
 	];
 
-	public $students = [
-		'student_number' => [
-			'rules' => 'required|max_length[15]|is_unique[frbs_students.student_number,id,{studentID}]',
-			'label' => 'Student Number',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
-		],
-		'last_name' => [
-			'rules' => 'required|min_length[2]|max_length[50]',
-			'label' => 'Last Name'
-		],
-
-		'first_name' => [
-			'rules' => 'required|min_length[3]|max_length[50]',
-			'label' => 'First Name'
-		],
-
-		'middle_name' => [
-			'rules' => 'max_length[50]',
-			'label' => 'Middle Name'
-		],
-
-		'email_address' => [
-			'rules' => 'required|min_length[5]|max_length[50]|valid_email',
-			'label' => 'Email Address'
-		],
-
-		'contact_number' => [
-			'rules' => 'required|min_length[9]|max_length[50]|numeric',
-			'label' => 'Contact Number'
-		],
-
-		'facebook_account' => [
-			'rules' => 'required|min_length[5]|max_length[50]',
-			'label' => 'Facebook Account'
-		],
-
-		'extension_name_id' => [
-			'rules' => 'numeric',
-			'label' => 'Extension Name',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-
-		'year_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Year Level',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-		
-		'course_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Course',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-
-		'organization_id' => [
-			'rules' => 'required|numeric',
-			'label' => 'Course',
-			'errors' => [
-				'numeric' => '{field} field is required'
-			]
-		],
-	];
-
 	public $ingredients = [
 		'product_name' => [
 			'rules' => 'required',
@@ -196,7 +129,7 @@ class Validation
                 'required' => '{field} field is required'      
             ]
 		],
-		'unit' => [
+		'unit_quantity' => [
 			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Unit Number',
 			'errors' => [
@@ -204,21 +137,32 @@ class Validation
 				'numeric' => '{field} must be number'
 			]
 		],
-		'quantity' => [
-			'rules' => 'required|numeric',
-			'label' => 'Quantity',
+		'price' => [
+			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Price',
+			'errors' => [
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'    
+            ]
+		],
+	];
+
+	public $ingredientStockInAndOut = [
+		'stock_type' => [
+			'rules' => 'required',
+			'label' => 'Stock Type'
+		],
+		'unit_quantity' => [
+			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Unit of Measure',
 			'errors' => [
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'
 			]
 		],
-		'product_description_id' => [
-			'rules' => 'required',
-			'label' => 'Description',
-		],
 		'price' => [
 			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Price',
+			'label' => 'Amount',
 			'errors' => [
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'    
@@ -239,7 +183,14 @@ class Validation
 			'label' => 'Description',
 		],
 	];
-	
+
+	public $ingredientBatchUploadFile = [
+		'uploadFile' => [
+			'rules' => 'required|uploaded[uploadFile]|max_size[uploadFile,4096]|ext_in[uploadFile,csv]',
+			'label' => 'Batch Upload File',
+		]
+	];
+
 	public $menuCategory = [
 		'name' => [
 			'rules' => 'required',
@@ -251,6 +202,29 @@ class Validation
 		'description' => [
 			'rules' => 'required|min_length[5]|max_length[50]',
 			'label' => 'Description',
+		],
+	];
+
+	public $menuIngredient = [
+		'menu_id' => [
+			'rules' => 'required',
+			'label' => 'Menu',
+		],
+		'ingredient_id' => [
+			'rules' => 'required',
+			'label' => 'Ingredient',
+		],
+		'unit_quantity' => [
+			'rules' => 'required|numeric',
+			'label' => 'Unit Of Measure',
+		],
+		'product_description_id' => [
+			'rules' => 'required',
+			'label' => 'Measurement',
+		],
+		'price' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Amount',
 		],
 	];
 

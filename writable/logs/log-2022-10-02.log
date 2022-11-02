@@ -1,0 +1,160 @@
+CRITICAL - 2022-10-02 12:30:28 --> Undefined index: unit_quantity
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 215, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrderToCartInMenuList()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 12:32:58 --> Undefined index: unit_quantity
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 215, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrderToCartInMenuList()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 12:34:57 --> Undefined index: unit_quantity
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 215, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrderToCartInMenuList()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 12:42:46 --> Undefined index: unit_quantity
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(215): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 215, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrderToCartInMenuList()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 13:23:56 --> Undefined variable: ingredientId
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(204): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 204, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrderToCartInMenuList()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:09:53 --> Undefined index: order_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(354): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 354, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteAdminCart('47', '1', '25', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:12:18 --> Undefined index: order_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(354): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 354, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteAdminCart('47', '1', '25', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:12:25 --> Undefined index: order_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(354): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 354, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteAdminCart('47', '1', '25', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:17:21 --> Undefined index: order_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(354): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 354, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteAdminCart('47', '1', '25', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:18:00 --> Undefined index: order_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(354): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 354, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteAdminCart('47', '1', '25', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:38:19 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(382): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 382, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteCart('46', '1', '24', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:42:25 --> Undefined variable: data
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(396): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 396, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteCart('40', '2', '21', '2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:42:34 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(382): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 382, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteCart('46', '1', '24', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:49:06 --> Undefined variable: time
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(146): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 146, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->addOrder()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 15:53:54 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(411): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 411, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteCart('46', '1', '24', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 16:08:30 --> Undefined variable: cartQyt
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(437): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 437, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('25')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 16:22:00 --> Undefined variable: cartQyt
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(436): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 436, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('25')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 16:23:11 --> Undefined variable: cartQyt
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(436): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 436, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('25')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 16:32:15 --> Undefined variable: orderId
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(442): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 442, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('25')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-02 16:32:56 --> Undefined variable: orderId
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(442): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 442, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('25')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}

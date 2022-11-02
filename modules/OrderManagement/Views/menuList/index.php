@@ -83,12 +83,12 @@
                                                                 <p class="card-text">₱ <?= number_format($row['price']); ?></p>
                                                             </div> 
                                                             <div class="card-footer p-1">                     
-                                                            <?php if($row['status'] == 'd'): ?>
+                                                            <?php if($row['menu_status'] == 'u'): ?>
                                                                 <div class="d-flex flex-column">
-                                                                    <button class="btn m-1 btn-sm btn-danger" animation="true" type="submit" title="Unavailable" disabled>Unavailable</button>
+                                                                    <button class="btn m-1 btn-sm btn-danger" animation="true" type="button" title="Unavailable" disabled>Unavailable</button>
                                                                 </div>
                                                             <?php else: ?>
-                                                                <form method="POST" action="/orders/admin/add-to-cart/a" enctype="multipart/form-data">
+                                                                <form method="POST" action="/orders/admin-menu/add-to-cart/a" enctype="multipart/form-data">
                                                                     <div class="d-flex flex-column">
                                                                         <input type="number" min="1" name="quantity" value="1" class="form-control" placeholder="Quantity">
                                                                         <?php if(isset($errors['order_number_id'])):?>
@@ -114,15 +114,15 @@
                         <?php endif; ?>
                     </div>
                     <div id="adminCart" class="tab-pane fade m-0 p-0">
-                        <div class="container-fluid m-0 p-2">
+                        <div class="container-fluid m-0 p-0">
                             <div class="row">
                                 <?php if(!empty($adminUnavailableOrders)):?>
                                     <?php foreach ($adminUnavailableOrders as $unavailableOrder) : ?>
                                         <?php if(!empty($adminCartLists)):?>
-                                            <?php foreach ($menuCategory as $category) : ?>
-                                                <?php foreach ($adminCartLists as $adminCart) : ?>
-                                                    <?php if($category['id'] == $adminCart['menu_category_id']):?>
-                                                        <?php if($unavailableOrder['id'] == $adminCart['order_id']):?>
+                                            <?php foreach ($adminCartLists as $adminCart) : ?>
+                                                <?php if($unavailableOrder['id'] == $adminCart['order_id']):?>
+                                                    <?php foreach ($menuCategory as $category) : ?>
+                                                        <?php if($category['id'] == $adminCart['menu_category_id']):?>
                                                             <div class="col-6 p-2">
                                                                 <div class="card p-1 m-1">
                                                                     <li class="m-0 p-1 list-group-item d-flex justify-content-between align-items-center">
@@ -133,13 +133,13 @@
                                                                             <p>₱ <?=$adminCart['price'] ?></p>
                                                                         </div>
                                                                         <div class="media-body">
-                                                                            <form method="POST" action="/orders/admin/cart/qty/<?= $adminCart['id']; ?>" enctype="multipart/form-data">
+                                                                            <form method="POST" action="/orders/admin-menu/cart/qty/<?= $adminCart['id']; ?>/<?=$adminCart['menu_id']?>/<?=$adminCart['order_id']?>/<?=$adminCart['quantity']?>/1" enctype="multipart/form-data">
                                                                                 <div class="input-group">
                                                                                     <input type="number" name="quantity" value="<?= $adminCart['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
-                                                                                    <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity"><i class="fas fa-plus-circle"></i>Change</button>
+                                                                                    <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity"><i class="fas fa-plus-circle"></i>&nbspChange</button>
                                                                                 </div>
                                                                             </form>
-                                                                            <a onclick="confirmDelete('/orders/admin/cart/d/',<?=$adminCart['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Remove Order" animation="true" class="btn mt-1 btn-sm btn-danger txt-sm float-right">
+                                                                            <a onclick="confirmDeleteCart('/orders/admin-menu/cart/d/',<?=$adminCart['id']?>,<?=$adminCart['menu_id']?>,<?=$adminCart['order_id']?>,<?=$adminCart['quantity']?>)" data-toggle="tooltip" data-placement="bottom" title="Remove Order" animation="true" class="btn mt-1 btn-sm btn-danger txt-sm float-right">
                                                                                 <i class="fas fa-minus-circle"></i> Remove Order
                                                                             </a>
                                                                         </div>
@@ -147,29 +147,50 @@
                                                                 </div>
                                                             </div>
                                                         <?php endif; ?>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
-                                            <?php if(!empty($adminUnavailableOrders)):?>
-                                                <div class="card container-fluid p-2 m-1">
-                                                    <form method="POST" action="/orders/admin/submit-orders/<?= $unavailableOrder['id']; ?>" enctype="multipart/form-data">
-                                                        <button class="btn btn-md btn-success float-right" animation="true" type="submit" id="button-addon2" title="Submit Order">
-                                                            Submit Order&nbsp<i class="fas fa-arrow-right"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            <?php else: ?>
-                                                No Carts
-                                            <?php endif; ?>
+                                            <div class="card container-fluid p-2 m-1">
+                                                <form method="POST" action="/orders/admin-menu/submit-orders/<?= $unavailableOrder['id']; ?>" enctype="multipart/form-data">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label for="inputAddress2">Select order type: <small class="text-danger">*</small></label>
+                                                            <select class="form-select  <?= isset($errors['order_type']) ? 'is-invalid':'is-valid' ?>" name="order_type">
+                                                                <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select order type --</option>
+                                                                <?php foreach ($orderType as $option) : ?>
+                                                                    <?php $selected = false; ?>
+                                                                    <?php if(isset($value['order_type'])):?>
+                                                                        <?php if($value['order_type'] == $option['id']): ?>
+                                                                            <?php $selected = true; ?>
+                                                                        <?php endif; ?>
+                                                                    <?php endif;?>
+                                                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['type']) ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            <?php if(isset($errors['order_type'])):?>
+                                                                <small class="text-danger"><?=esc($errors['order_type'])?></small>
+                                                            <?php endif;?>
+                                                        </div>
+                                                        <div class="col-sm-6 p-3">
+                                                            <button class="btn btn-md btn-success float-right" animation="true" type="submit" id="button-addon2" title="Submit Order">
+                                                                Submit Order&nbsp<i class="fas fa-arrow-right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="mt-5 mb-5 text-center">No Carts</div>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    No Orders
+                                    <div class="mt-5 mb-5 text-center">No Order</div>
                                 <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

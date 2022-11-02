@@ -1,7 +1,7 @@
 <?= $this->extend('layout/main') ?>
 <?= $this->section('content'); ?>
 <!-- NAVBAR START -->
-<nav class="navbar navbar-expand-lg py-lg-3 navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <div class="container">
 
         <!-- logo -->
@@ -23,18 +23,59 @@
                     <?php foreach ($_SESSION['modules']as $modules): ?>
                             <?php foreach ($_SESSION['permissions'] as $permissions): ?>
                                 <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 5
-                                            && $permissions['permission_type'] == 11): ?>
-                                    <li class="nav-item mx-lg-1">
-                                        <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
-                                            <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
-                                                <?php if ($permissions['slug'] == 'cart'): ?>
-                                                    <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                                        <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
-                                                    <?php endforeach; ?>
+                                            && $permissions['permission_type'] == 16): ?>
+                                    <?php if ($permissions['slug'] == '/'): ?>
+                                        <li class="nav-item mx-lg-1">
+                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
+                                                    <?php if ($permissions['slug'] == 'cart'): ?>
+                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
-                                            <?php endif; ?>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if ($permissions['slug'] == 'menu'): ?>
+                                        <li class="nav-item mx-lg-1">
+                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
+                                                    <?php if ($permissions['slug'] == 'cart'): ?>
+                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if ($permissions['slug'] == 'cart'): ?>
+                                        <li class="nav-item mx-lg-1">
+                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
+                                                    <?php if ($permissions['slug'] == 'cart'): ?>
+                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php if ($permissions['slug'] == 'profile'): ?>
+                                        <li class="nav-item mx-lg-1">
+                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
+                                                    <?php if ($permissions['slug'] == 'cart'): ?>
+                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                     <?php endforeach; ?>
@@ -55,24 +96,40 @@
             </ul>
 
             <!-- right menu -->
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item me-0">
-                    <?php if(!empty(session()->get('role_id'))):?>
-                        <a href="/signout" class="nav-link d-lg-none">
-                        <i class="mdi mdi-account-circle-outline me-1"></i>Logout
+            <ul class="navbar-nav ms-auto bg-dark align-items-center">
+                <?php if(!empty(session()->get('role_id'))):?>
+                    <li class="dropdown notification-list bg-dark">
+                        <a class="nav-link dropdown-toggle nav-user bg-dark arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="account-user-avatar"> 
+                                <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
+                            </span>
+                            <span>
+                                <span class="account-user-name"><?= session()->get('first_name') != null ? session()->get('first_name').' '.session()->get('last_name') : 'Anonymous';?></span>
+                                <span class="account-position"><?= session()->get('role_name')?></span>
+                            </span>
                         </a>
-                        <a href="/signout" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
-                            <i class="mdi mdi-account-circle-outline me-1"></i>Logout
-                        </a>
-                    <?php else: ?>
-                        <a href="/login" class="nav-link d-lg-none">
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
+                            <!-- item-->
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome !</h6>
+                            </div>
+                            <!-- item-->
+                            <a href="/signout" class="dropdown-item notify-item">
+                                <i class="mdi mdi-logout me-1"></i>
+                                <span>Logout</span>
+                            </a>
+
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <a href="/login" class="nav-link d-lg-none">
                         <i class="mdi mdi-account-circle-outline me-1"></i>Login
-                        </a>
-                        <a href="/login" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
-                            <i class="mdi mdi-account-circle-outline me-1"></i>Login
-                        </a>
-                    <?php endif; ?>
-                </li>
+                    </a>
+                    <a href="/login" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                        <i class="mdi mdi-account-circle-outline me-1"></i>Login
+                    </a>
+                <?php endif; ?>
             </ul>
 
         </div>

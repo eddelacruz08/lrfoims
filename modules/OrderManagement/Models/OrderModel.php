@@ -14,6 +14,7 @@ class OrderModel extends BaseModel
         'total_amount',
         'c_cash',
         'c_balance',
+        'order_type',
         'status',
         'created_at',
         'updated_at',
@@ -55,7 +56,7 @@ class OrderModel extends BaseModel
             $this->where([$field => $value]);
         }
         // $this->groupBy('lrfoims_orders.id');
-        // $this->orderBy('lrfoims_orders.total_amount', 'ASC');
+        $this->orderBy('lrfoims_orders.updated_at', 'ASC');
 
         return $this->findAll();
     }

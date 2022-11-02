@@ -35,7 +35,11 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/roles/a" role="button">  Add </a>
+                <?php if(user_link('roles/a', session()->get('userPermissionView'))):?>
+                    <a class="btn btn-primary btn-sm float-end" href="/roles/a" role="button">  Add </a>
+                <?php else: ?>
+                    <button type="button" class="btn btn-secondary btn-sm">No Permission | Add Button</button>
+                <?php endif; ?>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -51,6 +55,9 @@
                                     </th>
                                     <th scope="col">
                                         <center>Description</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>Landing Page</center>
                                     </th>
                                     <th scope="col">
                                         <center>Actions</center>
@@ -71,9 +78,20 @@
                                             <center><?= strtolower($role['description']); ?></center>
                                         </td>
                                         <td>
+                                            <center><?= ucwords($role['permission']); ?></center>
+                                        </td>
+                                        <td>
                                             <center>
-                                                <a href="/roles/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                <a onclick="confirmDelete('/roles/d/',<?=$role['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                                <?php if(user_link('roles/u', session()->get('userPermissionView'))):?>
+                                                    <a href="/roles/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                <?php else: ?>
+                                                    <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit Button</button>
+                                                <?php endif; ?>
+                                                <?php if(user_link('roles/d', session()->get('userPermissionView'))):?>
+                                                    <a onclick="confirmDelete('/roles/d/',<?=$role['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                                <?php else: ?>
+                                                    <button type="button" class="btn btn-secondary btn-sm">No Permission | Delete Button</button>
+                                                <?php endif; ?>
                                             </center>
                                         </td>
                                     </tr>

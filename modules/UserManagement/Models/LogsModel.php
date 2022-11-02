@@ -16,7 +16,7 @@ class LogsModel extends BaseModel
     ];
 
     public function getDetails($conditions = []){
-        $this->select('lrfoims_logs.*, lrfoims_logs.id as lid, u.first_name, u.last_name, r.role_name');
+        $this->select('lrfoims_logs.*, lrfoims_logs.id as lid, u.first_name, u.last_name, r.role_name, u.username');
         $this->join('lrfoims_users as u',  'lrfoims_logs.user_id = u.id');
         $this->join('lrfoims_roles as r',  'u.role_id = r.id');
         
@@ -24,7 +24,7 @@ class LogsModel extends BaseModel
             $this->where([$field => $value]);
         }
         
-        $this->orderBy('lid', 'desc');
+        $this->orderBy('lrfoims_logs.id', 'desc');
 
 	    return $this->findAll();
     }

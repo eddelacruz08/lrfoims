@@ -1,0 +1,64 @@
+CRITICAL - 2022-10-04 17:40:55 --> Undefined variable: id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(388): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 388, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('5', '14', '2', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:41:31 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(363): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 363, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('5', '14', '2', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:44:17 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(363): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 363, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('5', '14', '2', '3')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:45:54 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(363): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 363, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('5', '14', '2', '3')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:47:31 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(453): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 453, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->deleteCart('5', '14', '2', '3')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:47:59 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(484): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 484, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->delete('2')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:55:22 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(379): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 379, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('7', '14', '3', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-04 17:56:00 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(356): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 356, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->editCartQty('7', '14', '3', '1')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}

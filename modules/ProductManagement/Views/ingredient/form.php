@@ -33,7 +33,7 @@
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     <form method="POST" action="/ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="inputEmail4">Ingredient Name <small class="text-danger">*</small></label>
                                 <input type="text" class="form-control  <?= isset($errors['product_name']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" name="product_name" placeholder="Ingredient Name" value="<?= isset($value['product_name']) ? $value['product_name'] : '' ?>">
@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="inputAddress2">Ingredient Category <small class="text-danger">*</small></label>
-                                <select class="form-control custom-select  <?= isset($errors['product_category_id']) ? 'is-invalid':'is-valid' ?>" name="product_category_id">
+                                <select class="form-select custom-select  <?= isset($errors['product_category_id']) ? 'is-invalid':'is-valid' ?>" name="product_category_id">
                                     <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select --</option>
                                     <?php foreach ($productCategory as $option) : ?>
                                         <?php $selected = false; ?>
@@ -64,8 +64,8 @@
                             <div class="col-md-6">
                                 <label for="inputEmail4">Unit of Measure <small class="text-danger">*</small></label>
                                 <div class="input-group">
-                                    <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit" placeholder="Enter Unit Number" value="<?= isset($value['unit']) ? $value['unit'] : '' ?>">
-                                    <select class="form-control <?= isset($errors['product_description_id']) ? 'is-invalid':'is-valid' ?>" name="product_description_id">
+                                    <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit_quantity']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit_quantity" placeholder="Enter Unit Number" value="<?= isset($value['unit_quantity']) ? $value['unit_quantity'] : '' ?>">
+                                    <select class="form-select <?= isset($errors['product_description_id']) ? 'is-invalid':'is-valid' ?>" name="product_description_id">
                                         <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select measure --</option>
                                         <?php foreach ($productDescription as $option) : ?>
                                             <?php $selected = false; ?>
@@ -74,26 +74,17 @@
                                                     <?php $selected = true; ?>
                                                 <?php endif; ?>
                                             <?php endif;?>
-                                            <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= $option['name'] ?></option>
+                                            <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= $option['description'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <?php if(isset($errors['unit'])):?>
-                                    <small class="text-danger"><?=esc($errors['unit'])?> |</small>
+                                <?php if(isset($errors['unit_quantity'])):?>
+                                    <small class="text-danger"><?=esc($errors['unit_quantity'])?> |</small>
                                 <?php endif;?>
                                 <?php if(isset($errors['product_description_id'])):?>
                                     <small class="text-danger"> <?=esc($errors['product_description_id'])?></small>
                                 <?php endif;?>
                             </div>
-                            <div class="col-md-6">
-                                <label for="inputEmail4">Quantity <small class="text-danger">*</small></label>
-                                    <input type="number" aria-describedby="basic-addon1" min="0" class="form-control  <?= isset($errors['quantity']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="quantity" placeholder="Quantity" value="<?= isset($value['quantity']) ? $value['quantity'] : '' ?>">
-                                <?php if(isset($errors['quantity'])):?>
-                                    <small class="text-danger"><?=esc($errors['quantity'])?></small>
-                                <?php endif;?>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <label for="inputAddress2">Unit Price <small class="text-danger">*</small></label>
                                 <input type="number" class="form-control  <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="price" placeholder="Price" value="<?= isset($value['price']) ? $value['price'] : '' ?>">

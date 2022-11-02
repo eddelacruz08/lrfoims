@@ -109,14 +109,28 @@
                                             <div class="d-flex align-items-start">
                                                 <img class="me-2 rounded-circle" src="/assets/img/user.jpg" width="40" alt="Generic placeholder image">
                                                 <div>
-                                                    <h5 class="mt-0 mb-1"><?=$activity['first_name'].' '.$activity['last_name'] ;?><small class="fw-normal ms-3"><?=$activity['created_at'] ;?></small></h5>
-                                                    <span class="font-13"><?=$activity['description'] ;?></span>
+                                                    <?php foreach ($getUsers as $user): ?>
+                                                        <?php if ($user['id'] == $activity['user_id']): ?>
+                                                            <h5 class="mt-0 mb-1"><?=$user['first_name'].' '.$user['last_name'] ;?>
+                                                                <small class="fw-normal ms-3"><?=Date('F d, Y - h:i a', strtotime($activity['created_at']))?></small>
+                                                            </h5>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <span class="font-13"><?=ucfirst($activity['description']);?></span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="text-muted font-13"><?=$activity['username'] ;?></span> <br/>
-                                            <p class="mb-0"><?=$activity['role_name'] ;?></p>
+                                            <?php foreach ($getUsers as $user): ?>
+                                                <?php if ($user['id'] == $activity['user_id']): ?>
+                                                    <span class="text-muted font-13"><?=$user['username'];?></span> <br/>
+                                                    <?php foreach ($getRoles as $role): ?>
+                                                        <?php if ($role['id'] == $user['role_id']): ?>
+                                                            <p class="mb-0"><?=ucwords($role['role_name']) ;?></p>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -126,6 +140,30 @@
                             
                         </tbody>
                     </table>
+                    <style type="text/css"> 
+                        .paginate a { 
+                            padding-left: 5px; 
+                            padding-right: 5px; 
+                            margin-left: 5px; 
+                            margin-right: 5px; 
+                        } 
+                        .paginate .pagination li.active{
+                            background: deepskyblue;
+                            color: white;
+                        }
+                        .paginate .pagination li.active a{
+                            color: white;
+                            text-decoration: none;
+                        }
+                    </style>
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-end paginate">
+                        <?php if ($pager) :?>
+                            <?php $pagi_path='dashboard'; ?>
+                            <?php $pager->setPath($pagi_path); ?>
+                            <?= $pager->links() ?>
+                        <?php endif ?>
+                    </div>
                 </div> <!-- end table-responsive-->
 
             </div> <!-- end card body-->

@@ -16,7 +16,7 @@
             <?php foreach ($_SESSION['modules']as $modules): ?>
                     <?php foreach ($_SESSION['permissions'] as $permissions): ?>
                         <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 3
-                                    && $permissions['permission_type'] == 11): ?>
+                                    && $permissions['permission_type'] == 16): ?>
                             <li class="side-nav-item">
                                 <a href="/<?=$permissions['slug']?>" class="side-nav-link">
                                     <?=$permissions['icon']?>
@@ -27,15 +27,12 @@
                     <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endif; ?>
-
-        <hr>
-        <!-- <li class="side-nav-title side-nav-item">Navigation</li> -->
 
         <?php if (isset($_SESSION['modules'])): ?>
             <?php foreach ($_SESSION['modules']as $modules): ?>
                     <?php foreach ($_SESSION['permissions'] as $permissions): ?>
                         <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 1
-                                    && $permissions['permission_type'] == 11): ?>
+                                    && $permissions['permission_type'] == 16): ?>
                             <li class="side-nav-item">
                                 <a href="/<?=$permissions['slug']?>" class="side-nav-link">
                                     <?=$permissions['icon']?>
@@ -46,15 +43,12 @@
                     <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endif; ?>
-
-        <hr>
-        <!-- <li class="side-nav-title side-nav-item">Navigation</li> -->
 
         <?php if (isset($_SESSION['modules'])): ?>
             <?php foreach ($_SESSION['modules']as $modules): ?>
                     <?php foreach ($_SESSION['permissions'] as $permissions): ?>
                         <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 4
-                                    && $permissions['permission_type'] == 11): ?>
+                                    && $permissions['permission_type'] == 16): ?>
                             <li class="side-nav-item">
                                 <a href="/<?=$permissions['slug']?>" class="side-nav-link">
                                     <?=$permissions['icon']?>
@@ -65,11 +59,6 @@
                     <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endif; ?>
-
-        <hr>
-
-        <!-- <li class="side-nav-title side-nav-item">Apps</li> -->
-        <!-- <li class="side-nav-title side-nav-item">Management</li> -->
 
         <?php if (isset($_SESSION['modules'])): ?>
             <?php foreach ($_SESSION['modules']as $modules): ?>
@@ -85,7 +74,7 @@
                             <ul class="side-nav-second-level">
                                 <?php foreach ($_SESSION['permissions'] as $permissions): ?>
                                     <?php if ($permissions['module_id'] == $modules['module_id'] 
-                                        && $permissions['permission_type'] == 11
+                                        && $permissions['permission_type'] == 16
                                         && $permissions['selection_id'] == 2
                                      ): ?>
                                         <li>

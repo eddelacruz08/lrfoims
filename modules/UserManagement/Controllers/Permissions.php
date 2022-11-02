@@ -9,12 +9,12 @@ class Permissions extends BaseController
         $this->permissionsModel = new UserManagement\PermissionsModel();
         $this->modulesModel = new UserManagement\ModulesModel();
         $this->permissionTypesModel = new UserManagement\PermissionTypesModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function index() {
+        $this->hasPermissionRedirect('permissions');
+
         $data = [
             'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
@@ -26,9 +26,9 @@ class Permissions extends BaseController
         return view('templates/index',$data);
     }
 
-    public function add()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function add() {
+        $this->hasPermissionRedirect('permissions/a');
+
         $data = [
             'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
@@ -55,9 +55,9 @@ class Permissions extends BaseController
         return view('templates/index',$data);
     }
 
-    public function edit($id)
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function edit($id){
+        $this->hasPermissionRedirect('permissions/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Permissions',
             'title' => 'Permissions',
@@ -83,8 +83,9 @@ class Permissions extends BaseController
         return view('templates/index',$data);
     }
     
-    public function delete($id)
-    {
+    public function delete($id) {
+        $this->hasPermissionRedirect('permissions/d');
+
         if($this->permissionsModel->softDelete($id)){
             $data =[
             'status' => 'Deleted Successfully',

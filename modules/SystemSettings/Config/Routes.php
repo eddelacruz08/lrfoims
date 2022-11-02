@@ -21,6 +21,13 @@ $routes->group('menu-categories', ['namespace' => 'Modules\SystemSettings\Contro
     $routes->add('d/(:num)', 'MenuCategory::delete/$1');
 });
 
+$routes->group('menu-ingredients', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'MenuIngredient::index');
+    $routes->match(['get', 'post'], 'a', 'MenuIngredient::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'MenuIngredient::edit/$1');
+    $routes->add('d/(:num)', 'MenuIngredient::delete/$1');
+});
+
 $routes->group('ingredient-status', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'ProductStatus::index');
     $routes->match(['get', 'post'], 'a', 'ProductStatus::add');

@@ -49,6 +49,30 @@
                                 <?php endif;?>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label for="inputAddress2">Landing Page <small class="text-danger">*</small></label>
+                                <select class="form-select <?= isset($errors['landing_page_id']) ? 'is-invalid':'is-valid' ?>" name="landing_page_id">
+                                    <option value="" <?= isset($permissions) ? null : 'selected' ?>>-- select --</option>
+                                    <?php foreach ($modules as $index) : ?>
+                                        <?php foreach ($permissions as $option) : ?>
+                                            <?php if($index['id'] == $option['module_id']): ?>
+                                                <?php $selected = false ?>
+                                                <?php if(isset($value['landing_page_id'])): ?>
+                                                    <?php if($option['id'] == $value['landing_page_id']): ?>
+                                                        <?php $selected = true;?>
+                                                    <?php endif; ?>
+                                                <?php endif;?>
+                                                <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($index['description']); ?></option>
+                                            <?php endif;?>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                                <?php if(isset($errors['landing_page_id'])):?>
+                                    <small class="text-danger"><?=esc($errors['landing_page_id'])?></small>
+                                <?php endif;?>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>
                     </form>
                 </div>

@@ -11,25 +11,28 @@ class RolesPermissions extends BaseController
       $this->modulesModel = new UserManagement\ModulesModel();
       $this->rolesModel = new UserManagement\RolesModel();
       $this->time = new \DateTime();
+      helper(['form','link']);
   }
 
-  public function index()
-  {
-      if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
-      $data = [
-          'page_title' => 'LRFOIMS | Roles Permissions',
-          'title' => 'Roles Permissions',
-          'view' => 'Modules\UserManagement\Views\RolesPermissions\index',
-          'roles' => $this->rolesModel->get(),
-          'rolesPermissions' => $this->rolesPermissionsModel->getDetails(),
-          'permissions' => $this->permissionsModel->get(),
-          'modules' => $this->modulesModel->get(),
-      ];
-      
-      return view('templates/index',$data);
+  public function index() {
+    $this->hasPermissionRedirect('roles-permissions');
+
+    $data = [
+        'page_title' => 'LRFOIMS | Roles Permissions',
+        'title' => 'Roles Permissions',
+        'view' => 'Modules\UserManagement\Views\RolesPermissions\index',
+        'roles' => $this->rolesModel->get(),
+        'rolesPermissions' => $this->rolesPermissionsModel->getDetails(),
+        'permissions' => $this->permissionsModel->get(),
+        'modules' => $this->modulesModel->get(),
+    ];
+    
+    return view('templates/index',$data);
   }
 
   public function edit($id){
+    $this->hasPermissionRedirect('roles-permissions/u');
+
     $data['page_title'] = 'LRFOIMS | Roles Permissions';
     $data['title'] = 'Roles Permissions';
     $data['action'] = 'Submit';

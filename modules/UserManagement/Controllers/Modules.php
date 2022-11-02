@@ -7,12 +7,12 @@ class Modules extends BaseController
 {
     function __construct(){
         $this->modulesModel = new UserManagement\ModulesModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function index() {
+        $this->hasPermissionRedirect('modules');
+        
         $data = [
             'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
@@ -24,9 +24,9 @@ class Modules extends BaseController
         return view('templates/index',$data);
     }
 
-    public function add()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function add() {
+        $this->hasPermissionRedirect('modules/a');
+
         $data = [
             'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
@@ -49,8 +49,9 @@ class Modules extends BaseController
         return view('templates/index',$data);
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
+        $this->hasPermissionRedirect('modules/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Modules',
             'title' => 'Modules',
@@ -75,8 +76,9 @@ class Modules extends BaseController
         return view('templates/index',$data);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
+        $this->hasPermissionRedirect('modules/d');
+
         $this->modulesModel->softDelete($id);
         $data =[
             'status'=> 'Deleted Successfully',

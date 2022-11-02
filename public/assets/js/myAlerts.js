@@ -1,9 +1,9 @@
 function alert_error(message){
-	 Swal.fire({
-		  icon: 'error',
-		  title: 'Oops!',
-		  text: message,
-		});
+	Swal.fire(
+		'Opps!',
+		message,
+		'error'
+	  );
 }
 
 function alert_success(message){
@@ -107,6 +107,53 @@ function confirmDelete(route, id){
 	});
 }
 
+function confirmDeleteCart(route, cartId, menuId, orderId, cartQyt){
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this!",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!',
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 1000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route + cartId + '/' + menuId + '/' + orderId + '/' + cartQyt,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						}).then((confirm) => {
+							window.location.reload();
+						});
+					},
+					error: function () {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						});
+					}
+				});
+			});
+		}
+	});
+}
+
 function convert(str) {
 	var date = new Date(str),
 	mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -179,7 +226,6 @@ function filterDateClick(route){
 			});
 		}
 	});
-
 }
 
 function createOrderNumber(route){
@@ -259,6 +305,8 @@ function confirmPlaceOrder(route, id, valueId){
 							title: response.status,
 							text: response.status_text,
 							icon: response.status_icon,
+						}).then((confirm) => {
+							console.log('False');
 						});
 					}
 				});
@@ -345,92 +393,6 @@ function updateIngredientReportClick(route, id, ingredientId){
 		$("#ingredientReports"+id).modal("show");
 	});
 	$("#ingredientReports"+id).modal("show");
-}
-
-function addIngredientReportClick(route, id, quantity){
-
-	const quantityValue = quantity.split("/")
-	const ingredientQuantity =  Number(quantityValue[1]);
-
-	Swal.fire({
-		title: 'Apply Used Ingredient!',
-		inputLabel: 'Enter total quantity for this field.',
-		input: 'number',
-		inputAttributes: {
-			min: 0
-		  },
-		showCancelButton: true,
-		inputPlaceholder: 'Enter quantity . . .',
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-		allowOutsideClick: false,
-		inputValidator: (value) => {
-		  return new Promise((resolve) => {
-			if (value == '') {
-				resolve('Quantity field is required!')
-			} else if (value <= 0){
-				resolve('Please input higher than 0.')
-			} else if (value > ingredientQuantity){
-				resolve('Please check this ingredient! <br> You dont have enough stocks.')
-			} else if (ingredientQuantity >= value){
-				resolve()
-			} else{
-				resolve('Please check this ingredient! <br> You dont have enough stocks.')
-			}
-		  })
-		}
-	}).then((result) => {
-		const inputValueQuantity = result.value
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 1500,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route + id,
-					type: "POST",
-					data:{
-						ingredient_id: id,
-						quantity: inputValueQuantity
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							window.location.reload();
-							// $("#placeOrderPayment").load(location.href + "#placeOrderPayment");
-							console.log(ingredientQuantity);
-							console.log(inputValueQuantity);
-							console.log(true);
-						});
-					},
-					warning: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							console.log(inputValueQuantity);
-							console.log(false);
-						});
-					}
-				});
-			})
-		}
-	});
 }
 
 function applyPayment(route, id, totalAmount){

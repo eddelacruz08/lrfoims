@@ -63,20 +63,22 @@ class BaseController extends Controller
 		$this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
 		
 		$isValidSlug = 0;
-
+		$userPermissionView = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id')]);
 		$permissions = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id'), 'p.slug'=> $slugs]);
-		if(!empty($permissions))
-		{
+		if(!empty($permissions)){
+			session()->set(['userPermissionView' => $userPermissionView]);
+			// $this->session->setFlashdata('error', 'You don\'t have permission to this function!');
 			$isValidSlug = 1;
 		}else{
 			$isValidSlug = 0;
 		}
-
-		if($isValidSlug == 0)
-		{
+		if($isValidSlug == 0 && session()->get('role_id') == null){
+			header('Location: '.base_url());
+			exit();
+		}
+		if($isValidSlug == 0){
 			header('Location: '.base_url().'/'.$slugs.'/403');
 			exit();
 		}
 	}
-
 }

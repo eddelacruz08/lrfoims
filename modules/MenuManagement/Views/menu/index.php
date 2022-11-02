@@ -54,6 +54,9 @@
                                         <center>Menu</center>
                                     </th>
                                     <th scope="col">
+                                        <center>Show Status</center>
+                                    </th>
+                                    <th scope="col">
                                         <center>Action</center>
                                     </th>
                                 </tr>
@@ -71,6 +74,14 @@
                                             </td>
                                             <td>
                                                 <center><?= ucfirst($row['menu']) ?></center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <form action="/menu-list/menu-status/u/<?=$row['id']?>" method="POST">
+                                                        <input type="checkbox" onclick="if(this.checked){this.form.submit()}else{this.form.submit()}" name="menu_status" id="switch<?=$row['id']?>" <?=$row['menu_status']=='a'?'checked value="'.$row['menu_status'].'"':'value="'.$row['menu_status'].'"' ?> data-switch="success"/>
+                                                        <label for="switch<?=$row['id']?>" data-on-label="Yes" data-off-label="No"></label>
+                                                    </form>
+                                                </center>
                                             </td>
                                             <td>
                                                 <center>

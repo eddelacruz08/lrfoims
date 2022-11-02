@@ -14,25 +14,35 @@
                                 </p>
                             </a>
                             <?php if ($details['order_status_id'] == 2): ?>
-                                <?php if (empty($details['total_amount'])): ?>
-                                    <button class="btn btn-primary btn-sm d-print-none" data-bs-toggle="modal" data-bs-target="#addCartModal<?=$details['id']?>" type="button">
-                                        <i class="dripicons-plus"></i> Add&nbspfood
+                                <?php if(user_link('orders/a', session()->get('userPermissionView'))):?>
+                                    <?php if (empty($details['total_amount'])): ?>
+                                        <a class="btn btn-primary btn-sm d-print-none" data-bs-toggle="modal" data-bs-target="#addCartModal<?=$details['id']?>" type="button">
+                                            <i class="dripicons-plus"></i> Add&nbspfood
+                                        </a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if(user_link('orders/d', session()->get('userPermissionView'))):?>
+                                    <button onclick="confirmDelete('/orders/d/',<?=$details['id']?>)" type="button" title="Cancel Order" animation="true" class="btn btn-sm btn-danger d-print-none">
+                                        <i class="dripicons-trash"></i> Remove
                                     </button>
                                 <?php endif; ?>
-                                <a onclick="confirmDelete('/orders/d/',<?=$details['id']?>)" type="button" title="Cancel Order" animation="true" class="btn btn-sm btn-danger d-print-none">
-                                    <i class="dripicons-trash"></i> Remove
-                                </a>
-                                <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
-                                    <?php if($totalPrice['order_id'] == $details['id']):?>
-                                        <button onclick="applyPayment('/orders/admin/add-payment/u/',<?=$details['id']?>,'/<?=$totalPrice['total_price']?>')" class="btn btn-sm btn-outline-dark d-flex d-print-none" type="button" <?= (empty($details['total_amount']))? '':'disabled' ?>>
-                                            <?= (empty($details['total_amount']))? '<i class="dripicons-plus"></i>Add&nbspPayment':'Already&nbspPaid&nbsp<i class=" dripicons-checkmark text-success"></i>' ?>
-                                        </button>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                                <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info d-print-none"><i class="dripicons-print"></i>&nbspInvoice</a>
-                                <a onclick="confirmPlaceOrder('/orders/place-order/',<?=$details['id']?>,'/3')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
-                                    Serve&nbspFood <i class="dripicons-arrow-thin-right"></i> 
-                                </a>
+                                <?php if(user_link('orders/admin/add-payment/u', session()->get('userPermissionView'))):?>
+                                    <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
+                                        <?php if($totalPrice['order_id'] == $details['id']):?>
+                                            <button onclick="applyPayment('/orders/admin/add-payment/u/',<?=$details['id']?>,'/<?=$totalPrice['total_price']?>')" class="btn btn-sm btn-outline-dark d-flex d-print-none" type="button" <?= (empty($details['total_amount']))? '':'disabled' ?>>
+                                                <?= (empty($details['total_amount']))? '<i class="dripicons-plus"></i>Add&nbspPayment':'Already&nbspPaid&nbsp<i class=" dripicons-checkmark text-success"></i>' ?>
+                                            </button>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <?php if(user_link('orders/print-order-invoice', session()->get('userPermissionView'))):?>
+                                    <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info d-print-none"><i class="dripicons-print"></i>&nbspInvoice</a>
+                                <?php endif; ?>
+                                <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
+                                    <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/3')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                        Serve&nbspFood <i class="dripicons-arrow-thin-right"></i> 
+                                    </a>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </h5>
                     </div>
@@ -41,7 +51,6 @@
                         aria-labelledby="headingFour<?=$details['id']?>"
                         data-bs-parent="#custom-accordion-one<?=$details['id']?>">
                         <div class="card-body  p-0 m-0">
-                            <?php if ($details['order_status_id'] == 2): ?>
                                 <!-- Add Cart Modal -->
                                 <div class="modal fade" id="addCartModal<?=$details['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -56,8 +65,8 @@
                                                     <div class="form-row mb-2">
                                                         <div class="form-group col-md-12">
                                                             <label for="inputAddress2">Menu List <small class="text-danger">*</small></label>
-                                                            <select class="form-control custom-select  <?= isset($errors['menu_id']) ? 'is-invalid':'is-valid' ?>" name="menu_id">
-                                                                <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select --</option>
+                                                            <select class="form-select <?= isset($errors['menu_id']) ? 'is-invalid':'is-valid' ?>" name="menu_id">
+                                                                <option value="" <?= isset($validation) ? null : 'selected' ?>>-- Select Food --</option>
                                                                 <?php foreach ($menuLists as $option) : ?>
                                                                     <?php $selected = false; ?>
                                                                     <?php if(isset($value['menu_id'])):?>
@@ -89,7 +98,6 @@
                                     </div>
                                 </div>
                                 <!-- End Add Cart Modal -->
-                            <?php endif; ?>
 
                             <div class="table-responsive-sm p-0 m-0" id="<?= $details['id'] ?><?= $details['number'] ?>">
                                 <table class="table responsive table-sm mb-0 pb-0 table-borderless" width="100%">
@@ -141,9 +149,29 @@
                                                         </td>
                                                         <?php if (empty($details['total_amount'])): ?>
                                                             <td align="center" class="d-print-none">
-                                                                <a onclick="confirmDelete('/orders/cart/d/',<?=$carts['id']?>)" title="Remove Order" class="btn btn-sm btn-default rounded-pill txt-lg">
-                                                                    <i class="dripicons-trash"></i>
-                                                                </a>
+                                                                <div class="row">
+                                                                    <div class="col-8">
+                                                                        <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
+                                                                            <form method="POST" action="/orders/admin/cart/qty/<?= $carts['id']; ?>/<?=$carts['menu_id']?>/<?=$carts['order_id']?>/<?=$carts['quantity']?>/2" enctype="multipart/form-data">
+                                                                                <div class="input-group">
+                                                                                    <input type="number" name="quantity" value="<?= $carts['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
+                                                                                    <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity">Edit Qty</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        <?php else: ?>
+                                                                            -
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <?php if(user_link('orders/cart/d', session()->get('userPermissionView'))):?>
+                                                                            <a onclick="confirmDeleteCart('/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>)" title="Remove Order" class="btn btn-sm btn-default rounded-pill txt-lg">
+                                                                                <i class="dripicons-trash"></i>
+                                                                            </a>
+                                                                        <?php else: ?>
+                                                                            -
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </div>
                                                             </td>
                                                         <?php endif; ?>
                                                     </tr>
@@ -158,7 +186,14 @@
                                             <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
                                                     <?php if($totalPrice['order_id'] == $details['id']):?>
                                                         <tr>
-                                                            <td scope="col" class="d-print-none">
+                                                            <td scope="col">
+                                                                <center>
+                                                                    <?php foreach ($orderType as $type) : ?>
+                                                                        <?php if($details['order_type'] == $type['id']): ?>
+                                                                            <h4><span class="badge bg-success"><?= ucfirst($type['type']); ?></span></h4>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </center>
                                                             </td>
                                                             <td scope="col">
                                                                 <center>

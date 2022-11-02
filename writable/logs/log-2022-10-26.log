@@ -1,0 +1,43 @@
+CRITICAL - 2022-10-26 11:48:13 --> Undefined index: order_type_id
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\orders.php(15): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 15, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(68): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->retrievePlaceOrder()
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+CRITICAL - 2022-10-26 13:44:33 --> Class 'Modules\DeliveryManagement\Controllers\OrderManagement\OrderModel' not found
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(907): Modules\DeliveryManagement\Controllers\Delivery->__construct()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(421): CodeIgniter\CodeIgniter->createController()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-10-26 13:45:07 --> Undefined index: id
+#0 C:\xampp\htdocs\lrfoims\modules\DeliveryManagement\Controllers\Delivery.php(38): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 38, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\DeliveryManagement\Controllers\Delivery->index()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\DeliveryManagement\Controllers\Delivery))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-10-26 13:56:41 --> Undefined index: image
+#0 C:\xampp\htdocs\lrfoims\modules\DeliveryManagement\Views\delivery\index.php(44): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 44, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Deliver...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Deliver...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\DeliveryManagement\Controllers\Delivery.php(39): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\DeliveryManagement\Controllers\Delivery->index()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\DeliveryManagement\Controllers\Delivery))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}

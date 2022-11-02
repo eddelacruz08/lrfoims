@@ -10,6 +10,7 @@ class MenuModel extends BaseModel
         'menu',
         'menu_category_id',
         'price',
+        'menu_status',
         'status',
         'created_at',
         'updated_at',

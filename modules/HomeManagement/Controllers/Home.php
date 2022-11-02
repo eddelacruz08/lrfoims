@@ -16,11 +16,12 @@ class Home extends BaseController
 		$this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
         $this->usersModel = new UserManagement\UsersModel();
         $this->rolesModel = new UserManagement\RolesModel();
-		helper(['form']);
+		$this->logsModel = new UserManagement\LogsModel();
+		helper(['form','link']);
 	}
 
-	public function index()
-	{
+	public function index() {
+
 		$data = [
 			'page_title' => 'LRFOIMS | LAMON',
 			'title' => 'LAMON',
@@ -35,8 +36,9 @@ class Home extends BaseController
 		return view('templates/landingPage',$data);
 	}
 
-	public function menu()
-	{
+	public function menu() {
+        $this->hasPermissionRedirect('menu');
+
 		$data = [
 			'page_title' => 'LRFOIMS | Menu',
 			'title' => 'Menu',
@@ -48,13 +50,15 @@ class Home extends BaseController
 		return view('templates/landingPage',$data);
 	}
 	
-	public function addToCart()
-	{
+	public function addToCart() {
+        $this->hasPermissionRedirect('menu/a');
+
         $data['page_title'] = 'LRFOIMS | Menu';
         $data['title'] = 'Menu';
         $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
 
         $highestOrderNumber = $this->ordersModel->getHighestOrderNumber(['status' => 'a'])[0];
+		$orderNumberId = $highestOrderNumber['max_order_number'] + 1;
         $checkHaveOrders = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a']);
 		if(!empty($checkHaveOrders)){
 			$checkHaveOrderId = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
@@ -68,6 +72,11 @@ class Home extends BaseController
 					} else {
 						$_POST['order_id'] = $checkHaveOrderId['id'];
 						$this->cartsModel->add($_POST);
+						$logData = [
+							'user_id' => session()->get('id'),
+							'description' => 'added a food to order#'.$orderNumberId
+						];
+						$this->logsModel->add($logData);
 						$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
 					}
 					$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),'lrfoims_carts.status'=>'a'
@@ -87,7 +96,6 @@ class Home extends BaseController
 					$data['value'] = $_POST;
 					$this->session->setFlashdata('error', 'Please complete all fields!');
 				} else {
-					$orderNumberId = $highestOrderNumber['max_order_number'] + 1;
 					$postData = [
 						'number' => $orderNumberId,
 						'user_id' => session()->get('id'),
@@ -97,6 +105,11 @@ class Home extends BaseController
 					
 					$checkHaveOrderId = $this->ordersModel->get(['number' => $orderNumberId, 'user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
 					$_POST['order_id'] = $checkHaveOrderId['id'];
+					$logData = [
+						'user_id' => session()->get('id'),
+						'description' => 'created an order#'.$orderNumberId
+					];
+					$this->logsModel->add($logData);
 					$this->cartsModel->add($_POST);
 					$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
 				}
@@ -114,8 +127,9 @@ class Home extends BaseController
 		return view('templates/landingPage',$data);
 	}
 
-	public function cart()
-	{
+	public function cart() {
+        $this->hasPermissionRedirect('cart');
+
 		$data = [
 			'page_title' => 'LRFOIMS | Cart',
 			'title' => 'Cart',
@@ -132,8 +146,9 @@ class Home extends BaseController
 		return view('templates/landingPage',$data);
 	}
 
-    public function editCartQuantity($id)
-    {
+    public function editCartQuantity($id) {
+        $this->hasPermissionRedirect('cart/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Cart',
             'title' => 'Cart',
@@ -141,6 +156,11 @@ class Home extends BaseController
         ];
         if ($this->request->getMethod() == 'post') {
             $this->cartsModel->update($id, $_POST);
+			$logData = [
+				'user_id' => session()->get('id'),
+				'description' => 'added a food to order'
+			];
+			$this->logsModel->add($logData);
             $this->session->setFlashdata('success_no_flash', 'Cart Quantity Updated!');
             return redirect()->to('/cart');
         }
@@ -148,8 +168,9 @@ class Home extends BaseController
         return view('templates/index', $data);
     }
 
-    public function deleteCart($cartId)
-    {
+    public function deleteCart($cartId) {
+        $this->hasPermissionRedirect('cart/d');
+
         $this->cartsModel->softDelete($cartId);
         $data =[
             'status'=> 'Deleted Successfully',
@@ -159,8 +180,9 @@ class Home extends BaseController
         return $this->response->setJSON($data);
     }
 
-	public function profile()
-	{
+	public function profile() {
+        $this->hasPermissionRedirect('profile');
+
 		$data = [
 			'page_title' => 'LRFOIMS | Profile',
 			'title' => 'Profile',
@@ -170,8 +192,9 @@ class Home extends BaseController
 		return view('templates/landingPage',$data);
 	}
 	
-    public function editProfile($id)
-    {
+    public function editProfile($id) {
+        $this->hasPermissionRedirect('profile/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Edit Profile',
             'title' => 'Edit Profile',

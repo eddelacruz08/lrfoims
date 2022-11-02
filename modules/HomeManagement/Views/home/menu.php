@@ -67,7 +67,11 @@
                                                         </td>
                                                         <td class="table-action">
                                                             <input type="hidden" name="menu_id" value="<?=$row['id']?>">
-                                                            <button class="btn btn-sm <?= $row['status'] == 'a' ? 'btn-success':'btn-secondary'?>" animation="true" type="submit" title="Add to cart"<?= $row['status'] == 'a' ? '':'disabled'?>>Add&nbspTo&nbspCart</button>
+                                                            <?php if(user_link('menu/a', session()->get('userPermissionView'))):?>
+                                                                <button class="btn btn-sm <?= $row['status'] == 'a' ? 'btn-success':'btn-secondary'?>" animation="true" type="submit" title="Add to cart"<?= $row['status'] == 'a' ? '':'disabled'?>>Add&nbspTo&nbspCart</button>    
+                                                            <?php else: ?>
+                                                                -
+                                                            <?php endif; ?> 
                                                         </td>
                                                     </tr>
                                                 </form>     

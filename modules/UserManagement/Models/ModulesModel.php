@@ -8,10 +8,10 @@ class ModulesModel extends BaseModel
     protected $allowedFields = [
         'module', 
         'description',
+        'button_link_type',
         'status', 
         'created_at', 
         'updated_at', 
         'deleted_at'
     ];
-
 }

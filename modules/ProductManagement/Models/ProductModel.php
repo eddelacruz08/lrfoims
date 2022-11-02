@@ -8,10 +8,9 @@ class ProductModel extends BaseModel
     protected $allowedFields = [
         'product_name',
         'product_category_id',
-        'unit',
+        'unit_quantity',
         'product_description_id',
         'price',
-        'quantity',
         'product_status_id',
         'stock_out_date',
         'status',
@@ -161,6 +160,15 @@ class ProductModel extends BaseModel
             $this->where([$field => $value]);
         }
         $this->orderBy('lrfoims_products.product_category_id', 'ASC');
+
+        return $this->findAll();
+    }
+    
+    public function getIngredientToImport($id){
+
+        $this->select('lrfoims_products.*');
+        $this->where('id', $id);
+        $this->where('status', 'a');
 
         return $this->findAll();
     }

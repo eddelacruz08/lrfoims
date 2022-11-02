@@ -41,11 +41,11 @@ class IngredientReport extends BaseController
         $this->ingredientsModel = new ProductManagement\ProductModel();
         $this->time = new \DateTime();
         $this->dateAndTime = $this->time->format('Y-m-d');
-		helper(['form']);
+		helper(['form','link']);
 	}
 
-	public function index($year = null)
-	{
+	public function index($year = null) {
+        $this->hasPermissionRedirect('ingredient-reports');
 		if($year != null){
 			$dateYear = $year;
 			$data = [
@@ -166,15 +166,15 @@ class IngredientReport extends BaseController
 		return view('templates/index', $data);
 	}
 	
-	public function indexDateFilter()
-	{
+	public function indexDateFilter() {
         if ($this->request->getMethod() == 'post') {
 			return redirect()->to('/ingredient-reports/'.$_POST['date']);
 		}
 	}
 
-	public function generateReport()
-	{
+	public function generateReport() {
+        $this->hasPermissionRedirect('ingredient-reports/generate-report');
+
         if($this->request->getMethod() == 'post'){
 			// die($_POST['date'].' '.$_POST['date_status']);
 			if($this->validate('report')){

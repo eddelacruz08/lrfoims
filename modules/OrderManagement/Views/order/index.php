@@ -52,50 +52,58 @@
                             <?php endif; ?>
                         </a>
                     </li> -->
-                    <li class="nav-item">
-                        <a href="#placeOrders" class="nav-link" data-bs-toggle="tab">Place Orders
-                            <?php if(!empty($countPlaceOrders)):?>
-                                <?php foreach ($countPlaceOrders as $row) : ?>
-                                    <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="badge bg-dark rounded-pill">0</span>
-                            <?php endif; ?>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#serveOrder" class="nav-link" data-bs-toggle="tab">Served Orders
-                            <?php if(!empty($countServeOrders)):?>
-                                <?php foreach ($countServeOrders as $row) : ?>
-                                    <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="badge bg-dark rounded-pill">0</span>
-                            <?php endif; ?>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#payments" class="nav-link" data-bs-toggle="tab">Order Payments
-                            <?php if(!empty($countPaymentOrders)):?>
-                                <?php foreach ($countPaymentOrders as $row) : ?>
-                                    <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="badge bg-dark rounded-pill">0</span>
-                            <?php endif; ?>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#history" class="nav-link" data-bs-toggle="tab">Payment History
-                            <?php if(!empty($countPaymentHistoryOrders)):?>
-                                <?php foreach ($countPaymentHistoryOrders as $row) : ?>
-                                    <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="badge bg-dark rounded-pill">0</span>
-                            <?php endif; ?>
-                        </a>
-                    </li>
+                    <?php if(user_link('orders/place-order', session()->get('userPermissionView'))):?>
+                        <li class="nav-item">
+                            <a href="#placeOrders" class="nav-link" data-bs-toggle="tab">Place Orders
+                                <?php if(!empty($countPlaceOrders)):?>
+                                    <?php foreach ($countPlaceOrders as $row) : ?>
+                                        <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <span class="badge bg-dark rounded-pill">0</span>
+                                <?php endif; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(user_link('orders/serve-order', session()->get('userPermissionView'))):?>
+                        <li class="nav-item">
+                            <a href="#serveOrder" class="nav-link" data-bs-toggle="tab">Serve Orders
+                                <?php if(!empty($countServeOrders)):?>
+                                    <?php foreach ($countServeOrders as $row) : ?>
+                                        <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <span class="badge bg-dark rounded-pill">0</span>
+                                <?php endif; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(user_link('orders/payment-order', session()->get('userPermissionView'))):?>
+                        <li class="nav-item">
+                            <a href="#payments" class="nav-link" data-bs-toggle="tab">Payments
+                                <?php if(!empty($countPaymentOrders)):?>
+                                    <?php foreach ($countPaymentOrders as $row) : ?>
+                                        <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <span class="badge bg-dark rounded-pill">0</span>
+                                <?php endif; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(user_link('orders/payment-history-order', session()->get('userPermissionView'))):?>
+                        <li class="nav-item">
+                            <a href="#history" class="nav-link" data-bs-toggle="tab">Order History
+                                <?php if(!empty($countPaymentHistoryOrders)):?>
+                                    <?php foreach ($countPaymentHistoryOrders as $row) : ?>
+                                        <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <span class="badge bg-dark rounded-pill">0</span>
+                                <?php endif; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <div class="tab-content">
                     <div id="orders" class="tab-pane fade show active">
@@ -122,7 +130,7 @@
                                     <div class="serve-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                                No Served
+                                No Serve
                         <?php endif; ?>
                     </div>
                     <div id="payments" class="tab-pane fade">
@@ -131,7 +139,7 @@
                                     <div class="payment-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                                No Order Payments
+                                No Payments
                         <?php endif; ?>
                     </div>
                     <div id="history" class="tab-pane fade">
@@ -140,7 +148,7 @@
                                     <div class="payment-history-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                                No Payment Order History
+                                No Order History
                         <?php endif; ?>
                     </div>
                 </div>

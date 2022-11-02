@@ -8,24 +8,25 @@ class Users extends BaseController
     function __construct(){
         $this->usersModel = new UserManagement\UsersModel();
         $this->rolesModel = new UserManagement\RolesModel();
-        helper(['form']);
+        helper(['form','link']);
     }
     
-    public function index()
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function index() {
+        $this->hasPermissionRedirect('users');
+
         $data = [
             'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
             'view' => 'Modules\UserManagement\Views\Users\index',
-            'users' => $this->usersModel->getDetails()
+            'users' => $this->usersModel->getDetails(['lrfoims_users.status' => 'a', 'lrfoims_users.email_address' => false])
         ];
         
         return view('templates/index',$data);
     }
 
-    public function add()
-    {
+    public function add() {
+        $this->hasPermissionRedirect('users/a');
+
         $data = [
             'page_title' => 'LRFOIMS | Users',
             'title' => 'Users',
@@ -50,8 +51,9 @@ class Users extends BaseController
         return view('templates/index',$data);
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
+        $this->hasPermissionRedirect('users/u');
+
         $data = [
             'page_title' => 'LRFOIMS | Users',
             'title' => 'User',
@@ -80,8 +82,9 @@ class Users extends BaseController
         return view('templates/index', $data);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
+        $this->hasPermissionRedirect('users/d');
+
         $this->usersModel->softDelete($id);
         $data =[
             'status'=> 'Deleted Successfully',
@@ -91,9 +94,9 @@ class Users extends BaseController
         return $this->response->setJSON($data);
     }
 
-    public function view($id)
-    {
-        if (!session()->get('isLoggedIn')) return redirect()->to(base_url());
+    public function view($id) {
+        $this->hasPermissionRedirect('users/v');
+
         $data = [
             'page_title' => 'LRFOIMS | Profile',
             'title' => 'Profile',

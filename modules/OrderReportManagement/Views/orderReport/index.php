@@ -101,27 +101,33 @@
                     <div class="col-sm-4">
                         <h4 class="header-title mb-3"><?=$title;?></h4>
                     </div>
-                    <div class="col-sm-8 d-flex">
-                        <form method="POST" action="/order-reports/generate-report" target="_blank">
-                            <div class="input-group float-end ml-1">
-                                <input type="hidden" name="date_status" value="1">
-                                <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
-                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
-                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
-                                </button>
-                            </div>       
-                        </form>
-                        
-                        <form method="POST" action="/order-reports/generate-report" target="_blank">
-                            <div class="input-group float-end">
-                                <input type="hidden" name="date_status" value="0">
-                                <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
-                                <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
-                                    <i class="mdi mdi-calendar-range font-13"></i> &nbspRange Report
-                                </button>
-                            </div>       
-                        </form>
-                    </div>
+                    <?php if(user_link('order-reports/generate-report', session()->get('userPermissionView'))):?>
+                        <div class="col-sm-8 d-flex">
+                            <form method="POST" action="/order-reports/generate-report" target="_blank">
+                                <div class="input-group float-end ml-1">
+                                    <input type="hidden" name="date_status" value="1">
+                                    <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
+                                    <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                        <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
+                                    </button>
+                                </div>       
+                            </form>
+                            
+                            <form method="POST" action="/order-reports/generate-report" target="_blank">
+                                <div class="input-group float-end">
+                                    <input type="hidden" name="date_status" value="0">
+                                    <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
+                                    <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
+                                        <i class="mdi mdi-calendar-range font-13"></i> &nbspRange Report
+                                    </button>
+                                </div>       
+                            </form>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn btn-sm btn-secondary float-end">Need Permission to generate order report!</button>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <table class="table table-sm table-centered mb-0 text-center">
                     <thead>
