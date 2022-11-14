@@ -7,8 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><?= $title ?></li>
+                            <li class="breadcrumb-item"><?= $title ?></li>
                         </ol>
                     </div>
                     <h4 class="page-title"><?= $title ?></h4>
@@ -16,7 +15,12 @@
             </div>
         </div>
         <!-- end page title -->
-
+        <?php if(isset($_SESSION['warning'])):?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <?= $_SESSION['warning'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif;?>
         <?php if(isset($_SESSION['success'])):?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= $_SESSION['success'] ?>
@@ -41,17 +45,6 @@
         <div class="card p-1">
             <div class="card-body p-0 shadow">
                 <ul class="nav nav-tabs mb-0 shadow" id="myTab">
-                    <!-- <li class="nav-item">
-                        <a href="#orders" class="nav-link active" data-bs-toggle="tab">Orders
-                            <?php if(!empty($countOrders)):?>
-                                <?php foreach ($countOrders as $row) : ?>
-                                    <span class="badge bg-dark rounded-pill"><?=$row['order_total']?></span>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <span class="badge bg-dark rounded-pill">0</span>
-                            <?php endif; ?>
-                        </a>
-                    </li> -->
                     <?php if(user_link('orders/place-order', session()->get('userPermissionView'))):?>
                         <li class="nav-item">
                             <a href="#placeOrders" class="nav-link" data-bs-toggle="tab">Place Orders
@@ -106,21 +99,12 @@
                     <?php endif; ?>
                 </ul>
                 <div class="tab-content">
-                    <div id="orders" class="tab-pane fade show active">
-                        <?php if(!empty($orders)):?>
-                            <?php foreach ($orders as $row) : ?>
-                                <div class="orders-data" id="<?=$row['order_id']?>"></div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                                No Orders
-                        <?php endif; ?>
-                    </div>
-                    <div id="placeOrders" class="tab-pane fade">
+                    <div id="placeOrders" class="tab-pane fade show active">
                         <?php if(!empty($placeOrders)):?>
                             <?php foreach ($placeOrders as $row) : ?>
                                     <div class="place-orders-data" id="<?=$row['order_id']?>"></div>
                             <?php endforeach; ?>
-                        <?php else: ?>
+                        <?php else: ?> 
                                 No Place Orders
                         <?php endif; ?>
                     </div>

@@ -57,6 +57,65 @@
                             <?php endif;?>    
                         </div>
                     </div>
+                    <div class="row mb-1">
+                        <div class="col-sm-12">
+                            <label for="inputAddress2">Region: <small class="text-danger">*</small></label>
+                            <select class="js-example-basic-single <?= isset($errors['region_id']) ? 'is-invalid':'' ?> form-select" name="region_id" id="region_id">
+                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select region --</option>
+                                <?php foreach ($regions as $option) : ?>
+                                    <?php $selected = false; ?>
+                                    <?php if(isset($value['region_id'])):?>
+                                        <?php if($value['region_id'] == $option['id']): ?>
+                                            <?php $selected = true; ?>
+                                        <?php endif; ?>
+                                    <?php endif;?>
+                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['region_name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if(isset($errors['region_id'])):?>
+                                <small class="text-danger"><?=esc($errors['region_id'])?></small>
+                            <?php endif;?><br>
+                            <label for="inputAddress2">Province: <small class="text-danger">*</small></label>
+                            <select class="js-example-basic-single <?= isset($errors['province_id']) ? 'is-invalid':'' ?> form-select" data-toggle="select2" name="province_id" id="province_id">
+                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select province --</option>
+                                <?php foreach ($province as $option) : ?>
+                                    <?php $selected = false; ?>
+                                    <?php if(isset($value['province_id'])):?>
+                                        <?php if($value['province_id'] == $option['id']): ?>
+                                            <?php $selected = true; ?>
+                                        <?php endif; ?>
+                                    <?php endif;?>
+                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['province_name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if(isset($errors['province_id'])):?>
+                                <small class="text-danger"><?=esc($errors['province_id'])?></small>
+                            <?php endif;?><br>
+                            <label for="inputAddress2">City: <small class="text-danger">*</small></label>
+                            <select class="js-example-basic-single <?= isset($errors['city_id']) ? 'is-invalid':'' ?> form-select" data-toggle="select2" name="city_id" id="city_id">
+                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select city --</option>
+                                <?php foreach ($city as $option) : ?>
+                                    <?php $selected = false; ?>
+                                    <?php if(isset($value['city_id'])):?>
+                                        <?php if($value['city_id'] == $option['id']): ?>
+                                            <?php $selected = true; ?>
+                                        <?php endif; ?>
+                                    <?php endif;?>
+                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['city_name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if(isset($errors['city_id'])):?>
+                                <small class="text-danger"><?=esc($errors['city_id'])?></small>
+                            <?php endif;?><br>
+                            <div class="form-group mb-2">
+                                <label for="inputAddress2">House #, Street & Baranggay: <small class="text-danger">*</small></label>
+                                <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= isset($value['addtl_address']) ? esc($value['addtl_address']) : '' ?>" placeholder="(House #, Street & Baranggay)">
+                            </div>
+                            <?php if(isset($errors['addtl_address'])):?>
+                                <small class="text-danger"><?=esc($errors['addtl_address'])?></small>
+                            <?php endif;?>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputAddress2">Password <small class="text-danger">*</small></label>

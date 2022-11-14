@@ -41,67 +41,74 @@ class Product extends BaseController
     public function importCsvFile() {
         $this->hasPermissionRedirect('ingredients/batch-upload/stock-in');
 
-        $data = [
-            'page_title' => 'LRFOIMS | Ingredients',
-            'title' => 'Ingredients',
-            'view' => 'Modules\ProductManagement\Views\ingredient\index',
-            'productSortByCategory' => $this->productsCategoryModel->get(),
-            'ingredients' => $this->productsModel->getProduct(),
-            'ingredientReports' => $this->ingredientReportModel->getIngredientReports(),
-            'date' => $this->dateAndTime,
+        $jdata = [
+            'page_title' => 'LRFOIMS | Batch Upload Ingredients',
+            'title' => 'Batch Upload Ingredients',
+            'view' => 'Modules\ProductManagement\Views\ingredient\batchStockForm'
         ];
-        $upload_file = $_FILES['upload_file']['name'];
-        $extension = pathinfo($upload_file, PATHINFO_EXTENSION);
-        if($extension == 'csv'){
-            $reader= new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-        } else if($extension=='xls'){
-            $reader= new \PhpOffice\PhpSpreadsheet\Reader\Xls();
-        } else {
-            $reader= new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        }
-        $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
-        $sheetdata = $spreadsheet->getActiveSheet()->toArray();
-        $sheetcount = count($sheetdata);
-        $counted = 0; 
-        $notCount = 0; 
-        if($sheetcount > 1)
-        {
-            $data = array();
-            for ($i = 1; $i < $sheetcount; $i++) { 
-                $id = $sheetdata[$i][0];
-                $unit_quantity = $sheetdata[$i][3];
-                $price = $sheetdata[$i][5];
-                $ingredients = $this->productsModel->get(['id' => $id, 'status' => 'a'])[0];
-
-                
-                if(!empty($ingredients)){
-                    $ingredientData = [
-                        'unit_quantity' => $ingredients['unit_quantity'] - $unit_quantity,
-                        'price' => $ingredients['price'] - str_replace(',', '', $price),
-                    ];
-                    $this->productsModel->update($ingredients['id'], $ingredientData);
-                    $counted++;
-                }else{
-                    $notCount++;
+        if ($this->request->getMethod() == 'post') {
+            if (!$this->validate('ingredientBatchUploadFile')) {
+                $jdata['errors'] = $this->validation->getErrors();
+                $jdata['value'] = $_POST;
+            } else {
+                $upload_file = $_FILES['upload_file']['name'];
+                $extension = pathinfo($upload_file, PATHINFO_EXTENSION);
+                if($extension == 'csv'){
+                    $reader= new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                } else if($extension=='xls'){
+                    $reader= new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                }  else if($extension=='xlsx'){
+                    $reader= new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                }else {
+                    $this->session->setFlashdata('error', 'Invalid type of file!');
+                    return redirect()->to('/ingredients');   
                 }
-                
-                if($counted){
-                    $this->session->setFlashdata('success', ($counted > 1 ? $counted.' rows' : $counted.' row').
-                    ' out of '.($counted > 1 ? $counted.' rows are' : $counted.' row is').' successfully added and '.
-                    ($notCount > 1 ? $notCount.' rows are' : $notCount.' row is').' not added.');
-                } else {
-                    $this->session->setFlashdata('error', 'Batch file are not imported.');
+
+                $spreadsheet = $reader->load($_FILES['upload_file']['tmp_name']);
+
+                $sheetdata = $spreadsheet->getActiveSheet()->toArray();
+                $sheetcount = count($sheetdata);
+                $counted = 0; 
+                $notCount = 0; 
+                if($sheetcount > 1) {
+                    $data = array();
+                    for ($i = 1; $i < $sheetcount; $i++) { 
+                        $id = $sheetdata[$i][0];
+                        $unit_quantity = $sheetdata[$i][3];
+                        $price = $sheetdata[$i][5];
+                        $ingredients = $this->productsModel->get(['id' => $id, 'status' => 'a'])[0];
+                        
+                        if(!empty($ingredients)){
+                            $ingredientData = [
+                                'unit_quantity' => $ingredients['unit_quantity'] + $unit_quantity,
+                                'price' => $ingredients['price'] + str_replace(',', '', $price),
+                            ];
+                            $this->productsModel->update($ingredients['id'], $ingredientData);
+                            $counted++;
+                        }else{
+                            $notCount++;
+                        }
+                        
+                        if($counted){
+                            $this->session->setFlashdata('success', ($counted > 1 ? $counted.' rows' : $counted.' row').
+                            ' out of '.($counted > 1 ? $counted.' rows are' : $counted.' row is').' successfully added and '.
+                            ($notCount > 1 ? $notCount.' rows are' : $notCount.' row is').' not added.');
+                            return redirect()->to('/ingredients'); 
+                        } else {
+                            $this->session->setFlashdata('error', 'Batch file are not imported.');
+                        }
+                    }
                 }
             }
         }
-        return redirect()->to('/ingredients');   
+        return view('templates/index', $jdata); 
     }
 
     public function exportIngredients() {
         $this->hasPermissionRedirect('ingredients/batch-upload/export');
 
         // file name 
-        $filename = 'ingredients_'.date('Ymd').'.csv'; 
+        $filename = 'ingredients_'.date('Ymdhi').'.csv'; 
         header("Content-Description: File Transfer"); 
         header("Content-Disposition: attachment; filename=$filename"); 
         header("Content-Type: application/csv; ");
@@ -145,17 +152,17 @@ class Product extends BaseController
         ];
 
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('ingredients')) {
+            if (!$this->validate('addIngredients')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                if($_POST['unit_quantity'] == 0){
+                if($_POST['unit_quantity'] <= 1){
                     $_POST['product_status_id'] = 2;
                 }else{
                     $_POST['product_status_id'] = 1;
                 }
                 $this->productsModel->add($_POST);
-                $this->session->setFlashdata('success', 'Ingredient Successfully Added');
+                $this->session->setFlashdata('success', 'Ingredient Successfully Added!');
                 return redirect()->to('/ingredients');
             }
         }
@@ -168,12 +175,13 @@ class Product extends BaseController
 
         $data = [
             'page_title' => 'LRFOIMS | Ingredients',
-            'title' => 'Ingredients',
-            'view' => 'Modules\ProductManagement\Views\ingredient\index',
+            'title' => 'Manual Report Ingredient',
+            'view' => 'Modules\ProductManagement\Views\ingredient\singleStockForm',
             'productSortByCategory' => $this->productsCategoryModel->get(),
             'ingredients' => $this->productsModel->getProduct(),
             'ingredientReports' => $this->ingredientReportModel->getIngredientReports(),
-            'date' => $this->dateAndTime
+            'date' => $this->dateAndTime,
+            'id' => $id
         ];
         $ingredients = $this->productsModel->get(['id' => $id, 'status' => 'a'])[0];
         if ($this->request->getMethod() == 'post') {
@@ -323,11 +331,11 @@ class Product extends BaseController
             'productDescription' => $this->productMeasureModel->get(),
         ];
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('ingredients')) {
+            if (!$this->validate('editIngredients')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                if($_POST['unit_quantity'] == 0){
+                if($_POST['unit_quantity'] <=1){
                     $_POST['product_status_id'] = 2;
                 }else{
                     $_POST['product_status_id'] = 1;

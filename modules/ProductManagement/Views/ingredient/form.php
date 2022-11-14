@@ -7,8 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="/ingredients"><?= $title ?></a></li>
+                            <li class="breadcrumb-item"><a href="/ingredients">Ingredients</a></li>
                             <li class="breadcrumb-item active"><?= $edit?'Edit ':'Add '?><?= $title ?></li>
                         </ol>
                     </div>
@@ -36,7 +35,7 @@
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="inputEmail4">Ingredient Name <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control  <?= isset($errors['product_name']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" name="product_name" placeholder="Ingredient Name" value="<?= isset($value['product_name']) ? $value['product_name'] : '' ?>">
+                                <input type="text" class="form-control <?= isset($errors['product_name']) ? 'is-invalid':'is-valid' ?>" id="inputEmail4" name="product_name" placeholder="Ingredient Name" value="<?= isset($value['product_name']) ? $value['product_name'] : '' ?>">
                                 <?php if(isset($errors['product_name'])):?>
                                     <small class="text-danger"><?=esc($errors['product_name'])?></small>
                                 <?php endif;?>
@@ -86,7 +85,7 @@
                                 <?php endif;?>
                             </div>
                             <div class="col-md-6">
-                                <label for="inputAddress2">Unit Price <small class="text-danger">*</small></label>
+                                <label for="inputAddress2">Total Amount <small class="text-danger">*</small></label>
                                 <input type="number" class="form-control  <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="price" placeholder="Price" value="<?= isset($value['price']) ? $value['price'] : '' ?>">
                                 <?php if(isset($errors['price'])):?>
                                     <small class="text-danger"><?=esc($errors['price'])?></small>

@@ -14,6 +14,12 @@
     </script>
 <?php endif; ?>
 
+<?php if (session()->get('warning')) : ?>
+    <script type="text/javascript">
+        alert_warning('<?= session()->get('warning') ?>');
+    </script>
+<?php endif; ?>
+
 <?php if (isset($_SESSION['success'])) : ?>
     <script type="text/javascript">
         alert_success('<?= $_SESSION['success']; ?>');

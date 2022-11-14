@@ -5,6 +5,7 @@ use Modules\UserManagement\Models\LogsModel;
 use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
 use Modules\OrderManagement\Models as OrderManagement;
+use Modules\SystemSettings\Models as SystemSettings;
 
 class Security extends BaseController{
 
@@ -13,6 +14,9 @@ class Security extends BaseController{
 		$this->cartsModel = new HomeManagement\CartModel();
 		$this->ordersModel = new OrderManagement\OrderModel();
         $this->logsModel = new UserManagement\LogsModel();
+		$this->regionModel = new SystemSettings\RegionModel();
+		$this->provinceModel = new SystemSettings\ProvinceModel();
+		$this->cityModel = new SystemSettings\CityModel();
     }
 
     public function index(){
@@ -99,34 +103,35 @@ class Security extends BaseController{
         $data = [
             'page_title' => 'LRFOIMS | Register',
             'title' => 'Lamon Restaurant Food Ordering and Ingredient System',
-            'view' => 'register'
+            'view' => 'register',
+            'regions' => $this->regionModel->get(['status'=>'a']),
+            'province' => $this->provinceModel->get(['status'=>'a']),
+            'city' => $this->cityModel->get(['status'=>'a']),
         ];
         helper(['form']);
 
         if($this->request->getMethod() == 'post'){
-            //validation
-            $rules=[
-                'username' => 'required|min_length[5]|max_length[25]|is_unique[lrfoims_users.username]',
-                'password' => 'required|min_length[8]|max_length[50]',
-                'confirm_password' => 'matches[password]',
-            ];
-
-            if(! $this->validate($rules)){
-                $data['validation'] = $this->validator;
-            }
-            else{
+            if(!$this->validate('addRegister')) {
+                $data['errors'] = $this->validation->getErrors();
+                $data['value'] = $_POST;
+            } else {
                 $model = new UsersModel();
-
                 $newData = [
+                    'first_name' => $this->request->getVar('first_name'),
+                    'last_name' => $this->request->getVar('last_name'),
                     'username' => $this->request->getVar('username'),
+                    'email_address' => $this->request->getVar('email_address'),
+                    'region_id' => $this->request->getVar('region_id'),
+                    'province_id' => $this->request->getVar('province_id'),
+                    'city_id' => $this->request->getVar('city_id'),
+                    'addtl_address' => $this->request->getVar('addtl_address'),
                     'password' => $this->request->getVar('password'),
                     'role_id' => 4,
                     'status' => 'a'
                 ];
-
                 $model->save($newData);
                 $session = session();
-                $session->setFlashdata('success','Successfull Registration');
+                $session->setFlashdata('success','Successfully Registered!');
                 return redirect()->to('/');
             }
 

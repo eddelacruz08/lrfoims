@@ -7,8 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><?= $title ?></li>
+                            <li class="breadcrumb-item"><?= $title ?></li>
                         </ol>
                     </div>
                     <h4 class="page-title"><?= $title ?></h4>
@@ -90,7 +89,7 @@
                                                             <?php else: ?>
                                                                 <form method="POST" action="/orders/admin-menu/add-to-cart/a" enctype="multipart/form-data">
                                                                     <div class="d-flex flex-column">
-                                                                        <input type="number" min="1" name="quantity" value="1" class="form-control" placeholder="Quantity">
+                                                                        <input type="number" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" value="1" class="form-control" placeholder="Quantity">
                                                                         <?php if(isset($errors['order_number_id'])):?>
                                                                             <small class="text-danger"><?=esc($errors['order_number_id'])?></small>
                                                                         <?php endif;?>
@@ -135,7 +134,7 @@
                                                                         <div class="media-body">
                                                                             <form method="POST" action="/orders/admin-menu/cart/qty/<?= $adminCart['id']; ?>/<?=$adminCart['menu_id']?>/<?=$adminCart['order_id']?>/<?=$adminCart['quantity']?>/1" enctype="multipart/form-data">
                                                                                 <div class="input-group">
-                                                                                    <input type="number" name="quantity" value="<?= $adminCart['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
+                                                                                    <input type="number" name="quantity" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="<?= $adminCart['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
                                                                                     <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity"><i class="fas fa-plus-circle"></i>&nbspChange</button>
                                                                                 </div>
                                                                             </form>
@@ -155,8 +154,8 @@
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <label for="inputAddress2">Select order type: <small class="text-danger">*</small></label>
-                                                            <select class="form-select  <?= isset($errors['order_type']) ? 'is-invalid':'is-valid' ?>" name="order_type">
-                                                                <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select order type --</option>
+                                                            <select class="form-select <?= isset($errors['order_type']) ? 'is-invalid':'is-valid' ?>" name="order_type">
+                                                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select order type --</option>
                                                                 <?php foreach ($orderType as $option) : ?>
                                                                     <?php $selected = false; ?>
                                                                     <?php if(isset($value['order_type'])):?>

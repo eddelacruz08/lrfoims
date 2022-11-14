@@ -14,6 +14,14 @@ function alert_success(message){
 	);
 }
 
+function alert_warning(message){
+	 Swal.fire(
+	  'Warning!',
+	  message,
+	  'warning'
+	);
+}
+
 function alert_success_no_flash(message){
 	const Toast = Swal.mixin({
 		toast: true,
@@ -58,6 +66,54 @@ function alert_login_success(message){
 	  message,
 	  'success'
 	);
+}
+
+function confirmExport(route){
+	Swal.fire({
+		title: 'Export Ingredients',
+		text: "Do you want to continue?",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, export it!',
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 1000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route,
+					success: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						}).then((confirm) => {
+							window.location.reload();
+						});
+					},
+					error: function (response) {
+						Swal.fire({
+							title: response.status,
+							text: response.status_text,
+							icon: response.status_icon,
+						}).then((confirm) => {
+						});
+					}
+				});
+			});
+		}
+	});
 }
 
 function confirmDelete(route, id){

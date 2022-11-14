@@ -11,4 +11,5 @@ $routes->group('',['namespace' => 'Modules\HomeManagement\Controllers'],function
     $routes->match(['get', 'post'], '/menu/customer/add-to-cart', 'Home::addToCart');
     $routes->match(['get', 'post'], '/profile/u', 'Home::editProfile');
     $routes->add('d/(:num)', 'Home::delete/$1');
+    $routes->match(['get', 'post'], '/place-order/u/(:num)/(:num)', 'Home::placeOrder/$1/$2');
 });

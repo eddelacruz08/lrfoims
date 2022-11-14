@@ -61,7 +61,8 @@
                                                                             <?php if(user_link('cart/u', session()->get('userPermissionView'))):?>
                                                                                 <form method="POST" action="/cart/qty/<?= $row['id']; ?>" enctype="multipart/form-data">
                                                                                     <div class="input-group">
-                                                                                        <input type="number" name="quantity" value="<?=$row['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
+                                                                                        <input type="number" name="quantity" value="<?=$row['quantity'] ?>" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" 
+                                                                                            value="1" class="form-control <?= isset($errors['quantity']) ? 'is-invalid':'' ?>" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
                                                                                         <button class="btn btn-sm btn-outline-secondary m-0 p-1" animation="true" type="submit" id="button-addon2" title="Change Quantity">Change</button>
                                                                                     </div>
                                                                                 </form>    
@@ -91,58 +92,62 @@
                                             <!-- end col -->
 
                                             <div class="col-lg-4">
-                                                <div class="border p-3 mt-4 mt-lg-0 rounded">
-                                                    <h4 class="header-title mb-3">Order Summary</h4>
-                                                    <div class="table-responsive">
-                                                        <table class="table mb-0">
-                                                            <tbody>
-                                                                <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
-                                                                    <?php if($totalPrice['order_id'] == $details['id']):?>
-                                                                        <tr>
-                                                                            <td>Order Number:</td>
-                                                                            <td>#<?=$details['number'] ?></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>Order Total :</th>
-                                                                            <th>₱ <?= number_format($totalPrice['total_price']); ?></th>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th colspan="2">
-                                                                                <label for="example-select" class="form-label">Select Order Type: </label>
-                                                                                <select class="form-select form-select-sm" id="example-select">
-                                                                                    <option selected>-- Select Order Type --</option>
-                                                                                    <option>Dinning</option>
-                                                                                    <option>Take Out</option>
-                                                                                    <option>Deliver</option>
-                                                                                </select>
-                                                                            </th>
-                                                                        </tr>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <!-- end table-responsive -->
-                                                </div>
-
-                                                <!-- action buttons-->
-                                                <div class="row mt-4">
-                                                    <div class="col-sm-6">
-                                                        <?php if(user_link('menu', session()->get('userPermissionView'))):?>
-                                                            <a href="/menu" class="btn text-muted d-none d-sm-inline-block btn-link fw-semibold">
-                                                                <i class="mdi mdi-arrow-left"></i> Continue Shopping </a>
-                                                        <?php endif; ?>
-                                                    </div> <!-- end col -->
-                                                    <div class="col-sm-6">
-                                                        <div class="text-sm-end">
-                                                            <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                                <a onclick="confirmPlaceOrder('/orders/place-order/',<?=$details['id']?>,'/2')" title="Place Order" class="btn btn-sm btn-danger">
-                                                                    <i class="mdi mdi-cart-plus me-1"></i> Place Order
-                                                                </a>
-                                                        <?php endif; ?>
+                                                <form action="/place-order/u/<?=$details['id']?>/2" method="post">
+                                                    <div class="border p-3 mt-4 mt-lg-0 rounded">
+                                                        <h4 class="header-title mb-3">Order Summary</h4>
+                                                        <div class="table-responsive">
+                                                            <table class="table mb-0">
+                                                                <tbody>
+                                                                    <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
+                                                                        <?php if($totalPrice['order_id'] == $details['id']):?>
+                                                                            <tr>
+                                                                                <td>Order Number:</td>
+                                                                                <td>#<?=$details['number'] ?></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Order Total :</th>
+                                                                                <th>₱ <?= number_format($totalPrice['total_price']); ?></th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th colspan="2">
+                                                                                    <label for="example-select" class="form-label">Select Order Type: </label>
+                                                                                    <select class="form-select form-select-sm <?= isset($errors['order_type']) ? 'is-invalid':'is-valid' ?>" id="example-select" name="order_type">
+                                                                                        <option selected disabled>-- Select Order Type --</option>
+                                                                                        <option value="1">Dinning</option>
+                                                                                        <option value="2">Take Out</option>
+                                                                                        <option value="3">Deliver</option>
+                                                                                    </select>
+                                                                                    <?php if(isset($errors['order_type'])):?>
+                                                                                        <small class="text-danger"><?=esc($errors['order_type'])?></small>
+                                                                                    <?php endif;?>
+                                                                                </th>
+                                                                            </tr>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                    </div> <!-- end col -->
-                                                </div> <!-- end row-->
+                                                        <!-- end table-responsive -->
+                                                    </div>
+
+                                                    <!-- action buttons-->
+                                                    <div class="row mt-4">
+                                                        <div class="col-sm-6">
+                                                            <?php if(user_link('menu', session()->get('userPermissionView'))):?>
+                                                                <a href="/menu" class="btn text-muted d-none d-sm-inline-block btn-link fw-semibold">
+                                                                    <i class="mdi mdi-arrow-left"></i> Continue Shopping </a>
+                                                            <?php endif; ?>
+                                                        </div> <!-- end col -->
+                                                        <div class="col-sm-6">
+                                                            <div class="text-sm-end">
+                                                                <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
+                                                                    <button title="Place Order" type="submit" class="btn btn-sm btn-danger"><i class="mdi mdi-cart-plus me-1"></i> Place Order</button>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </div> <!-- end col -->
+                                                    </div> <!-- end row-->
+
+                                                </form>
 
                                             </div> <!-- end col -->
 

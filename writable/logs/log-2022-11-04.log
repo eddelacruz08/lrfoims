@@ -1,0 +1,52 @@
+CRITICAL - 2022-11-04 10:17:38 --> Undefined index: upload_file
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 53, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->importCsvFile()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-11-04 11:22:58 --> required|numeric|greater_than_equal_to is not a valid rule.
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Validation\Validation.php(314): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('required|numeri...')
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Validation\Validation.php(164): CodeIgniter\Validation\Validation->processRules('unit_quantity', 'Unit Quantity', '0', Array, Array)
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Controller.php(181): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(155): CodeIgniter\Controller->validate(Array)
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->add()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2022-11-04 11:52:03 --> Undefined variable: jdata
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(139): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 139, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->exportIngredients()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-11-04 11:52:03 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse json string, error: "Type is not supported". in C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Format\JSONFormatter.php:42
+Stack trace:
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Format\JSONFormatter.php(42): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\API\ResponseTrait.php(407): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\API\ResponseTrait.php(114): CodeIgniter\Debug\Exceptions->format(Array)
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Debug\Exceptions.php(141): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#5 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-11-04 16:28:19 --> Invalid file: Modules\ProductManagement\Views\ingredient\singleStockForm.php
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(203): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\Product...')
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Product...', Array, true)
+#2 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Product...')
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#6 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(269): view('templates/index', Array)
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->stockReport('5')
+#8 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#12 {main}

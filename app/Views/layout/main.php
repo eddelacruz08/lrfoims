@@ -80,6 +80,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
@@ -115,7 +116,7 @@
     <script src="/assets/js/app.min.js"></script>
 
     <!-- third party js -->
-    <script src="/assets/js/vendor/apexcharts.min.js"></script>
+    <!-- <script src="/assets/js/vendor/apexcharts.min.js"></script> -->
     <script src="/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <script src="/assets/js/vendor/jquery.dataTables.min.js"></script>
@@ -134,7 +135,7 @@
 
 
     <!-- demo app -->
-    <script src="/assets/js/pages/demo.dashboard.js"></script>
+    <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->
     <!-- <script src="assets/js/pages/demo.chartjs.js"></script> -->
     <?= $this->rendersection('ingredientReportCharts'); ?>
     <?= $this->rendersection('ordersReportCharts'); ?>
@@ -152,6 +153,7 @@
       $(document).ready(function() {
           $('.js-example-basic-multiple').select2();
       });
+        // <!-- orders tabs -->
       $(document).ready(function(){
           $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
               localStorage.setItem('activeTab', $(e.target).attr('href'));
@@ -159,6 +161,18 @@
           var activeTab = localStorage.getItem('activeTab');
           if(activeTab){
               $('#myTab a[href="' + activeTab + '"]').tab('show');
+          }
+      });
+    </script>
+    <!-- ingredients tabs -->
+    <script>
+      $(document).ready(function(){
+          $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+              localStorage.setItem('activeIngredientsTab', $(e.target).attr('href'));
+          });
+          var activeIngredientsTab = localStorage.getItem('activeIngredientsTab');
+          if(activeIngredientsTab){
+              $('a[href="' + activeIngredientsTab + '"]').tab('show');
           }
       });
     </script>

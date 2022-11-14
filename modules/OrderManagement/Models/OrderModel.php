@@ -20,42 +20,47 @@ class OrderModel extends BaseModel
         'updated_at',
         'deleted_at'];
 
-    public function getDetails($conditions = []){
+    public function getDetails($conditions = [], $takeOut = null, $dineIn = null){
 
         $this->select('lrfoims_orders.*, u.id, lrfoims_orders.id as order_id');
         $this->join('lrfoims_users as u', 'u.id = lrfoims_orders.user_id');
-        // $this->join('lrfoims_order_numbers as on', 'on.id = lrfoims_orders.order_number_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
+        }
+        if($takeOut != null && $dineIn != null){
+            $this->whereIn('lrfoims_orders.order_type', [$takeOut, $dineIn]);
         }
         $this->groupBy('lrfoims_orders.number');
 
         return $this->findAll();
     }
     
-    public function getCountPerOrderDetails($conditions = []){
+    public function getCountPerOrderDetails($dateAndTime = null, $orderStatusID, $takeOut, $dineIn){
 
         $this->select('COUNT(lrfoims_orders.id) as order_total, u.id');
         $this->join('lrfoims_users as u', 'u.id = lrfoims_orders.user_id');
-
-        foreach($conditions as $field => $value){
-            $this->where([$field => $value]);
+        if($dateAndTime != null){
+            $this->where("CAST(lrfoims_orders.updated_at AS DATE) = '$dateAndTime'");
         }
-        $this->groupBy('lrfoims_orders.order_status_id');
+        $this->where("
+            lrfoims_orders.status ='a' AND
+            lrfoims_orders.order_status_id ='$orderStatusID'
+        ");
+        $this->whereIn('lrfoims_orders.order_type', [$takeOut, $dineIn]);
 
         return $this->findAll();
     }
 
     public function getOrderDetails($conditions = []){
 
-        $this->select('lrfoims_orders.*, os.order_status');
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->groupBy('lrfoims_orders.id');
         $this->orderBy('lrfoims_orders.updated_at', 'ASC');
 
         return $this->findAll();
@@ -63,8 +68,9 @@ class OrderModel extends BaseModel
 
     public function getOrderPaymentHistoryDetails($conditions = []){
 
-        $this->select('lrfoims_orders.*, os.order_status');
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
@@ -74,15 +80,12 @@ class OrderModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getHighestOrderNumber($conditions = []){
+    public function generateOrderNumber(){
 
-        $this->select('lrfoims_orders.*,
-                        MIN(lrfoims_orders.number) as min_order_number, 
-                        MAX(lrfoims_orders.number) as max_order_number');
-        foreach($conditions as $field => $value){
-            $this->where([$field => $value]);
-        }
-        // $this->groupBy('lrfoims_orders.order_number');
+        $this->select('FLOOR(RAND() * 9999) AS number');
+        $this->where('status', 'a');
+        $this->whereNotIn('number', ['SELECT number FROM lrfoims_orders']);
+        $this->limit(1);
 
         return $this->findAll();
     }

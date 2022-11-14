@@ -42,7 +42,7 @@ class CartModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getCartTotalPrice($conditions = []){
+    public function getCartTotalPrice($conditions = [], $takeOut = null, $dineIn = null){
 
         $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
@@ -50,6 +50,9 @@ class CartModel extends BaseModel
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
+        }
+        if($takeOut != null && $dineIn != null){
+            $this->whereIn('lrfoims_orders.order_type', [$takeOut, $dineIn]);
         }
         $this->groupBy('lrfoims_carts.order_id');
 

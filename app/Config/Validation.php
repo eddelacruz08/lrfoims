@@ -68,6 +68,92 @@ class Validation
 		]    
 	];
 
+	public $addRegister = [
+        'first_name' => [
+			'rules' => 'required|min_length[2]|max_length[100]',
+			'label' => 'First name'
+		],
+        'last_name' => [
+			'rules' => 'required|min_length[2]|max_length[100]',
+			'label' => 'Last name'
+		],
+        'email_address' => [
+			'rules' => 'required|valid_email|min_length[5]|max_length[100]|is_unique[lrfoims_users.email_address,id,{userID}]',
+			'label' => 'Email Address'
+		],
+        'username' => [
+			'rules' => 'required|min_length[5]|max_length[100]|is_unique[lrfoims_users.username,id,{userID}]',
+			'label' => 'Username'
+		],
+        'region_id' => [
+			'rules' => 'required',
+			'label' => 'Region'
+		],
+        'province_id' => [
+			'rules' => 'required',
+			'label' => 'Province'
+		],
+        'city_id' => [
+			'rules' => 'required',
+			'label' => 'City'
+		],
+        'addtl_address' => [
+			'rules' => 'required',
+			'label' => 'House #, Street & Baranggay'
+		],
+        'password' => [
+			'rules' => 'required|min_length[8]|max_length[100]',
+			'label' => 'Password'
+		],
+        'confirm_password' => [
+			'rules' => 'matches[password]',
+			'label' => 'Confirm Password'
+		],
+	];
+	
+	public $editProfile = [
+        'first_name' => [
+			'rules' => 'required|min_length[2]|max_length[100]',
+			'label' => 'First name'
+		],
+        'last_name' => [
+			'rules' => 'required|min_length[2]|max_length[100]',
+			'label' => 'Last name'
+		],
+        'email_address' => [
+			'rules' => 'required|valid_email|min_length[5]|max_length[100]',
+			'label' => 'Email Address'
+		],
+        'username' => [
+			'rules' => 'required|min_length[5]|max_length[100]|is_unique[lrfoims_users.username,id,{userID}]',
+			'label' => 'Username'
+		],
+        'region_id' => [
+			'rules' => 'required',
+			'label' => 'Region'
+		],
+        'province_id' => [
+			'rules' => 'required',
+			'label' => 'Province'
+		],
+        'city_id' => [
+			'rules' => 'required',
+			'label' => 'City'
+		],
+        'addtl_address' => [
+			'rules' => 'required',
+			'label' => 'House #, Street & Baranggay'
+		],
+        'password' => [
+			'rules' => 'required|min_length[8]|max_length[100]',
+			'label' => 'Password'
+		],
+        'confirm_password' => [
+			'rules' => 'matches[password]',
+			'label' => 'Confirm Password'
+		],
+	];
+
 	public $roles = [
 		'role_name' => [
 			'rules' => 'required|min_length[3]|max_length[50]|is_unique[lrfoims_roles.role_name,id,{roleID}]',
@@ -114,32 +200,79 @@ class Validation
 		],
 	];
 
-	public $ingredients = [
+	public $addIngredients = [
 		'product_name' => [
-			'rules' => 'required',
-			'label' => 'Product Name',
+			'rules' => 'required|is_unique[lrfoims_products.product_name,id,{id}]',
+			'label' => 'Ingredient Name',
 			'errors' => [
                 'is_unique' => '{field} already exist'      
             ]
 		],
+		'product_description_id' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Measure',
+			'errors' => [
+                'required' => '{field} field is required'      
+            ]
+		],
 		'product_category_id' => [
 			'rules' => 'required',
-			'label' => 'Product Category',
+			'label' => 'Ingredient Category',
 			'errors' => [
                 'required' => '{field} field is required'      
             ]
 		],
 		'unit_quantity' => [
-			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Unit Number',
+			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Unit Quantity',
 			'errors' => [
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'
 			]
 		],
 		'price' => [
-			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Price',
+			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Total Amount',
+			'errors' => [
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'    
+            ]
+		],
+	];
+	
+	public $editIngredients = [
+		'product_name' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Name',
+			'errors' => [
+                'is_unique' => '{field} already exist'      
+            ]
+		],
+		'product_description_id' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Measure',
+			'errors' => [
+                'required' => '{field} field is required'      
+            ]
+		],
+		'product_category_id' => [
+			'rules' => 'required',
+			'label' => 'Ingredient Category',
+			'errors' => [
+                'required' => '{field} field is required'      
+            ]
+		],
+		'unit_quantity' => [
+			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Unit Quantity',
+			'errors' => [
+				'required' => '{field} field is required',
+				'numeric' => '{field} must be number'
+			]
+		],
+		'price' => [
+			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'label' => 'Total Amount',
 			'errors' => [
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'    
@@ -153,7 +286,7 @@ class Validation
 			'label' => 'Stock Type'
 		],
 		'unit_quantity' => [
-			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'rules' => 'required|numeric|greater_than[0]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Unit of Measure',
 			'errors' => [
 				'required' => '{field} field is required',
@@ -161,7 +294,7 @@ class Validation
 			]
 		],
 		'price' => [
-			'rules' => 'required|numeric|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+			'rules' => 'required|numeric|greater_than[0]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Amount',
 			'errors' => [
 				'required' => '{field} field is required',
@@ -185,8 +318,8 @@ class Validation
 	];
 
 	public $ingredientBatchUploadFile = [
-		'uploadFile' => [
-			'rules' => 'required|uploaded[uploadFile]|max_size[uploadFile,4096]|ext_in[uploadFile,csv]',
+		'upload_file' => [
+			'rules' => 'uploaded[upload_file]|max_size[upload_file,4096]|ext_in[upload_file,csv,xls,xlsx]',
 			'label' => 'Batch Upload File',
 		]
 	];
@@ -215,7 +348,7 @@ class Validation
 			'label' => 'Ingredient',
 		],
 		'unit_quantity' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|greater_than_equal_to[0]',
 			'label' => 'Unit Of Measure',
 		],
 		'product_description_id' => [
@@ -223,7 +356,7 @@ class Validation
 			'label' => 'Measurement',
 		],
 		'price' => [
-			'rules' => 'required',
+			'rules' => 'required|greater_than_equal_to[0]',
 			'label' => 'Ingredient Amount',
 		],
 	];
@@ -248,7 +381,7 @@ class Validation
 			'label' => 'Menu Category',
 		],
 		'price' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|greater_than[0]',
 			'label' => 'Price',
 		],
 	];
@@ -259,7 +392,7 @@ class Validation
 			'label' => 'Menu',
 		],
 		'quantity' => [
-			'rules' => 'required|numeric',
+			'rules' => 'required|numeric|greater_than[0]',
 			'label' => 'Quantity',
 		],
 	];
@@ -315,6 +448,20 @@ class Validation
 		'quantity' => [
 			'rules' => 'required',
 			'label' => 'Quantity',
+		],
+	];
+
+	public $placeOrderType = [
+		'order_type' => [
+			'rules' => 'required',
+			'label' => 'Order Type',
+		],
+	];
+	
+	public $submitOrderToCartInMenuList = [
+		'order_type' => [
+			'rules' => 'required',
+			'label' => 'Order Type',
 		],
 	];
 

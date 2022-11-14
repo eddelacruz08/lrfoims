@@ -5,6 +5,8 @@ use Modules\HomeManagement\Models as HomeManagement;
 use Modules\MenuManagement\Models as MenuManagement;
 use Modules\OrderManagement\Models as OrderManagement;
 use Modules\SystemSettings\Models as SystemSettings;
+use Modules\ProductManagement\Models as ProductManagement;
+use Modules\IngredientReportManagement\Models as IngredientReportManagement;
 use App\Controllers\BaseController;
 
 class Home extends BaseController
@@ -17,6 +19,12 @@ class Home extends BaseController
         $this->usersModel = new UserManagement\UsersModel();
         $this->rolesModel = new UserManagement\RolesModel();
 		$this->logsModel = new UserManagement\LogsModel();
+		$this->regionModel = new SystemSettings\RegionModel();
+		$this->provinceModel = new SystemSettings\ProvinceModel();
+		$this->cityModel = new SystemSettings\CityModel();
+		$this->menuIngredientModel = new SystemSettings\MenuIngredientModel();
+        $this->ingredientsModel = new ProductManagement\ProductModel();
+        $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel();
 		helper(['form','link']);
 	}
 
@@ -46,19 +54,18 @@ class Home extends BaseController
 			'menu' => $this->menuModel->get(),
 			'menuCategory' => $this->menuCategoryModel->get(),
 		];
-
+		$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),
+										'lrfoims_carts.status'=>'a','o.order_status_id'=>1]);
+		session()->set($dataSession);
 		return view('templates/landingPage',$data);
 	}
 	
 	public function addToCart() {
         $this->hasPermissionRedirect('menu/a');
 
-        $data['page_title'] = 'LRFOIMS | Menu';
-        $data['title'] = 'Menu';
-        $data['view'] = 'Modules\OrderManagement\Views\menuList\index';
+        $time = new \DateTime();
+		$orderNumber = $this->ordersModel->generateOrderNumber()[0];
 
-        $highestOrderNumber = $this->ordersModel->getHighestOrderNumber(['status' => 'a'])[0];
-		$orderNumberId = $highestOrderNumber['max_order_number'] + 1;
         $checkHaveOrders = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a']);
 		if(!empty($checkHaveOrders)){
 			$checkHaveOrderId = $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
@@ -70,23 +77,85 @@ class Home extends BaseController
 						$data['value'] = $_POST;
 						$this->session->setFlashdata('error', 'Please complete all fields!');
 					} else {
-						$_POST['order_id'] = $checkHaveOrderId['id'];
-						$this->cartsModel->add($_POST);
-						$logData = [
-							'user_id' => session()->get('id'),
-							'description' => 'added a food to order#'.$orderNumberId
-						];
-						$this->logsModel->add($logData);
-						$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+						$menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
+						if(!empty($menuIngredients)){
+							foreach ($menuIngredients as $menuIngredientsValue) {
+								$ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
+								
+								$ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
+								$total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
+								if($ingredients['unit_quantity'] > $total_unit_quantity){
+									$ingredientsData[] = [
+										'ingredient_id' => $ingredients['id'],
+										'unit_quantity' => $ingredientStatus,
+										'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
+										'stock_out_date' => $time->format('Y-m-d H:i:s'),
+										'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
+									];
+									$ingredientDataReports[] = [
+										'order_id' => $checkHaveOrderId['id'],
+										'ingredient_id' => $ingredients['id'],
+										'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
+										'unit_price' => $menuIngredientsValue['price'],
+										'product_description_id' => $ingredients['product_description_id'],
+										'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
+									];
+									$isUpdated = 1;
+								}else{
+									$errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+									$isUpdated = 0;
+								}
+							}
+							if(empty($errorDataIngredients)){
+								if($isUpdated == 1){
+									foreach ($ingredientDataReports as $ingredientDataReportsValue) {
+										$reports = [
+											'order_id' => $ingredientDataReportsValue['order_id'],
+											'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
+											'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
+											'unit_price' => $ingredientDataReportsValue['unit_price'],
+											'product_description_id' => $ingredientDataReportsValue['product_description_id'],
+											'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
+										];
+										$this->ingredientReportModel->add($reports);
+									}
+									foreach ($ingredientsData as $ingredientsDataValue) {
+										$ingredientInfo = [
+											'unit_quantity' => $ingredientsDataValue['unit_quantity'],
+											'price' => $ingredientsDataValue['price'],
+											'stock_out_date' => $ingredientsDataValue['stock_out_date'],
+											'product_status_id' => $ingredientsDataValue['product_status_id'],
+										];
+										$this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
+									}
+									$_POST['order_id'] = $checkHaveOrderId['id'];
+									$logData = [
+										'user_id' => session()->get('id'),
+										'description' => 'added a food to order#'.$orderNumber['number']
+									];
+									$this->logsModel->add($logData);
+									$this->cartsModel->add($_POST);
+									$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+								}
+							}else{
+								$message = "These ingredients: <br>";
+								$cnt = 1;
+								foreach ($errorDataIngredients as $value) {
+									$message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
+									$cnt++;
+								}
+								$message .= "<br> Please check your ingredients.";
+								$this->session->setFlashdata('error', $message);
+							}
+						}else{
+							$this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
+						}
 					}
-					$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),'lrfoims_carts.status'=>'a'
-							,'o.order_status_id'=>1]);
-					session()->set($dataSession);
 					return redirect()->to('/menu');
 				}
 				return redirect()->to('/menu');
 			}else{
-				$this->session->setFlashdata('error_no_flash', 'You\\\'ve already added this menu! Please check your cart to apply changes.');
+				$this->session->setFlashdata('error_no_flash', 'You\\\'ve already added this food! Please check your cart to apply changes.');
 				return redirect()->to('/menu');
 			}
 		}else{
@@ -94,36 +163,92 @@ class Home extends BaseController
 				if (!$this->validate('addOrderToCartInMenuList')) {
 					$data['errors'] = $this->validation->getErrors();
 					$data['value'] = $_POST;
-					$this->session->setFlashdata('error', 'Please complete all fields!');
 				} else {
-					$postData = [
-						'number' => $orderNumberId,
-						'user_id' => session()->get('id'),
-						'order_status_id' => 1
-					];
-					$this->ordersModel->add($postData);
-					
-					$checkHaveOrderId = $this->ordersModel->get(['number' => $orderNumberId, 'user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
-					$_POST['order_id'] = $checkHaveOrderId['id'];
-					$logData = [
-						'user_id' => session()->get('id'),
-						'description' => 'created an order#'.$orderNumberId
-					];
-					$this->logsModel->add($logData);
-					$this->cartsModel->add($_POST);
-					$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+					$menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
+					if(!empty($menuIngredients)){
+						$postData = [
+							'number' => $orderNumber['number'],
+							'user_id' => session()->get('id'),
+							'order_status_id' => 1
+						];
+						$this->ordersModel->add($postData);
+						$checkHaveOrderId = $this->ordersModel->get(['number' => $orderNumber['number'], 'user_id' => session()->get('id'), 'order_status_id' => 1, 'status' => 'a'])[0];
+						foreach ($menuIngredients as $menuIngredientsValue) {
+							$ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
+							
+							$ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
+							$total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
+							if($ingredients['unit_quantity'] > $total_unit_quantity){
+								$ingredientsData[] = [
+									'ingredient_id' => $ingredients['id'],
+									'unit_quantity' => $ingredientStatus,
+									'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
+									'stock_out_date' => $time->format('Y-m-d H:i:s'),
+									'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
+								];
+								$ingredientDataReports[] = [
+									'order_id' => $checkHaveOrderId['id'],
+									'ingredient_id' => $ingredients['id'],
+									'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
+									'unit_price' => $menuIngredientsValue['price'],
+									'product_description_id' => $ingredients['product_description_id'],
+									'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
+								];
+								$isUpdated = 1;
+							}else{
+								$errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+								$isUpdated = 0;
+							}
+						}
+						if(empty($errorDataIngredients)){
+							if($isUpdated == 1){
+								foreach ($ingredientDataReports as $ingredientDataReportsValue) {
+									$reports = [
+										'order_id' => $ingredientDataReportsValue['order_id'],
+										'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
+										'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
+										'unit_price' => $ingredientDataReportsValue['unit_price'],
+										'product_description_id' => $ingredientDataReportsValue['product_description_id'],
+										'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
+									];
+									$this->ingredientReportModel->add($reports);
+								}
+								foreach ($ingredientsData as $ingredientsDataValue) {
+									$ingredientInfo = [
+										'unit_quantity' => $ingredientsDataValue['unit_quantity'],
+										'price' => $ingredientsDataValue['price'],
+										'stock_out_date' => $ingredientsDataValue['stock_out_date'],
+										'product_status_id' => $ingredientsDataValue['product_status_id'],
+									];
+									$this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
+								}
+								$_POST['order_id'] = $checkHaveOrderId['id'];
+								$logData = [
+									'user_id' => session()->get('id'),
+									'description' => 'added a food to order#'.$orderNumber['number']
+								];
+								$this->logsModel->add($logData);
+								$this->cartsModel->add($_POST);
+								$this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+							}
+						}else{
+							$message = "These ingredients: <br>";
+							$cnt = 1;
+							foreach ($errorDataIngredients as $value) {
+								$message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
+								$cnt++;
+							}
+							$message .= "<br> Please check your ingredients.";
+							$this->session->setFlashdata('error', $message);
+						}
+					}else{
+						$this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
+					}
 				}
-				$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),'lrfoims_carts.status'=>'a'
-						,'o.order_status_id'=>1]);
-				session()->set($dataSession);
 				return redirect()->to('/menu');
 			}
-			$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),'lrfoims_carts.status'=>'a'
-					,'o.order_status_id'=>1]);
-			session()->set($dataSession);
 			return redirect()->to('/menu');
 		}
-
 		return view('templates/landingPage',$data);
 	}
 
@@ -145,6 +270,55 @@ class Home extends BaseController
 
 		return view('templates/landingPage',$data);
 	}
+
+	public function placeOrder($id, $valueId){
+        // $this->hasPermissionRedirect('place-order/u');
+
+		$data = [
+			'page_title' => 'LRFOIMS | Cart',
+			'title' => 'Cart',
+			'view' => 'Modules\HomeManagement\Views\home\cart',
+			'getCustomerCartDetails' => $this->cartsModel->getCustomerCartDetails(['lrfoims_carts.status' => 'a']),
+			'getCartTotalPrice' => $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 1]),
+			'getCustomerOrderDetails' => $this->ordersModel->get(['lrfoims_orders.user_id' => session()->get('id'),'lrfoims_orders.order_status_id' => 1,'lrfoims_orders.status' => 'a']),
+		];
+        $getCart = $this->cartsModel->get(['order_id' => $id, 'status'=>'a']);
+        if(!empty($getCart)){
+			if ($this->request->getMethod() == 'post') {
+				if (!$this->validate('placeOrderType')) {
+					$data['errors'] = $this->validation->getErrors();
+					$data['value'] = $_POST;
+				} else {
+					if($valueId == 1 || $valueId == 2 || $valueId == 3 || $valueId == 4){
+						$dataPOST['order_status_id'] = $valueId;
+						$dataPOST['order_type'] = $_POST['order_type'];
+						$this->ordersModel->update($id, $dataPOST);
+						
+						$this->session->setFlashdata('success', 'Order has been successfully added!');
+						return redirect()->to('/cart');
+					}else{
+						$ordersData = $this->ordersModel->get(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $id, 'lrfoims_orders.order_status_id' => 4])[0];
+						
+						if(empty($ordersData['total_amount']) && $valueId == 5){
+							$this->session->setFlashdata('error', 'Please add payment!');
+							return redirect()->to('/cart');
+						}else{
+							$dataPOST['order_status_id'] = $valueId;
+							$dataPOST['order_type'] = $_POST['order_type'];
+							$this->ordersModel->update($id, $dataPOST);
+							
+							$this->session->setFlashdata('success', 'Order has been successfully added!');
+							return redirect()->to('/cart');
+						}
+					}
+				}
+			}
+        }else{
+            $this->session->setFlashdata('error', 'Empty Cart! Please add foods. Thank you!');
+			return redirect()->to('/cart');
+        }
+		return view('templates/landingPage',$data);
+    }
 
     public function editCartQuantity($id) {
         $this->hasPermissionRedirect('cart/u');
@@ -203,6 +377,9 @@ class Home extends BaseController
             'edit' => true,
             'id' => $id,
             'roles' => $this->rolesModel->get(),
+            'regions' => $this->regionModel->get(['status'=>'a']),
+            'province' => $this->provinceModel->get(['status'=>'a']),
+            'city' => $this->cityModel->get(['status'=>'a']),
             'value' => $this->usersModel->get(['id' => $id])[0]
         ];
 
@@ -211,7 +388,7 @@ class Home extends BaseController
         }
 
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('users')) {
+            if (!$this->validate('editProfile')) {
                 $data['value'] = $_POST;
                 $data['errors'] = $this->validation->getErrors();
             } else {
