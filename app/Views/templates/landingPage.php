@@ -6,7 +6,7 @@
 
         <!-- logo -->
         <a href="/" class="navbar-brand me-lg-5 m-0">
-            <img src="assets/img/lamon_logo.png" alt="" class="logo-dark" height="70" />
+            <img src="<?=base_url();?>/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" alt="" class="logo-dark" height="70" />
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -144,23 +144,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <!-- <img src="assets/img/lamon_logo.png" alt="" class="logo-dark" height="68" /> -->
-                <p class="text-muted mt-2">Catch this newest addition to our menu! 👌🏻 Available at Lamon-Mantahan, Maasin.
-                    <br> We are also open at Lamon-Macrohon starting 5PM.🤗
-                    <br> Kitakits! 😉</p>
+                <img src="<?=base_url();?>/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" alt="image" class="logo-dark" height="68" />
+                <p class="text-muted mt-2">
+                    <?= isset($homeDetails['footer_desc']) ? $homeDetails['footer_desc'] : 'Footer desccription'?>
+                </p>
 
                 <ul class="social-list list-inline mt-2">
                     <li class="list-inline-item text-center">
                         <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
-                    </li>
-                    <li class="list-inline-item text-center">
-                        <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="mdi mdi-google"></i></a>
-                    </li>
-                    <li class="list-inline-item text-center">
-                        <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="mdi mdi-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item text-center">
-                        <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="mdi mdi-github"></i></a>
                     </li>
                 </ul>
 
@@ -170,7 +161,7 @@
                 <h5 class="text-light">Location</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Mantahan, Maasin, Philippines, 6600</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['location']) ? $homeDetails['location'] : 'Location'?></a></li>
                 </ul>
 
             </div>
@@ -179,7 +170,7 @@
                 <h5 class="text-light">Contact</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">0966 291 0632</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['contact']) ? $homeDetails['contact'] : 'contact'?></a></li>
                 </ul>
             </div>
 
@@ -187,19 +178,18 @@
                 <h5 class="text-light">Email</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">ronylee.escol16@gmail.com</a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['email_address']) ? $homeDetails['email_address'] : 'email_address'?></a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-12">
-                <div class="mt-5">
-                    <p class="text-muted mt-4 text-center mb-0">© 2018 - 2021 Hyper. Design and coded by
-                        Coderthemes</p>
+                <div class="mt-2">
+                    <p class="text-muted mt-2 text-center mb-0">2022</p>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </footer>
 <!-- END FOOTER -->

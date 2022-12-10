@@ -66,8 +66,56 @@
             display:none;
         }
     </style>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @media (max-width: 768px) {
+            .carousel-inner .carousel-item > div {
+                display: none;
+            }
+            .carousel-inner .carousel-item > div:first-child {
+                display: block;
+            }
+            }
+
+            .carousel-inner .carousel-item.active,
+            .carousel-inner .carousel-item-start,
+            .carousel-inner .carousel-item-next,
+            .carousel-inner .carousel-item-prev {
+                display: flex;
+            /* transition-duration: 10s; */
+            }
+
+            /* display 4 */
+            @media (min-width: 768px) {
+            .carousel-inner .carousel-item-right.active,
+            .carousel-inner .carousel-item-next,
+            .carousel-item-next:not(.carousel-item-start) {
+                transform: translateX(25%) !important;
+            }
+
+            .carousel-inner .carousel-item-left.active,
+            .carousel-item-prev:not(.carousel-item-end),
+            .active.carousel-item-start,
+            .carousel-item-prev:not(.carousel-item-end) {
+                transform: translateX(-25%) !important;
+            }
+
+            .carousel-item-next.carousel-item-start, .active.carousel-item-end {
+                transform: translateX(0) !important;
+            }
+
+            .carousel-inner .carousel-item-prev,
+            .carousel-item-prev:not(.carousel-item-end) {
+                transform: translateX(-25%) !important;
+            }
+        }
+        .imageCarousel {
+            max-height: 300px;
+            max-width: 300px;
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"/>
 
 
 </head>
@@ -78,43 +126,35 @@
     <?= $this->rendersection('content') ?>
     <!-- /End-bar -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/9cef9fee62.js" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js" integrity="sha256-AOrsg7pOO9zNtKymdz4LsI+KyLEHhTccJrZVU4UFwIU=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js" integrity="sha256-GMN9UIJeUeOsn/Uq4xDheGItEeSpI5Hcfp/63GclDZk=" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.esm.js" integrity="sha256-OsWibt46P+gzQrnjYvWGnUi5tggkmMv4ZHXzU3g6uJk=" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.js" integrity="sha256-+s2W82x5uCYS4k+d4CN6IUKJ5lWiPJFsOTr5vYqnf4Y=" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/helpers.esm.js" integrity="sha256-DBLfWTRw9KgCTW52S2DJ/h/ApFpgL06+MzZONT3BUL0=" crossorigin="anonymous"></script> -->
-    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
-    <!-- <script src="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@2.0.0/dist/mdtimepicker.js"></script> -->
-    <!-- <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script> -->
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
-    <!-- <script src="/assets/js/adminlte.js"></script>
-    <script src="/assets/js/sidenav.js"></script>
-    <script src="/assets/js/datatables.js"></script> -->
     <script src="/assets/js/myAlerts.js"></script>
-    <!-- <script src="/assets/js/script.js"></script> -->
-    <!-- <script src="/assets/js/main.js"></script> -->
-    <!-- <script src="/assets/js/incrementer.js"></script>
-    <script src="/assets/js/submitReceipt.js"></script>
-    <script src="/assets/js/imageCheckbox.js"></script> -->
-    <!-- <script src="/assets/js/datepicker.js"></script> -->
-    <!-- <script src="/assets/js/datepickerReports.js"></script> -->
-    <!-- <script src="/assets/js/tabbable.js"></script> -->
     <!-- bundle -->
     <script src="/assets/js/vendor.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
-
+    <script>
+        $('.carousel .carousel-item').each(function(){
+            var minPerSlide = 4;
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+            for (var i=0;i<minPerSlide;i++) {
+                next=next.next();
+                if (!next.length) {
+                    next = $(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+    </script>
     <!-- third party js -->
     <!-- <script src="/assets/js/vendor/apexcharts.min.js"></script> -->
     <script src="/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
@@ -132,7 +172,6 @@
     <script src="/assets/js/vendor/dataTables.select.min.js"></script>
     <script src="/assets/js/vendor/Chart.bundle.min.js"></script>
     <!-- third party js ends -->
-
 
     <!-- demo app -->
     <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->

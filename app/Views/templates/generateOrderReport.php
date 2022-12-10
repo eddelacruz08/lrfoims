@@ -53,13 +53,13 @@
                             <?=$row['order_status']?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['total_amount'])?>
+                            Php <?=number_format($row['total_amount'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['total_amount'])?>
+                            Php <?=number_format($row['c_cash'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['total_amount'])?>
+                            Php <?=number_format($row['c_balance'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             <?= Date('F d, Y - h:i a', strtotime($row['created_at']))?>
@@ -72,7 +72,7 @@
                             Total Amount:
                         </th>
                         <td colspan="1" style="text-align:center; font-weight: bold; font-size: 10pt">
-                            Php <?=number_format($rows['total_amount_price'])?>
+                            Php <?=number_format($rows['total_amount_price'], 2)?>
                         </td>
                         <td colspan="3" style="text-align:center; font-size: 10pt">
                         </td>

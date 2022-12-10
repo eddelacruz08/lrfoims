@@ -39,6 +39,9 @@ $routes->match(['get','post'],'guest-mode', 'Security::guestMode');
 // $routes->add('/send', 'SendMail::send');
 $routes->get('/import', 'Import::index');
 $routes->get('/(:alpha)/403', 'Security::fileNotFound/$1');
+$routes->get('/regions', 'Security::getRegions');
+$routes->get('/provinces/(:num)', 'Security::getProvinces/$1');
+$routes->get('/cities/(:num)', 'Security::getCities/$1');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

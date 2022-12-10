@@ -85,6 +85,10 @@ class Validation
 			'rules' => 'required|min_length[5]|max_length[100]|is_unique[lrfoims_users.username,id,{userID}]',
 			'label' => 'Username'
 		],
+		'contact_number' => [
+			'label'  => 'Contact Number',
+			'rules'  => 'required|numeric|regex_match[((^(\+)(\d){12}$)|(^\d{11}$))]|is_unique[lrfoims_users.contact_number]',
+		],
         'region_id' => [
 			'rules' => 'required',
 			'label' => 'Region'
@@ -127,6 +131,10 @@ class Validation
         'username' => [
 			'rules' => 'required|min_length[5]|max_length[100]|is_unique[lrfoims_users.username,id,{userID}]',
 			'label' => 'Username'
+		],
+		'contact_number' => [
+			'label'  => 'Contact Number',
+			'rules'  => 'required|numeric|regex_match[((^(\+)(\d){12}$)|(^\d{11}$))]',
 		],
         'region_id' => [
 			'rules' => 'required',
@@ -385,6 +393,28 @@ class Validation
 			'label' => 'Price',
 		],
 	];
+	
+	public $editmenu = [
+		// 'image' => [
+		// 	'rules' => 'required|uploaded[image]|max_size[image, 10240]|ext_in[image,png,jpg,gif]|is_image[image]', 
+		// 	'label' => 'Image',
+		// ],
+		'menu' => [
+			'rules' => 'required',
+			'label' => 'Menu name',
+			'errors' => [
+                'is_unique' => '{field} already exist'      
+            ]
+		],
+		'menu_category_id' => [
+			'rules' => 'required|numeric',
+			'label' => 'Menu Category',
+		],
+		'price' => [
+			'rules' => 'required|numeric|greater_than[0]',
+			'label' => 'Price',
+		],
+	];
 
 	public $addToCartAdmin = [
 		'menu_id' => [
@@ -408,13 +438,34 @@ class Validation
 		],
 	];
  
-	public $orderNumbers = [
-		'number' => [
-			'rules' => 'required|numeric|is_unique[lrfoims_order_numbers.number,{number}]',
-			'label' => 'Order Number',
-			'errors' => [
-				'is_unique' => '{field} already exist'      
-			]
+	public $homeDetails = [
+		'restaurant_name' => [
+			'rules' => 'required', 
+			'label' => 'Restaurant Name',
+		],
+		'body_desc' => [
+			'rules' => 'required', 
+			'label' => 'Body Description',
+		],
+		'footer_desc' => [
+			'rules' => 'required', 
+			'label' => 'Footer Description',
+		],
+		'location' => [
+			'rules' => 'required', 
+			'label' => 'Location Address',
+		],
+		'contact' => [
+			'rules' => 'required|numeric|min_length[11]|max_length[11]', 
+			'label' => 'Contact Number',
+		],
+        'email_address' => [
+			'rules' => 'required|min_length[5]|max_length[100]|valid_email',
+			'label' => 'Email Address'
+		],
+		'fb_link' => [
+			'rules' => 'required', 
+			'label' => 'Facebook Link',
 		],
 	];
 	

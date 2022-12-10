@@ -116,10 +116,8 @@ class OrderReport extends BaseController
 					'type' => 'report',
 				];
 				if($_POST['date_status'] == 1){
-					$orderdate = explode('/', $_POST['date']);
-					$strDate = $orderdate[2].'-'.$orderdate[0].'-'.$orderdate[1];
-					$data['orders'] = $this->ordersModel->getOrderReports(['lrfoims_orders.order_status_id' => 5, 'CAST(lrfoims_orders.created_at AS DATE)' => $strDate, 'lrfoims_orders.status' => 'a']);
-					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['lrfoims_orders.order_status_id' => 5, 'CAST(lrfoims_orders.created_at AS DATE)' => $strDate, 'lrfoims_orders.status' => 'a']);
+					$data['orders'] = $this->ordersModel->getOrderReports(['lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
+					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
 					$data['date'] = $_POST['date'];
 					$data['date_status'] = $_POST['date_status'];
 				}else{

@@ -32,9 +32,6 @@
                     <center>Unit of Measure</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Qty</center>
-                </th>
-                <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
                     <center>Unit Price</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
@@ -56,16 +53,13 @@
                             <?= ucwords($row['product_category'])?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            <?= ($row['unit'] > 1) ? $row['unit'].' '.$row['description'].'s ' : $row['unit'].' '.$row['description'] ?>
+                            <?= $row['unit_quantity'].' '.ucfirst($row['description'])?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            x<?= $row['quantity'];?>
+                            Php <?=number_format($row['price'],2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['price'])?>
-                        </td>
-                        <td style="text-align:center; font-size: 10pt">
-                            <?= ($row['product_status_id'] == 1) ? ucfirst($row['name']): ucfirst($row['name']); ?></span>
+                            <span><?= $row['product_status_id'] == 1 ? ucfirst($row['name']) : ucfirst($row['name']) ?></span>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             <?= Date('F d, Y - h:i a', strtotime($row['created_at']))?>
@@ -74,7 +68,7 @@
                 <?php endforeach; ?>
             <?php else:?>
                 <tr>
-                    <td colspan="7" style="text-align:center; font-size: 10pt"><i>No Record available</i></td>
+                    <td colspan="6" style="text-align:center; font-size: 10pt"><i>No Record available</i></td>
                 </tr>
             <?php endif;?>
         </tbody>

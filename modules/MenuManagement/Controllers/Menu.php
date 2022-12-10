@@ -9,7 +9,7 @@ class Menu extends BaseController
 	function __construct(){
 		$this->menuModel = new MenuManagement\MenuModel();
 		$this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
-		helper(['form']);
+		helper(['form','file']);
 	}
 
 	public function index()
@@ -71,7 +71,7 @@ class Menu extends BaseController
             'menuCategory' => $this->menuCategoryModel->get()
         ];
         if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('menu')) {
+            if (!$this->validate('editmenu')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
@@ -106,7 +106,7 @@ class Menu extends BaseController
     public function editMenuStatus($id) {
         if ($this->request->getMethod() == 'post') {
             if(!empty($_POST['menu_status'])) {
-                $data['menu_status'] = $_POST['menu_status'];
+                $data['menu_status'] = 'a';
                 $this->menuModel->update($id, $data);
                 $this->session->setFlashdata('success', 'Menu status successfully updated!');
                 return redirect()->to('/menu-list');

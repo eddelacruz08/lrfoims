@@ -163,7 +163,11 @@
                                                                             <?php $selected = true; ?>
                                                                         <?php endif; ?>
                                                                     <?php endif;?>
-                                                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['type']) ?></option>
+                                                                    <?php if($option['id'] == 3): ?>
+                                                                        <!-- <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?> disabled><?= ucwords($option['type']) ?></option> -->
+                                                                    <?php else: ?>
+                                                                        <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['type']) ?></option>
+                                                                    <?php endif; ?>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                             <?php if(isset($errors['order_type'])):?>

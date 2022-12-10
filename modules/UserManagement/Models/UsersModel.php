@@ -12,6 +12,7 @@ class UsersModel extends BaseModel
         'first_name',
         'last_name',
         'email_address',
+        'contact_number',
         'username', 
         'region_id', 
         'province_id', 

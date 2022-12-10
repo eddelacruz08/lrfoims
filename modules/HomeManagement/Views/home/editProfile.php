@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <form method="POST" action="/edit-profile/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
+                <form method="POST" action="/edit-profile/<?= $edit ? 'u/'.esc($id) : 'a' ?>" id="formId">
                     <?php if($edit):?>
                         <input type="hidden" name="userID" value="<?=$id?>">                             
                     <?php endif;?>
@@ -57,60 +57,48 @@
                             <?php endif;?>    
                         </div>
                     </div>
+                    <div class="row mb-2 mt-2">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputAddress2">Contact Number: <small class="text-danger">* (ex.09*********)</small></label>
+                                <input type="text" class="form-control <?= isset($errors['contact_number']) ? 'is-invalid':'' ?>" name="contact_number" id="contact_number" value="<?= set_value('contact_number');?>" placeholder="Enter contact number">
+                            </div>
+                            <?php if(isset($errors['contact_number'])):?>
+                                <small class="text-danger"><?=esc($errors['contact_number'])?></small>
+                            <?php endif;?>
+                        </div>
+                    </div>
                     <div class="row mb-1">
                         <div class="col-sm-12">
                             <label for="inputAddress2">Region: <small class="text-danger">*</small></label>
-                            <select class="js-example-basic-single <?= isset($errors['region_id']) ? 'is-invalid':'' ?> form-select" name="region_id" id="region_id">
-                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select region --</option>
-                                <?php foreach ($regions as $option) : ?>
-                                    <?php $selected = false; ?>
-                                    <?php if(isset($value['region_id'])):?>
-                                        <?php if($value['region_id'] == $option['id']): ?>
-                                            <?php $selected = true; ?>
-                                        <?php endif; ?>
-                                    <?php endif;?>
-                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['region_name']) ?></option>
-                                <?php endforeach; ?>
+                            <select class="form-select <?= isset($errors['region_id']) ? 'is-invalid':'' ?>" name="region_id" id="region_id">
+                                <option selected disabled>-- select region --</option>
                             </select>
                             <?php if(isset($errors['region_id'])):?>
                                 <small class="text-danger"><?=esc($errors['region_id'])?></small>
-                            <?php endif;?><br>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-sm-12 mt-1">
                             <label for="inputAddress2">Province: <small class="text-danger">*</small></label>
-                            <select class="js-example-basic-single <?= isset($errors['province_id']) ? 'is-invalid':'' ?> form-select" data-toggle="select2" name="province_id" id="province_id">
-                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select province --</option>
-                                <?php foreach ($province as $option) : ?>
-                                    <?php $selected = false; ?>
-                                    <?php if(isset($value['province_id'])):?>
-                                        <?php if($value['province_id'] == $option['id']): ?>
-                                            <?php $selected = true; ?>
-                                        <?php endif; ?>
-                                    <?php endif;?>
-                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['province_name']) ?></option>
-                                <?php endforeach; ?>
+                            <select class="form-select <?= isset($errors['province_id']) ? 'is-invalid':'' ?>" name="province_id" id="province_id">
+                                <option selected disabled>-- select province --</option>
                             </select>
                             <?php if(isset($errors['province_id'])):?>
                                 <small class="text-danger"><?=esc($errors['province_id'])?></small>
-                            <?php endif;?><br>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-sm-12 mt-1">
                             <label for="inputAddress2">City: <small class="text-danger">*</small></label>
-                            <select class="js-example-basic-single <?= isset($errors['city_id']) ? 'is-invalid':'' ?> form-select" data-toggle="select2" name="city_id" id="city_id">
-                                <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- select city --</option>
-                                <?php foreach ($city as $option) : ?>
-                                    <?php $selected = false; ?>
-                                    <?php if(isset($value['city_id'])):?>
-                                        <?php if($value['city_id'] == $option['id']): ?>
-                                            <?php $selected = true; ?>
-                                        <?php endif; ?>
-                                    <?php endif;?>
-                                    <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['city_name']) ?></option>
-                                <?php endforeach; ?>
+                            <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id">
+                                <option selected disabled>-- select city --</option>
                             </select>
                             <?php if(isset($errors['city_id'])):?>
                                 <small class="text-danger"><?=esc($errors['city_id'])?></small>
-                            <?php endif;?><br>
-                            <div class="form-group mb-2">
-                                <label for="inputAddress2">House #, Street & Baranggay: <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= isset($value['addtl_address']) ? esc($value['addtl_address']) : '' ?>" placeholder="(House #, Street & Baranggay)">
-                            </div>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-sm-12 mt-1">
+                            <label for="inputAddress2">House #, Street & Baranggay: <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= set_value('addtl_address');?>" placeholder="(House #, Street & Baranggay)">
                             <?php if(isset($errors['addtl_address'])):?>
                                 <small class="text-danger"><?=esc($errors['addtl_address'])?></small>
                             <?php endif;?>
@@ -133,7 +121,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>
+                    <button type="submit" id="submitButton" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>
                 </form>
             </div> <!-- end col-->
         </div>
@@ -141,3 +129,84 @@
 
     </div> <!-- End Content -->
 </div> <!-- End Content -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            showRegion();
+            function showRegion() {
+                $.ajax({
+                    type: "GET",
+                    url: '/regions',
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        console.log(data);
+                        for(i=0; i<data.length; i++){
+                            $('#region_id').append($('<option>', {value: data[i].region_code, text: data[i].region_name}));
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
+            $("select[name='region_id']").change(function(){
+                var regionCode = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: '/provinces/'+ regionCode ,
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data){
+                        console.log(data);
+                            $('#province_id').find('option').remove();
+                            $('#province_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select province --'}));
+                        for(i=0; i<data.length; i++){
+                            $('#province_id').append($('<option>', {value: data[i].province_code, text:data[i].province_name}));
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            });
+            $("select[name='province_id']").change(function(){
+                var provinceCode = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: '/cities/'+provinceCode,
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data){
+                        console.log(data);
+                        $('#city_id').find('option').remove();
+                            $('#city_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select city --'}));
+                        for(i=0; i<data.length; i++){
+                            $('#city_id').append($('<option>', {value: data[i].city_code, text:data[i].city_name}));
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            });
+            $(() => {
+                $("#submitButton").click(function(ev) {
+                    var form = $("#formId");
+                    var url = form.attr('action');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(),
+                        cache: false,
+                        success: function(data) {
+                            window.location.href = '/profile';
+                        },
+                        error: function(data) {
+                            alert("some Error");
+                        }
+                    });
+                });
+            });
+        });
+    </script>

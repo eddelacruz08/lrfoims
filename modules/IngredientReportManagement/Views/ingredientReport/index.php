@@ -98,12 +98,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-7">
                                 <h4 class="header-title mt-1">Generate <?=$title;?></h4>
                             </div>
                             <?php if(user_link('ingredient-reports/generate-report', session()->get('userPermissionView'))):?>
-                                <div class="col-sm-8 d-flex">
-                                    <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                                <div class="col-sm-5">
+                                    <!-- <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
                                         <div class="input-group float-end ml-1">
                                             <input type="hidden" name="date_status" value="1">
                                             <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
@@ -111,10 +111,10 @@
                                                 <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
                                             </button>
                                         </div>       
-                                    </form>
+                                    </form> -->
                                     
                                     <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
-                                        <div class="input-group float-end">
+                                        <div class="input-group">
                                             <input type="hidden" name="date_status" value="0">
                                             <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
                                             <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
@@ -124,7 +124,7 @@
                                     </form>
                                 </div>
                             <?php else: ?>
-                                <div class="col-sm-8">
+                                <div class="col-sm-5">
                                     <button type="button" class="btn btn-sm btn-secondary float-end">No Permission | Generate ingredient report!</button>
                                 </div>
                             <?php endif; ?>
@@ -166,12 +166,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-7">
                                 <h4 class="header-title mt-1">Generate Goods Sold Report</h4>
                             </div>
-                            <?php if(user_link('ingredient-reports/generate-reports', session()->get('userPermissionView'))):?>
-                                <div class="col-sm-8 d-flex">
-                                    <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                            <?php if(user_link('ingredient-reports/generate-report', session()->get('userPermissionView'))):?>
+                                <div class="col-sm-5">
+                                    <!-- <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
                                         <div class="input-group float-end ml-1">
                                             <input type="hidden" name="date_status" value="1">
                                             <input type="text" class="form-control form-control-light form-control-sm date" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true" name="date" autocomplete="off">
@@ -179,10 +179,10 @@
                                                 <i class="mdi mdi-calendar-range font-13"></i> &nbspSingle Report
                                             </button>
                                         </div>       
-                                    </form>
+                                    </form> -->
                                     
                                     <form method="POST" action="/order-reports/generate-report" target="_blank">
-                                        <div class="input-group float-end">
+                                        <div class="input-group">
                                             <input type="hidden" name="date_status" value="0">
                                             <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
                                             <button type="submit" class="input-group-text btn btn-sm bg-primary border-primary text-white">
@@ -192,7 +192,7 @@
                                     </form>
                                 </div>
                             <?php else: ?>
-                                <div class="col-sm-8">
+                                <div class="col-sm-5">
                                     <button type="button" class="btn btn-sm btn-secondary float-end">No Permission | Good sold report!</button>
                                 </div>
                             <?php endif; ?>

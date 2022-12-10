@@ -90,7 +90,7 @@
                 <ul class="nav nav-tabs mb-2">
                     <?php foreach ($productSortByCategory as $category) : ?>
                         <li class="nav-item border border-bottom-0 mt-1">
-                            <a href="#activeIngredientsTab<?=$category['id']; ?>" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 p-1">
+                            <a href="#activeIngredientsTab<?=$category['id']; ?>" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 p-1">
                                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                                 <span class="d-none d-md-block text-sm m-0"><b><?= ucfirst($category['product_name']); ?></b></span>
                             </a>
@@ -100,7 +100,7 @@
 
                 <div class="tab-content">
                     <?php foreach ($productSortByCategory as $category) : ?>
-                        <div class="tab-pane fade" id="activeIngredientsTab<?=$category['id']; ?>">
+                        <div class="tab-pane fade show" id="activeIngredientsTab<?=$category['id']; ?>">
                             <div class="table-responsive table-responsive-sm">
                                 <table id="basic-datatable" class="table table-sm table-hover dt-responsive nowrap w-100">
                                     <thead class="table-active">

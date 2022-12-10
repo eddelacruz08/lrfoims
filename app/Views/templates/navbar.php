@@ -12,22 +12,16 @@
             </span>
         </a>
 
-        <ul class="list-unstyled topbar-menu float-end mb-0">
-
-            <li class="notification-list">
-                <a class="nav-link end-bar-toggle" href="javascript: void(0);">
-                    <i class="dripicons-gear noti-icon"></i>
-                </a>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+        <ul class="list-unstyled topbar-menu float-end mb-0 navbar-nav ms-auto bg-dark">
+            
+            <li class="dropdown notification-list bg-dark">
+                <a class="nav-link dropdown-toggle nav-user bg-dark arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
                     <span class="account-user-avatar"> 
                         <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
-                        <span class="account-user-name"><?= session()->get('first_name').' '.session()->get('last_name');?></span>
+                        <span class="account-user-name"><?= session()->get('first_name') != null ? session()->get('first_name').' '.session()->get('last_name') : 'Anonymous';?></span>
                         <span class="account-position"><?= session()->get('role_name')?></span>
                     </span>
                 </a>
@@ -36,13 +30,6 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome !</h6>
                     </div>
-
-                    <!-- item-->
-                    <a href="/users/v/<?= session()->get('id')?>" class="dropdown-item notify-item">
-                        <i class="mdi mdi-account-circle me-1"></i>
-                        <span>My Account</span>
-                    </a>
-
                     <!-- item-->
                     <a href="/signout" class="dropdown-item notify-item">
                         <i class="mdi mdi-logout me-1"></i>

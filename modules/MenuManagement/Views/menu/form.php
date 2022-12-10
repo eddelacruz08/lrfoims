@@ -32,12 +32,12 @@
                 <h5 class="card-title mb-0"><?= $edit?'Edit ':'Add '?><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="POST" action="/menu-list/<?= $edit ? 'u/'.esc($id) : 'a' ?>">         
+                    <form action="/menu-list/<?= $edit ? 'u/'.esc($id) : 'a' ?>" enctype="multipart/form-data" method="POST">         
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="inputAddress2">Image <small class="text-danger">*</small></label>
                                 <div class="custom-file">
-                                    <input type="file" class="form-control <?= isset($errors['image']) ? 'is-invalid':'is-valid' ?>" name="image" id="customFile" accept="image/*">
+                                    <input type="file" class="form-control <?= isset($errors['image']) ? 'is-invalid':'is-valid' ?>" name="image" id="image" accept="image/*">
                                 </div>
                                 <?php if(isset($errors['image'])):?>
                                     <small class="text-danger"><?=esc($errors['image'])?></small>
@@ -78,7 +78,8 @@
                                 <?php endif;?>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>
+                        <input type="submit" class="btn btn-sm btn-success float-end mt-2" value="<?= $action ?>"/>
+                        <!-- <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button> -->
                     </form>
                 </div>
             </div>

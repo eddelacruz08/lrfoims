@@ -14,7 +14,7 @@
                                 </p>
                             </a>
                             <?php if ($details['order_status_id'] == 2): ?>
-                                <?php if(user_link('orders/a', session()->get('userPermissionView'))):?>
+                                <?php if(user_link('orders/a', session()->get('userPermissionView'))):?> 
                                     <?php if (empty($details['total_amount'])): ?>
                                         <a class="btn btn-primary btn-sm d-print-none" data-bs-toggle="modal" data-bs-target="#addCartModal<?=$details['id']?>" type="button">
                                             <i class="dripicons-plus"></i> Add&nbspfood

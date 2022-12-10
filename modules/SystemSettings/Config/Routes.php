@@ -42,11 +42,9 @@ $routes->group('ingredient-measures', ['namespace' => 'Modules\SystemSettings\Co
     $routes->add('d/(:num)', 'ProductMeasure::delete/$1');
 });
 
-$routes->group('order-numbers', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
-    $routes->add('/', 'OrderNumber::index');
-    $routes->match(['get', 'post'], 'a', 'OrderNumber::add');
-    $routes->match(['get', 'post'], 'u/(:num)', 'OrderNumber::edit/$1');
-    $routes->add('d/(:num)', 'OrderNumber::delete/$1');
+$routes->group('home-details', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'HomeInfo::index');
+    $routes->match(['get', 'post'], 'u/(:num)', 'HomeInfo::edit/$1');
 });
 
 $routes->group('order-status', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {

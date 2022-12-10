@@ -32,7 +32,7 @@ class IngredientReportModel extends BaseModel
 
     public function getIngredientReports($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*, pm.name as description');
+        $this->select('lrfoims_ingredient_out.*, pm.name as description, ps.name');
         $this->join('lrfoims_products as p', 'lrfoims_ingredient_out.ingredient_id = p.id');
         $this->join('lrfoims_product_measures as pm', 'lrfoims_ingredient_out.product_description_id = pm.id');
 

@@ -12,4 +12,6 @@ $routes->group('',['namespace' => 'Modules\HomeManagement\Controllers'],function
     $routes->match(['get', 'post'], '/profile/u', 'Home::editProfile');
     $routes->add('d/(:num)', 'Home::delete/$1');
     $routes->match(['get', 'post'], '/place-order/u/(:num)/(:num)', 'Home::placeOrder/$1/$2');
+    $routes->match(['get', 'post'], 'cart/add-chat', 'Home::addChat');
+    $routes->add('cart/get-message/(:num)', 'Home::getMessage/$1');
 });

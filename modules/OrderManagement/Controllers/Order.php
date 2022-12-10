@@ -15,7 +15,6 @@ class Order extends BaseController
         $this->menusModel = new MenuManagement\MenuModel();
         $this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
         $this->orderTypeModel = new SystemSettings\OrderTypeModel();
-        $this->orderNumbersModel = new SystemSettings\OrderNumberModel();
         $this->ingredientsModel = new ProductManagement\ProductModel();
 		$this->menuIngredientModel = new SystemSettings\MenuIngredientModel();
         $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel();
@@ -842,6 +841,7 @@ class Order extends BaseController
                 'status_icon' => 'success'
             ];
             $this->ordersModel->softDelete($id);
+            return $this->response->setJSON($data);
         }else{
             $data =[
                 'status'=> 'Opps',

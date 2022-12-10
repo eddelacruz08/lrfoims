@@ -59,6 +59,36 @@ class CartModel extends BaseModel
         return $this->findAll();
     }
     
+    public function getCartDeliveryTotalPrice($conditions = []){
+
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
+        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->whereIn('o.order_status_id', [2,3]);
+        $this->groupBy('lrfoims_carts.order_id');
+
+        return $this->findAll();
+    }
+
+    public function getCartDeliveryShipmentTotalPrice($conditions = []){
+
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
+        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->whereIn('o.order_status_id', [4]);
+        $this->groupBy('lrfoims_carts.order_id');
+
+        return $this->findAll();
+    }
+    
     public function getAdminCartLists($conditions = []){
 
         $this->select('lrfoims_carts.*, m.menu, m.image, m.price, m.menu_category_id');
