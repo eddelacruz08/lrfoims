@@ -1,0 +1,143 @@
+CRITICAL - 2022-12-27 11:02:18 --> Call to undefined method Modules\IngredientReportManagement\Models\IngredientReportModel::getIngredientStockIn
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(35): CodeIgniter\Model->__call('getIngredientSt...', Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->index()
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 11:09:23 --> Call to undefined method Modules\IngredientReportManagement\Models\IngredientReportModel::getIngredientReports
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(184): CodeIgniter\Model->__call('getIngredientRe...', Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->stockReport('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 11:49:03 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Views\ingredient\viewStocks.php(62): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 62, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Product...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Product...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(53): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->viewStocks('5')
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-12-27 11:50:38 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Views\ingredient\viewStocks.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Product...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Product...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(53): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->viewStocks('5')
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-12-27 11:53:37 --> Undefined offset: 0
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'C:\\xampp\\htdocs...', 45, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->viewStocks('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 12:29:32 --> Undefined index: description
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Views\ingredient\viewStocks.php(65): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 65, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\Product...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\index.php(10): view('Modules\\Product...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/index', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(53): view('templates/index', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->viewStocks('5')
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2022-12-27 13:06:46 --> Call to a member function orderBy() on array
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->viewStocks('5')
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#5 {main}
+CRITICAL - 2022-12-27 16:24:56 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:27:32 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:28:14 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:28:28 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:29:10 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:29:20 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:29:56 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+CRITICAL - 2022-12-27 16:30:56 --> Undefined index: date_expiration
+#0 C:\xampp\htdocs\lrfoims\modules\ProductManagement\Controllers\Product.php(191): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 191, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\ProductManagement\Controllers\Product->updateStocksByExpirationDate('5')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\ProductManagement\Controllers\Product))
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#6 {main}

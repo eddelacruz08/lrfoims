@@ -43,13 +43,13 @@
                                                 </div>
                                             </div>
                                             <?php if ($details['order_status_id'] == 2):?>   
-                                                <div class="process-line" style="width: 33%;"></div>
+                                                <div class="process-line" style="width: 0%;"></div>
                                             <?php elseif ($details['order_status_id'] == 3):?>  
-                                                <div class="process-line" style="width: 66%;"></div>
+                                                <div class="process-line" style="width: 33%;"></div>
                                             <?php elseif ($details['order_status_id'] == 4):?>  
-                                                <div class="process-line" style="width: 99%;"></div>
+                                                <div class="process-line" style="width: 66%;"></div>
                                             <?php elseif ($details['order_status_id'] == 5):?>  
-                                                <div class="process-line" style="width: 100%;"></div>
+                                                <div class="process-line" style="width: 99%;"></div>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -75,13 +75,13 @@
                                             </div>
                                         </div>
                                         <?php if ($details['order_status_id'] == 2):?>   
-                                            <div class="process-line" style="width: 33%;"></div>
+                                            <div class="process-line" style="width: 0%;"></div>
                                         <?php elseif ($details['order_status_id'] == 3):?>  
-                                            <div class="process-line" style="width: 66%;"></div>
+                                            <div class="process-line" style="width: 33%;"></div>
                                         <?php elseif ($details['order_status_id'] == 4):?>  
-                                            <div class="process-line" style="width: 99%;"></div>
+                                            <div class="process-line" style="width: 66%;"></div>
                                         <?php elseif ($details['order_status_id'] == 5):?>  
-                                            <div class="process-line" style="width: 100%;"></div>
+                                            <div class="process-line" style="width: 99%;"></div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -95,6 +95,7 @@
                                         <div class="row">
                                             <div class="col-lg-8">
                                                 <div class="table-responsive">
+                                                    <span class="badge badge-outline-danger rounded-pill m-1 h3">*Limit of <?=$orderMaxLimit['max_limit']?> orders only.</span>
                                                     <table class="table table-borderless table-centered mb-0">
                                                         <thead class="table-light">
                                                             <tr>
@@ -135,8 +136,8 @@
                                                                                 <?php else: ?>
                                                                                     <form method="POST" action="/cart/qty/<?= $row['id']; ?>" enctype="multipart/form-data">
                                                                                         <div class="input-group">
-                                                                                            <input type="number" name="quantity" value="<?=$row['quantity'] ?>" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" 
-                                                                                                value="1" class="form-control <?= isset($errors['quantity']) ? 'is-invalid':'' ?>" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
+                                                                                            <input type="number" name="quantity" value="<?=$row['quantity'] ?>" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" 
+                                                                                                value="1" class="form-control <?= isset($errors['quantity']) ? 'is-invalid':'' ?>" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2" required>
                                                                                             <button class="btn btn-sm btn-outline-secondary m-0 p-1" animation="true" type="submit" id="button-addon2" title="Change Quantity">Change</button>
                                                                                         </div>
                                                                                     </form> 
@@ -221,8 +222,8 @@
                                                         <div class="card p-0 mt-3">
                                                             <div class="card-body p-1 m-1 border-success">
                                                                 <ul class="conversation-list p-1" data-simplebar style="max-height: 200px">
-                                                                    <div id="getmsg<?=$details['id']?>">
-                                                                    </div>
+                                                                    <div id="getBotmsg"></div>
+                                                                    <div id="getmsg<?=$details['id']?>"></div>
                                                                 </ul>
                                                                 <div class="row">
                                                                     <div class="col">
@@ -268,6 +269,7 @@
                                                                         dataType: 'JSON',
                                                                         success: function(data){
                                                                             var html = "";
+                                                                            var htmlBot = "";
                                                                             var odd = null;
                                                                             for(i=0; i<data.length; i++){
                                                                                 var date = new Date(data[i].created_at);
@@ -299,11 +301,31 @@
                                                                                     "</div>"+
                                                                                 "</li>";
                                                                             }
+                                                                            var date = new Date();
+                                                                            var hours = date.getHours();
+                                                                            var minutes = date.getMinutes();
+                                                                            var ampm = hours >= 12 ? 'pm' : 'am';
+                                                                            hours = hours % 12;
+                                                                            hours = hours ? hours : 12; // the hour '0' should be '12'
+                                                                            minutes = minutes < 10 ? '0'+minutes : minutes;
+                                                                            var strTime = hours + ':' + minutes + ' ' + ampm;
+                                                                            htmlBot += 
+                                                                            "<li class='clearfix mb-1'>"+
+                                                                                "<div class='chat-avatar'>"+
+                                                                                    "<img src='/assets/img/user.jpg' class='rounded-circle' alt='LAMON Restaurant' />"+
+                                                                                    "<i>"+strTime+"</i>"+
+                                                                                "</div>"+
+                                                                                "<div class='conversation-text'>"+
+                                                                                    "<div class='ctext-wrap'>"+
+                                                                                        "<i>LAMON Restaurant</i>"+
+                                                                                        "<p class='text-break'>"+
+                                                                                            "Please wait for your orders. Thank you!" +
+                                                                                        "</p>"+
+                                                                                    "</div>"+
+                                                                                "</div>"+
+                                                                                "</li>";
+                                                                            $("#getBotmsg").html(htmlBot);
                                                                             $("#getmsg<?=$details['id']?>").html(html);
-                                                                        },
-                                                                        error: function(err)
-                                                                        {
-                                                                            console.log(err);
                                                                         }
                                                                     });
                                                                 }

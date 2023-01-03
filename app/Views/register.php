@@ -66,7 +66,7 @@
                         <div class="row mb-1">
                             <div class="col-sm-12">
                                 <label for="inputAddress2">Region: <small class="text-danger">*</small></label>
-                                <select class="form-select <?= isset($errors['region_id']) ? 'is-invalid':'' ?>" name="region_id" id="region_id">
+                                <select class="form-select <?= isset($errors['region_id']) ? 'is-invalid':'' ?>" value="<?= set_value('region_id');?>" name="region_id" id="region_id">
                                     <option selected disabled>-- select region --</option>
                                 </select>
                                 <?php if(isset($errors['region_id'])):?>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-sm-12 mt-1">
                                 <label for="inputAddress2">Province: <small class="text-danger">*</small></label>
-                                <select class="form-select <?= isset($errors['province_id']) ? 'is-invalid':'' ?>" name="province_id" id="province_id">
+                                <select class="form-select <?= isset($errors['province_id']) ? 'is-invalid':'' ?>" value="<?= set_value('province_id');?>" name="province_id" id="province_id">
                                     <option selected disabled>-- select province --</option>
                                 </select>
                                 <?php if(isset($errors['province_id'])):?>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-sm-12 mt-1">
                                 <label for="inputAddress2">City: <small class="text-danger">*</small></label>
-                                <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id">
+                                <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" value="<?= set_value('city_id');?>" name="city_id" id="city_id">
                                     <option selected disabled>-- select city --</option>
                                 </select>
                                 <?php if(isset($errors['city_id'])):?>
@@ -92,8 +92,8 @@
                                 <?php endif;?>
                             </div>
                             <div class="col-sm-12 mt-1">
-                                <label for="inputAddress2">House #, Street & Baranggay: <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= set_value('addtl_address');?>" placeholder="(House #, Street & Baranggay)">
+                                <label for="inputAddress2">House #, Street & Barangay: <small class="text-danger">*</small></label>
+                                <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= set_value('addtl_address');?>" placeholder="(House #, Street & Barangay)">
                                 <?php if(isset($errors['addtl_address'])):?>
                                     <small class="text-danger"><?=esc($errors['addtl_address'])?></small>
                                 <?php endif;?>
@@ -125,7 +125,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 </div>
@@ -136,18 +136,14 @@
             function showRegion() {
                 $.ajax({
                     type: "GET",
-                    url: '/regions',
+                    url: '/get-regions',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        console.log(data);
                         for(i=0; i<data.length; i++){
                             $('#region_id').append($('<option>', {value: data[i].region_code, text: data[i].region_name}));
                             document.getElementById("region_id").value = data[i].id;
                         }
-                    },
-                    error: function(err) {
-                        console.log(err);
                     }
                 });
             }
@@ -155,7 +151,7 @@
                 var regionCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/provinces/'+ regionCode ,
+                    url: '/get-provinces/'+ regionCode ,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
@@ -166,9 +162,6 @@
                             $('#province_id').append($('<option>', {value: data[i].province_code, text:data[i].province_name}));
                             document.getElementById("province_id").value = data[i].id;
                         }
-                    },
-                    error: function(err) {
-                        console.log(err);
                     }
                 });
             });
@@ -176,7 +169,7 @@
                 var provinceCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/cities/'+provinceCode,
+                    url: '/get-cities/'+provinceCode,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
@@ -187,9 +180,6 @@
                             $('#city_id').append($('<option>', {value: data[i].city_code, text:data[i].city_name}));
                             document.getElementById("city_id").value = data[i].id;
                         }
-                    },
-                    error: function(err) {
-                        console.log(err);
                     }
                 });
             });
@@ -213,3 +203,4 @@
             });
         });
     </script>
+    <?= $this->include('templates/notifications'); ?>

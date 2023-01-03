@@ -80,8 +80,8 @@
                                                 </div>  
                                                 <div class="form-row mb-2">
                                                     <div class="form-group col-md-12">
-                                                        <label for="quantity">Quantity <small class="text-danger">*</small></label>
-                                                        <input type="number" id="quantity" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" placeholder="Quantity" required class="form-control">
+                                                        <label for="quantity">Quantity <small class="text-danger">*(Limit of <?=$orderMaxLimit['max_limit']?> orders only.)</small></label>
+                                                        <input type="number" id="quantity" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" placeholder="Quantity" required class="form-control">
                                                         <div class="invalid-feedback">
                                                             Please input quantity.
                                                         </div>

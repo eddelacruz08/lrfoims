@@ -16,6 +16,19 @@
         </div>     
         <!-- end page title --> 
 
+        <?php if(isset($_SESSION['success'])):?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= $_SESSION['success'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif;?>
+
+        <?php if(isset($_SESSION['error'])):?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $_SESSION['error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif;?>
 
         <div class="row">
             <div class="col-sm-12">
@@ -73,7 +86,8 @@
                                                                     $full_address .= ', '.$region['region_name'];
                                                                 }
                                                             }
-                                                            echo $full_address;
+                                                            $str = strtolower($full_address);
+                                                            echo ucwords($str);
                                                         ?>
                                                     </span>
                                                 </p>

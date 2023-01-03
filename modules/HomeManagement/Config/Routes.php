@@ -3,6 +3,7 @@
 $routes->group('',['namespace' => 'Modules\HomeManagement\Controllers'],function ($routes) {
     $routes->add('/', 'Home::index');
     $routes->add('menu', 'Home::menu');
+    $routes->add('order-status-list', 'Home::ongoingOrderStatusList');
     $routes->add('cart', 'Home::cart');
     $routes->match(['get', 'post'], '/cart/qty/(:num)', 'Home::editCartQuantity/$1');
     $routes->add('cart/d/(:num)', 'Home::deleteCart/$1');

@@ -35,11 +35,11 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <?php if(user_link('roles-permissions/a', session()->get('userPermissionView'))):?>
+                <!-- <?php if(user_link('roles-permissions/a', session()->get('userPermissionView'))):?>
                     <a class="btn btn-primary btn-sm float-end" href="/roles-permissions/a" role="button">  Add </a>
                 <?php else: ?>
                     <button type="button" class="btn btn-secondary btn-sm">No Permission | Add Button</button>
-                <?php endif; ?>
+                <?php endif; ?> -->
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">

@@ -61,7 +61,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="inputAddress2">Contact Number: <small class="text-danger">* (ex.09*********)</small></label>
-                                <input type="text" class="form-control <?= isset($errors['contact_number']) ? 'is-invalid':'' ?>" name="contact_number" id="contact_number" value="<?= set_value('contact_number');?>" placeholder="Enter contact number">
+                                <input type="text" class="form-control <?= isset($errors['contact_number']) ? 'is-invalid':'' ?>" name="contact_number" id="contact_number" value="<?= isset($value['contact_number']) ? esc($value['contact_number']) : '' ?>" placeholder="Enter contact number">
                             </div>
                             <?php if(isset($errors['contact_number'])):?>
                                 <small class="text-danger"><?=esc($errors['contact_number'])?></small>
@@ -71,7 +71,7 @@
                     <div class="row mb-1">
                         <div class="col-sm-12">
                             <label for="inputAddress2">Region: <small class="text-danger">*</small></label>
-                            <select class="form-select <?= isset($errors['region_id']) ? 'is-invalid':'' ?>" name="region_id" id="region_id">
+                            <select class="form-select <?= isset($errors['region_id']) ? 'is-invalid':'' ?>" name="region_id" id="region_id" value="<?= isset($value['region_id']) ? esc($value['region_id']) : '' ?>">
                                 <option selected disabled>-- select region --</option>
                             </select>
                             <?php if(isset($errors['region_id'])):?>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-sm-12 mt-1">
                             <label for="inputAddress2">Province: <small class="text-danger">*</small></label>
-                            <select class="form-select <?= isset($errors['province_id']) ? 'is-invalid':'' ?>" name="province_id" id="province_id">
+                            <select class="form-select <?= isset($errors['province_id']) ? 'is-invalid':'' ?>" name="province_id" id="province_id" value="<?= isset($value['province_id']) ? esc($value['province_id']) : '' ?>">
                                 <option selected disabled>-- select province --</option>
                             </select>
                             <?php if(isset($errors['province_id'])):?>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-12 mt-1">
                             <label for="inputAddress2">City: <small class="text-danger">*</small></label>
-                            <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id">
+                            <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id" value="<?= isset($value['city_id']) ? esc($value['city_id']) : '' ?>">
                                 <option selected disabled>-- select city --</option>
                             </select>
                             <?php if(isset($errors['city_id'])):?>
@@ -97,8 +97,8 @@
                             <?php endif;?>
                         </div>
                         <div class="col-sm-12 mt-1">
-                            <label for="inputAddress2">House #, Street & Baranggay: <small class="text-danger">*</small></label>
-                            <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= set_value('addtl_address');?>" placeholder="(House #, Street & Baranggay)">
+                            <label for="inputAddress2">House #, Street & Barangay: <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control <?= isset($errors['addtl_address']) ? 'is-invalid':'' ?>" name="addtl_address" id="addtl_address" value="<?= isset($value['addtl_address']) ? esc($value['addtl_address']) : '' ?>" placeholder="(House #, Street & Barangay)">
                             <?php if(isset($errors['addtl_address'])):?>
                                 <small class="text-danger"><?=esc($errors['addtl_address'])?></small>
                             <?php endif;?>
@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="inputAddress2">Password <small class="text-danger">*</small></label>
-                            <input type="password" class="form-control <?= isset($errors['password']) ? 'is-invalid':'is-valid' ?> " name="password" id="password" placeholder="Password">
+                            <input type="password" class="form-control <?= isset($errors['password']) ? 'is-invalid':'is-valid' ?> " name="password" id="password" placeholder="Password" valu="<?= isset($value['password']) ? esc($value['password']) : '' ?>">
                             <?php if(isset($errors['password'])):?>
                                 <small class="text-danger"><?=esc($errors['password'])?></small>
                             <?php endif;?>    
@@ -136,7 +136,7 @@
             function showRegion() {
                 $.ajax({
                     type: "GET",
-                    url: '/regions',
+                    url: '/get-regions',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
@@ -154,7 +154,7 @@
                 var regionCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/provinces/'+ regionCode ,
+                    url: '/get-provinces/'+ regionCode ,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
@@ -174,7 +174,7 @@
                 var provinceCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/cities/'+provinceCode,
+                    url: '/get-cities/'+provinceCode,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){

@@ -89,7 +89,7 @@
                                                             <?php else: ?>
                                                                 <form method="POST" action="/orders/admin-menu/add-to-cart/a" enctype="multipart/form-data">
                                                                     <div class="d-flex flex-column">
-                                                                        <input type="number" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" value="1" class="form-control" placeholder="Quantity">
+                                                                        <input type="number" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" value="1" class="form-control" placeholder="Quantity" required>
                                                                         <?php if(isset($errors['order_number_id'])):?>
                                                                             <small class="text-danger"><?=esc($errors['order_number_id'])?></small>
                                                                         <?php endif;?>
@@ -134,7 +134,7 @@
                                                                         <div class="media-body">
                                                                             <form method="POST" action="/orders/admin-menu/cart/qty/<?= $adminCart['id']; ?>/<?=$adminCart['menu_id']?>/<?=$adminCart['order_id']?>/<?=$adminCart['quantity']?>/1" enctype="multipart/form-data">
                                                                                 <div class="input-group">
-                                                                                    <input type="number" name="quantity" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="<?= $adminCart['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2">
+                                                                                    <input type="number" name="quantity" min="1"  max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="<?= $adminCart['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2" required>
                                                                                     <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity"><i class="fas fa-plus-circle"></i>&nbspChange</button>
                                                                                 </div>
                                                                             </form>

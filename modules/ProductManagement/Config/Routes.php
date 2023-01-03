@@ -2,8 +2,14 @@
 
 $routes->group('ingredients', ['namespace' => 'Modules\ProductManagement\Controllers'], function ($routes) {
     $routes->add('/', 'Product::index');
+    $routes->add('v/(:num)', 'Product::viewStocks/$1');
+    $routes->add('list/v', 'Product::getViewStocks');
     $routes->match(['get', 'post'], 'a', 'Product::add');
     $routes->match(['get', 'post'], 'u/(:num)', 'Product::edit/$1');
+    $routes->match(['get', 'post'], 'expire-date/u/(:num)/(:num)', 'Product::updateStocksByExpirationDate/$1/$2');
+    $routes->match(['get', 'post'], 'update-date/u/(:num)', 'Product::updateDateStocks/$1');
+    $routes->match(['get', 'post'], 'notify-marked/u/(:num)', 'Product::notificationMarked/$1');
+    $routes->match(['get', 'post'], 'notification/a', 'Product::notification');
     $routes->match(['get', 'post'], 'status/(:num)', 'Product::editStatus/$1');
     $routes->add('d/(:num)', 'Product::delete/$1');
     $routes->match(['get', 'post'], 'batch-upload/export', 'Product::exportIngredients');

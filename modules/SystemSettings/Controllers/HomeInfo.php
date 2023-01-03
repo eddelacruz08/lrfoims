@@ -7,6 +7,9 @@ class HomeInfo extends BaseController
 {
 	function __construct(){
 		$this->infoModel = new SystemSettings\HomeInfoModel();
+		$this->regionModel = new SystemSettings\RegionModel();
+		$this->provinceModel = new SystemSettings\ProvinceModel();
+		$this->cityModel = new SystemSettings\CityModel();
 		helper(['form']);
 	}
 
@@ -16,6 +19,9 @@ class HomeInfo extends BaseController
 			'title' => 'Home Details',
 			'view' => 'Modules\SystemSettings\Views\homeDetails\index',
 			'homeDetails' => $this->infoModel->get(),
+            'regions' => $this->regionModel->get(['status'=>'a']), 
+            'provinces' => $this->provinceModel->get(['status'=>'a']),
+            'cities' => $this->cityModel->get(['status'=>'a']),
 		];
 
 		return view('templates/index', $data);
@@ -54,7 +60,7 @@ class HomeInfo extends BaseController
                 $_POST['image'] = $imageName;
                 $this->infoModel->update($id, $_POST);
                 $this->session->setFlashdata('success', 'Details successfully updated');
-                return redirect()->to('/order-numbers');
+                return redirect()->to('/home-details');
             }
         }
         return view('templates/index', $data);

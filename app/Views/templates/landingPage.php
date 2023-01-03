@@ -79,18 +79,24 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                     <?php endforeach; ?>
+                    <!-- <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="/order-status-list">Order Status List</a>
+                    </li> -->
                 <?php else: ?>
                     <li class="nav-item mx-lg-1">
                         <a class="nav-link active" href="/">Home</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link active" href="javascript:void(0);">Menu</a>
+                        <a class="nav-link active" href="/register">Menu</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link active" href="javascript:void(0);">Cart</a>
+                        <a class="nav-link active" href="/register">Cart</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link active" href="javascript:void(0);">Profile</a>
+                        <a class="nav-link active" href="/register">Profile</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link btn btn-default rounded active" href="/order-status-list">Order Status List</a>
                     </li>
                 <?php endif; ?>
             </ul>
@@ -161,7 +167,34 @@
                 <h5 class="text-light">Location</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['location']) ? $homeDetails['location'] : 'Location'?></a></li>
+                    <li class="mt-2">
+                        <a href="javascript: void(0);" class="text-muted">
+                            <?php
+                                $full_address = '';
+                                foreach ($cities as $city) {
+                                    if($city['city_code'] == $homeDetails['city_id']){
+                                        $full_address .= $homeDetails['addtl_address'].', '.$city['city_name'];
+                                    }
+                                }
+                                foreach ($provinces as $province) {
+                                    if($province['province_code'] == $homeDetails['province_id']){
+                                        $full_address .= ', '.$province['province_name'];
+                                    }
+                                }
+                                foreach ($regions as $region) {
+                                    if($region['region_code'] == $homeDetails['region_id']){
+                                        $full_address .= ', '.$region['region_name'];
+                                    }
+                                }
+                                if($full_address != ''){
+                                    $str = strtolower($full_address);
+                                    echo ucwords($str);
+                                } else {
+                                    echo 'Location';
+                                }
+                            ?>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -178,7 +211,7 @@
                 <h5 class="text-light">Email</h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['email_address']) ? $homeDetails['email_address'] : 'email_address'?></a></li>
+                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted"><?= isset($homeDetails['email_address']) ? $homeDetails['email_address'] : 'email address'?></a></li>
                 </ul>
             </div>
         </div>

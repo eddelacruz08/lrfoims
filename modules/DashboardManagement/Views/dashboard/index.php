@@ -14,28 +14,28 @@
 <!-- end page title --> 
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
         <div class="card widget-inline">
             <div class="card-body p-0">
                 <div class="row g-0">
 
-                    <div class="col-sm-6 col-xl-3">
+                    <div class="col-sm-6 col-xl-6">
                         <div class="card shadow-none m-0 border-start">
                             <div class="card-body text-center">
-                                <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                <i class="mdi mdi-cart-outline text-muted" style="font-size: 24px;"></i>
                                 <h3>
                                     <span>
-                                        <?php foreach ($getTotalUsers as $totalUsers): ?>
-                                            <?=$totalUsers['getTotalUsers'];?>
+                                        <?php foreach ($getTotalPendingOrders as $totalPendingOrders): ?>
+                                            <?=$totalPendingOrders['getTotalPendingOrders'];?>
                                         <?php endforeach; ?>
                                     </span>
                                 </h3>
-                                <p class="text-muted font-15 mb-0">Total Users</p>
+                                <p class="text-muted font-15 mb-0">Total Pending Orders</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-xl-3">
+                    <div class="col-sm-6 col-xl-6">
                         <div class="card shadow-none m-0 border-start">
                             <div class="card-body text-center">
                                 <i class="mdi mdi-cart-outline text-muted" style="font-size: 24px;"></i>
@@ -51,38 +51,6 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card shadow-none m-0 border-start">
-                            <div class="card-body text-center">
-                                <i class="mdi mdi-food text-muted" style="font-size: 24px;"></i>
-                                <h3>
-                                    <span>
-                                        <?php foreach ($getTotalIngredients as $totalIngredients): ?>
-                                            <?=$totalIngredients['getTotalIngredients'];?>
-                                        <?php endforeach; ?>
-                                    </span>
-                                </h3>
-                                <p class="text-muted font-15 mb-0">Total Ingredients</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card shadow-none m-0 border-start">
-                            <div class="card-body text-center">
-                                <i class="mdi mdi-clipboard-list-outline text-muted" style="font-size: 24px;"></i>
-                                <h3>
-                                    <span>
-                                        <?php foreach ($getTotalLogs as $totalLogs): ?>
-                                            <?=$totalLogs['getTotalLogs'];?>
-                                        <?php endforeach; ?>
-                                    </span>
-                                </h3>
-                                <p class="text-muted font-15 mb-0">Total Activities</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div> <!-- end row -->
             </div>
         </div> <!-- end card-box-->
@@ -90,84 +58,210 @@
 </div>
 <!-- end row-->
 
-
 <div class="row">
-
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <a type="button" class="btn btn-outline-dark btn-sm float-end m-0">Export</a>
-                <h4 class="header-title mb-3">Recent Activities</h4>
-
+                <h4 class="header-title mb-2">Expiring Ingredients</h4>
                 <div class="table-responsive">
-                    <table class="table table-centered table-nowrap table-hover mb-0">
+                    <table class="table table-sm table-centered table-nowrap table-hover text-center w-100 mb-0">
+                        <thead>
+                            <tr>
+                                <th>Ingredient Name</th>
+                                <th>Unit Quantity</th>
+                                <th>Current Price</th>
+                                <th>Expiry Date</th>
+                                <th>Expiry Status</th>
+                                <th>Status</th>
+                                <th>Created Date</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <?php if (!empty($getActivities)): ?>
-                                <?php foreach ($getActivities as $activity): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-start">
-                                                <img class="me-2 rounded-circle" src="/assets/img/user.jpg" width="40" alt="Generic placeholder image">
-                                                <div>
-                                                    <?php foreach ($getUsers as $user): ?>
-                                                        <?php if ($user['id'] == $activity['user_id']): ?>
-                                                            <h5 class="mt-0 mb-1"><?=$user['first_name'].' '.$user['last_name'] ;?>
-                                                                <small class="fw-normal ms-3"><?=Date('F d, Y - h:i a', strtotime($activity['created_at']))?></small>
-                                                            </h5>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                    <span class="font-13"><?=ucfirst($activity['description']);?></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <?php foreach ($getUsers as $user): ?>
-                                                <?php if ($user['id'] == $activity['user_id']): ?>
-                                                    <span class="text-muted font-13"><?=$user['username'];?></span> <br/>
-                                                    <?php foreach ($getRoles as $role): ?>
-                                                        <?php if ($role['id'] == $user['role_id']): ?>
-                                                            <p class="mb-0"><?=ucwords($role['role_name']) ;?></p>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </td>
-                                    </tr>
+                            <?php foreach ($ingredientStockIn as $stockIn) : ?>
+                                <?php foreach ($ingredients as $ingredient) : ?>
+                                    <?php if ($ingredient['id'] == $stockIn['ingredient_id']) : ?>
+                                        <tr>
+                                            <td>
+                                                <center><?= ucfirst($ingredient['product_name']) ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?= number_format($stockIn['unit_quantity'],3) ?></center>
+                                            </td>
+                                            <td>
+                                                <center>₱ <?= number_format($stockIn['unit_price'],2); ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?= date('F d, Y',strtotime($stockIn['date_expiration'])); ?></center>
+                                            </td>
+                                            <td>
+                                                <div id="demo<?=$stockIn['id'];?>"></div>
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        setInterval(
+                                                            getExpirationDate(<?=$stockIn['ingredient_id'];?>, <?=$stockIn['id'];?>, "<?= date('M d, Y H:i:s', strtotime($stockIn['date_expiration'])) ?>")
+                                                        , 1000);
+                                                        function getExpirationDate(ingredient_id, demoId, date){
+                                                            // Set the date we're counting down to
+                                                            var countDownDate = new Date(date).getTime();
+                                                            // Update the count down every 1 second
+                                                            var x = setInterval(function() {
+
+                                                                // Get today's date and time
+                                                                var now = new Date().getTime();
+
+                                                                // Find the distance between now and the count down date
+                                                                var distance = countDownDate - now;
+                                                                // console.log(distance);
+                                                                // Time calculations for days, hours, minutes and seconds
+                                                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                                                                
+                                                                if(days <= 3 && "<?=$stockIn['status']?>" === 'a'){
+                                                                    // Display the result in the element with id="demo"
+                                                                    document.getElementById("demo"+demoId).innerHTML = "<button class='btn btn-sm btn-outline-danger'>"+days + "d " + hours + "h "
+                                                                    + minutes + "m " + seconds + "s "+"</button>";
+                                                                }else{
+                                                                    // Display the result in the element with id="demo"
+                                                                    document.getElementById("demo"+demoId).innerHTML = "<button class='btn btn-sm btn-outline-dark'>"+days + "d " + hours + "h "
+                                                                    + minutes + "m " + seconds + "s "+"</button>";
+                                                                }
+
+                                                                // Get today's date and time
+                                                                var dateNow = new Date();
+
+                                                                if(days <= 3 && "<?=$stockIn['status']?>" === 'a'){
+                                                                    showNotification();
+                                                                    function showNotification() {
+                                                                        var getDateFromLocalStorage = localStorage.getItem('Stock Id: '+demoId);
+                                                                        if(getDateFromLocalStorage == null){
+                                                                            localStorage.setItem('Stock Id: '+ demoId, dateNow);
+                                                                            $.ajax({
+                                                                                url: "/ingredients/notification/a/",
+                                                                                type: "POST",
+                                                                                data:{
+                                                                                    user_id: <?=session()->get('id');?>,
+                                                                                    name: "<?=$title?>",
+                                                                                    description: 'Expiring after '+days+' days!',
+                                                                                    link: "ingredients/v/"+ingredient_id,
+                                                                                },
+                                                                                cache: false,
+                                                                                success: function () {
+                                                                                    console.log("Successfully sent a notification!");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }
+                                                                }
+                                                                // If the count down is finished, write some text
+                                                                if (distance < 0) {
+                                                                    clearInterval(x);
+                                                                    if("<?=$stockIn['status']?>" == 'd'){
+                                                                        document.getElementById("demo"+demoId).innerHTML = "<button class='btn btn-sm btn-danger' disabled>EXPIRED</button>";
+                                                                    }else{
+                                                                        $.ajax({
+                                                                            url: "/ingredients/expire-date/u/" + ingredient_id + "/" + demoId,
+                                                                            type: "POST",
+                                                                            data:{
+                                                                                unit_quantity: <?=$stockIn['unit_quantity']?>,
+                                                                            },
+                                                                            cache: false,
+                                                                            success: function (response) {
+                                                                                if("<?=$stockIn['status']?>" != 'd'){
+                                                                                }else{
+
+                                                                                }
+                                                                                document.getElementById("demo"+demoId).innerHTML = "<button class='btn btn-sm btn-danger' disabled>EXPIRED</button>";
+                                                                                window.location.reload();
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            }, 1000);
+                                                        }
+                                                    });
+                                                </script>
+                                            </td>
+                                            <td>
+                                                <center><?= ($stockIn['status'] == 'a' ? "<span class='badge bg-success'>Ongoing</span>":"<span class='badge bg-danger'>Expired</span>") ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?= date('F d, Y - H:i a',strtotime($stockIn['created_at'])); ?></center>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                            <?php else: ?>
-                                No available data
-                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-2">Pending Orders</h4>
+                <div class="table-responsive">
+                    <table class="table table-sm table-centered table-nowrap table-hover text-center w-100 mb-0">
+                        <thead>
+                            <tr>
+                                <th>Order#</th>
+                                <th>Status</th>
+                                <th>Order Type</th>
+                                <th>Date & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($getPendingOrders as $row): ?> 
+                                <tr>
+                                    <td>Order#<?=$row['number']?></td>
+                                    <td><span class="badge bg-warning"><?=$row['order_status']?></span></td>
+                                    <td><span class="badge bg-primary"><?=$row['type']?></span></td>
+                                    <td><?= Date('M d, Y - h:i a', strtotime($row['created_at']))?></td>
+                                </tr>
+                            <?php endforeach; ?>
                             
                         </tbody>
                     </table>
-                    <style type="text/css"> 
-                        .paginate a { 
-                            padding-left: 5px; 
-                            padding-right: 5px; 
-                            margin-left: 5px; 
-                            margin-right: 5px; 
-                        } 
-                        .paginate .pagination li.active{
-                            background: deepskyblue;
-                            color: white;
-                        }
-                        .paginate .pagination li.active a{
-                            color: white;
-                            text-decoration: none;
-                        }
-                    </style>
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-end paginate">
-                        <?php if ($pager) :?>
-                            <?php $pagi_path='dashboard'; ?>
-                            <?php $pager->setPath($pagi_path); ?>
-                            <?= $pager->links() ?>
-                        <?php endif ?>
-                    </div>
-                </div> <!-- end table-responsive-->
-
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-2">Best Foods & Sellers</h4>
+                <div class="table-responsive">
+                    <table id="basic-datatable" class="table table-sm text-center table-hover dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Menu Name</th>
+                                <th>Best Foods (Ratings)</th>
+                                <th>Best Sellers (Total Orders)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($menu as $row) : ?>
+                                <tr>
+                                    <td><?= ucfirst($row['menu']) ?></td>
+                                    <td><?= number_format($row['star_rate'], 2) ?></td>
+                                    <?php foreach ($getTotaBestFoods as $total) : ?>
+                                        <?php if ($total['menu_id'] == $row['id']) : ?>
+                                            <td><?= ucfirst($total['count_per_best_food']) ?></td>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- end row-->

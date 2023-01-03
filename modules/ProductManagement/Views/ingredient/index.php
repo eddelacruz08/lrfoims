@@ -48,7 +48,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="col-3"> 
-                        <?php if(user_link('ingredients/batch-upload/stock-in', session()->get('userPermissionView'))):?> 
+                        <!-- <?php if(user_link('ingredients/batch-upload/stock-in', session()->get('userPermissionView'))):?> 
                             <div class="ml-2 mr-2 float-end">
                                 <a href="/ingredients/batch-upload/stock-in" title="Batch Upload" class="btn btn-sm btn-secondary">Batch Upload</a>
                             </div>
@@ -56,7 +56,6 @@
                             <button type="button" class="btn btn-primary btn-sm mt-2">No Permission | Batch Upload!</button>
                         <?php endif; ?> 
                         <?php if(user_link('ingredients/batch-upload/export', session()->get('userPermissionView'))):?>
-                            <!-- Info Alert Modal -->
                             <div class="ml-2 ml-2 float-end">
                                 <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#info-alert-modal">Export</button>
                             </div>
@@ -78,12 +77,12 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
+                                    </div>
+                                </div>
+                            </div>
                         <?php else: ?>
                             <button type="button" class="btn btn-primary btn-sm mt-2">No Permission | export ingredients!</button>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
                     </div>
                 </div> 
 
@@ -112,13 +111,16 @@
                                                 <center>Unit of Measure</center>
                                             </th>
                                             <th scope="col">
-                                                <center>Total Amount</center>
+                                                <center>Current Price</center>
                                             </th>
                                             <th scope="col" class="table-active">
                                                 <center>Status</center>
                                             </th>
                                             <th scope="col">
-                                                <center>Manual Report</center>
+                                                <center>Stock In</center>
+                                            </th>
+                                            <th scope="col">
+                                                <center>View Stocks</center>
                                             </th>
                                             <th scope="col">
                                                 <center>Action</center>
@@ -126,7 +128,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($ingredients as $row) : ?>
+                                        <?php foreach ($getIngredients as $row) : ?>
                                             <?php if($category['id'] == $row['product_category_id']): ?>
                                                 <tr>
                                                     <td>
@@ -146,7 +148,7 @@
                                                     <td>
                                                         <center> 
                                                             <?php if(user_link('ingredients/stocks', session()->get('userPermissionView'))):?>
-                                                                <a href="/ingredients/stocks/<?= $row['id']; ?>" title="Stock In And Out" class="btn btn-sm btn-link"><u>Stock In & Out</u></a>
+                                                                <a href="/ingredients/stocks/<?= $row['id']; ?>" title="Stock In And Out" class="btn btn-sm btn-link"><u>Add Stock</u></a>
                                                             <?php else: ?>
                                                                 -
                                                             <?php endif; ?>
@@ -154,64 +156,21 @@
                                                     </td>
                                                     <td>
                                                         <center> 
-                                                            <!-- Info Header Modal -->
-                                                            <!-- <?php if(user_link('ingredients/stock-in-out/v', session()->get('userPermissionView'))):?>
-                                                                <button  type="button" class="btn btn-sm btn-link" data-bs-toggle="modal" title="View" data-bs-target="#ingredientReports<?=$row['id']?>"><u>View</u></button>
+                                                            <?php if(user_link('ingredients/stocks', session()->get('userPermissionView'))):?>
+                                                                <a href="/ingredients/v/<?= $row['id']; ?>" title="View" class="btn btn-sm btn-info"><i class="mdi mdi-eye h4"></i></a>
                                                             <?php else: ?>
                                                                 -
-                                                            <?php endif; ?> -->
+                                                            <?php endif; ?>
+                                                        </center>
+                                                    </td>
+                                                    <td>
+                                                        <center> 
                                                             <?php if(user_link('ingredients/u', session()->get('userPermissionView'))):?>
                                                                 <a href="/ingredients/u/<?= $row['id']; ?>" title="Edit" class="btn btn-sm btn-link"><u>Edit</u></a>
                                                             <?php else: ?>
                                                                 -
                                                             <?php endif; ?>
                                                         </center>
-                                                        <!-- <div id="ingredientReports<?=$row['id']?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header modal-colored-header bg-primary">
-                                                                        <h4 class="modal-title" id="primary-header-modalLabel"><?= ucfirst($row['product_name']); ?></h4>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <table class="table table-centered mb-0">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th><center>Unit Of Measure</center></th>
-                                                                                    <th><center>Unit Price</center></th>
-                                                                                    <th><center>Total Price</center></th>
-                                                                                    <th><center>Status</center></th>
-                                                                                    <th><center>Date & Time</center></th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <?php foreach ($ingredientReports as $reports) : ?>
-                                                                                    <?php if($reports['ingredient_id'] == $row['id']): ?>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <center><?= number_format($reports['unit_quantity'],3).' '.$reports['description'] ?></center>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <center>₱ <?= number_format($reports['unit_price'],2); ?></center>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <center>₱ <?= number_format($reports['total_unit_price'],2); ?></center>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <center><?= ($reports['stock_status'] == 1) ? '<span class="badge badge-spill bg-success">Stock In</span>': '<span class="badge badge-spill bg-danger">Stock Out</span>'; ?></center>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <center><?= Date('F d, Y - h:i a', strtotime($reports['created_at'])); ?></center>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
