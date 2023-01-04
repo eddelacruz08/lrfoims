@@ -44,6 +44,7 @@ class Home extends BaseController
 			'title' => 'LAMON',
 			'view' => 'Modules\HomeManagement\Views\home\index',
 			'menu' => $this->menuModel->get(),
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
 			'menuCategory' => $this->menuCategoryModel->get(),
 			'homeDetails' => $this->infoModel->get()[0],
 			'regions' => $this->regionModel->get(['status'=>'a']),
@@ -66,6 +67,7 @@ class Home extends BaseController
 			'menu' => $this->menuModel->get(),
 			'menuCategory' => $this->menuCategoryModel->get(),
 			'homeDetails' => $this->infoModel->get()[0],
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
@@ -85,6 +87,7 @@ class Home extends BaseController
 			'view' => 'Modules\HomeManagement\Views\home\menu',
 			'menu' => $this->menuModel->get(),
 			'menuCategory' => $this->menuCategoryModel->get(),
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
 			'homeDetails' => $this->infoModel->get()[0],
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
@@ -94,13 +97,26 @@ class Home extends BaseController
 										'lrfoims_carts.status'=>'a','o.order_status_id'=>1]);
 		session()->set($dataSession);
 		return view('templates/landingPage',$data);
-	}
+	} 
 	
 	public function addToCart() {
         $this->hasPermissionRedirect('menu/a');
 
         $time = new \DateTime();
-		$orderNumber = $this->ordersModel->generateOrderNumber()[0];
+		function random_string($length) {
+			$key = '';
+			$keys = range(0, 9);
+			for ($i = 0; $i < $length; $i++) {
+				$key .= $keys[array_rand($keys)];
+			}
+			return $key;
+		}
+		$orderNumberIsTrue = $this->ordersModel->generateOrderNumber();
+		if(!empty($orderNumberIsTrue)){
+			$orderNumber = $this->ordersModel->generateOrderNumber()[0];
+		}else{
+			$orderNumber['number'] = random_string(4);
+		}
 
         $checkOngoingOrder = $this->ordersModel->getCheckOngoingOrder(['user_id' => session()->get('id'), 'status' => 'a']);
 
@@ -334,6 +350,7 @@ class Home extends BaseController
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
 			'orderType' => $this->orderTypeModel->get(),
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
 			'getCustomerCartDetails' => $this->cartsModel->getCustomerCartDetails(['lrfoims_carts.status' => 'a']),
 			'getCartTotalPrice' => $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a']),
 			'getCustomerOrderDetails' => $this->ordersModel->getCustomerOrderDetails(['lrfoims_orders.user_id' => session()->get('id'),'lrfoims_orders.status' => 'a']),
@@ -404,6 +421,7 @@ class Home extends BaseController
         $data = [
             'page_title' => 'LRFOIMS | Cart',
             'title' => 'Cart',
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
             'view' => 'Modules\HomeManagement\Views\home\cart'
         ];
         if ($this->request->getMethod() == 'post') {
@@ -439,6 +457,7 @@ class Home extends BaseController
 			'page_title' => 'LRFOIMS | Profile',
 			'title' => 'Profile',
 			'view' => 'Modules\HomeManagement\Views\home\profile',
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
 			'homeDetails' => $this->infoModel->get()[0],
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
@@ -476,6 +495,7 @@ class Home extends BaseController
             'view' => 'Modules\HomeManagement\Views\home\editProfile',
             'edit' => true,
             'id' => $id,
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
             'roles' => $this->rolesModel->get(),
 			'homeDetails' => $this->infoModel->get()[0],
             'regions' => $this->regionModel->get(['status'=>'a']),

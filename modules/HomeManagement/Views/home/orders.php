@@ -37,9 +37,9 @@
                                             <td><span class="badge bg-warning">preparing</span></td>
                                             <td><span class="badge bg-primary">
                                                 <?php if($row['order_type'] == 1):?>
-                                                    Take Out
-                                                <?php elseif($row['order_type'] == 2):?>
                                                     Dine In
+                                                <?php elseif($row['order_type'] == 2):?>
+                                                    Take Out
                                                 <?php else: ?>
                                                     Delivery
                                                 <?php endif; ?>
@@ -73,9 +73,9 @@
                                             <td><span class="badge bg-warning">serving</span></td>
                                             <td><span class="badge bg-primary">
                                                 <?php if($row['order_type'] == 1):?>
-                                                    Take Out
-                                                <?php elseif($row['order_type'] == 2):?>
                                                     Dine In
+                                                <?php elseif($row['order_type'] == 2):?>
+                                                    Take Out
                                                 <?php else: ?>
                                                     Delivery
                                                 <?php endif; ?>

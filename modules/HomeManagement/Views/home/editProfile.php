@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-sm-12 mt-1">
                             <label for="inputAddress2">City: <small class="text-danger">*</small></label>
-                            <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id" value="<?= isset($value['city_id']) ? esc($value['city_id']) : '' ?>">
+                            <select class="form-select <?= isset($errors['city_id']) ? 'is-invalid':'' ?>" name="city_id" id="city_id" value="<?= isset($value['city_id']) ? esc($value['city_id']) : '' ?>"> 
                                 <option selected disabled>-- select city --</option>
                             </select>
                             <?php if(isset($errors['city_id'])):?>

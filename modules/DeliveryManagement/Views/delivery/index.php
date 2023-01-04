@@ -375,6 +375,7 @@
                                                                                 }else{
                                                                                     odd = '';
                                                                                 }
+                                                                                let msg = data[i].message.toString();
                                                                                 html += 
                                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                                     "<div class='chat-avatar'>"+
@@ -385,7 +386,7 @@
                                                                                         "<div class='ctext-wrap'>"+
                                                                                             "<i>"+data[i].username+"</i>"+
                                                                                             "<p class='text-break'>"+
-                                                                                                data[i].message +
+                                                                                                msg +
                                                                                             "</p>"+
                                                                                         "</div>"+
                                                                                     "</div>"+
@@ -695,6 +696,7 @@
                                                                                 }else{
                                                                                     odd = '';
                                                                                 }
+                                                                                let msg = data[i].message.toString();
                                                                                 html += 
                                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                                     "<div class='chat-avatar'>"+
@@ -705,7 +707,7 @@
                                                                                         "<div class='ctext-wrap'>"+
                                                                                             "<i>"+data[i].username+"</i>"+
                                                                                             "<p class='text-break'>"+
-                                                                                                data[i].message +
+                                                                                                msg +
                                                                                             "</p>"+
                                                                                         "</div>"+
                                                                                     "</div>"+

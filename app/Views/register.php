@@ -142,7 +142,7 @@
                     success: function(data) {
                         for(i=0; i<data.length; i++){
                             $('#region_id').append($('<option>', {value: data[i].region_code, text: data[i].region_name}));
-                            document.getElementById("region_id").value = data[i].id;
+                            // document.getElementById("region_id").value = data[i].id;
                         }
                     }
                 });

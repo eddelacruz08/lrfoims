@@ -219,41 +219,42 @@
                                                     </div>
 
                                                     <?php if ($details['order_status_id'] != 1):?>
-                                                        <div class="card p-0 mt-3">
-                                                            <div class="card-body p-1 m-1 border-success">
-                                                                <ul class="conversation-list p-1" data-simplebar style="max-height: 200px">
-                                                                    <div id="getBotmsg"></div>
-                                                                    <div id="getmsg<?=$details['id']?>"></div>
-                                                                </ul>
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="mt-0 bg-light p-2 rounded">
-                                                                            <form method="POST" class="needs-validation" novalidate="" name="chat-form"
-                                                                                id="chat-form">
-                                                                                <div class="row">
-                                                                                    <div class="col mb-2 mb-sm-0">
-                                                                                        <input type="hidden" name="order_id" id="orderId<?=$details['id']?>" value="<?=$details['id']?>">
-                                                                                        <input type="text" name="message" id="msg<?=$details['id']?>" class="form-control" placeholder="Enter your message" required=""/>
-                                                                                        <span id="msg_err<?=$details['id']?>"></span>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Please enter your messsage
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-sm-auto">
-                                                                                        <div class="btn-group">
-                                                                                            <div class="d-grid">
-                                                                                                <button type="submit" id="send<?=$details['id']?>" class="btn btn-success chat-send"><i class='uil uil-message'></i></button>
+                                                        <?php if ($details['order_type'] == 3):?>
+                                                            <div class="card p-0 mt-3">
+                                                                <div class="card-body p-1 m-1 border-success">
+                                                                    <ul class="conversation-list p-1" data-simplebar style="max-height: 200px">
+                                                                        <div id="getBotmsg"></div>
+                                                                        <div id="getmsg<?=$details['id']?>"></div>
+                                                                    </ul>
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <div class="mt-0 bg-light p-2 rounded">
+                                                                                <form method="POST" class="needs-validation" novalidate="" name="chat-form"
+                                                                                    id="chat-form">
+                                                                                    <div class="row">
+                                                                                        <div class="col mb-2 mb-sm-0">
+                                                                                            <input type="hidden" name="order_id" id="orderId<?=$details['id']?>" value="<?=$details['id']?>">
+                                                                                            <input type="text" name="message" id="msg<?=$details['id']?>" class="form-control" placeholder="Enter your message" required=""/>
+                                                                                            <span id="msg_err<?=$details['id']?>"></span>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Please enter your messsage
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div> <!-- end col -->
-                                                                                </div> <!-- end row-->
-                                                                            </form>
-                                                                        </div> 
-                                                                    </div> <!-- end col-->
-                                                                </div>
-                                                                <!-- end row -->
-                                                            </div> <!-- end card-body -->
-                                                        </div> <!-- end card -->
+                                                                                        <div class="col-sm-auto">
+                                                                                            <div class="btn-group">
+                                                                                                <div class="d-grid">
+                                                                                                    <button type="submit" id="send<?=$details['id']?>" class="btn btn-success chat-send"><i class='uil uil-message'></i></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                        <?php endif;?>
                                                         <script>
                                                             $(document).ready(function(){
                                                                 setInterval(function(){

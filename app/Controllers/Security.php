@@ -167,7 +167,7 @@ class Security extends BaseController{
                 $message .= '<p>Email Verification';
                 $message .= '<br><p>Code: <b>'.$code.'</b></p>';
                 $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
-                $to = 'willsondelacruz12@gmail.com';
+                $to = $this->request->getVar('email_address');
                 $subject = 'Email Verification';
                 $this->email->setTo($to);
                 $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	

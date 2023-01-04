@@ -133,7 +133,7 @@ class OrderModel extends BaseModel
 
         return $this->findAll();
     }
-
+    
     public function generateOrderNumber(){
 
         $this->select('FLOOR(RAND() * 9999) AS number');
