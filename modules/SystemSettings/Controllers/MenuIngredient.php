@@ -49,7 +49,34 @@ class MenuIngredient extends BaseController
                 $data['value'] = $_POST;
             } else {
                 $this->menuIngredientModel->add($_POST);
-                $this->session->setFlashdata('success', 'Menu Ingredient successfully added');
+                $this->session->setFlashdata('success', 'Successfully added');
+                return redirect()->to('/menu-ingredients');
+            }
+        }
+
+        return view('templates/index', $data);
+    }
+
+    public function addIngredient($id)
+    {
+        $data = [
+            'page_title' => 'LRFOIMS | Menu Ingredient',
+            'title' => 'Menu Ingredient',
+            'action' => 'Submit',
+            'view' => 'Modules\SystemSettings\Views\menuIngredient\form',
+            'edit' => false,
+            'id' => $id,
+            'menus' => $this->menusModel->get(['id' => $id])[0],
+            'ingredients' => $this->productsModel->get(),
+            'ingredientDescription' => $this->ingredientMeasurementModel->get(),
+        ];
+        if ($this->request->getMethod() == 'post') {
+            if (!$this->validate('menuIngredient')) {
+                $data['errors'] = $this->validation->getErrors();
+                $data['value'] = $_POST;
+            } else {
+                $this->menuIngredientModel->add($_POST);
+                $this->session->setFlashdata('success', 'Successfully added');
                 return redirect()->to('/menu-ingredients');
             }
         }
@@ -77,7 +104,7 @@ class MenuIngredient extends BaseController
                 $data['value'] = $_POST;
             } else {
                 $this->menuIngredientModel->update($id, $_POST);
-                $this->session->setFlashdata('success', 'Menu Ingredient successfully updated');
+                $this->session->setFlashdata('success', 'Successfully updated');
                 return redirect()->to('/menu-ingredients');
             }
         }

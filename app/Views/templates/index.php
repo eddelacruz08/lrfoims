@@ -36,4 +36,5 @@
 <?= $this->section('ingredientReportCharts'); ?>
 <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\ingredientReportCharts'); ?>
 <?= $this->endsection('ingredientReportCharts'); ?>
+<?= $this->include('templates/notifications'); ?>
 

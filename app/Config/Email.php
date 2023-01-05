@@ -39,14 +39,15 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $SMTPHost = 'smtp.hostinger.com';
+	// public $SMTPHost = 'smtp.hostinger.com';
+	public $SMTPHost = 'smtp.googlemail.com';
 	/**
 	 * SMTP Username
 	 *
 	 * @var string
 	 */
 	// Enter your email id from where you send email
-	public $SMTPUser = 'adminoffice@rfeis.puptaguigcs.net';
+	public $SMTPUser = 'stackoverflow.pupt@gmail.com';
 	
 
 	/**
@@ -55,7 +56,8 @@ class Email extends BaseConfig
 	 * @var string
 	 */
 	// Enter your email's password
-	public $SMTPPass = 'outovNo3Wh3r3$';
+	// public $SMTPPass = 'STACKoverflow2022.';
+	public $SMTPPass = 'fzetxqfbovxziuii';
 
 	/**
 	 * SMTP Port

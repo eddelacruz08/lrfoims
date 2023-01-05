@@ -85,8 +85,8 @@
                                                 </div>  
                                                 <div class="form-row mb-2">
                                                     <div class="form-group col-md-12">
-                                                        <label for="quantity">Quantity <small class="text-danger">*</small></label>
-                                                        <input type="number" id="quantity" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" placeholder="Quantity" required class="form-control">
+                                                        <label for="quantity">Quantity <small class="text-danger">*(Limit of <?=$orderMaxLimit['max_limit']?> orders only.)</small></label>
+                                                        <input type="number" id="quantity" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" placeholder="Quantity" required class="form-control">
                                                         <div class="invalid-feedback">
                                                             Please input quantity.
                                                         </div>
@@ -175,7 +175,7 @@
                                                                             <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
                                                                                 <form method="POST" action="/orders/admin/cart/qty/<?= $carts['id']; ?>/<?=$carts['menu_id']?>/<?=$carts['order_id']?>/<?=$carts['quantity']?>/2" enctype="multipart/form-data">
                                                                                     <div class="input-group" style="max-width: 70%;">
-                                                                                        <input type="number" name="quantity" min="1" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="<?= $carts['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2" required>
+                                                                                        <input type="number" name="quantity" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="<?= $carts['quantity'] ?>" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon2" required>
                                                                                         <button class="btn btn-sm btn-outline-secondary" animation="true" type="submit" id="button-addon2" title="Change Quantity">Edit Qty</button>
                                                                                     </div>
                                                                                 </form>

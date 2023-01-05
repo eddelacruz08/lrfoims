@@ -36,12 +36,23 @@ $routes->add('/signout', 'Security::signOut');
 //for registration
 $routes->match(['get','post'],'register', 'Security::register');
 $routes->match(['get','post'],'guest-mode', 'Security::guestMode');
+$routes->match(['get','post'],'register-email-verification', 'Security::emailVerificationGuestMode');
+$routes->match(['get','post'],'register-submit-email-verification', 'Security::emailVerificationGuestMode');
 // $routes->add('/send', 'SendMail::send');
 $routes->get('/import', 'Import::index');
 $routes->get('/(:alpha)/403', 'Security::fileNotFound/$1');
-$routes->get('/regions', 'Security::getRegions');
-$routes->get('/provinces/(:num)', 'Security::getProvinces/$1');
-$routes->get('/cities/(:num)', 'Security::getCities/$1');
+$routes->get('/get-regions', 'Security::getRegions');
+$routes->get('/get-provinces/(:num)', 'Security::getProvinces/$1');
+$routes->get('/get-cities/(:num)', 'Security::getCities/$1');
+$routes->get('/get-barangay/(:num)', 'Security::getBarangay/$1'); 
+$routes->get('/get-notifications', 'Security::getNotifications');
+$routes->get('/submit-email-verification', 'Security::emailVerification');
+// $routes->get('/submit', 'Security::send');
+$routes->match(['get','post'],'submit', 'Security::send');
+$routes->match(['get','post'],'register-submit', 'Security::sendRegister');
+$routes->match(['get','post'],'email-verification', 'Security::emailVerification');
+$routes->match(['get','post'],'forgot-password', 'Security::forgotPassword');
+$routes->match(['get','post'],'temporary-password', 'Security::emailTemporaryPassword');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

@@ -114,7 +114,14 @@ class Validation
 			'label' => 'Confirm Password'
 		],
 	];
-	
+
+	public $forgotPassword = [
+        'email_address' => [
+			'rules' => 'required|min_length[5]|max_length[100]|valid_email',
+			'label' => 'Email Address'
+		],
+	];
+
 	public $editProfile = [
         'first_name' => [
 			'rules' => 'required|min_length[2]|max_length[100]',
@@ -180,6 +187,81 @@ class Validation
 		]
 	];
 
+	public $region = [
+		'psgcCode' => [
+			'rules' => 'required|numeric',
+			'label' => 'psgcCode',
+		],
+		'region_name' => [
+			'rules' => 'required',
+			'label' => 'Region Name'
+		],
+		'region_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Region Code'
+		]
+	];
+
+	public $province = [
+		'psgcCode' => [
+			'rules' => 'required|numeric',
+			'label' => 'psgcCode',
+		],
+		'province_name' => [
+			'rules' => 'required',
+			'label' => 'Province Name'
+		],
+		'region_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Region Code'
+		],
+		'province_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Province Code'
+		]
+	];
+	
+	public $city = [
+		'psgcCode' => [
+			'rules' => 'required|numeric',
+			'label' => 'psgcCode',
+		],
+		'city_name' => [
+			'rules' => 'required',
+			'label' => 'City Name'
+		],
+		'province_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Province Code'
+		],
+		'city_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'City Code'
+		]
+	];
+	
+	public $barangay = [
+		'barangay_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'psgcCode',
+		],
+		'barangay_name' => [
+			'rules' => 'required',
+			'label' => 'Barangay Name'
+		],
+		'region_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Region Code'
+		],
+		'province_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'Province Code'
+		],
+		'city_code' => [
+			'rules' => 'required|numeric',
+			'label' => 'City Code'
+		]
+	];
 	public $modules = [
 		'module' => [
 			'rules' => 'required|min_length[4]|max_length[50]|is_unique[lrfoims_modules.module,id,{moduleID}]',
@@ -230,31 +312,28 @@ class Validation
                 'required' => '{field} field is required'      
             ]
 		],
-		'unit_quantity' => [
-			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Unit Quantity',
-			'errors' => [
-				'required' => '{field} field is required',
-				'numeric' => '{field} must be number'
-			]
-		],
-		'price' => [
-			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Total Amount',
-			'errors' => [
-				'required' => '{field} field is required',
-				'numeric' => '{field} must be number'    
-            ]
-		],
+		// 'unit_quantity' => [
+		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+		// 	'label' => 'Unit Quantity',
+		// 	'errors' => [
+		// 		'required' => '{field} field is required',
+		// 		'numeric' => '{field} must be number'
+		// 	]
+		// ],
+		// 'price' => [
+		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+		// 	'label' => 'Total Amount',
+		// 	'errors' => [
+		// 		'required' => '{field} field is required',
+		// 		'numeric' => '{field} must be number'    
+        //     ]
+		// ],
 	];
 	
 	public $editIngredients = [
 		'product_name' => [
 			'rules' => 'required',
 			'label' => 'Ingredient Name',
-			'errors' => [
-                'is_unique' => '{field} already exist'      
-            ]
 		],
 		'product_description_id' => [
 			'rules' => 'required',
@@ -270,29 +349,40 @@ class Validation
                 'required' => '{field} field is required'      
             ]
 		],
-		'unit_quantity' => [
-			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Unit Quantity',
-			'errors' => [
-				'required' => '{field} field is required',
-				'numeric' => '{field} must be number'
-			]
+		// 'unit_quantity' => [
+		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+		// 	'label' => 'Unit Quantity',
+		// 	'errors' => [
+		// 		'required' => '{field} field is required',
+		// 		'numeric' => '{field} must be number'
+		// 	]
+		// ],
+		// 'price' => [
+		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
+		// 	'label' => 'Total Amount',
+		// 	'errors' => [
+		// 		'required' => '{field} field is required',
+		// 		'numeric' => '{field} must be number'    
+        //     ]
+		// ],
+	];
+
+	public $orderLimit = [
+		'max_limit' => [
+			'rules' => 'required|numeric',
+			'label' => 'Maximum Order',
 		],
-		'price' => [
-			'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-			'label' => 'Total Amount',
-			'errors' => [
-				'required' => '{field} field is required',
-				'numeric' => '{field} must be number'    
-            ]
+		'order_type' => [
+			'rules' => 'required',
+			'label' => 'Order Type',
 		],
 	];
 
-	public $ingredientStockInAndOut = [
-		'stock_type' => [
-			'rules' => 'required',
-			'label' => 'Stock Type'
-		],
+	public $ingredientStockIn = [
+		// 'stock_type' => [
+		// 	'rules' => 'required',
+		// 	'label' => 'Stock Type'
+		// ],
 		'unit_quantity' => [
 			'rules' => 'required|numeric|greater_than[0]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Unit of Measure',
@@ -307,6 +397,13 @@ class Validation
 			'errors' => [
 				'required' => '{field} field is required',
 				'numeric' => '{field} must be number'    
+            ]
+		],
+		'date_expiration' => [
+			'rules' => 'required',
+			'label' => 'Expiration Date',
+			'errors' => [
+				'required' => '{field} field is required',
             ]
 		],
 	];
@@ -363,10 +460,10 @@ class Validation
 			'rules' => 'required',
 			'label' => 'Measurement',
 		],
-		'price' => [
-			'rules' => 'required|greater_than_equal_to[0]',
-			'label' => 'Ingredient Amount',
-		],
+		// 'price' => [
+		// 	'rules' => 'required|greater_than_equal_to[0]',
+		// 	'label' => 'Ingredient Amount',
+		// ],
 	];
 
 	public $menu = [
@@ -438,6 +535,13 @@ class Validation
 		],
 	];
  
+	public $emailCode = [
+		'email_code' => [
+			'rules' => 'required|max_length[6]', 
+			'label' => 'Email Code',
+		],
+	];
+
 	public $homeDetails = [
 		'restaurant_name' => [
 			'rules' => 'required', 
@@ -451,9 +555,21 @@ class Validation
 			'rules' => 'required', 
 			'label' => 'Footer Description',
 		],
-		'location' => [
-			'rules' => 'required', 
-			'label' => 'Location Address',
+        'region_id' => [
+			'rules' => 'required',
+			'label' => 'Region'
+		],
+        'province_id' => [
+			'rules' => 'required',
+			'label' => 'Province'
+		],
+        'city_id' => [
+			'rules' => 'required',
+			'label' => 'City'
+		],
+        'addtl_address' => [
+			'rules' => 'required',
+			'label' => 'House #, Street & Baranggay'
 		],
 		'contact' => [
 			'rules' => 'required|numeric|min_length[11]|max_length[11]', 

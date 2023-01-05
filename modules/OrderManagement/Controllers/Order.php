@@ -21,6 +21,7 @@ class Order extends BaseController
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
+		$this->orderLimitModel = new SystemSettings\OrderLimitModel();
 		helper(['link','form']);
         $this->take_out = 1;
         $this->dine_in = 2;
@@ -52,6 +53,7 @@ class Order extends BaseController
         $this->hasPermissionRedirect('orders/place-order');
 
         $data['menuLists'] = $this->menusModel->get();
+        $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
         $data['menuCategory'] = $this->menuCategoryModel->get(['status'=>'a']);
         $data['orderType'] = $this->orderTypeModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
@@ -64,6 +66,7 @@ class Order extends BaseController
         $this->hasPermissionRedirect('orders/serve-order');
 
         $data['menuLists'] = $this->menusModel->get();
+        $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
         $data['menuCategory'] = $this->menuCategoryModel->get(['status'=>'a']);
         $data['orderType'] = $this->orderTypeModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
@@ -161,68 +164,75 @@ class Order extends BaseController
                 } else {
                     $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
                     if(!empty($menuIngredients)){
-                        foreach ($menuIngredients as $menuIngredientsValue) {
-                            $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
-                            
-                            $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
-                            $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
-                            if($ingredients['unit_quantity'] > $total_unit_quantity){
-                                $ingredientsData[] = [
-                                    'ingredient_id' => $ingredients['id'],
-                                    'unit_quantity' => $ingredientStatus,
-                                    'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
-                                    'stock_out_date' => $time->format('Y-m-d H:i:s'),
-                                    'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
-                                ];
-                                $ingredientDataReports[] = [
-                                    'order_id' => $_POST['order_id'],
-                                    'ingredient_id' => $ingredients['id'],
-                                    'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
-                                    'unit_price' => $menuIngredientsValue['price'],
-                                    'product_description_id' => $ingredients['product_description_id'],
-                                    'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
-                                ];
-                                $isUpdated = 1;
-                            }else{
-                                $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
-                                $isUpdated = 0;
-                            }
-                        }
-                        if(empty($errorDataIngredients)){
-                            if($isUpdated == 1){
-                                foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                                    $reports = [
-                                        'order_id' => $ingredientDataReportsValue['order_id'],
-                                        'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                                        'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                                        'unit_price' => $ingredientDataReportsValue['unit_price'],
-                                        'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                                        'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                                    ];
-                                    $this->ingredientReportModel->add($reports);
-                                }
-                                foreach ($ingredientsData as $ingredientsDataValue) {
-                                    $ingredientInfo = [
-                                        'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                                        'price' => $ingredientsDataValue['price'],
-                                        'stock_out_date' => $ingredientsDataValue['stock_out_date'],
-                                        'product_status_id' => $ingredientsDataValue['product_status_id'],
-                                    ];
-                                    $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
-                                }
+                        $orderMaxLimit = $this->orderLimitModel->get(['status' => 'a'])[0];
+                        $menuTotal = $this->cartsModel->getCountMenuTypePerOrder(['lrfoims_carts.order_id'=> $_POST['order_id'], 'm.menu_type'=> 'a', 'lrfoims_carts.status'=> 'a'])[0];
+
+                        if($menuTotal['total_menu'] <= $orderMaxLimit['max_limit']){
+                            foreach ($menuIngredients as $menuIngredientsValue) {
+                                $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
                                 
-                                $this->cartsModel->add($_POST);
-                                $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                                $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
+                                $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
+                                if($ingredients['unit_quantity'] > $total_unit_quantity){
+                                    $ingredientsData[] = [
+                                        'ingredient_id' => $ingredients['id'],
+                                        'unit_quantity' => $ingredientStatus,
+                                        // 'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
+                                        // 'stock_out_date' => $time->format('Y-m-d H:i:s'),
+                                        'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
+                                    ];
+                                    // $ingredientDataReports[] = [
+                                    //     'order_id' => $_POST['order_id'],
+                                    //     'ingredient_id' => $ingredients['id'],
+                                    //     'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
+                                    //     'unit_price' => $menuIngredientsValue['price'],
+                                    //     'product_description_id' => $ingredients['product_description_id'],
+                                    //     'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
+                                    // ];
+                                    $isUpdated = 1;
+                                }else{
+                                    $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+                                    $isUpdated = 0;
+                                }
+                            }
+                            if(empty($errorDataIngredients)){
+                                if($isUpdated == 1){
+                                    // foreach ($ingredientDataReports as $ingredientDataReportsValue) {
+                                    //     $reports = [
+                                    //         'order_id' => $ingredientDataReportsValue['order_id'],
+                                    //         'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
+                                    //         'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
+                                    //         'unit_price' => $ingredientDataReportsValue['unit_price'],
+                                    //         'product_description_id' => $ingredientDataReportsValue['product_description_id'],
+                                    //         'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
+                                    //     ];
+                                    //     $this->ingredientReportModel->add($reports);
+                                    // }
+                                    foreach ($ingredientsData as $ingredientsDataValue) {
+                                        $ingredientInfo = [
+                                            'unit_quantity' => $ingredientsDataValue['unit_quantity'],
+                                            // 'price' => $ingredientsDataValue['price'],
+                                            // 'stock_out_date' => $ingredientsDataValue['stock_out_date'],
+                                            'product_status_id' => $ingredientsDataValue['product_status_id'],
+                                        ];
+                                        $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
+                                    }
+                                    
+                                    $this->cartsModel->add($_POST);
+                                    $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                                }
+                            }else{
+                                $message = "These ingredients: <br>";
+                                $cnt = 1;
+                                foreach ($errorDataIngredients as $value) {
+                                    $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
+                                    $cnt++;
+                                }
+                                $message .= "<br> Please check your ingredients.";
+                                $this->session->setFlashdata('error', $message);
                             }
                         }else{
-                            $message = "These ingredients: <br>";
-                            $cnt = 1;
-                            foreach ($errorDataIngredients as $value) {
-                                $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
-                                $cnt++;
-                            }
-                            $message .= "<br> Please check your ingredients.";
-                            $this->session->setFlashdata('error', $message);
+                            $this->session->setFlashdata('error', 'Added Failed! You\\\'ve reached a maximum order!');
                         }
                     }else{
                         $this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
@@ -307,68 +317,75 @@ class Order extends BaseController
                 } else {
                     $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
                     if(!empty($menuIngredients)){
-                        foreach ($menuIngredients as $menuIngredientsValue) {
-                            $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
-                            
-                            $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
-                            $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
-                            if($ingredients['unit_quantity'] > $total_unit_quantity){
-                                $ingredientsData[] = [
-                                    'ingredient_id' => $ingredients['id'],
-                                    'unit_quantity' => $ingredientStatus,
-                                    'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
-                                    'stock_out_date' => $time->format('Y-m-d H:i:s'),
-                                    'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
-                                ];
-                                $ingredientDataReports[] = [
-                                    'order_id' => $_POST['order_id'],
-                                    'ingredient_id' => $ingredients['id'],
-                                    'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
-                                    'unit_price' => $menuIngredientsValue['price'],
-                                    'product_description_id' => $ingredients['product_description_id'],
-                                    'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
-                                ];
-                                $isUpdated = 1;
-                            }else{
-                                $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
-                                $isUpdated = 0;
-                            }
-                        }
-                        if(empty($errorDataIngredients)){
-                            if($isUpdated == 1){
-                                foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                                    $reports = [
-                                        'order_id' => $ingredientDataReportsValue['order_id'],
-                                        'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                                        'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                                        'unit_price' => $ingredientDataReportsValue['unit_price'],
-                                        'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                                        'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                                    ];
-                                    $this->ingredientReportModel->add($reports);
-                                }
-                                foreach ($ingredientsData as $ingredientsDataValue) {
-                                    $ingredientInfo = [
-                                        'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                                        'price' => $ingredientsDataValue['price'],
-                                        'stock_out_date' => $ingredientsDataValue['stock_out_date'],
-                                        'product_status_id' => $ingredientsDataValue['product_status_id'],
-                                    ];
-                                    $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
-                                }
+                        $orderMaxLimit = $this->orderLimitModel->get(['status' => 'a'])[0];
+                        $menuTotal = $this->cartsModel->getCountMenuTypePerOrder(['lrfoims_carts.order_id'=> $_POST['order_id'], 'm.menu_type'=> 'a', 'lrfoims_carts.status'=> 'a'])[0];
+
+                        if($menuTotal['total_menu'] <= $orderMaxLimit['max_limit']){
+                            foreach ($menuIngredients as $menuIngredientsValue) {
+                                $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
                                 
-                                $this->cartsModel->add($_POST);
-                                $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                                $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
+                                $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
+                                if($ingredients['unit_quantity'] > $total_unit_quantity){
+                                    $ingredientsData[] = [
+                                        'ingredient_id' => $ingredients['id'],
+                                        'unit_quantity' => $ingredientStatus,
+                                        'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
+                                        'stock_out_date' => $time->format('Y-m-d H:i:s'),
+                                        'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
+                                    ];
+                                    $ingredientDataReports[] = [
+                                        'order_id' => $_POST['order_id'],
+                                        'ingredient_id' => $ingredients['id'],
+                                        'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
+                                        'unit_price' => $menuIngredientsValue['price'],
+                                        'product_description_id' => $ingredients['product_description_id'],
+                                        'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
+                                    ];
+                                    $isUpdated = 1;
+                                }else{
+                                    $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+                                    $isUpdated = 0;
+                                }
+                            }
+                            if(empty($errorDataIngredients)){
+                                if($isUpdated == 1){
+                                    foreach ($ingredientDataReports as $ingredientDataReportsValue) {
+                                        $reports = [
+                                            'order_id' => $ingredientDataReportsValue['order_id'],
+                                            'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
+                                            'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
+                                            'unit_price' => $ingredientDataReportsValue['unit_price'],
+                                            'product_description_id' => $ingredientDataReportsValue['product_description_id'],
+                                            'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
+                                        ];
+                                        $this->ingredientReportModel->add($reports);
+                                    }
+                                    foreach ($ingredientsData as $ingredientsDataValue) {
+                                        $ingredientInfo = [
+                                            'unit_quantity' => $ingredientsDataValue['unit_quantity'],
+                                            'price' => $ingredientsDataValue['price'],
+                                            'stock_out_date' => $ingredientsDataValue['stock_out_date'],
+                                            'product_status_id' => $ingredientsDataValue['product_status_id'],
+                                        ];
+                                        $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
+                                    }
+                                    
+                                    $this->cartsModel->add($_POST);
+                                    $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                                }
+                            }else{
+                                $message = "These ingredients: <br>";
+                                $cnt = 1;
+                                foreach ($errorDataIngredients as $value) {
+                                    $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
+                                    $cnt++;
+                                }
+                                $message .= "<br> Please check your ingredients.";
+                                $this->session->setFlashdata('error', $message);
                             }
                         }else{
-                            $message = "These ingredients: <br>";
-                            $cnt = 1;
-                            foreach ($errorDataIngredients as $value) {
-                                $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
-                                $cnt++;
-                            }
-                            $message .= "<br> Please check your ingredients.";
-                            $this->session->setFlashdata('error', $message);
+                            $this->session->setFlashdata('error', 'Added Failed! You\\\'ve reached a maximum order!');
                         }
                     }else{
                         $this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
@@ -396,69 +413,35 @@ class Order extends BaseController
                 // unit quantity 
                 $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2));
                 $ingredientReturnStatus = $ingredientStatus + ($menuIngredientsValue['unit_quantity'] * $cartQyt);
-                // price
-                $ingredientPrice = ($ingredients['price'] - ($menuIngredientsValue['price'] * number_format($_POST['quantity'],2)));
-                $ingredientReturnPrice = $ingredientPrice + ($menuIngredientsValue['price'] * $cartQyt);
-    
+        
                 $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2);
                 if($ingredients['unit_quantity'] > $total_unit_quantity){
                     $ingredientsDataReturn[] = [
                         'ingredient_id' => $ingredients['id'],
                         'unit_quantity' => $ingredientReturnStatus,
-                        'price' => $ingredientReturnPrice,
-                        'stock_out_date' => $time->format('Y-m-d H:i:s'),
                         'product_status_id' => $ingredientReturnStatus > $total_unit_quantity ? 2 : 1,
-                    ];
-                    $ingredientDataReports[] = [
-                        'order_id' => $orderId,
-                        'ingredient_id' => $ingredients['id'],
-                        'unit_quantity' => $menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2),
-                        'unit_price' => $menuIngredientsValue['price'],
-                        'product_description_id' => $ingredients['product_description_id'],
-                        'total_unit_price' => $menuIngredientsValue['price'] * number_format($_POST['quantity'],2),
                     ];
                     $isUpdated = 1;
                 }else{
                     $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
                     $isUpdated = 0;
                 }
-                $ingredientReports = $this->ingredientReportModel->get(['order_id' => $orderId,'ingredient_id' => $ingredients['id'], 'status' => 'a'])[0];
-                if(!empty($ingredientReports)){
-                    $ingredientReportData[] = ['id' => $ingredientReports['id']];
-                }
             }
             if(empty($errorDataIngredients)){
                 if($isUpdated == 1){
-                    foreach ($ingredientReportData as $ingredientId) {
-                        $this->ingredientReportModel->softDelete($ingredientId['id']);
-                    }
-                    foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                        $reports = [
-                            'order_id' => $ingredientDataReportsValue['order_id'],
-                            'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                            'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                            'unit_price' => $ingredientDataReportsValue['unit_price'],
-                            'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                            'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                        ];
-                        $this->ingredientReportModel->add($reports);
-                    }
                     foreach ($ingredientsDataReturn as $ingredientsDataReturnValue) {
                         $ingredientInfoReturn = [
                             'unit_quantity' => $ingredientsDataReturnValue['unit_quantity'],
-                            'price' => $ingredientsDataReturnValue['price'],
-                            'stock_out_date' => $ingredientsDataReturnValue['stock_out_date'],
                             'product_status_id' => $ingredientsDataReturnValue['product_status_id'],
                         ];
                         $this->ingredientsModel->update($ingredientsDataReturnValue['ingredient_id'], $ingredientInfoReturn);
                     }
+                    $this->cartsModel->update($cartId, $_POST);
+                    $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
+                    
                     if($routeStatus == '2' || $routeStatus == 2){
-                        $this->cartsModel->update($cartId, $_POST);
-                        $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
                         return redirect()->to('/orders');
                     }else{
-                        $this->cartsModel->update($cartId, $_POST);
-                        $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
                         return redirect()->to('/orders/admin-menu');
                     }
                 }
@@ -471,11 +454,21 @@ class Order extends BaseController
                 }
                 $message .= "<br> Please check your ingredients!";
                 $this->session->setFlashdata('error', $message);
-                return redirect()->to('/orders/admin-menu');
+
+                if($routeStatus == '2' || $routeStatus == 2){
+                    return redirect()->to('/orders');
+                }else{
+                    return redirect()->to('/orders/admin-menu');
+                }
             }
         }else{
             $this->session->setFlashdata('warning', 'Have the same value you\'ve inputted! If you want changes for your quantity. Please input higher or less than the value.');
-            return redirect()->to('/orders');
+            
+            if($routeStatus == '2' || $routeStatus == 2){
+                return redirect()->to('/orders');
+            }else{
+                return redirect()->to('/orders/admin-menu');
+            }
         }
     }
 
@@ -491,69 +484,35 @@ class Order extends BaseController
                 // unit quantity 
                 $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2));
                 $ingredientReturnStatus = $ingredientStatus + ($menuIngredientsValue['unit_quantity'] * $cartQyt);
-                // price
-                $ingredientPrice = ($ingredients['price'] - ($menuIngredientsValue['price'] * number_format($_POST['quantity'],2)));
-                $ingredientReturnPrice = $ingredientPrice + ($menuIngredientsValue['price'] * $cartQyt);
-    
+              
                 $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2);
                 if($ingredients['unit_quantity'] > $total_unit_quantity){
                     $ingredientsDataReturn[] = [
                         'ingredient_id' => $ingredients['id'],
                         'unit_quantity' => $ingredientReturnStatus,
-                        'price' => $ingredientReturnPrice,
-                        'stock_out_date' => $time->format('Y-m-d H:i:s'),
                         'product_status_id' => $ingredientReturnStatus > $total_unit_quantity ? 2 : 1,
-                    ];
-                    $ingredientDataReports[] = [
-                        'order_id' => $orderId,
-                        'ingredient_id' => $ingredients['id'],
-                        'unit_quantity' => $menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2),
-                        'unit_price' => $menuIngredientsValue['price'],
-                        'product_description_id' => $ingredients['product_description_id'],
-                        'total_unit_price' => $menuIngredientsValue['price'] * number_format($_POST['quantity'],2),
                     ];
                     $isUpdated = 1;
                 }else{
                     $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
                     $isUpdated = 0;
                 }
-                $ingredientReports = $this->ingredientReportModel->get(['order_id' => $orderId,'ingredient_id' => $ingredients['id'], 'status' => 'a'])[0];
-                if(!empty($ingredientReports)){
-                    $ingredientReportData[] = ['id' => $ingredientReports['id']];
-                }
             }
             if(empty($errorDataIngredients)){
                 if($isUpdated == 1){
-                    foreach ($ingredientReportData as $ingredientId) {
-                        $this->ingredientReportModel->softDelete($ingredientId['id']);
-                    }
-                    foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                        $reports = [
-                            'order_id' => $ingredientDataReportsValue['order_id'],
-                            'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                            'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                            'unit_price' => $ingredientDataReportsValue['unit_price'],
-                            'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                            'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                        ];
-                        $this->ingredientReportModel->add($reports);
-                    }
                     foreach ($ingredientsDataReturn as $ingredientsDataReturnValue) {
                         $ingredientInfoReturn = [
                             'unit_quantity' => $ingredientsDataReturnValue['unit_quantity'],
-                            'price' => $ingredientsDataReturnValue['price'],
-                            'stock_out_date' => $ingredientsDataReturnValue['stock_out_date'],
                             'product_status_id' => $ingredientsDataReturnValue['product_status_id'],
                         ];
                         $this->ingredientsModel->update($ingredientsDataReturnValue['ingredient_id'], $ingredientInfoReturn);
                     }
+                    $this->cartsModel->update($cartId, $_POST);
+                    $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
+                    
                     if($routeStatus == '2' || $routeStatus == 2){
-                        $this->cartsModel->update($cartId, $_POST);
-                        $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
                         return redirect()->to('/orders');
                     }else{
-                        $this->cartsModel->update($cartId, $_POST);
-                        $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
                         return redirect()->to('/orders/admin-menu');
                     }
                 }
@@ -566,11 +525,21 @@ class Order extends BaseController
                 }
                 $message .= "<br> Please check your ingredients!";
                 $this->session->setFlashdata('error', $message);
-                return redirect()->to('/orders/admin-menu');
+                
+                if($routeStatus == '2' || $routeStatus == 2){
+                    return redirect()->to('/orders');
+                }else{
+                    return redirect()->to('/orders/admin-menu');
+                }
             }
         }else{
-            $this->session->setFlashdata('warning', 'Have the same value you\'ve inputted! If you want changes for your quantity. Please input higher or less than the value.');
-            return redirect()->to('/orders');
+            $this->session->setFlashdata('warning', 'Have the same value you\\\'ve inputted! If you want changes for your quantity. Please input higher or less than the value.');
+            
+            if($routeStatus == '2' || $routeStatus == 2){
+                return redirect()->to('/orders');
+            }else{
+                return redirect()->to('/orders/admin-menu');
+            }
         }
     }
 
@@ -684,34 +653,21 @@ class Order extends BaseController
             $ingredientsReturnData[] = [
                 'ingredient_id' => $ingredients['id'],
                 'unit_quantity' => $ingredientStatus,
-                'price' => $ingredients['price'] + ($menuIngredientsValue['price'] * $cartQyt),
-                'stock_out_date' => $time->format('Y-m-d H:i:s'),
                 'product_status_id' => ($ingredientStatus < 0.01 ? 2 : 1),
             ];
             $isDeleted = 1;
-            $ingredientReports = $this->ingredientReportModel->get(['order_id' => $orderId,'ingredient_id' => $ingredients['id'], 'status' => 'a'])[0];
-             
-            if(!empty($ingredientReports)){
-                $ingredientReportData[] = ['id' => $ingredientReports['id']];
-                $isDeleted = 1;
-            }
         }
         if($isDeleted == 1){
-            foreach ($ingredientReportData as $ingredientId) {
-                $this->ingredientReportModel->softDelete($ingredientId['id']);
-            }
             foreach ($ingredientsReturnData as $ingredientsDataValue) {
                 $ingredientInfo = [
                     'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                    'price' => $ingredientsDataValue['price'],
-                    'stock_out_date' => $ingredientsDataValue['stock_out_date'],
                     'product_status_id' => $ingredientsDataValue['product_status_id'],
                 ];
                 $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
             }
             $data =[
                 'status'=> 'Deleted Successfully',
-                'status_text' => 'Cart Successfully Deleted',
+                'status_text' => 'Successfully Deleted!',
                 'status_icon' => 'success'
             ];
             $this->cartsModel->softDelete($cartId);
@@ -739,27 +695,14 @@ class Order extends BaseController
             $ingredientsReturnData[] = [
                 'ingredient_id' => $ingredients['id'],
                 'unit_quantity' => $ingredients['unit_quantity'] + ($menuIngredientsValue['unit_quantity'] * $cartQyt),
-                'price' => $ingredients['price'] + ($menuIngredientsValue['price'] * $cartQyt),
-                'stock_out_date' => $time->format('Y-m-d H:i:s'),
                 'product_status_id' => ($ingredientStatus < 0.01 ? 2 : 1),
             ];
             $isDeleted = 1;
-            $ingredientReports = $this->ingredientReportModel->get(['order_id' => $orderId,'ingredient_id' => $ingredients['id'], 'status' => 'a'])[0];
-             
-            if(!empty($ingredientReports)){
-                $ingredientReportData[] = ['id' => $ingredientReports['id']];
-                $isDeleted = 1;
-            }
         }
         if($isDeleted == 1){
-            foreach ($ingredientReportData as $ingredientId) {
-                $this->ingredientReportModel->softDelete($ingredientId['id']);
-            }
             foreach ($ingredientsReturnData as $ingredientsDataValue) {
                 $ingredientInfo = [
                     'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                    'price' => $ingredientsDataValue['price'],
-                    'stock_out_date' => $ingredientsDataValue['stock_out_date'],
                     'product_status_id' => $ingredientsDataValue['product_status_id'],
                 ];
                 $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
@@ -797,37 +740,26 @@ class Order extends BaseController
                     $ingredientsReturnData[] = [
                         'ingredient_id' => $ingredients['id'],
                         'unit_quantity' => $ingredients['unit_quantity'] + ($menuIngredientsValue['unit_quantity'] * $cartDetailsValue['quantity']),
-                        'price' => $ingredients['price'] + ($menuIngredientsValue['price'] * $cartDetailsValue['quantity']),
-                        'stock_out_date' => $time->format('Y-m-d H:i:s'),
                         'product_status_id' => ($ingredientStatus < 0.01 ? 2 : 1)
                     ];
                     $isDeleted = 1;
-                    $ingredientReports = $this->ingredientReportModel->get(['order_id' => $id,'ingredient_id' => $ingredients['id'], 'status' => 'a'])[0];
                      
                     $cartId[] = ['id' => $cartDetailsValue['id']];
-                    if(!empty($ingredientReports)){
-                        $ingredientReportData[] = ['id' => $ingredientReports['id']];
-                    }
                 }
             }
         }else{
             $data =[
                 'status'=> 'Deleted Successfully!',
-                'status_text' => 'Order Successfully Deleted!',
+                'status_text' => 'Successfully Deleted!',
                 'status_icon' => 'success'
             ];
             $this->ordersModel->softDelete($id);
             return $this->response->setJSON($data);
         }
         if($isDeleted == 1){
-            foreach ($ingredientReportData as $ingredientId) {
-                $this->ingredientReportModel->softDelete($ingredientId['id']);
-            }
             foreach ($ingredientsReturnData as $ingredientsDataValue) {
                 $ingredientInfo = [
                     'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                    'price' => $ingredientsDataValue['price'],
-                    'stock_out_date' => $ingredientsDataValue['stock_out_date'],
                     'product_status_id' => $ingredientsDataValue['product_status_id'],
                 ];
                 $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
@@ -837,7 +769,7 @@ class Order extends BaseController
             }
             $data =[
                 'status'=> 'Deleted Successfully!',
-                'status_text' => 'Order Successfully Deleted!',
+                'status_text' => 'Successfully Deleted!',
                 'status_icon' => 'success'
             ];
             $this->ordersModel->softDelete($id);

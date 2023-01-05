@@ -7,12 +7,11 @@ class IngredientReportModel extends BaseModel
     protected $table = 'lrfoims_ingredient_out';
     protected $allowedFields = [
         'ingredient_id',
-        'order_id',
         'unit_quantity',
         'unit_price',
-        'total_unit_price',
         'product_description_id',
         'stock_status',
+        'date_expiration',
         'status',
         'created_at',
         'updated_at',
@@ -26,27 +25,25 @@ class IngredientReportModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
+        $this->orderBy('lrfoims_ingredient_out.created_at', 'DESC');
 
         return $this->findAll();
     }
 
-    public function getIngredientReports($conditions = []){
+    public function getIngredientStockIn($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*, pm.name as description, ps.name');
-        $this->join('lrfoims_products as p', 'lrfoims_ingredient_out.ingredient_id = p.id');
-        $this->join('lrfoims_product_measures as pm', 'lrfoims_ingredient_out.product_description_id = pm.id');
+        $this->select('lrfoims_ingredient_out.*');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->orderBy('lrfoims_ingredient_out.created_at', 'DESC');
+        $this->orderBy('lrfoims_ingredient_out.date_expiration < CURDATE()', 'DESC');
         return $this->findAll();
     }
-
+ 
     public function getCountIngredientReports($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*, SUM(lrfoims_ingredient_out.total_unit_price) as total,
-                        COUNT(lrfoims_ingredient_out.ingredient_id) as countIngredientReport, p.product_name, p.id as product_id');
+        $this->select('lrfoims_ingredient_out.*, COUNT(lrfoims_ingredient_out.ingredient_id) as countIngredientReport, p.product_name, p.id as product_id');
         $this->join('lrfoims_products as p', 'lrfoims_ingredient_out.ingredient_id = p.id');
 
         foreach($conditions as $field => $value){

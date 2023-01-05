@@ -24,6 +24,7 @@ $routes->group('menu-categories', ['namespace' => 'Modules\SystemSettings\Contro
 $routes->group('menu-ingredients', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'MenuIngredient::index');
     $routes->match(['get', 'post'], 'a', 'MenuIngredient::add');
+    $routes->match(['get', 'post'], 'a/(:num)', 'MenuIngredient::addIngredient/$1');
     $routes->match(['get', 'post'], 'u/(:num)', 'MenuIngredient::edit/$1');
     $routes->add('d/(:num)', 'MenuIngredient::delete/$1');
 });
@@ -52,4 +53,43 @@ $routes->group('order-status', ['namespace' => 'Modules\SystemSettings\Controlle
     $routes->match(['get', 'post'], 'a', 'OrderStatus::add');
     $routes->match(['get', 'post'], 'u/(:num)', 'OrderStatus::edit/$1');
     $routes->add('d/(:num)', 'OrderStatus::delete/$1');
+});
+
+$routes->group('regions', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'Region::index');
+    $routes->match(['get', 'post'], 'a', 'Region::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'Region::edit/$1');
+    $routes->add('d/(:num)', 'Region::delete/$1');
+});
+
+$routes->group('provinces', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'Province::index');
+    $routes->match(['get', 'post'], 'a', 'Province::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'Province::edit/$1');
+    $routes->add('d/(:num)', 'Province::delete/$1');
+});
+
+$routes->group('cities', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'City::index');
+    $routes->match(['get', 'post'], 'a', 'City::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'City::edit/$1');
+    $routes->add('d/(:num)', 'City::delete/$1');
+});
+
+$routes->group('barangay', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'Barangay::index');
+    $routes->match(['get', 'post'], 'a', 'Barangay::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'Barangay::edit/$1');
+    $routes->add('d/(:num)', 'Barangay::delete/$1');
+});
+
+$routes->group('order-max-limit', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'OrderLimit::index');
+    $routes->match(['get', 'post'], 'a', 'OrderLimit::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'OrderLimit::edit/$1');
+    $routes->add('d/(:num)', 'OrderLimit::delete/$1');
+});
+
+$routes->group('generate-qrcode-link', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'QrCode::index');
 });

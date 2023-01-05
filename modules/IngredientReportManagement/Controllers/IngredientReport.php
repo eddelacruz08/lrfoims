@@ -47,7 +47,7 @@ class IngredientReport extends BaseController
 	public function index($year = null) {
         $this->hasPermissionRedirect('ingredient-reports');
 		if($year != null){
-			$dateYear = $year;
+			$dateYear = $year; 
 			$data = [
 				'page_title' => 'LRFOIMS | Ingredient Reports',
 				'title' => 'Ingredient Reports',

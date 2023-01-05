@@ -28,6 +28,7 @@ class Delivery extends BaseController
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
+		$this->orderLimitModel = new SystemSettings\OrderLimitModel();
 		helper(['form','link']);
 	}
 
@@ -42,11 +43,12 @@ class Delivery extends BaseController
 		
         $data['menuLists'] = $this->menusModel->get();
 		$data['userLists'] = $this->usersModel->get();
-		$data['regions'] = $this->regionModel->get(['status'=>'a']);
+		$data['regions'] = $this->regionModel->get(['status'=>'a']); 
 		$data['provinces'] = $this->provinceModel->get(['status'=>'a']);
 		$data['cities'] = $this->cityModel->get(['status'=>'a']);
         $data['menuCategory'] = $this->menuCategoryModel->get(['status'=>'a']);
         $data['orderType'] = $this->orderTypeModel->get();
+		$data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartDeliveryTotalPrice'] = $this->cartsModel->getCartDeliveryTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_type' => 3]);
         $data['getCartDeliveryShipmentTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_type' => 3]);

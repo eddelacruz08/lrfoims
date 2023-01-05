@@ -35,8 +35,8 @@ class OrderModel extends BaseModel
 
         return $this->findAll();
     }
-    
-    public function getCustomerOrderDetails($conditions = []){
+
+    public function getCustomerOrderDetails($conditions = []){ 
 
         $this->select('lrfoims_orders.*');
 
@@ -55,7 +55,7 @@ class OrderModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->whereIn('lrfoims_orders.order_status_id', [2, 3, 4]);
+        $this->whereIn('order_status_id', [2, 3, 4]);
 
         return $this->findAll();
     }
@@ -133,7 +133,7 @@ class OrderModel extends BaseModel
 
         return $this->findAll();
     }
-
+    
     public function generateOrderNumber(){
 
         $this->select('FLOOR(RAND() * 9999) AS number');
@@ -207,6 +207,17 @@ class OrderModel extends BaseModel
     public function getTotalOrders($conditions = []){
 
         $this->select('lrfoims_orders.*, COUNT(lrfoims_orders.id) as getTotalOrders');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll(); 
+    }
+    
+    public function getTotalPendingOrders($conditions = []){
+
+        $this->select('lrfoims_orders.*, COUNT(lrfoims_orders.id) as getTotalPendingOrders');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

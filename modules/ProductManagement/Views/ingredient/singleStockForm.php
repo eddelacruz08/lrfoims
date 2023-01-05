@@ -32,7 +32,7 @@
 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     <form action="/ingredients/stocks/<?= esc($id)?>" method="post">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-12 mb-1">
                                 <label for="stock_type" class="form-label">Stock type: </label>
                                 <select class="form-select form-select-sm <?= isset($errors['stock_type']) ? 'is-invalid':'is-valid' ?>" id="stock_type" name="stock_type">
@@ -44,7 +44,7 @@
                                     <small class="text-danger"><?=esc($errors['stock_type'])?></small>
                                 <?php endif;?>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mb-1">
                             <div class="col-sm-6 mb-1">
                                 <label for="unit_quantity" class="form-label">Unit of Measure: </label>
@@ -54,10 +54,19 @@
                                 <?php endif;?>
                             </div>
                             <div class="col-sm-6 mb-1">
-                                <label for="price" class="form-label">Estimated Amount: </label>
-                                <input type="text" id="price" name="price" placeholder="Enter amount" class="form-control form-control-sm <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" value="<?= isset($value['price']) ? $value['price'] : '' ?>">
+                                <label for="price" class="form-label">Enter current price per measurement: </label>
+                                <input type="text" id="price" name="price" placeholder="Enter current price" class="form-control form-control-sm <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" value="<?= isset($value['price']) ? $value['price'] : '' ?>">
                                 <?php if(isset($errors['price'])):?>
                                     <small class="text-danger"><?=esc($errors['price'])?></small>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-sm-6 mb-1">
+                                <label for="date_expiration" class="form-label">Expiration Date: </label>
+                                <input type="date" id="date_expiration" name="date_expiration" class="form-control form-control-sm <?= isset($errors['date_expiration']) ? 'is-invalid':'is-valid' ?>" value="<?= isset($value['date_expiration']) ? $value['date_expiration'] : '' ?>">
+                                <?php if(isset($errors['date_expiration'])):?>
+                                    <small class="text-danger"><?=esc($errors['date_expiration'])?></small>
                                 <?php endif;?>
                             </div>
                         </div>

@@ -7,7 +7,6 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="/menu-ingredients"><?= $title ?></a></li>
                             <li class="breadcrumb-item active"><?= $edit?'Edit ':'Add '?><?= $title ?></li>
                         </ol>
@@ -32,29 +31,16 @@
                 <h5 class="card-title mb-0"><?= $edit?'Edit ':'Add '?><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="POST" action="/menu-ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
+                    <form method="POST" action="/menu-ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>/<?= esc($id) ?>">
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="inputAddress2">Menu Name List <small class="text-danger">*</small></label>
-                                <select class="form-control  <?= isset($errors['menu_id']) ? 'is-invalid':'is-valid' ?>" name="menu_id">
-                                    <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select --</option>
-                                    <?php foreach ($menus as $option) : ?>
-                                        <?php $selected = false; ?>
-                                        <?php if(isset($value['menu_id'])):?>
-                                            <?php if($value['menu_id'] == $option['id']): ?>
-                                                <?php $selected = true; ?>
-                                            <?php endif; ?>
-                                        <?php endif;?>
-                                        <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= $option['menu'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <?php if(isset($errors['menu_id'])):?>
-                                    <small class="text-danger"><?=esc($errors['menu_id'])?></small>
-                                <?php endif;?>
+                                <label for="inputAddress2">Food Name</label>
+                                <input type="text" class="form-control" value="<?=$menus['menu']?>" disabled/>
+                                <input type="hidden" class="form-control" value="<?=$id?>" name="menu_id"/>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Ingredient Name List <small class="text-danger">*</small></label>
-                                <select class="form-control  <?= isset($errors['ingredient_id']) ? 'is-invalid':'is-valid' ?>" name="ingredient_id">
+                                <select class="form-select <?= isset($errors['ingredient_id']) ? 'is-invalid':'is-valid' ?>" name="ingredient_id">
                                     <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select --</option>
                                     <?php foreach ($ingredients as $option) : ?>
                                         <?php $selected = false; ?>
@@ -94,13 +80,6 @@
                                 <?php endif;?>
                                 <?php if(isset($errors['product_description_id'])):?>
                                     <small class="text-danger"> <?=esc($errors['product_description_id'])?></small>
-                                <?php endif;?>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputAddress2">Amount <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control  <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="price" placeholder="Enter Ingredient Amount" value="<?= isset($value['price']) ? $value['price'] : '' ?>">
-                                <?php if(isset($errors['price'])):?>
-                                    <small class="text-danger"><?=esc($errors['price'])?></small>
                                 <?php endif;?>
                             </div>
                         </div>

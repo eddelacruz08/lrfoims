@@ -10,18 +10,18 @@
     <title><?= $page_title ?></title>
     <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-image-checkbox.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css"> -->
+    <!-- <link rel="stylesheet" href="/assets/css/bootstrap-image-checkbox.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />  -->
     <link href="https://cdn.jsdelivr.net/gh/dmuy/MDTimePicker@2.0.0/dist/mdtimepicker.css" rel="stylesheet" /> 
     <!-- <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" /> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/r-2.2.9/datatables.min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <!-- third party css -->
-    <!-- <link href="/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" /> -->
+    <link href="/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
     
     <!-- third party css -->
@@ -64,6 +64,16 @@
         }
         .ui-datepicker-next,.ui-datepicker-prev {
             display:none;
+        }
+        /* maintenance/menu ingredients css for accordion transition */
+        .panel {
+            -moz-transition: height .5s;
+            -ms-transition: height .5s;
+            -o-transition: height .5s;
+            -webkit-transition: height .5s;
+            transition: height .5s;
+            /* height: 0; */
+            overflow: hidden;
         }
     </style>
     <style>
@@ -234,23 +244,65 @@
             autoclose:true
         });
 	</script>
+    <!-- ingredients accordion collapse -->
     <script>
-      $(document).ready(function(){
-          $('.collapse-ingredients-stock').on('shown.bs.collapse', function(e) {
-              localStorage.setItem('activeAccordion', $(e.target).attr('id'));
-          });
-          $('.collapse-ingredients-stock').on('hidden.bs.collapse', function(e) {
-              localStorage.setItem('notActiveAccordion', $(e.target).attr('id'));
-              localStorage.removeItem("activeAccordion");
-          });
-          var activeAccordion = localStorage.getItem('activeAccordion');
-          var notActiveAccordion = localStorage.getItem('notActiveAccordion');
-          if(activeAccordion){
-              $('.accordion div[id="' + activeAccordion + '"]').collapse('show');
-          }else{
-              $('.accordion div[id="' + notActiveAccordion + '"]').collapse('hide');
-          }
-      });
+        $(document).ready(function(){
+            $('.collapse-ingredients-stock').on('shown.bs.collapse', function(e) {
+                localStorage.setItem('activeAccordion', $(e.target).attr('id'));
+            });
+            $('.collapse-ingredients-stock').on('hidden.bs.collapse', function(e) {
+                localStorage.setItem('notActiveAccordion', $(e.target).attr('id'));
+                localStorage.removeItem("activeAccordion");
+            });
+            var activeAccordion = localStorage.getItem('activeAccordion');
+            var notActiveAccordion = localStorage.getItem('notActiveAccordion');
+            if(activeAccordion){
+                $('.accordion div[id="' + activeAccordion + '"]').collapse('show');
+            }else{
+                $('.accordion div[id="' + notActiveAccordion + '"]').collapse('hide');
+            }
+        });
+    </script>
+    <!-- maintenance/menu-ingredients accordion collapse -->
+    <script>
+        $(document).ready(function(){
+            // $('a[data-bs-toggle="collapse"]').on('shown.bs.collapse', function(e) {
+            //     localStorage.setItem('activeAccordion', $(e.target).attr('id'));
+            // });
+            // $('a[data-bs-toggle="collapse"]').on('hidden.bs.collapse', function(e) {
+            //     localStorage.setItem('notActiveAccordion', $(e.target).attr('id'));
+            //     localStorage.removeItem("activeAccordion");
+            // });
+            // var activeAccordion = localStorage.getItem('activeAccordion');
+            // var notActiveAccordion = localStorage.getItem('notActiveAccordion');
+            // if(activeAccordion){
+            //     $('.collapse div[id="' + activeAccordion + '"]').collapse('show');
+            // }else{
+            //     $('.collapse div[id="' + notActiveAccordion + '"]').collapse('hide');
+            // }
+        
+            var acc = document.getElementsByClassName("accordionMenuIngredients");
+            var i;
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function(e) {
+                    localStorage.setItem('activePanelMenuIngredients', $(e.target).attr('id'));
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    console.log(panel);
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+            var activePanelMenuIngredients = localStorage.getItem('activePanelMenuIngredients');
+            if(activePanelMenuIngredients){
+                $('div[id="' + activePanelMenuIngredients + '"]').collapse('show');
+            }else{
+                $('div[id="' + activePanelMenuIngredients + '"]').collapse('hide');
+            }
+        });
     </script>
     <script>
         $(document).ready(function(){
@@ -271,5 +323,5 @@
         });
     </script>
     </body>
-    </html>
+</html>
     <?= $this->include('templates/notifications'); ?>

@@ -26,6 +26,31 @@ class CartModel extends BaseModel
 
         return $this->findAll();
     }
+    
+    public function getTotalBestFoods(){
+
+        $this->select('lrfoims_carts.*, COUNT(lrfoims_carts.menu_id) as count_per_best_food');
+
+        $this->where('lrfoims_carts.status', 'a');
+
+        $this->orderBy('COUNT(lrfoims_carts.menu_id)', 'DESC');
+        $this->groupBy('lrfoims_carts.menu_id');
+
+        return $this->findAll();
+    }
+    
+    public function getCountMenuTypePerOrder($conditions = []){
+
+        $this->select('lrfoims_carts.*, COUNT(lrfoims_carts.id) as total_menu');
+        $this->join('lrfoims_orders as o', 'o.id = lrfoims_carts.order_id');
+        $this->join('lrfoims_menus as m', 'm.id = lrfoims_carts.menu_id');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+
+        return $this->findAll();
+    }
 
     public function getCarts($conditions = []){
 

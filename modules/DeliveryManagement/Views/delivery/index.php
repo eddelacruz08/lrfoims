@@ -34,7 +34,7 @@
                 <div class="card mt-1">
                     <div class="card-body p-1 m-0">
                         <?php if (!empty($getOrderDeliveryDetails)): ?> 
-                            <div class="card p-0 m-0">
+                            <div class="card p-0 m-0"> 
                                 <?php foreach ($getOrderDeliveryDetails as $details): ?>
                                     <div class="accordion custom-accordion p-0 m-0" id="custom-accordion-one<?=$details['id']?>">
                                         <div class="card p-0 m-1">
@@ -47,6 +47,13 @@
                                                             <span class="badge badge-warning-lighten"><?= ucfirst($details['order_status']); ?></span> 
                                                         </p>
                                                     </a>
+                                                    <?php if(user_link('orders/a', session()->get('userPermissionView'))):?> 
+                                                        <?php if (empty($details['total_amount'])): ?>
+                                                            <a class="btn btn-primary btn-sm d-print-none" data-bs-toggle="modal" data-bs-target="#addCartModal<?=$details['id']?>" type="button">
+                                                                <i class="dripicons-plus"></i> Add&nbspfood
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
                                                     <?php if(user_link('orders/d', session()->get('userPermissionView'))):?>
                                                         <button onclick="confirmDelete('/orders/d/',<?=$details['id']?>)" type="button" title="Cancel Order" animation="true" class="btn btn-sm btn-danger d-print-none">
                                                             <i class="dripicons-trash"></i> Remove
@@ -66,25 +73,101 @@
                                                     <?php endif; ?>
                                                     <?php if ($details['order_status_id'] == 2): ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/3')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/3')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Prepare&nbspthe&nbspfood&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
                                                     <?php elseif ($details['order_status_id'] == 3): ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/4')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/4')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Add&nbspto&nbspshipping&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
                                                     <?php else: ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/5')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/5')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Apply&nbspshipping&nbspis&nbspdone&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
                                                     <?php endif; ?>
                                                 </h5>
                                             </div>
+                                            <!-- Add Cart Modal -->
+                                            <div class="modal fade" id="addCartModal<?=$details['id']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Add Food For Order#<?= $details['number'] ?></h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body pt-2">
+                                                            <form class="needs-validation" action="/orders/a" method="post" novalidate>
+                                                                <input type="hidden" name="order_id" value="<?= $details['id'] ?>">
+                                                                <div class="form-row mb-2 mt-2">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="menu_id">Menu List <small class="text-danger">*</small></label>
+                                                                        <select class="form-control select2" data-toggle="select2" id="menu_id" required name="menu_id">
+                                                                            <option disabled value="" <?= isset($validation) ? null : 'selected' ?>>-- Select Food --</option>
+                                                                            <?php foreach ($menuCategory as $category) : ?>
+                                                                                <optgroup label="<?= $category['name'] ?>">
+                                                                                    <?php foreach ($menuLists as $option) : ?>
+                                                                                        <?php if ($option['menu_category_id'] == $category['id']) : ?>
+                                                                                            <?php if ($option['menu_status'] == 'a') : ?>
+                                                                                                <?php $selected = false; ?>
+                                                                                                <?php if(isset($value['menu_id'])):?>
+                                                                                                    <?php if($value['menu_id'] == $option['id']): ?>
+                                                                                                        <?php $selected = true; ?>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endif;?>
+                                                                                                <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= $option['menu'] ?></option>
+                                                                                            <?php else:?>
+                                                                                                <option disabled class="text-danger"><s><?= $option['menu'] ?> (unavailable)</s></option>
+                                                                                            <?php endif;?>
+                                                                                        <?php endif;?>
+                                                                                    <?php endforeach; ?>
+                                                                                </optgroup>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">
+                                                                            Please select an order.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="form-row mb-2">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="quantity">Quantity <small class="text-danger">*(Limit of <?=$orderMaxLimit['max_limit']?> orders only.)</small></label>
+                                                                        <input type="number" id="quantity" min="1" max="10" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" name="quantity" placeholder="Quantity" required class="form-control">
+                                                                        <div class="invalid-feedback">
+                                                                            Please input quantity.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-success float-end" id="addToOrder">Add To Order</button>
+                                                            </form>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Add Cart Modal -->
+                                            <script>
+                                                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                                (function () {
+                                                'use strict'
+                                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                                var forms = document.querySelectorAll('.needs-validation')
+                                                // Loop over them and prevent submission
+                                                Array.prototype.slice.call(forms)
+                                                    .forEach(function (form) {
+                                                        form.addEventListener('submit', function (event) {
+                                                            if (!form.checkValidity()) {
+                                                            event.preventDefault()
+                                                            event.stopPropagation()
+                                                            }
+                                                            form.classList.add('was-validated')
+                                                        }, false)
+                                                    })
+                                                })()
+                                            </script>
                                             <div id="collapseFour<?=$details['id']?>" class="collapse show p-0 m-0" aria-labelledby="headingFour<?=$details['id']?>"
                                                 data-bs-parent="#custom-accordion-one<?=$details['id']?>">
                                                 <div class="card-body  p-0 m-0">
@@ -211,7 +294,8 @@
                                                                                                             $full_address .= ', '.$region['region_name'];
                                                                                                         }
                                                                                                     }
-                                                                                                    echo $full_address;
+                                                                                                    $str = strtolower($full_address);
+                                                                                                    echo ucwords($str);
                                                                                                 ?>
                                                                                             </p>
                                                                                         </div>
@@ -291,6 +375,7 @@
                                                                                 }else{
                                                                                     odd = '';
                                                                                 }
+                                                                                let msg = data[i].message.toString();
                                                                                 html += 
                                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                                     "<div class='chat-avatar'>"+
@@ -301,7 +386,7 @@
                                                                                         "<div class='ctext-wrap'>"+
                                                                                             "<i>"+data[i].username+"</i>"+
                                                                                             "<p class='text-break'>"+
-                                                                                                data[i].message +
+                                                                                                msg +
                                                                                             "</p>"+
                                                                                         "</div>"+
                                                                                     "</div>"+
@@ -371,31 +456,33 @@
                                                             <!-- <span class="badge badge-warning-lighten"><?= ucfirst($details['order_status']); ?></span>  -->
                                                         </p>
                                                     </a>
-                                                    <?php if(user_link('orders/a', session()->get('userPermissionView'))):?> 
-                                                        <?php if (empty($details['total_amount'])): ?>
-                                                            <a class="btn btn-primary btn-sm d-print-none" data-bs-toggle="modal" data-bs-target="#addCartModal<?=$details['id']?>" type="button">
-                                                                <i class="dripicons-plus"></i> Add&nbspfood
-                                                            </a>
-                                                        <?php endif; ?>
+                                                    <?php if(user_link('orders/admin/add-payment/u', session()->get('userPermissionView'))):?>
+                                                        <?php foreach ($getCartDeliveryShipmentTotalPrice as $totalPrice) : ?>
+                                                            <?php if($totalPrice['order_id'] == $details['id']):?>
+                                                                <button onclick="applyPayment('/orders/admin/add-payment/u/',<?=$details['id']?>,'/<?=$totalPrice['total_price']?>')" class="btn btn-sm btn-outline-dark d-flex" type="button" <?= (empty($details['total_amount']))? '':'disabled' ?>>
+                                                                    <?= (empty($details['total_amount']))? '<i class="dripicons-plus"></i>Add&nbspPayment':'Paid<i class=" dripicons-checkmark text-success"></i>' ?>
+                                                                </button>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
                                                     <?php endif; ?>
                                                     <?php if(user_link('orders/print-order-invoice', session()->get('userPermissionView'))):?>
                                                         <a onclick="printOrders('<?= $details['id'] ?><?= $details['number'] ?>')" class="btn btn-sm btn-info d-print-none"><i class="dripicons-print"></i>&nbspInvoice</a>
                                                     <?php endif; ?>
                                                     <?php if ($details['order_status_id'] == 2): ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/3')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/3')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Prepare&nbspthe&nbspfood&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
                                                     <?php elseif ($details['order_status_id'] == 3): ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/4')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/4')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Add&nbspto&nbspshipping&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
                                                     <?php else: ?>
                                                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
-                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/4')" title="Serve Food" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
+                                                            <a onclick="confirmPlaceOrder('/orders/place-order/u/',<?=$details['id']?>,'/5')" title="Submit" animation="true" class="btn btn-sm btn-success d-flex d-print-none">
                                                                 Apply&nbspshipment&nbspis&nbspdone&nbsp <i class="dripicons-arrow-thin-right"></i> 
                                                             </a>
                                                         <?php endif; ?>
@@ -528,7 +615,8 @@
                                                                                                             $full_address .= ', '.$region['region_name'];
                                                                                                         }
                                                                                                     }
-                                                                                                    echo $full_address;
+                                                                                                    $str = strtolower($full_address);
+                                                                                                    echo ucwords($str);
                                                                                                 ?>
                                                                                             </p>
                                                                                         </div>
@@ -608,6 +696,7 @@
                                                                                 }else{
                                                                                     odd = '';
                                                                                 }
+                                                                                let msg = data[i].message.toString();
                                                                                 html += 
                                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                                     "<div class='chat-avatar'>"+
@@ -618,7 +707,7 @@
                                                                                         "<div class='ctext-wrap'>"+
                                                                                             "<i>"+data[i].username+"</i>"+
                                                                                             "<p class='text-break'>"+
-                                                                                                data[i].message +
+                                                                                                msg +
                                                                                             "</p>"+
                                                                                         "</div>"+
                                                                                     "</div>"+

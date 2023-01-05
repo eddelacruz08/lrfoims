@@ -8,6 +8,7 @@ class MenuModel extends BaseModel
     protected $allowedFields = [
         'image',
         'menu',
+        'description',
         'menu_category_id',
         'price',
         'menu_status',
@@ -29,5 +30,4 @@ class MenuModel extends BaseModel
         return $this->findAll();
     }
     
-
 }

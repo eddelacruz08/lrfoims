@@ -56,23 +56,12 @@
                                 <div class="modal-body">
                                     <div class="row p-3 text-center">
                                         <div class="col-sm-12">
-                                            <form method="post" action="/search-guest-order-number">
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="ordernumber">Search for Order Number</label>
-                                                    <div class="input-group">
-                                                        <input type="number" class="form-control" name="ordernumber" id="ordernumber" placeholder="Enter order number . . ." aria-label="Enter order number . . .">
-                                                        <button class="btn btn-dark" type="submit">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <hr class="m-0 p-0">
-                                        <div class="col-sm-12">
                                             <form method="post" action="/guest-mode">
-                                                <label class="form-label m-0 p-0" for="ordernumber">Or</label>
-                                                <hr class="m-0 p-0">
-                                                <input type="hidden" class="form-control" name="username" value="<?=$random_name;?>">
-                                                <button class="btn btn-secondary mt-3" type="submit"> Guest Mode </button><br>
+                                                <label class="form-label" for="email_address">Enter email for verification: </label>
+                                                <div class="input-group">
+                                                    <input type="email" class="form-control" name="email_address" id="email_address" placeholder="Enter email . . ." aria-label="Enter email . . ." required>
+                                                    <button class="btn btn-secondary" type="submit">Guest Mode</button>
+                                                </div>
                                                 <span class="text-muted"><em>*Click Guest Mode if you want to order anonymously.</em></span>
                                             </form>
                                         </div>

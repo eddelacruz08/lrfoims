@@ -10,22 +10,21 @@ class SendMail extends Controller
     function __construct(){
         $this->email = \Config\Services::email();
         $this->usersModel = new UserManagement\UsersModel();
-        $this->studentsModel = new UniversityManagement\StudentsModel();
-        $this->facultiesModel = new UniversityManagement\FacultiesModel();
-        $this->reservationsModel = new ReservationManagement\ReservationsModel();
     }
 
     public function sendMail($to, $subject, $message) { 
         $this->email->setTo($to);
-        $this->email->setFrom('adminoffice@rfeis.puptaguigcs.net', 'PUPT RMFS');
+        $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');
         
         $this->email->setSubject($subject);
         $this->email->setMessage($message);
 
-        $this->email->send();
-
-
-
+        if($this->email->send()){
+            return $this->email->printDebugger(['headers']);
+            // return "Email sent!";
+        }else{
+            return $this->email->printDebugger(['headers']);
+        }
     }
 
     public function sendMailForOffices($id){
