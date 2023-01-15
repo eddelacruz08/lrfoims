@@ -22,6 +22,63 @@ function alert_warning(message){
 	);
 }
 
+function plusAndMinusCartQuantity(route, cartId, menuId, orderId, quantity, routeType, minusOrPlus, url, orderNumber, orderMaxLimit){
+	$.ajax({
+		url: route + cartId + '/' + menuId + '/' + orderId + '/' + quantity + '/' + routeType,
+		type: "POST",
+		data:{
+			operation: minusOrPlus,
+			quantity: quantity,
+		},
+		cache: false,
+		success: function (response) {
+			if(routeType === 1){
+				displayOrderTypeInfo(url, orderId, orderNumber, orderMaxLimit);
+				alert_no_flash(response.status_text, response.status_icon);
+			}else{
+				displayCartListInfo(url, orderId);
+				orderTypeMenuList();
+				alert_no_flash(response.status_text, response.status_icon);
+			}
+		}
+	});
+}
+
+function confirmDeleteOrder(route, orderId, orderNumber, orderMaxLimit, url){
+	Swal.fire({
+		title: 'Remove Order#'+ orderNumber+ '!',
+		text: "Are you sure you want to remove this order?",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, remove it!',
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire({
+				title: 'Processing...',
+				html: 'Please wait.',
+				icon: 'info',
+				timer: 1000,
+				timerProgressBar: true,
+				allowOutsideClick: false,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+			}).then((result) => {
+				$.ajax({
+					url: route + orderId,
+					success: function (response) {
+						displayOrderTypeInfo(url, orderId, orderNumber, orderMaxLimit);
+						alert_no_flash(response.status_text, response.status_icon);
+					}
+				});
+			});
+		}
+	});
+}
+
 function alert_success_no_flash(message){
 	const Toast = Swal.mixin({
 		toast: true,
@@ -33,12 +90,12 @@ function alert_success_no_flash(message){
 		  toast.addEventListener('mouseenter', Swal.stopTimer)
 		  toast.addEventListener('mouseleave', Swal.resumeTimer)
 		}
-	  })
-	  
-	  Toast.fire({ 
-		icon: 'success',
-		title: message
-	  })
+	})
+	
+	Toast.fire({ 
+	icon: 'success',
+	title: message
+	})
 }
 
 function alert_error_no_flash(message){
@@ -163,53 +220,6 @@ function confirmDelete(route, id){
 	});
 }
 
-function confirmDeleteCart(route, cartId, menuId, orderId, cartQyt){
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You won't be able to revert this!",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, delete it!',
-		allowOutsideClick: false,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 1000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route + cartId + '/' + menuId + '/' + orderId + '/' + cartQyt,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							window.location.reload();
-						});
-					},
-					error: function () {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						});
-					}
-				});
-			});
-		}
-	});
-}
-
 function convert(str) {
 	var date = new Date(str),
 	mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -285,44 +295,16 @@ function filterDateClick(route){
 }
 
 function createOrderNumber(route){
-	Swal.fire({
-		title: 'Processing...',
-		html: 'Please wait.',
-		icon: 'info',
-		timer: 1000,
-		timerProgressBar: true,
-		allowOutsideClick: false,
-		didOpen: () => {
-			Swal.showLoading()
-		},
-	}).then((result) => {
-		$.ajax({
-			url: route,
-			type: "POST",
-			data:{},
-			cache: false,
-			success: function (response) {
-				Swal.fire({
-					title: response.status,
-					text: response.status_text,
-					icon: response.status_icon,
-				}).then((confirm) => {
-					window.location.reload();
-					console.log(route);
-				});
-			},
-			warning: function (response) {
-				Swal.fire({
-					title: response.status,
-					text: response.status_text,
-					icon: response.status_icon,
-				});
-			}
-		});
+	$.ajax({
+		url: route,
+		success: function (response) {
+			alert_no_flash(response.status_text, response.status_icon);
+			orderTypeMenuList();
+		}
 	});
 }
 
-function confirmPlaceOrder(route, id, valueId){
+function confirmPlaceOrder(btnMsg, route, id, orderStatusId, orderNumber, orderMaxLimit, url){
 	Swal.fire({
 		title: 'Do you want to continue?',
 		text: "You won't be able to revert this!",
@@ -330,7 +312,7 @@ function confirmPlaceOrder(route, id, valueId){
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, place order!',
+		confirmButtonText: 'Yes, '+btnMsg+'!',
 		allowOutsideClick: false,
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -338,7 +320,7 @@ function confirmPlaceOrder(route, id, valueId){
 				title: 'Processing...',
 				html: 'Please wait.',
 				icon: 'info',
-				timer: 1000,
+				timer: 500,
 				timerProgressBar: true,
 				allowOutsideClick: false,
 				didOpen: () => {
@@ -346,24 +328,15 @@ function confirmPlaceOrder(route, id, valueId){
 				},
 			}).then((result) => {
 				$.ajax({
-					url: route + id + valueId,
+					url: route + '/' + id + '/' + orderStatusId,
 					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							window.location.reload();
-						});
-					},
-					error: function () {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-						}).then((confirm) => {
-							console.log('False');
-						});
+						if(response.status_icon == 'success' || response.status_icon == 'warning'){
+							displayOrderTypeInfo(url, id, orderNumber, orderMaxLimit);
+							alert_no_flash(response.status_text, response.status_icon);
+						}else{
+							displayOrderTypeInfo(url, id, orderNumber, orderMaxLimit);
+							alert_no_flash(response.status_text, response.status_icon);
+						}
 					}
 				});
 			});
@@ -451,14 +424,10 @@ function updateIngredientReportClick(route, id, ingredientId){
 	$("#ingredientReports"+id).modal("show");
 }
 
-function applyPayment(route, id, totalAmount){
-
-	const totalPrice = totalAmount.split("/")
-	const totaPriceAmount =  Number(totalPrice[1]);
-
+function applyPayment(route, orderId, totalAmount, url, orderNumber, orderMaxLimit, ...rest_param ){
 	Swal.fire({
 		title: 'Customer Payment',
-		inputLabel: 'Enter the payment in this field.',
+		inputLabel: 'Your bill is ₱' + rest_param[0].toFixed(2),
 		input: 'number',
 		inputAttributes: {
 			min: 0
@@ -473,7 +442,7 @@ function applyPayment(route, id, totalAmount){
 		  return new Promise((resolve) => {
 			if (value == '') {
 				resolve('Payment field is required!')
-			} else if (totaPriceAmount < value || totaPriceAmount == value){
+			} else if (rest_param[0] < value || rest_param[0] == value){
 				resolve()
 			} else{
 				resolve('Please pay higher than your bill!')
@@ -483,8 +452,6 @@ function applyPayment(route, id, totalAmount){
 	}).then((result) => {
 		const inputValue = result.value
 		if (result.isConfirmed) {
-			// const totalPrice = totalAmount.split("/")
-			// const inputValue = Swal.getInput()
 			Swal.fire({
 				title: 'Processing...',
 				html: 'Please wait.',
@@ -497,163 +464,20 @@ function applyPayment(route, id, totalAmount){
 				},
 			}).then((result) => {
 				$.ajax({
-					url: route + id + totalAmount,
+					url: route + orderId + '/' + totalAmount,
 					type: "POST",
 					data:{
 						c_cash: inputValue,
-						total_amount: totalAmount,
+						total_amount_order: totalAmount,
+						total_amount: rest_param[0].toFixed(2),
+						total_amount_vat: rest_param[1].toFixed(2),
+						discount_amount: rest_param[2].toFixed(2),
+
 					},
 					cache: false,
 					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							window.location.reload();
-							// $("#placeOrderPayment").load(location.href + "#placeOrderPayment");
-							console.log(totaPriceAmount);
-						});
-					},
-					warning: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							console.log(inputValue);
-						});
-					}
-				});
-			})
-		}
-	});
-}
-
-function applyPaymentOrders(route){
-	var c_cash = $("#payment_customer_cash").val()
-	var id = $("#payment_modal_id").val()
-	var total_amount = $("#payment_total_amount").val()
-
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You want to apply this payment?",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-		allowOutsideClick: false,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						c_cash: c_cash,
-						total_amount: total_amount,
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							$("#addPaymentOrdersModal"+id).modal("hide");
-							window.location.reload();
-							console.log(total_amount);
-						});
-					},
-					warning: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							$("#addPaymentOrdersModal"+id).modal("show");
-							console.log(total_amount);
-						});
-					}
-				});
-			})
-		}
-	});
-}
-
-function applyPaymentServeOrders(route){
-	var c_cash = $("#serve_payment_customer_cash").val()
-	var id = $("#serve_payment_modal_id").val()
-	var total_amount = $("#serve_payment_total_amount").val()
-
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You want to apply this payment?",
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, continue',
-		allowOutsideClick: false,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route,
-					type: "POST",
-					data: {
-						c_cash: c_cash,
-						total_amount: total_amount,
-					},
-					cache: false,
-					success: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							$("#addPaymentServeOrdersModal"+id).modal("hide");
-							window.location.reload();
-							console.log(total_amount);
-						});
-					},
-					warning: function (response) {
-						Swal.fire({
-							title: response.status,
-							text: response.status_text,
-							icon: response.status_icon,
-							allowOutsideClick: false,
-						}).then((confirm) => {
-							$("#addPaymentServeOrdersModal"+id).modal("show");
-							window.location.reload();
-							console.log(total_amount);
-						});
+						displayOrderTypeInfo(url, orderId, orderNumber, orderMaxLimit);
+						alert_no_flash(response.status_text, response.status_icon);
 					}
 				});
 			})

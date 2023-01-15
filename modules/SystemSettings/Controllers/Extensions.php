@@ -9,7 +9,7 @@ class Extensions extends BaseController
 {
     function __construct(){
         $this->extensionsModel = new SystemSettings\ExtensionsModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

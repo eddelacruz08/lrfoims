@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <div class="h3">User Registration</div>
+                            <div class="h3">Registration</div>
                             <hr>
                         </div>
                     </div>

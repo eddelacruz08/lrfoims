@@ -11,6 +11,7 @@ use App\Controllers\SendMail as SendMail;
 class Security extends BaseController{
 
     function __construct(){
+        helper(['form','link']);
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
 		$this->cartsModel = new HomeManagement\CartModel();
 		$this->ordersModel = new OrderManagement\OrderModel();
@@ -41,7 +42,7 @@ class Security extends BaseController{
 
             $data = [
                 'page_title' => 'LRFOIMS | Sign in',
-                'title' => 'Lamon Restaurant Food Ordering and Ingredient Management System',
+                'title' => 'Lamon Restaurant Food Ordering',
                 'view' => 'Login/login',
                 'random_name' => random_string(25),
                 'homeDetails' => $this->infoModel->get()[0],
@@ -82,7 +83,7 @@ class Security extends BaseController{
                 }
             }
 
-            return view('templates/landingPage', $data);
+            return view('templates/landingPage_home', $data);
         }else{
             return redirect()->to(session()->get('landing_page'));
         }
@@ -185,7 +186,7 @@ class Security extends BaseController{
 
         }
 
-        return view('templates/landingPage',$data);
+        return view('templates/landingPage_home',$data);
     }
 
     public function send(){
@@ -291,7 +292,7 @@ class Security extends BaseController{
 
         }
 
-        return view('templates/landingPage',$data);
+        return view('templates/landingPage_home',$data);
     }
     
 	public function getNotifications() {
@@ -319,105 +320,105 @@ class Security extends BaseController{
 		return $this->response->setJSON($data);
 	}
 
-    public function guestMode(){
-        helper(['form']);
-        if($this->request->getMethod() == 'post'){
-            $model = new UsersModel();
-            if(!empty($model->where(['email_address'=>$_POST['email_address'],'status'=>'a'])->findAll())){
+    // public function guestMode(){
+    //     helper(['form']);
+    //     if($this->request->getMethod() == 'post'){
+    //         $model = new UsersModel();
+    //         if(!empty($model->where(['email_address'=>$_POST['email_address'],'status'=>'a'])->findAll())){
                 
-                function random_string($length) {
-                    $key = '';
-                    $keys = array_merge(range(0, 9), range('a', 'z'));
-                    for ($i = 0; $i < $length; $i++) {
-                        $key .= $keys[array_rand($keys)];
-                    }
-                    return $key;
-                }
+    //             function random_string($length) {
+    //                 $key = '';
+    //                 $keys = array_merge(range(0, 9), range('a', 'z'));
+    //                 for ($i = 0; $i < $length; $i++) {
+    //                     $key .= $keys[array_rand($keys)];
+    //                 }
+    //                 return $key;
+    //             }
 
-                $email = $this->request->getVar('email_address');
+    //             $email = $this->request->getVar('email_address');
 
-                $code = random_string(6);
+    //             $code = random_string(6);
 
-                $localData = [
-                    'local_register_username' =>  $this->request->getVar('email_address'),
-                    'local_register_email_address' => $this->request->getVar('email_address'),
-                    'local_register_role_id' => 5,
-                    'local_register_status' => 'a',
-                    'local_register_email_code' => $code
-                ];
-                session()->set($localData);
+    //             $localData = [
+    //                 'local_register_username' =>  $this->request->getVar('email_address'),
+    //                 'local_register_email_address' => $this->request->getVar('email_address'),
+    //                 'local_register_role_id' => 5,
+    //                 'local_register_status' => 'a',
+    //                 'local_register_email_code' => $code
+    //             ];
+    //             session()->set($localData);
 
-                $code = random_string(6);
-                $message = '';
-                $message .= '<p>Email Verification';
-                $message .= '<br><p>Code: <b>'.$code.'</b></p>';
-                $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
-                $to = 'willsondelacruz12@gmail.com';
-                $subject = 'Email Verification';
-                $this->email->setTo($to);
-                $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
-                $this->email->setSubject($subject);
-                $this->email->setMessage($message);
-                if($this->email->send()){
-                    $session = session();
-                    $session->setFlashdata('success','Email sent!');
-                    return redirect()->to('/register-submit-email-verification');
-                }
-                $session = session();
-                $session->setFlashdata('error','Email not sent!');
-                return redirect()->to('/login');
-            } else {
-            }
-        }
-    }
+    //             $code = random_string(6);
+    //             $message = '';
+    //             $message .= '<p>Email Verification';
+    //             $message .= '<br><p>Code: <b>'.$code.'</b></p>';
+    //             $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
+    //             $to = 'willsondelacruz12@gmail.com';
+    //             $subject = 'Email Verification';
+    //             $this->email->setTo($to);
+    //             $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
+    //             $this->email->setSubject($subject);
+    //             $this->email->setMessage($message);
+    //             if($this->email->send()){
+    //                 $session = session();
+    //                 $session->setFlashdata('success','Email sent!');
+    //                 return redirect()->to('/register-submit-email-verification');
+    //             }
+    //             $session = session();
+    //             $session->setFlashdata('error','Email not sent!');
+    //             return redirect()->to('/login');
+    //         } else {
+    //         }
+    //     }
+    // }
 
-    public function emailVerificationGuestMode(){
-        $data = [
-            'page_title' => 'LRFOIMS | Verify Email',
-            'view' => 'register_email_verification_guest_mode',
-			'homeDetails' => $this->infoModel->get()[0],
-            'regions' => $this->regionModel->get(['status'=>'a']),
-            'provinces' => $this->provinceModel->get(['status'=>'a']),
-            'cities' => $this->cityModel->get(['status'=>'a']),
-        ];
-        helper(['form']);
-        if($this->request->getMethod() == 'post'){
-            if(!$this->validate('emailCode')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-            } else {
-                if($_POST['email_code'] == session()->get('local_email_code')){
-                    $model = new UsersModel();
-                    $newData = [
-                        'username' => session()->get('local_register_username'),
-                        'email_address' => session()->get('local_register_email_address'),
-                        'role_id' => session()->get('local_register_role_id'),
-                        'status' => session()->get('local_register_status')
-                    ];
-                    $model->save($newData);
+    // public function emailVerificationGuestMode(){
+    //     $data = [
+    //         'page_title' => 'LRFOIMS | Verify Email',
+    //         'view' => 'register_email_verification_guest_mode',
+	// 		'homeDetails' => $this->infoModel->get()[0],
+    //         'regions' => $this->regionModel->get(['status'=>'a']),
+    //         'provinces' => $this->provinceModel->get(['status'=>'a']),
+    //         'cities' => $this->cityModel->get(['status'=>'a']),
+    //     ];
+    //     helper(['form']);
+    //     if($this->request->getMethod() == 'post'){
+    //         if(!$this->validate('emailCode')) {
+    //             $data['errors'] = $this->validation->getErrors();
+    //             $data['value'] = $_POST;
+    //         } else {
+    //             if($_POST['email_code'] == session()->get('local_email_code')){
+    //                 $model = new UsersModel();
+    //                 $newData = [
+    //                     'username' => session()->get('local_register_username'),
+    //                     'email_address' => session()->get('local_register_email_address'),
+    //                     'role_id' => session()->get('local_register_role_id'),
+    //                     'status' => session()->get('local_register_status')
+    //                 ];
+    //                 $model->save($newData);
 
-                    session()->remove('local_register_username');
-                    session()->remove('local_register_email_address');
-                    session()->remove('local_register_role_id');
-                    session()->remove('local_register_status');
+    //                 session()->remove('local_register_username');
+    //                 session()->remove('local_register_email_address');
+    //                 session()->remove('local_register_role_id');
+    //                 session()->remove('local_register_status');
 
-                    $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
+    //                 $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
 
-                    $this->setUserMethod($user);
+    //                 $this->setUserMethod($user);
 
-                    $this->session->setFlashdata('success_login', 'Successfully logged in!');
-                    return redirect()->to('/menu');
-                }else{
-                    $session = session();
-                    $session->setFlashdata('error','Invalid Code!');
-                    return redirect()->to('/register-submit-email-verification');
-                }
-            }
+    //                 $this->session->setFlashdata('success_login', 'Successfully logged in!');
+    //                 return redirect()->to('/menu');
+    //             }else{
+    //                 $session = session();
+    //                 $session->setFlashdata('error','Invalid Code!');
+    //                 return redirect()->to('/register-submit-email-verification');
+    //             }
+    //         }
 
-        }
+    //     }
 
-        return view('templates/landingPage',$data);
-    }
+    //     return view('templates/landingPage',$data);
+    // }
 
     public function fileNotFound($slugs)
 	{
@@ -502,7 +503,7 @@ class Security extends BaseController{
             }
         }
 
-        return view('templates/landingPage',$data);
+        return view('templates/landingPage_home',$data);
     }
     
     public function emailTemporaryPassword(){
@@ -574,7 +575,7 @@ class Security extends BaseController{
             }
         }
 
-        return view('templates/landingPage',$data);
+        return view('templates/landingPage_home',$data);
     }
 
     public function signOut(){

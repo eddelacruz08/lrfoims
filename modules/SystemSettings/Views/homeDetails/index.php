@@ -65,28 +65,26 @@
                         <div class="row mb-2">
                             <div class="col-md-12">
                                 <label for="inputEmail4">Full Address</label>
-                                <input disabled type="text" class="form-control" id="inputEmail4" name="location" placeholder="Full address" value="
-                                    <?php
-                                        $full_address = '';
-                                        foreach ($cities as $city) {
-                                            if($city['city_code'] == $row['city_id']){
-                                                $full_address .= $row['addtl_address'].', '.$city['city_name'];
-                                            }
+                                <?php
+                                    $full_address = '';
+                                    foreach ($cities as $city) {
+                                        if($city['city_code'] == $row['city_id']){
+                                            $full_address .= $row['addtl_address'].', '.$city['city_name'];
                                         }
-                                        foreach ($provinces as $province) {
-                                            if($province['province_code'] == $row['province_id']){
-                                                $full_address .= ', '.$province['province_name'];
-                                            }
+                                    }
+                                    foreach ($provinces as $province) {
+                                        if($province['province_code'] == $row['province_id']){
+                                            $full_address .= ', '.$province['province_name'];
                                         }
-                                        foreach ($regions as $region) {
-                                            if($region['region_code'] == $row['region_id']){
-                                                $full_address .= ', '.$region['region_name'];
-                                            }
+                                    }
+                                    foreach ($regions as $region) {
+                                        if($region['region_code'] == $row['region_id']){
+                                            $full_address .= ', '.$region['region_name'];
                                         }
-                                        $str = strtolower($full_address);
-                                        echo ucwords($str);
-                                    ?>
-                                ">
+                                    }
+                                    $str = strtolower($full_address);
+                                ?>
+                                <input disabled type="text" class="form-control" id="inputEmail4" name="location" placeholder="Full address" value="<?=ucwords($str)?>">
                             </div>
                         </div>
                         <div class="row mb-2">

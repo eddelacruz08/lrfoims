@@ -12,8 +12,14 @@ class OrderModel extends BaseModel
         'quantity',
         'order_status_id',
         'total_amount',
+        'total_amount_vat',
         'c_cash',
         'c_balance',
+        'delivery_fee',
+        'order_user_discount_id',
+        'coupon_discount',
+        'coupon_code',
+        'payment_method_id',
         'order_type',
         'status',
         'created_at',
@@ -76,11 +82,41 @@ class OrderModel extends BaseModel
         return $this->findAll();
     }
 
+    public function getOrderTypeDetails($orderStatusId = [], $orderType = null){
+
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
+
+        $this->where("lrfoims_orders.status ='a'");
+        $this->whereIn("lrfoims_orders.order_type", [$orderType]);
+        $this->whereIn('lrfoims_orders.order_status_id', $orderStatusId);
+
+        $this->orderBy('lrfoims_orders.updated_at', 'ASC');
+
+        return $this->findAll();
+    }
+
+    public function getOrderTypeInfo($orderId = null, $orderStatusId = []){
+
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
+
+        $this->where("lrfoims_orders.id ='$orderId'");
+        $this->where("lrfoims_orders.status ='a'");
+        $this->whereIn('lrfoims_orders.order_status_id', $orderStatusId);
+
+        $this->orderBy('lrfoims_orders.updated_at', 'ASC');
+
+        return $this->findAll();
+    }
+
     public function getOrderDetails($conditions = []){
 
         $this->select('lrfoims_orders.*, os.order_status, ot.type');
-        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
-        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

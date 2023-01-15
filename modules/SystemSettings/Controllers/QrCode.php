@@ -9,7 +9,7 @@ class QrCode extends BaseController
 {
     function __construct(){
         $this->infoModel = new SystemSettings\HomeInfoModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

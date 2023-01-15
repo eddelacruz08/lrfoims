@@ -55,7 +55,7 @@ class Home extends BaseController
 				,'o.order_status_id'=>1]);
 		session()->set($dataSession);
 
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	}
 
 	public function ongoingOrderStatusList() {
@@ -75,7 +75,7 @@ class Home extends BaseController
 			'servingOrders' => $this->ordersModel->get(['order_status_id'=> 3,'status'=>'a']),
 		];
 
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	}
 
 	public function menu() {
@@ -96,7 +96,7 @@ class Home extends BaseController
 		$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),
 										'lrfoims_carts.status'=>'a','o.order_status_id'=>1]);
 		session()->set($dataSession);
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	} 
 	
 	public function addToCart() {
@@ -278,7 +278,7 @@ class Home extends BaseController
 			$this->session->setFlashdata('error', 'You have an ongoing order. Wait for current order to finish. Thank you!');
 			return redirect()->to('/menu');
 		}
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	}
 
 	public function cart() {
@@ -304,7 +304,7 @@ class Home extends BaseController
 				,'o.order_status_id'=>1]);
 		session()->set($dataSession);
 
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	}
 
 	public function addChat() {
@@ -412,7 +412,7 @@ class Home extends BaseController
 			$this->session->setFlashdata('error', 'Empty Cart! Please add foods. Thank you!');
 			return redirect()->to('/cart');
 		}
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
     }
 
     public function editCartQuantity($id) {
@@ -482,7 +482,7 @@ class Home extends BaseController
 
         session()->set($jdata);
 
-		return view('templates/landingPage',$data);
+		return view('templates/landingPage_home',$data);
 	}
 	
     public function editProfile($id) {
@@ -519,7 +519,7 @@ class Home extends BaseController
                 return redirect()->to('/profile');
             }
         }
-        return view('templates/landingPage', $data);
+        return view('templates/landingPage_home', $data);
     }
 	//--------------------------------------------------------------------
 }

@@ -13,7 +13,7 @@ class MenuIngredient extends BaseController
 		$this->menusModel = new MenuManagement\MenuModel();
         $this->productsModel = new ProductManagement\ProductModel();
         $this->ingredientMeasurementModel = new SystemSettings\ProductMeasureModel();
-		helper(['form']);
+		helper(['form','link']);
 	}
 
 	public function index()
@@ -30,33 +30,6 @@ class MenuIngredient extends BaseController
 		return view('templates/index', $data);
 	}
 
-    public function add()
-    {
-        $data = [
-            'page_title' => 'LRFOIMS | Menu Ingredient',
-            'title' => 'Menu Ingredient',
-            'action' => 'Submit',
-            'view' => 'Modules\SystemSettings\Views\menuIngredient\form',
-            'edit' => false,
-			'menus' => $this->menusModel->get(),
-            'ingredients' => $this->productsModel->get(),
-            'ingredientDescription' => $this->ingredientMeasurementModel->get(),
-        ];
-
-        if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('menuIngredient')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-            } else {
-                $this->menuIngredientModel->add($_POST);
-                $this->session->setFlashdata('success', 'Successfully added');
-                return redirect()->to('/menu-ingredients');
-            }
-        }
-
-        return view('templates/index', $data);
-    }
-
     public function addIngredient($id)
     {
         $data = [
@@ -71,20 +44,28 @@ class MenuIngredient extends BaseController
             'ingredientDescription' => $this->ingredientMeasurementModel->get(),
         ];
         if ($this->request->getMethod() == 'post') {
+            $ingredients = $this->productsModel->get(['id'=>$_POST['ingredient_id']])[0];
+            $_POST['product_description_id'] = $ingredients['product_description_id'];
             if (!$this->validate('menuIngredient')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                $this->menuIngredientModel->add($_POST);
-                $this->session->setFlashdata('success', 'Successfully added');
-                return redirect()->to('/menu-ingredients');
+                $checkDuplicateMenuIngredients = $this->menuIngredientModel->get(['menu_id' => $id, 'ingredient_id' => $_POST['ingredient_id']]);
+                if(!empty($checkDuplicateMenuIngredients)){
+                    $this->session->setFlashdata('error', 'Already added ingredient!');
+                    return redirect()->to('/menu-ingredients');
+                }else{
+                    $this->menuIngredientModel->add($_POST);
+                    $this->session->setFlashdata('success', 'Successfully added');
+                    return redirect()->to('/menu-ingredients');
+                }
             }
         }
 
         return view('templates/index', $data);
     }
 
-    public function edit($id)
+    public function editIngredient($id, $menu_id)
     {
         $data = [
             'page_title' => 'LRFOIMS | Menu Ingredient',
@@ -93,12 +74,16 @@ class MenuIngredient extends BaseController
             'view' => 'Modules\SystemSettings\Views\menuIngredient\form',
             'edit' => true,
             'id' => $id,
+            'menu_id' => $menu_id,
             'value' => $this->menuIngredientModel->get(['id' => $id])[0],
-			'menus' => $this->menusModel->get(),
+            'menus' => $this->menusModel->get(['id' => $menu_id])[0],
             'ingredients' => $this->productsModel->get(),
             'ingredientDescription' => $this->ingredientMeasurementModel->get(),
         ];
         if ($this->request->getMethod() == 'post') {
+            $ingredients = $this->productsModel->get(['id'=>$_POST['ingredient_id']])[0];
+            $_POST['product_description_id'] = $ingredients['product_description_id'];
+            // die(print_r($_POST));
             if (!$this->validate('menuIngredient')) {
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;

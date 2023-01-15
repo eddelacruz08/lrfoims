@@ -1,91 +1,56 @@
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-xxl-4 col-lg-5">
-            <div class="card m-2">
-
-                <div class="card-body">
-                    
-                    <div class="text-center w-75 m-auto">
-                        <h4 class="text-dark-50 text-center mt-0 fw-bold">Sign In</h4>
-                    </div>
-
-                    <form method="post" action="/login">
-
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="img" style="background-image: url(/assets/lamon-images/login_bg.jpg);"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4">Sign In</h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="javascript: void(0);" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="javascript: void(0);" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
+                        </div>
                         <?php if (isset($validation)) : ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <?= $validation->listErrors(); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input class="form-control" type="text" id="username" name="username" required="" placeholder="Enter your username">
-                        </div>
-
-                        <div class="mb-3">
-                            <a href="/forgot-password" class="text-muted float-end"><small>Forgot your password?</small></a>
-                            <label for="password" class="form-label">Password</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
-                                <div class="input-group-text" data-password="false">
-                                    <span class="password-eye"></span>
+                        <form action="/login" class="signin-form" method="post">
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Username</label>
+                                <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Password</label>
+                                <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-left">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="/forgot-password">Forgot Password</a>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="mb-3 mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
-                                <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-0 text-center">
-                            <button class="btn btn-primary" type="submit"> Log In </button>
-                        </div>
-
-                    </form>
-                    <hr>
-                    <div class="mb-0 text-center">
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#info-alert-modal">Guest Mode</button>
+                        </form>
+                        <p class="text-center">Not a member? <a data-toggle="tab" href="/register">Sign Up</a></p>
                     </div>
-                    <div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-md">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <div class="row p-3 text-center">
-                                        <div class="col-sm-12">
-                                            <form method="post" action="/guest-mode">
-                                                <label class="form-label" for="email_address">Enter email for verification: </label>
-                                                <div class="input-group">
-                                                    <input type="email" class="form-control" name="email_address" id="email_address" placeholder="Enter email . . ." aria-label="Enter email . . ." required>
-                                                    <button class="btn btn-secondary" type="submit">Guest Mode</button>
-                                                </div>
-                                                <span class="text-muted"><em>*Click Guest Mode if you want to order anonymously.</em></span>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    <div class="mb-0 text-center">
-                        
-                    </div>
-                </div> <!-- end card-body -->
+                </div>
             </div>
-            <!-- end card -->
-
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p class="text-muted">Don't have an account? <a href="/register" class="text-muted ms-1"><b>Sign Up</b></a></p>
-                </div> <!-- end col -->
-            </div>
-            <!-- end row -->
-
-        </div> <!-- end col -->
+        </div>
     </div>
-    <!-- end row -->
-</div>
-<!-- end container -->
+</section>

@@ -26,26 +26,20 @@ class Dashboard extends BaseController
 	public function index() { 
         $this->hasPermissionRedirect('dashboard');
 
-		// die(print_r($getTotaBestFoods['count_per_best_food']));
 		$data = [
 			'page_title' => 'LRFOIMS | Dashboard',
 			'title' => 'Dashboard',
 			'view' => 'Modules\DashboardManagement\Views\dashboard\index',
-			// 'getTotalUsers' => $this->usersModel->getTotalUsers(['status' => 'a']),
         	'ingredients' => $this->ingredientsModel->getProduct(['lrfoims_products.status'=>'a']),
+        	'getIngredientLowQuantityStatus' => $this->ingredientsModel->getIngredientLowQuantityStatus(['lrfoims_products.status'=>'a']),
             'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.stock_status'=>1,'lrfoims_ingredient_out.status'=>'a']),
 			'getTotalOrders' => $this->ordersModel->getTotalOrders(['order_status_id' => 5, 'status' => 'a']),
 			'getTotalPendingOrders' => $this->ordersModel->getTotalPendingOrders(['order_status_id' => 2, 'status' => 'a']),
 			'getTotalIngredients' => $this->ingredientsModel->getTotalIngredients(['status' => 'a']),
-			// 'getTotalLogs' => $this->logsModel->getTotalLogs(['status' => 'a']),
-			// 'getRoles' => $this->rolesModel->get(['status' => 'a']),
-			// 'getUsers' => $this->usersModel->get(['status' => 'a']),
-            // 'getActivities' => $this->logsModel->orderBy('id', 'DESC')->paginate(10),
-            // 'pager' => $this->logsModel->pager,
 			'menu' => $this->menuModel->get(),
 			'getTotaBestFoods' => $this->cartsModel->getTotalBestFoods(),
 			'getPendingOrders' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a']),
-            // 'getPendingOrdersPager' => $this->ordersModel->pager,
+			'getCancelledOrders' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=> 6,'lrfoims_orders.status'=>'a']),
 		];
 		return view('templates/index', $data);
 	}

@@ -10,7 +10,7 @@ class HomeInfo extends BaseController
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
-		helper(['form']);
+		helper(['form','link']);
 	}
 
 	public function index() {

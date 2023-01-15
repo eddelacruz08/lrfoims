@@ -31,8 +31,10 @@ class Product extends BaseController
             'page_title' => 'LRFOIMS | Ingredients',
             'title' => 'Ingredients',
             'view' => 'Modules\ProductManagement\Views\ingredient\index',
+            'ingredientCategory' => $this->productsCategoryModel->get(),
+            'ingredientStockIn' => $this->ingredientReportModel->get(['status'=>'a']),
+            'getIngredients' => $this->productsModel->getProduct(),
             'productSortByCategory' => $this->productsCategoryModel->get(),
-            // 'ingredients' => $this->productsModel->getProduct(),
             'ingredientStockIn' => $this->ingredientReportModel->get(['status'=>'a']),
             'date' => $this->dateAndTime,
             'getIngredients' => $this->productsModel->getProduct(),
@@ -54,6 +56,26 @@ class Product extends BaseController
         return view('templates/index', $data);
     }
     
+    public function getIngredientList() {
+        $data = [
+            'page_title' => 'LRFOIMS | Ingredients',
+            'title' => 'Ingredients',
+            'ingredientCategory' => $this->productsCategoryModel->get(),
+            'ingredientStockIn' => $this->ingredientReportModel->get(['status'=>'a']),
+            'getIngredients' => $this->productsModel->getProduct(),
+        ];
+        return view('Modules\ProductManagement\Views\ingredient\ingredients', $data);
+    }
+
+    public function getIngredientListData() {
+        $data = [
+            'ingredientCategory' => $this->productsCategoryModel->get(['id'=>$_GET['id']]),
+            'ingredientStockIn' => $this->ingredientReportModel->get(['status'=>'a']),
+            'getIngredients' => $this->productsModel->getProduct(['lrfoims_products.product_category_id'=>$_GET['id']]),
+        ];
+        return view('Modules\ProductManagement\Views\ingredient\ingredientData', $data);
+    }
+
 	public function getViewStocks() {
         $this->hasPermissionRedirect('ingredients');
 
@@ -61,6 +83,17 @@ class Product extends BaseController
 		$data = $this->ingredientReportModel->where($array)->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
 	}
+
+    public function retrieveIngredients(){
+        $this->hasPermissionRedirect('ingredients');
+
+        $data = [
+            'ingredientCategory' => $this->productsCategoryModel->get(),
+            'ingredientStockIn' => $this->ingredientReportModel->get(['status'=>'a']),
+            'getIngredients' => $this->productsModel->getProduct(),
+        ];
+        return $this->response->setJSON($data);
+    }
 
     public function importCsvFile() {
         $this->hasPermissionRedirect('ingredients/batch-upload/stock-in');

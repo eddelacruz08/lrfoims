@@ -9,7 +9,7 @@ class Menu extends BaseController
 	function __construct(){
 		$this->menuModel = new MenuManagement\MenuModel();
 		$this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
-		helper(['form','file']);
+		helper(['form','file','link']);
 	}
 
 	public function index()
@@ -23,6 +23,14 @@ class Menu extends BaseController
 		];
 
 		return view('templates/index', $data);
+	}
+
+    public function getMenuList(){
+		$data = [
+			'menu' => $this->menuModel->get(),
+			'menuCategory' => $this->menuCategoryModel->get(),
+		];
+        return $this->response->setJSON($data);
 	}
 
     public function add()

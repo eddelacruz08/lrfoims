@@ -9,7 +9,7 @@ class OrderLimit extends BaseController
 {
     function __construct(){
         $this->orderLimitModel = new SystemSettings\OrderLimitModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

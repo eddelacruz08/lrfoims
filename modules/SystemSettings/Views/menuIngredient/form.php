@@ -31,16 +31,16 @@
                 <h5 class="card-title mb-0"><?= $edit?'Edit ':'Add '?><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="POST" action="/menu-ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>/<?= esc($id) ?>">
+                    <form method="POST" action="/menu-ingredients/<?= $edit ? 'u/'.esc($id).'/'.esc($menu_id) : 'a/'.esc($id) ?>">
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Food Name</label>
                                 <input type="text" class="form-control" value="<?=$menus['menu']?>" disabled/>
-                                <input type="hidden" class="form-control" value="<?=$id?>" name="menu_id"/>
+                                <input type="hidden" class="form-control" value="<?= $edit ? esc($menu_id) : esc($id) ?>" name="menu_id"/>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Ingredient Name List <small class="text-danger">*</small></label>
-                                <select class="form-select <?= isset($errors['ingredient_id']) ? 'is-invalid':'is-valid' ?>" name="ingredient_id">
+                                <select class="form-select <?= isset($errors['ingredient_id']) ? 'is-invalid':'is-valid' ?> select2" data-toggle="select2" name="ingredient_id">
                                     <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select --</option>
                                     <?php foreach ($ingredients as $option) : ?>
                                         <?php $selected = false; ?>
@@ -61,25 +61,11 @@
                             <div class="col-md-6">
                                 <label for="inputEmail4">Unit of Measure <small class="text-danger">*</small></label>
                                 <div class="input-group">
-                                    <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit_quantity']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit_quantity" placeholder="Enter Unit Number" value="<?= isset($value['unit_quantity']) ? $value['unit_quantity'] : '' ?>">
-                                    <select class="form-control <?= isset($errors['product_description_id']) ? 'is-invalid':'is-valid' ?>" name="product_description_id">
-                                        <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select measure --</option>
-                                        <?php foreach ($ingredientDescription as $option) : ?>
-                                            <?php $selected = false; ?>
-                                            <?php if(isset($value['product_description_id'])):?>
-                                                <?php if($value['product_description_id'] == $option['id']): ?>
-                                                    <?php $selected = true; ?>
-                                                <?php endif; ?>
-                                            <?php endif;?>
-                                            <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= $option['description'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit_quantity']) ? 'is-invalid':'is-valid' ?>" 
+                                        id="inputAddress2" name="unit_quantity" placeholder="Enter Unit Number" value="<?= isset($value['unit_quantity']) ? $value['unit_quantity'] : '' ?>">
                                 </div>
                                 <?php if(isset($errors['unit_quantity'])):?>
-                                    <small class="text-danger"><?=esc($errors['unit_quantity'])?> |</small>
-                                <?php endif;?>
-                                <?php if(isset($errors['product_description_id'])):?>
-                                    <small class="text-danger"> <?=esc($errors['product_description_id'])?></small>
+                                    <small class="text-danger"><?=esc($errors['unit_quantity'])?></small>
                                 <?php endif;?>
                             </div>
                         </div>

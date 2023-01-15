@@ -312,22 +312,6 @@ class Validation
                 'required' => '{field} field is required'      
             ]
 		],
-		// 'unit_quantity' => [
-		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-		// 	'label' => 'Unit Quantity',
-		// 	'errors' => [
-		// 		'required' => '{field} field is required',
-		// 		'numeric' => '{field} must be number'
-		// 	]
-		// ],
-		// 'price' => [
-		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-		// 	'label' => 'Total Amount',
-		// 	'errors' => [
-		// 		'required' => '{field} field is required',
-		// 		'numeric' => '{field} must be number'    
-        //     ]
-		// ],
 	];
 	
 	public $editIngredients = [
@@ -349,22 +333,6 @@ class Validation
                 'required' => '{field} field is required'      
             ]
 		],
-		// 'unit_quantity' => [
-		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-		// 	'label' => 'Unit Quantity',
-		// 	'errors' => [
-		// 		'required' => '{field} field is required',
-		// 		'numeric' => '{field} must be number'
-		// 	]
-		// ],
-		// 'price' => [
-		// 	'rules' => 'required|numeric|greater_than_equal_to[1]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
-		// 	'label' => 'Total Amount',
-		// 	'errors' => [
-		// 		'required' => '{field} field is required',
-		// 		'numeric' => '{field} must be number'    
-        //     ]
-		// ],
 	];
 
 	public $orderLimit = [
@@ -456,14 +424,6 @@ class Validation
 			'rules' => 'required|numeric|greater_than_equal_to[0]',
 			'label' => 'Unit Of Measure',
 		],
-		'product_description_id' => [
-			'rules' => 'required',
-			'label' => 'Measurement',
-		],
-		// 'price' => [
-		// 	'rules' => 'required|greater_than_equal_to[0]',
-		// 	'label' => 'Ingredient Amount',
-		// ],
 	];
 
 	public $menu = [
@@ -629,6 +589,10 @@ class Validation
 		'order_type' => [
 			'rules' => 'required',
 			'label' => 'Order Type',
+		],
+		'payment_method_id' => [
+			'rules' => 'required',
+			'label' => 'Payment Method',
 		],
 	];
 

@@ -9,7 +9,7 @@ class ProductStatus extends BaseController
 {
     function  __construct(){
         $this->productStatusModel = new SystemSettings\ProductStatusModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

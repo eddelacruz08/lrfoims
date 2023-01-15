@@ -7,7 +7,7 @@ class MenuCategory extends BaseController
 {
 	function __construct(){
 		$this->menuCategoryModel = new SystemSettings\MenuCategoryModel();
-		helper(['form']);
+		helper(['form','link']);
 	}
 
 	public function index()

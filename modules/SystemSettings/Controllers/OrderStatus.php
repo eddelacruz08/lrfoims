@@ -7,7 +7,7 @@ class OrderStatus extends BaseController
 {
 	function __construct(){
 		$this->orderStatusModel = new SystemSettings\OrderStatusModel();
-		helper(['form']);
+		helper(['form','link']);
 	}
 
 	public function index()

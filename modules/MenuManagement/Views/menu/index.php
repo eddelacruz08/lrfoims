@@ -7,7 +7,6 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                             <li class="breadcrumb-item active"><?= $title ?></li>
                         </ol>
                     </div>
@@ -36,67 +35,66 @@
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     
-                <?php foreach ($menuCategory as $category) : ?>
-                    <div class="card m-2 bg-dark text-white">
-                        <center><h5 class="m-2"><?= ucfirst($category['name']); ?></h5></center>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">
-                                        <center>#</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Image</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Menu</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Show Status</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Action</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $id = 1;
-                                foreach ($menu as $row) : ?>
-                                    <?php if($category['id'] == $row['menu_category_id']): ?>
-                                        <tr>
-                                            <th scope="row">
-                                                <center><?= $id ?></center>
-                                            </th>
-                                            <td>
-                                            <center><img src="<?= '/assets/uploads/menu/'.$row['image'] ?>" class="img-fluid" height="100px" width="100px"></center>
-                                            </td>
-                                            <td>
-                                                <center><?= ucfirst($row['menu']) ?></center>
-                                            </td>
-                                            <td>
-                                                <center>
-                                                    <form action="/menu-list/menu-status/u/<?=$row['id']?>" method="POST">
-                                                        <input type="checkbox" onclick="if(this.checked){this.form.submit()}else{this.form.submit()}" name="menu_status" id="switch<?=$row['id']?>" <?=$row['menu_status']=='a'?'checked value="'.$row['menu_status'].'"':'value="'.$row['menu_status'].'"' ?> data-switch="success"/>
-                                                        <label for="switch<?=$row['id']?>" data-on-label="Yes" data-off-label="No"></label>
-                                                    </form>
+                    <?php foreach ($menuCategory as $category) : ?>
+                        <div class="card mt-1 mb-1 bg-dark text-white">
+                            <center><h5 class="m-1"><?= ucfirst($category['name']); ?></h5></center>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="table-basic" class="table table-sm table-hover dt-responsive nowrap w-100">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">
+                                            <center>#</center>
+                                        </th>
+                                        <th scope="col">
+                                            <center>Image</center>
+                                        </th>
+                                        <th scope="col">
+                                            <center>Menu</center>
+                                        </th>
+                                        <th scope="col">
+                                            <center>Show Status</center>
+                                        </th>
+                                        <th scope="col">
+                                            <center>Action</center>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $id = 1;
+                                    foreach ($menu as $row) : ?>
+                                        <?php if($category['id'] == $row['menu_category_id']): ?>
+                                            <tr>
+                                                <th scope="row">
+                                                    <center><?= $id++; ?></center>
+                                                </th>
+                                                <td>
+                                                <center><img src="<?= '/assets/uploads/menu/'.$row['image'] ?>" class="img-fluid" style="height: 80px; width: 80px;"></center>
+                                                </td>
+                                                <td>
+                                                    <center><?= ucfirst($row['menu']) ?></center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <form action="/menu-list/menu-status/u/<?=$row['id']?>" method="POST">
+                                                            <input type="checkbox" onclick="if(this.checked){this.form.submit()}else{this.form.submit()}" name="menu_status" id="switch<?=$row['id']?>" <?=$row['menu_status']=='a'?'checked value="'.$row['menu_status'].'"':'value="'.$row['menu_status'].'"' ?> data-switch="success"/>
+                                                            <label for="switch<?=$row['id']?>" data-on-label="Yes" data-off-label="No"></label>
+                                                        </form>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                    <a href="/menu-list/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                    <a onclick="confirmDelete('/menu-list/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                                 </center>
                                             </td>
-                                            <td>
-                                                <center>
-                                                <a href="/menu-list/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                <a onclick="confirmDelete('/menu-list/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <?php endif; ?>
-                                <?php $id++;
-                                endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endforeach; ?>
+                                        </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div> <!-- end card-->

@@ -358,7 +358,7 @@
                                                                         url: '/delivery/get-message/<?=$details['id']?>',
                                                                         async: true,
                                                                         dataType: 'JSON',
-                                                                        success: function(data){
+                                                                        success: function(data){ 
                                                                             var html = "";
                                                                             var odd = null;
                                                                             for(i=0; i<data.length; i++){

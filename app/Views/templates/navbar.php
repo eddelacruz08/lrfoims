@@ -1,70 +1,51 @@
 <!-- Topbar Start -->
 <div class="navbar-custom topnav-navbar topnav-navbar-dark">
-    <div class="container-fluid">
+    <div class="container">
 
         <!-- LOGO -->
         <a href="/" class="topnav-logo">
             <span class="topnav-logo-lg">
-                <img src="/assets/img/lamon_logo.png" alt="" height="65">
+                <img src="/assets/img/lamon_logo.png" alt="" height="56">
             </span>
             <span class="topnav-logo-sm">
-                <img src="/assets/img/lamon_logo.png" alt="" height="65">
+                <img src="/assets/img/lamon_logo.png" alt="" height="56">
             </span>
         </a>
 
-        <ul class="list-unstyled topbar-menu float-end mb-0 navbar-nav ms-auto bg-dark">
-            
-            <li class="dropdown notification-list bg-dark">
-                <a class="nav-link dropdown-toggle nav-user bg-dark arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false">
-                    <span class="account-user-avatar"> 
-                        <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
-                    </span>
-                    <span>
-                        <span class="account-user-name"><?= session()->get('first_name') != null ? session()->get('first_name').' '.session()->get('last_name') : 'Anonymous'?></span>
-                        <span class="account-position"><?= session()->get('role_name')?></span>
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
-                    <!-- item-->
-                    <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
-                    </div>
-                    <!-- item-->
-                    <a href="/signout" class="dropdown-item notify-item">
-                        <i class="mdi mdi-logout me-1"></i>
-                        <span>Logout</span>
-                    </a>
+        <ul class="list-unstyled topbar-menu float-end mb-0">
+            <?php if(session()->get('role_id') == 1 || session()->get('role_id') == 2):?>
 
-                </div>
-            </li>
-
-        </ul>
-        <?php if(session()->get('role_id') == 1 || session()->get('role_id') == 2):?>
-            <ul class="list-unstyled topbar-menu float-end mb-0 navbar-nav ms-auto bg-dark">
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="h4 mt-2"> Notifications</span>
-                        <i class="dripicons-bell noti-icon"></i>&nbsp&nbsp&nbsp&nbsp
+                        <i class="dripicons-bell noti-icon"></i>
                         <span class="noti-icon-badge"></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg" style="max-width: 1000px;" aria-labelledby="topbar-notifydrop">
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop">
 
                         <!-- item-->
                         <div class="dropdown-item noti-title">
                             <h5 class="m-0">
-                                <!-- <span class="float-end">
+                                <span class="float-end">
                                     <a href="javascript: void(0);" class="text-dark">
                                         <small>Clear All</small>
                                     </a>
-                                </span> -->
-                                Notification
+                                </span>Notification
                             </h5>
                         </div>
 
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-                        <div style="max-height: 300px; max-width: 600px;" data-simplebar>
+                        <div style="max-height: 230px;" data-simplebar>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-primary">
+                                    <i class="mdi mdi-comment-account-outline"></i>
+                                </div>
+                                <p class="notify-details">Caleb Flakelar commented on Admin
+                                    <small class="text-muted">1 min ago</small>
+                                </p>
+                            </a>
+                            
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
                             <div class="notifications text-break" id="notifications"></div>
                             
                             <!-- item-->
@@ -156,16 +137,42 @@
                         </div>
 
                         <!-- All-->
-                        <!-- <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
                             View All
-                        </a> -->
+                        </a>
 
                     </div>
                 </li>
+            <?php endif;?>
 
-            </ul>
-        <?php endif;?>
-        <a class="button-menu-mobile disable-btn">
+            <li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="account-user-avatar"> 
+                        <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
+                    </span>
+                    <span>
+                        <span class="account-user-name"><?= session()->get('first_name') != null ? session()->get('first_name').' '.session()->get('last_name') : 'Anonymous'?></span>
+                        <span class="account-position"><?= session()->get('role_name')?></span>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
+                    <!-- item-->
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Welcome !</h6>
+                    </div>
+
+                    <!-- item-->
+                    <a href="/signout" class="dropdown-item notify-item">
+                        <i class="mdi mdi-logout me-1"></i>
+                        <span>Logout</span>
+                    </a>
+
+                </div>
+            </li>
+
+        </ul>
+        <a class="navbar-toggle"  data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
             <div class="lines">
                 <span></span>
                 <span></span>

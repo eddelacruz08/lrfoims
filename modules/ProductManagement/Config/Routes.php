@@ -16,4 +16,9 @@ $routes->group('ingredients', ['namespace' => 'Modules\ProductManagement\Control
     $routes->match(['get', 'post'], 'batch-upload/stock-in', 'Product::importCsvFile');
     $routes->add('stocks/(:num)', 'Product::stockReport/$1');
     $routes->add('update-report/(:num)/(:num)', 'Product::updateIngredientReport/$1/$2');
+    //get data using ajax
+    $routes->add('get-ingredients', 'Product::retrieveIngredients');
+    // $routes->add('ingredient-list', 'Product::getIngredientList');
+    $routes->match(['get', 'post'], 'ingredient-list-data', 'Product::getIngredientListData');
+    // $routes->add('ingredient-list-data', 'Product::getIngredientListData');
 });

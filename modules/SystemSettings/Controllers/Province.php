@@ -9,7 +9,7 @@ class Province extends BaseController
 {
     function __construct(){
         $this->provincesModel = new SystemSettings\ProvinceModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

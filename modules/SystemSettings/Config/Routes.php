@@ -23,9 +23,8 @@ $routes->group('menu-categories', ['namespace' => 'Modules\SystemSettings\Contro
 
 $routes->group('menu-ingredients', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'MenuIngredient::index');
-    $routes->match(['get', 'post'], 'a', 'MenuIngredient::add');
     $routes->match(['get', 'post'], 'a/(:num)', 'MenuIngredient::addIngredient/$1');
-    $routes->match(['get', 'post'], 'u/(:num)', 'MenuIngredient::edit/$1');
+    $routes->match(['get', 'post'], 'u/(:num)/(:num)', 'MenuIngredient::editIngredient/$1/$2');
     $routes->add('d/(:num)', 'MenuIngredient::delete/$1');
 });
 

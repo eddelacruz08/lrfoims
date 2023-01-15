@@ -7,7 +7,6 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                             <li class="breadcrumb-item active"><?= $title ?></li>
                         </ol>
                     </div>
@@ -43,8 +42,8 @@
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
+                    <div class="table-responsive table-responsive-sm">
+                        <table id="basic-datatable" class="table table-sm table-hover dt-responsive nowrap w-100">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">

@@ -9,7 +9,7 @@ class Region extends BaseController
 {
     function __construct(){
         $this->regionsModel = new SystemSettings\RegionModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

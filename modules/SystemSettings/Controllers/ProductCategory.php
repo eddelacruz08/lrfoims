@@ -7,7 +7,7 @@ class ProductCategory extends BaseController
 {
 	function __construct(){
 		$this->productCategoryModel = new SystemSettings\ProductCategoryModel();
-		helper(['form']);
+		helper(['form','link']);
 	}
 
 	public function index()

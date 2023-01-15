@@ -9,7 +9,7 @@ class City extends BaseController
 {
     function __construct(){
         $this->citiesModel = new SystemSettings\CityModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

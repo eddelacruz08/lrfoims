@@ -67,11 +67,17 @@ class CartModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getCartTotalPrice($conditions = [], $takeOut = null, $dineIn = null){
+    public function getCartTotalPrice($conditions = [], $takeOut = null, $dineIn = null, $orderDivideVAT = null, $orderMultiplyVAT = null){
 
-        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, 
+                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') - (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') * oud.discount_amount + o.delivery_fee - o.coupon_discount as total_amount_bill,
+                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') + o.delivery_fee - o.coupon_discount as total_amount_bill_no_discount,
+                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * '.$orderMultiplyVAT.') as total_amount_vat,
+                        SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * oud.discount_amount as total_amount_user_discount,
+                        o.order_status_id, o.c_cash, o.c_balance, o.total_amount, o.discount_amount');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
         $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+        $this->join('lrfoims_order_user_discounts as oud', 'o.order_user_discount_id = oud.id', 'left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

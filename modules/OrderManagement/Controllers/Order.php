@@ -4,6 +4,7 @@ use Modules\OrderManagement\Models as OrderManagement;
 use Modules\MenuManagement\Models as MenuManagement;
 use Modules\SystemSettings\Models as SystemSettings;
 use Modules\ProductManagement\Models as ProductManagement;
+use Modules\UserManagement\Models as UserManagement;
 use Modules\IngredientReportManagement\Models as IngredientReportManagement;
 use App\Controllers\BaseController;
 
@@ -21,7 +22,13 @@ class Order extends BaseController
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
+		$this->usersModel = new UserManagement\UsersModel();
 		$this->orderLimitModel = new SystemSettings\OrderLimitModel();
+		$this->deliveryFeeModel = new SystemSettings\DeliveryFeeModel();
+		$this->paymentMethodModel = new SystemSettings\PaymentMethodModel();
+		$this->orderDiscountModel = new SystemSettings\OrderDiscountModel();
+		$this->VATModel = new SystemSettings\VATModel();
+		$this->couponModel = new SystemSettings\CouponModel();
 		helper(['link','form']);
         $this->take_out = 1;
         $this->dine_in = 2;
@@ -49,75 +56,64 @@ class Order extends BaseController
 		return view('templates/index', $data); 
 	}
 
-    public function retrievePlaceOrder(){
-        $this->hasPermissionRedirect('orders/place-order');
-
-        $data['menuLists'] = $this->menusModel->get();
+    public function orderTypeListData($orderType){
         $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
-        $data['menuCategory'] = $this->menuCategoryModel->get(['status'=>'a']);
-        $data['orderType'] = $this->orderTypeModel->get();
-        $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 2]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 2]);
-        return view('Modules\OrderManagement\Views\order\orders', $data);
+        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeDetails([1, 2, 3, 4, 5], $orderType);
+        return view('Modules\OrderManagement\Views\order\order_type_list_data', $data);
+    }
+
+    public function cartRefreshAndCancelButtons(){
+        return view('Modules\OrderManagement\Views\menuList\refreshAndCancelButtons');
     }
     
-    public function retrieveServeOrder(){
-        $this->hasPermissionRedirect('orders/serve-order');
-
-        $data['menuLists'] = $this->menusModel->get();
+    public function getInfo(){
+		$data['userLists'] = $this->usersModel->get();
+		$data['regions'] = $this->regionModel->get(['status'=>'a']); 
+		$data['provinces'] = $this->provinceModel->get(['status'=>'a']); 
+		$data['cities'] = $this->cityModel->get(['status'=>'a']);
+        $data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+        $data['getVAT'] = $this->VATModel->get(['status'=>'a'])[0];
+        $getVatable = $this->VATModel->get(['status'=>'a'])[0];
+        $data['getOrderUserDiscount'] = $this->orderDiscountModel->get(['status'=>'a']);
+        $data['getDeliveryFee'] = $this->deliveryFeeModel->get(['status'=>'a'])[0];
         $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
-        $data['menuCategory'] = $this->menuCategoryModel->get(['status'=>'a']);
-        $data['orderType'] = $this->orderTypeModel->get();
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 3]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 3]);
-        return view('Modules\OrderManagement\Views\order\serveOrder', $data);
+        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a'], null, null, $getVatable['divide_vat'], $getVatable['multiply_vat']);
+        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeInfo($_GET['id'], [1, 2, 3, 4, 5]);
+        return view('Modules\OrderManagement\Views\order\order_type_info', $data);
     }
     
-    public function retrievePaymentOrder(){
-        $this->hasPermissionRedirect('orders/payment-order');
-
-        $data['menuLists'] = $this->menusModel->get();
-        $data['orderType'] = $this->orderTypeModel->get();
+    public function getCartInfoForPrint(){
+        $data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+        $data['getVAT'] = $this->VATModel->get(['status'=>'a'])[0];
+        $getVatable = $this->VATModel->get(['status'=>'a'])[0];
+        $data['getOrderUserDiscount'] = $this->orderDiscountModel->get(['status'=>'a']);
+        $data['getDeliveryFee'] = $this->deliveryFeeModel->get(['status'=>'a'])[0];
+        $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 4]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 4]);
-        return view('Modules\OrderManagement\Views\order\paymentOrder', $data);
-    }
-    
-    public function retrievePaymentHistoryOrder(){
-        $this->hasPermissionRedirect('orders/payment-history-order');
-
-        $time = new \DateTime();
-        $dateAndTime = $time->format('Y-m-d');
-        $data['menuLists'] = $this->menusModel->get();
-        $data['orderType'] = $this->orderTypeModel->get();
-        $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
-        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a', 'o.order_status_id' => 5]);
-        $data['getOrderDetails'] = $this->ordersModel->getOrderPaymentHistoryDetails(['CAST(lrfoims_orders.updated_at AS DATE)' => $dateAndTime, 
-            'lrfoims_orders.status' => 'a','lrfoims_orders.id' => $_GET['id'], 'lrfoims_orders.order_status_id' => 5]);
-        return view('Modules\OrderManagement\Views\order\paymentHistoryOrder', $data);
+        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a'], null, null, $getVatable['divide_vat'], $getVatable['multiply_vat']);
+        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeInfo($_GET['id'], [1, 2, 3, 4, 5]);
+        return $this->response->setJSON($data);
     }
 
-    public function placeOrder($id, $valueId){
+    public function placeOrder($id, $orderStatusId){
         $this->hasPermissionRedirect('orders/place-order/u');
 
         $getCart = $this->cartsModel->get(['order_id' => $id, 'status'=>'a']);
         if(!empty($getCart)){
-            if($valueId == 1 || $valueId == 2 || $valueId == 3 || $valueId == 4){
-                $_POST['order_status_id'] = $valueId;
+            if($orderStatusId == 1 || $orderStatusId == 2 || $orderStatusId == 3 || $orderStatusId == 4){
+                $_POST['order_status_id'] = $orderStatusId;
                 $this->ordersModel->update($id, $_POST);
                 $data =[
                     'status'=> 'Added Successfully',
-                    'status_text' => 'Order has been successfully added!',
+                    'status_text' => 'Success!',
                     'status_icon' => 'success'
                 ];
                 return $this->response->setJSON($data);
-            }else{
-                $ordersData = $this->ordersModel->get(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $id, 'lrfoims_orders.order_status_id' => 4])[0];
+            } else {
+                $ordersData = $this->ordersModel->get(['lrfoims_orders.status' => 'a','lrfoims_orders.id' => $id])[0];
                 
-                if(empty($ordersData['total_amount']) && $valueId == 5){
+                if(empty($ordersData['total_amount']) && $orderStatusId == 5){
                     $data =[
                         'status'=> 'Opss',
                         'status_text' => 'Please add payments!',
@@ -125,11 +121,11 @@ class Order extends BaseController
                     ];
                     return $this->response->setJSON($data);
                 }else{
-                    $_POST['order_status_id'] = $valueId;
+                    $_POST['order_status_id'] = $orderStatusId;
                     $this->ordersModel->update($id, $_POST);
                     $data =[
                         'status'=> 'Added Successfully',
-                        'status_text' => 'Order has been successfully added!',
+                        'status_text' => 'Success!',
                         'status_icon' => 'success'
                     ];
                     return $this->response->setJSON($data);
@@ -145,108 +141,94 @@ class Order extends BaseController
         }
     }
 
-    public function addOrder(){
+    public function addOrderResponse(){
         $this->hasPermissionRedirect('orders/a');
-
-        $data['page_title'] = 'LRFOIMS | Orders';
-        $data['title'] = 'Orders';
-        $data['view'] = 'Modules\OrderManagement\Views\order\index';
-        $time = new \DateTime();
 
         $isUpdated = 0;
         $checkDuplicateMenuId = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'menu_id' => $_POST['menu_id'], 'status' => 'a']);
         if(empty($checkDuplicateMenuId)){
             if ($this->request->getMethod() == 'post') {
-                if (!$this->validate('addToCartAdmin')) {
-                    $data['errors'] = $this->validation->getErrors();
-                    $data['value'] = $_POST;
-                    $this->session->setFlashdata('error', 'Please complete all fields!');
-                } else {
-                    $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
-                    if(!empty($menuIngredients)){
-                        $orderMaxLimit = $this->orderLimitModel->get(['status' => 'a'])[0];
-                        $menuTotal = $this->cartsModel->getCountMenuTypePerOrder(['lrfoims_carts.order_id'=> $_POST['order_id'], 'm.menu_type'=> 'a', 'lrfoims_carts.status'=> 'a'])[0];
+                $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
+                if(!empty($menuIngredients)){
+                    $orderMaxLimit = $this->orderLimitModel->get(['status' => 'a'])[0];
+                    $menuTotal = $this->cartsModel->getCountMenuTypePerOrder(['lrfoims_carts.order_id'=> $_POST['order_id'], 'm.menu_type'=> 'a', 'lrfoims_carts.status'=> 'a'])[0];
 
-                        if($menuTotal['total_menu'] <= $orderMaxLimit['max_limit']){
-                            foreach ($menuIngredients as $menuIngredientsValue) {
-                                $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
-                                
-                                $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
-                                $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
-                                if($ingredients['unit_quantity'] > $total_unit_quantity){
-                                    $ingredientsData[] = [
-                                        'ingredient_id' => $ingredients['id'],
-                                        'unit_quantity' => $ingredientStatus,
-                                        // 'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
-                                        // 'stock_out_date' => $time->format('Y-m-d H:i:s'),
-                                        'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
-                                    ];
-                                    // $ingredientDataReports[] = [
-                                    //     'order_id' => $_POST['order_id'],
-                                    //     'ingredient_id' => $ingredients['id'],
-                                    //     'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
-                                    //     'unit_price' => $menuIngredientsValue['price'],
-                                    //     'product_description_id' => $ingredients['product_description_id'],
-                                    //     'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
-                                    // ];
-                                    $isUpdated = 1;
-                                }else{
-                                    $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
-                                    $isUpdated = 0;
-                                }
-                            }
-                            if(empty($errorDataIngredients)){
-                                if($isUpdated == 1){
-                                    // foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                                    //     $reports = [
-                                    //         'order_id' => $ingredientDataReportsValue['order_id'],
-                                    //         'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                                    //         'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                                    //         'unit_price' => $ingredientDataReportsValue['unit_price'],
-                                    //         'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                                    //         'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                                    //     ];
-                                    //     $this->ingredientReportModel->add($reports);
-                                    // }
-                                    foreach ($ingredientsData as $ingredientsDataValue) {
-                                        $ingredientInfo = [
-                                            'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                                            // 'price' => $ingredientsDataValue['price'],
-                                            // 'stock_out_date' => $ingredientsDataValue['stock_out_date'],
-                                            'product_status_id' => $ingredientsDataValue['product_status_id'],
-                                        ];
-                                        $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
-                                    }
-                                    
-                                    $this->cartsModel->add($_POST);
-                                    $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
-                                }
+                    if($menuTotal['total_menu'] <= $orderMaxLimit['max_limit']){
+                        foreach ($menuIngredients as $menuIngredientsValue) {
+                            $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
+                            
+                            $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * $_POST['quantity']);
+                            $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * $_POST['quantity'];
+                            if($ingredients['unit_quantity'] > $total_unit_quantity){
+                                $ingredientsData[] = [
+                                    'ingredient_id' => $ingredients['id'],
+                                    'unit_quantity' => $ingredientStatus,
+                                    'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
+                                ];
+                                $isUpdated = 1;
                             }else{
-                                $message = "These ingredients: <br>";
-                                $cnt = 1;
-                                foreach ($errorDataIngredients as $value) {
-                                    $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
-                                    $cnt++;
+                                $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+                                $isUpdated = 0;
+                            }
+                        }
+                        if(empty($errorDataIngredients)){
+                            if($isUpdated == 1){
+                                foreach ($ingredientsData as $ingredientsDataValue) {
+                                    $ingredientInfo = [
+                                        'unit_quantity' => $ingredientsDataValue['unit_quantity'],
+                                        'product_status_id' => $ingredientsDataValue['product_status_id'],
+                                    ];
+                                    $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
                                 }
-                                $message .= "<br> Please check your ingredients.";
-                                $this->session->setFlashdata('error', $message);
+                                $this->cartsModel->add($_POST);
+                                $jdata =[
+                                    'status' => 'Success',
+                                    'status_text' => 'Menu successfully added!',
+                                    'status_icon' => 'success'
+                                ];
+                                return $this->response->setJSON($jdata);
                             }
                         }else{
-                            $this->session->setFlashdata('error', 'Added Failed! You\\\'ve reached a maximum order!');
+                            $message = "These ingredients: ";
+                            $cnt = 1;
+                            foreach ($errorDataIngredients as $value) {
+                                $message .= $cnt.". ".$value['product_name']." -> ";
+                                $cnt++;
+                            }
+                            $message .= "Please check your ingredients.";
+                            $jdata =[
+                                'status' => 'Out of stocks',
+                                'status_text' => $message,
+                                'status_icon' => 'error'
+                            ];
+                            return $this->response->setJSON($jdata);
                         }
                     }else{
-                        $this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
+                        $jdata =[
+                            'status' => 'Added Failed!',
+                            'status_text' => 'You\\\'ve reached a maximum order!',
+                            'status_icon' => 'error'
+                        ];
+                        return $this->response->setJSON($jdata);
                     }
-                    return redirect()->to('/orders');
+                }else{
+                    $jdata =[
+                        'status' => 'Added Failed!',
+                        'status_text' => 'Please apply Menu Ingredients to continue. *(Maintenances/Menu Ingredients/Add) Request to your admin for this site.',
+                        'status_icon' => 'error'
+                    ];
+                    return $this->response->setJSON($jdata);
                 }
-                return redirect()->to('/orders');
+                return $this->response->setJSON($jdata);
             }
-            return redirect()->to('/orders');
         }else{
-            $this->session->setFlashdata('error_no_flash', 'You\'ve already added this menu! Please check your orders to apply changes.');
-            return redirect()->to('/orders');
+            $jdata =[
+                'status' => 'Error',
+                'status_text' => 'You\'ve already added this menu! Please check your orders to apply changes.',
+                'status_icon' => 'error'
+            ];
+            return $this->response->setJSON($jdata);
         }
-        return view('templates/index', $data);
     }
 
     public function menu(){
@@ -259,61 +241,156 @@ class Order extends BaseController
             'menuLists' => $this->menusModel->getDetails(['lrfoims_menus.status'=>'a']),
             'menuCategory' => $this->menuCategoryModel->get(),
             'orderType' => $this->orderTypeModel->get(),
-            'adminUnavailableOrders' => $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id'=> 1, 'status'=>'a']),
-            'adminCartLists' => $this->cartsModel->getAdminCartLists(['lrfoims_carts.status'=>'a']),
-            'adminCountCartLists' => $this->cartsModel->getAdminCountCartLists(['o.status'=>'u']),
-            'getCreatedOrderNumber' => $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status'=>'a']),
 		];
-		return view('templates/index', $data);
+		return view('templates/menu_order_index', $data);
 	}
+
+    public function adminMenu(){
+        $this->hasPermissionRedirect('orders/admin-menu');
+
+		return view('Modules\OrderManagement\Views\menuList\adminMenu');
+	}
+
+    public function menuList(){
+        $this->hasPermissionRedirect('orders/admin-menu');
+
+		$data = [
+            'menuLists' => $this->menusModel->getDetails(['lrfoims_menus.status'=>'a']),
+            'menuCategory' => $this->menuCategoryModel->get(),
+            'getCreatedOrderNumber' => $this->ordersModel->get(['id' => session()->get('local_admin_menu_order_id'), 'order_status_id' => 1, 'status'=>'a']),
+		];
+		return view('Modules\OrderManagement\Views\menuList\menuList', $data);
+	}
+
+    public function cartList(){
+        $this->hasPermissionRedirect('orders/admin-menu');
+
+        $data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+        $data['getVAT'] = $this->VATModel->get(['status'=>'a'])[0];
+        $getVatable = $this->VATModel->get(['status'=>'a'])[0];
+        $data['getOrderUserDiscount'] = $this->orderDiscountModel->get(['status'=>'a']);
+        $data['getDeliveryFee'] = $this->deliveryFeeModel->get(['status'=>'a'])[0];
+        $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
+        $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
+        $data['getOrderType'] = $this->orderTypeModel->get(['status' => 'a']);
+        $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a'], null, null, $getVatable['divide_vat'], $getVatable['multiply_vat']);
+        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeInfo($_GET['id'], [1, 2, 3, 4, 5]);
+		return view('Modules\OrderManagement\Views\menuList\cartList', $data);
+	}
+    
+    public function getOrderTypeListAndPaymentMethodList(){
+        
+        $data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+        $data['getOrderType'] = $this->orderTypeModel->get(['status' => 'a']);
+        return $this->response->setJSON($data);
+	}
+
+    public function applyCouponDiscount(){ 
+
+        if ($this->request->getMethod() == 'post') {
+            $couponCode = $this->couponModel->get(['code' => $_POST['coupon_code']]);
+            if(!empty($couponCode)){
+                foreach ($couponCode as $value) {
+                    if($_POST['coupon_code'] == $value['code'] && $value['status'] == 'a'){
+
+                        $couponData = [
+                            'status' => 'd'
+                        ];
+                        if($this->couponModel->update($value['id'], $couponData)){
+
+                            $orderData = [
+                                'coupon_code' => $value['code'],
+                                'coupon_discount' => $value['amount']
+                            ];
+                            $this->ordersModel->update($_POST['order_id'], $orderData);
+
+                            $jdata =[
+                                'status' => 'Success',
+                                'status_text' => 'Successfully added!',
+                                'status_icon' => 'success'
+                            ];
+                            return $this->response->setJSON($jdata);
+                        }else{
+                            $jdata =[
+                                'status' => 'Opss',
+                                'status_text' => 'Something went wrong!',
+                                'status_icon' => 'warning'
+                            ];
+                            return $this->response->setJSON($jdata);
+                        }
+                    }else{
+                        $jdata =[
+                            'status' => 'Opss',
+                            'status_text' => 'Already used code!',
+                            'status_icon' => 'warning'
+                        ];
+                        return $this->response->setJSON($jdata);
+                    }
+                }
+
+            }else{
+                $jdata =[
+                    'status' => 'Error',
+                    'status_text' => 'Invalid coupon code!',
+                    'status_icon' => 'error'
+                ];
+                return $this->response->setJSON($jdata);
+            }
+        }
+    }
 
     public function createOrderNumber(){ 
         $this->hasPermissionRedirect('orders/create-order-number');
 
-        $orderNumber = $this->ordersModel->generateOrderNumber()[0];
+		function random_string($length) {
+			$key = '';
+			$keys = range(0, 9);
+			for ($i = 0; $i < $length; $i++) {
+				$key .= $keys[array_rand($keys)];
+			}
+			return $key;
+		}
+		$orderNumberIsTrue = $this->ordersModel->generateOrderNumber();
+		if(!empty($orderNumberIsTrue)){
+			$orderNumber = $this->ordersModel->generateOrderNumber()[0];
+		}else{
+			$orderNumber['number'] = random_string(4);
+		}
             
-        if ($this->request->getMethod() == 'post') {
-            if(!empty($orderNumber['number'])){
-                $data['number'] = $orderNumber['number'];
-                $data['user_id'] = session()->get('id');
-                $data['order_status_id'] = 1;
-                if($this->ordersModel->add($data)){
-                    $jdata =[
-                        'status' => 'Success',
-                        'status_text' => 'Successfully added an order!',
-                        'status_icon' => 'success'
-                    ];
-                }else{
-                    $jdata =[
-                        'status' => 'Opss',
-                        'status_text' => 'Something went wrong!',
-                        'status_icon' => 'warning'
-                    ];
-                }
-                return $this->response->setJSON($jdata);
-            }else{
-                $jdata =[
-                    'status' => 'Opss',
-                    'status_text' => 'Try Again!',
-                    'status_icon' => 'warning'
-                ];
-            }
-            return $this->response->setJSON($jdata);
+        $data['number'] = $orderNumber['number'];
+        $data['user_id'] = session()->get('id');
+        $data['order_status_id'] = 1;
+        if($this->ordersModel->add($data)){
+            $orderId = $this->ordersModel->get(['number'=>$orderNumber['number'], 'status'=>'a'])[0];
+            $orderIdPerOrder = [
+                'local_admin_menu_order_id' => $orderId['id'],
+            ];
+            session()->set($orderIdPerOrder);
+
+            $jdata =[
+                'status' => 'Success!',
+                'status_text' => 'Welcome '.session()->get('first_name').'!',
+                'status_icon' => 'success'
+            ];
+        }else{
+            $jdata =[
+                'status' => 'Opss',
+                'status_text' => 'Something went wrong!',
+                'status_icon' => 'warning'
+            ];
         }
         return $this->response->setJSON($jdata);
     }
     
     public function addOrderToCartInMenuList(){
         $this->hasPermissionRedirect('orders/admin-menu/add-to-cart/a');
-
-        $time = new \DateTime();
         $isUpdated = 0;
         $checkDuplicateMenuId = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'menu_id' => $_POST['menu_id'], 'status' => 'a']);
         if(empty($checkDuplicateMenuId)){
             if ($this->request->getMethod() == 'post') {
                 if (!$this->validate('addOrderToCartInMenuList')) {
-                    $data['errors'] = $this->validation->getErrors();
-                    $data['value'] = $_POST;
+                    $jdata['errors'] = $this->validation->getErrors();
+                    $jdata['value'] = $_POST;
                 } else {
                     $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $_POST['menu_id'], 'status' => 'a']);
                     if(!empty($menuIngredients)){
@@ -330,17 +407,7 @@ class Order extends BaseController
                                     $ingredientsData[] = [
                                         'ingredient_id' => $ingredients['id'],
                                         'unit_quantity' => $ingredientStatus,
-                                        'price' => $ingredients['price'] - ($menuIngredientsValue['price'] * $_POST['quantity']),
-                                        'stock_out_date' => $time->format('Y-m-d H:i:s'),
                                         'product_status_id' => $total_unit_quantity > $ingredients['unit_quantity'] ? 2 : 1,
-                                    ];
-                                    $ingredientDataReports[] = [
-                                        'order_id' => $_POST['order_id'],
-                                        'ingredient_id' => $ingredients['id'],
-                                        'unit_quantity' => $menuIngredientsValue['unit_quantity'] * $_POST['quantity'],
-                                        'unit_price' => $menuIngredientsValue['price'],
-                                        'product_description_id' => $ingredients['product_description_id'],
-                                        'total_unit_price' => $menuIngredientsValue['price'] * $_POST['quantity'],
                                     ];
                                     $isUpdated = 1;
                                 }else{
@@ -350,54 +417,64 @@ class Order extends BaseController
                             }
                             if(empty($errorDataIngredients)){
                                 if($isUpdated == 1){
-                                    foreach ($ingredientDataReports as $ingredientDataReportsValue) {
-                                        $reports = [
-                                            'order_id' => $ingredientDataReportsValue['order_id'],
-                                            'ingredient_id' => $ingredientDataReportsValue['ingredient_id'],
-                                            'unit_quantity' => $ingredientDataReportsValue['unit_quantity'],
-                                            'unit_price' => $ingredientDataReportsValue['unit_price'],
-                                            'product_description_id' => $ingredientDataReportsValue['product_description_id'],
-                                            'total_unit_price' => $ingredientDataReportsValue['total_unit_price'],
-                                        ];
-                                        $this->ingredientReportModel->add($reports);
-                                    }
                                     foreach ($ingredientsData as $ingredientsDataValue) {
                                         $ingredientInfo = [
                                             'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-                                            'price' => $ingredientsDataValue['price'],
-                                            'stock_out_date' => $ingredientsDataValue['stock_out_date'],
                                             'product_status_id' => $ingredientsDataValue['product_status_id'],
                                         ];
                                         $this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
                                     }
                                     
                                     $this->cartsModel->add($_POST);
-                                    $this->session->setFlashdata('success_no_flash', 'Menu successfully added!');
+                                    $jdata =[
+                                        'status' => 'Success',
+                                        'status_text' => 'Successfully added!',
+                                        'status_icon' => 'success'
+                                    ];
+                                    return $this->response->setJSON($jdata);
                                 }
                             }else{
-                                $message = "These ingredients: <br>";
+                                $message = "These ingredients: ";
                                 $cnt = 1;
                                 foreach ($errorDataIngredients as $value) {
-                                    $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
+                                    $message .= $cnt.". ".$value['product_name']." -> ";
                                     $cnt++;
                                 }
-                                $message .= "<br> Please check your ingredients.";
-                                $this->session->setFlashdata('error', $message);
+                                $message .= " Please check your ingredients.";
+                                $jdata =[
+                                    'status' => 'Success',
+                                    'status_text' => $message,
+                                    'status_icon' => 'success'
+                                ];
+                                return $this->response->setJSON($jdata);
                             }
                         }else{
-                            $this->session->setFlashdata('error', 'Added Failed! You\\\'ve reached a maximum order!');
+                            $jdata =[
+                                'status' => 'Added Failed!',
+                                'status_text' => 'You\\\'ve reached a maximum order!',
+                                'status_icon' => 'warning'
+                            ];
+                            return $this->response->setJSON($jdata);
                         }
                     }else{
-                        $this->session->setFlashdata('error', 'Added Failed! Please apply Menu Ingredients to continue. <br><small class="text-danger"><em>*(Maintenances/Menu Ingredients/Add)<br>*Request to your admin for this site.<em></small>');
+                        $jdata =[
+                            'status' => 'Added Failed!',
+                            'status_text' => 'Please apply Menu Ingredients to continue. *(Maintenances/Menu Ingredients/Add) Request to your admin for this site.',
+                            'status_icon' => 'warning'
+                        ];
+                        return $this->response->setJSON($jdata);
                     }
-                    return redirect()->to('/orders/admin-menu');
                 }
-                return redirect()->to('/orders/admin-menu');
+                return $this->response->setJSON($jdata);
             }
-            return redirect()->to('/orders/admin-menu');
+            return $this->response->setJSON($jdata);
         }else{
-            $this->session->setFlashdata('error_no_flash', 'You\'ve already added this menu! Please check your orders to apply changes.');
-            return redirect()->to('/orders/admin-menu');
+            $jdata =[
+                'status' => 'Opss!',
+                'status_text' => 'You\'ve already added this menu! Please check your orders to apply changes.',
+                'status_icon' => 'warning'
+            ];
+            return $this->response->setJSON($jdata);
         }
     }
     
@@ -406,69 +483,80 @@ class Order extends BaseController
 
         $time = new \DateTime();
         $isUpdated = 0;
-        if($cartQyt != $_POST['quantity']) {
-            $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $menuId, 'status' => 'a']);
-            foreach ($menuIngredients as $menuIngredientsValue) {
-                $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
-                // unit quantity 
-                $ingredientStatus = $ingredients['unit_quantity'] - ($menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2));
-                $ingredientReturnStatus = $ingredientStatus + ($menuIngredientsValue['unit_quantity'] * $cartQyt);
-        
-                $total_unit_quantity = $menuIngredientsValue['unit_quantity'] * number_format($_POST['quantity'],2);
-                if($ingredients['unit_quantity'] > $total_unit_quantity){
-                    $ingredientsDataReturn[] = [
-                        'ingredient_id' => $ingredients['id'],
-                        'unit_quantity' => $ingredientReturnStatus,
-                        'product_status_id' => $ingredientReturnStatus > $total_unit_quantity ? 2 : 1,
-                    ];
-                    $isUpdated = 1;
-                }else{
-                    $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
-                    $isUpdated = 0;
-                }
-            }
-            if(empty($errorDataIngredients)){
-                if($isUpdated == 1){
-                    foreach ($ingredientsDataReturn as $ingredientsDataReturnValue) {
-                        $ingredientInfoReturn = [
-                            'unit_quantity' => $ingredientsDataReturnValue['unit_quantity'],
-                            'product_status_id' => $ingredientsDataReturnValue['product_status_id'],
-                        ];
-                        $this->ingredientsModel->update($ingredientsDataReturnValue['ingredient_id'], $ingredientInfoReturn);
-                    }
-                    $this->cartsModel->update($cartId, $_POST);
-                    $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
-                    
-                    if($routeStatus == '2' || $routeStatus == 2){
-                        return redirect()->to('/orders');
-                    }else{
-                        return redirect()->to('/orders/admin-menu');
-                    }
-                }
-            }else{
-                $message = "These ingredients: <br>";
-                $cnt = 1;
-                foreach ($errorDataIngredients as $value) {
-                    $message .= $cnt.". ".$value['product_name']." = low stocks; <br>";
-                    $cnt++;
-                }
-                $message .= "<br> Please check your ingredients!";
-                $this->session->setFlashdata('error', $message);
+        $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $menuId, 'status' => 'a']);
+        if($_POST['operation'] == 'minus') {
+            $quantityCheck = $_POST['quantity'] - 1;
+        } else {
+            $quantityCheck = $_POST['quantity'] + 1;
+        }
+        if($quantityCheck == 0){
+            $jdata =[
+                'status' => 'Opss',
+                'status_text' => 'You cannot plus or minus a quantity if less than 1.',
+                'status_icon' => 'warning'
+            ];
+            return $this->response->setJSON($jdata);
+        }
+        foreach ($menuIngredients as $menuIngredientsValue) {
+            $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
 
-                if($routeStatus == '2' || $routeStatus == 2){
-                    return redirect()->to('/orders');
-                }else{
-                    return redirect()->to('/orders/admin-menu');
+            if($_POST['operation'] == 'minus') {
+                $quantityData = [
+                    'quantity' => $_POST['quantity'] - 1
+                ];
+                $ingredientReturnStatus = $ingredients['unit_quantity'] + $menuIngredientsValue['unit_quantity'];
+            } else {
+                $quantityData = [
+                    'quantity' => $_POST['quantity'] + 1
+                ];
+                $ingredientReturnStatus = $ingredients['unit_quantity'] - $menuIngredientsValue['unit_quantity'];
+            }
+            if($ingredients['unit_quantity'] > $menuIngredientsValue['unit_quantity']){
+                $ingredientsDataReturn[] = [
+                    'ingredient_id' => $ingredients['id'],
+                    'unit_quantity' => $ingredientReturnStatus,
+                    'product_status_id' => $ingredientReturnStatus > 1 ? 2 : 1,
+                ];
+                $isUpdated = 1;
+            }else{
+                $errorDataIngredients[] = ['product_name' => $ingredients['product_name']];
+                $isUpdated = 0;
+            }
+        }
+        if(empty($errorDataIngredients)){
+            if($isUpdated == 1){
+                foreach ($ingredientsDataReturn as $ingredientsDataReturnValue) {
+                    $ingredientInfoReturn = [
+                        'unit_quantity' => $ingredientsDataReturnValue['unit_quantity'],
+                        'product_status_id' => $ingredientsDataReturnValue['product_status_id'],
+                    ];
+                    $this->ingredientsModel->update($ingredientsDataReturnValue['ingredient_id'], $ingredientInfoReturn);
                 }
+                $this->cartsModel->update($cartId, $quantityData);
+                
+                $jdata =[
+                    'status' => 'Success!',
+                    'status_text' => 'Food quantity changed!',
+                    'status_icon' => 'success'
+                ];
+                return $this->response->setJSON($jdata);
             }
         }else{
-            $this->session->setFlashdata('warning', 'Have the same value you\'ve inputted! If you want changes for your quantity. Please input higher or less than the value.');
-            
-            if($routeStatus == '2' || $routeStatus == 2){
-                return redirect()->to('/orders');
-            }else{
-                return redirect()->to('/orders/admin-menu');
+            $message = "These ingredients: ";
+            $cnt = 1;
+            foreach ($errorDataIngredients as $value) {
+                $message .= $cnt.". ".$value['product_name']." -> ";
+                $cnt++;
             }
+            $message .= " Please check your ingredients!";
+            $this->session->setFlashdata('error', $message);
+
+            $jdata =[
+                'status' => 'Opss',
+                'status_text' => $message,
+                'status_icon' => 'warning'
+            ];
+            return $this->response->setJSON($jdata);
         }
     }
 
@@ -543,40 +631,46 @@ class Order extends BaseController
         }
     }
 
-    public function submitAdminOrderCarts($id){
+    public function submitAdminOrderCarts(){
         $this->hasPermissionRedirect('orders/admin-menu/submit-orders');
 
-        $data = [
-            'page_title' => 'LRFOIMS | Order Menu',
-            'title' => 'Order Menu',
-            'view' => 'Modules\OrderManagement\Views\menuList\index',
-            'menuLists' => $this->menusModel->getDetails(['lrfoims_menus.status'=>'a']),
-            'menuCategory' => $this->menuCategoryModel->get(),
-            'orderType' => $this->orderTypeModel->get(),
-            'adminUnavailableOrders' => $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id'=> 1, 'status'=>'a']),
-            'adminCartLists' => $this->cartsModel->getAdminCartLists(['lrfoims_carts.status'=>'a']),
-            'adminCountCartLists' => $this->cartsModel->getAdminCountCartLists(['o.status'=>'u']),
-            'getCreatedOrderNumber' => $this->ordersModel->get(['user_id' => session()->get('id'), 'order_status_id' => 1, 'status'=>'a']),
-        ];
-        $_POST['order_status_id'] = 2;
-        $_POST['status'] = 'a';
         if ($this->request->getMethod() == 'post') {
-            $getCart = $this->cartsModel->get(['order_id' => $id, 'status'=>'a']);
-            if (!$this->validate('submitOrderToCartInMenuList')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-            } else {
-                if(!empty($getCart)){
-                    $this->ordersModel->update($id, $_POST);
-                    $this->session->setFlashdata('success', 'Order successfully submitted!');
-                    return redirect()->to('/orders');
+            $getCart = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status'=>'a']);
+            if(!empty($getCart)){
+                if(!empty($_POST['order_user_discount_id'])){
+                    $getOrderUserDiscount = $this->orderDiscountModel->get(['id'=>$_POST['order_user_discount_id'], 'status'=>'a'])[0];
                 }else{
-                    $this->session->setFlashdata('error_no_flash', '<b>Empty Cart!</b> Please add to cart. Thank you.');
-                    return redirect()->to('/orders/admin-menu');
+                    $getOrderUserDiscount['id'] = 0;
                 }
+                $data = [
+                    'payment_method_id' => $_POST['payment_method_id'],
+                    'order_type' => $_POST['order_type'],
+                    'order_user_discount_id' => $getOrderUserDiscount['id'],
+                    'order_status_id' => 2,
+                    'status' => 'a',
+                ];
+                $this->ordersModel->update($_POST['order_id'], $data); 
+
+                $orderIdPerOrder = [
+                    'local_admin_menu_order_id' => null,
+                ];
+                session()->set($orderIdPerOrder);
+
+                $jdata =[
+                    'status' => 'Success',
+                    'status_text' => 'Successfully checkout!',
+                    'status_icon' => 'success'
+                ];
+                return $this->response->setJSON($jdata);
+            }else{
+                $jdata =[
+                    'status' => 'Error!',
+                    'status_text' => 'Empty cart! Please add food before you checkout.',
+                    'status_icon' => 'error'
+                ];
+                return $this->response->setJSON($jdata);
             }
         }
-        return view('templates/index', $data);
     }
     
     public function addAdminPayment($id, $totalAmount){
@@ -586,34 +680,30 @@ class Order extends BaseController
         $getCart = $this->cartsModel->get(['order_id' => $id, 'status'=>'a']);
         if(!empty($getCart)){
             if ($this->request->getMethod() == 'post') {
-                if($totalAmount <= $_POST['c_cash']){
-                    $data = [
-                        'total_amount' => $totalAmount,
-                        'c_cash' => $_POST['c_cash'],
-                        'c_balance' => $_POST['c_cash'] - $totalAmount
+                $data = [
+                    'total_amount_order' => $_POST['total_amount_order'],
+                    'total_amount' =>$_POST['total_amount'],
+                    'total_amount_vat' =>$_POST['total_amount_vat'],
+                    'discount_amount' =>$_POST['discount_amount'],
+                    'c_cash' => $_POST['c_cash'],
+                    'c_balance' => $_POST['c_cash'] - $_POST['total_amount'],
+                    'order_status_id' => 5
+                ];
+                if($this->ordersModel->update($orders['id'], $data)){
+                    
+                    $jdata =[
+                        'status' => 'Success',
+                        'status_text' => 'Successfully added!',
+                        'status_icon' => 'success'
                     ];
-                    if($this->ordersModel->update($orders['id'], $data)){
-                        
-                        $jdata =[
-                            'status' => 'Success',
-                            'status_text' => 'Successfully added a payment!',
-                            'status_icon' => 'success'
-                        ];
-                    } else{
-                        $jdata =[
-                            'status' => 'Oops!',
-                            'status_text' => 'Something went wrong!',
-                            'status_icon' => 'warning'
-                        ];
-                    }
-                    return $this->response->setJSON($jdata);
-                }else{
+                } else{
                     $jdata =[
                         'status' => 'Oops!',
-                        'status_text' => 'Please pay higher than your bill!',
+                        'status_text' => 'Something went wrong!',
                         'status_icon' => 'warning'
                     ];
                 }
+                return $this->response->setJSON($jdata);
             }
         }else{
             $jdata =[
@@ -623,22 +713,6 @@ class Order extends BaseController
             ];
         }
 		return $this->response->setJSON($jdata);
-    }
-
-    public function editQty($id){
-        $this->hasPermissionRedirect('');
-        $data = [
-            'page_title' => 'LRFOIMS | Orders',
-            'title' => 'Orders',
-            'view' => 'Modules\OrderManagement\Views\orders\orders'
-        ];
-        if ($this->request->getMethod() == 'post') {
-            $this->cartsModel->update($id, $_POST);
-            $this->session->setFlashdata('success_no_flash', 'Menu Quantity Updated!');
-            return redirect()->to('/orders');
-        }
-
-        return view('templates/index', $data);
     }
     
     public function deleteAdminCart($cartId, $menuId, $orderId, $cartQyt){
@@ -725,12 +799,11 @@ class Order extends BaseController
         return $this->response->setJSON($data);
     }
 
-    public function delete($id){
+    public function deleteOrderAdminMenu(){
         $this->hasPermissionRedirect('orders/d');
 
-        $time = new \DateTime();
         $isDeleted = 0;
-        $cartDetails = $this->cartsModel->get(['order_id' => $id, 'status' => 'a']);
+        $cartDetails = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status' => 'a']);
         if(!empty($cartDetails)){
             foreach ($cartDetails as $cartDetailsValue) {
                 $menuIngredients = $this->menuIngredientModel->get(['menu_id' => $cartDetailsValue['menu_id'], 'status' => 'a']);
@@ -748,12 +821,21 @@ class Order extends BaseController
                 }
             }
         }else{
+            $orderIdPerOrder = [
+                'local_admin_menu_order_id' => null,
+            ];
+            session()->set($orderIdPerOrder);
+
+            $orderInfo = [
+                'order_status_id' => 6,
+            ];
+            $this->ordersModel->update($_POST['order_id'], $orderInfo);
+
             $data =[
-                'status'=> 'Deleted Successfully!',
-                'status_text' => 'Successfully Deleted!',
+                'status'=> 'Success!',
+                'status_text' => 'Cancelled Order!',
                 'status_icon' => 'success'
             ];
-            $this->ordersModel->softDelete($id);
             return $this->response->setJSON($data);
         }
         if($isDeleted == 1){
@@ -767,12 +849,22 @@ class Order extends BaseController
             foreach ($cartId as $cartIdValue) {
                 $this->cartsModel->softDelete($cartIdValue['id']);
             }
+            
+            $orderIdPerOrder = [
+                'local_admin_menu_order_id' => null,
+            ];
+            session()->set($orderIdPerOrder);
+
+            $orderInfo = [
+                'order_status_id' => 6,
+            ];
+            $this->ordersModel->update($_POST['order_id'], $orderInfo);
+
             $data =[
-                'status'=> 'Deleted Successfully!',
-                'status_text' => 'Successfully Deleted!',
+                'status'=> 'Success!',
+                'status_text' => 'Cancelled Order!',
                 'status_icon' => 'success'
             ];
-            $this->ordersModel->softDelete($id);
             return $this->response->setJSON($data);
         }else{
             $data =[

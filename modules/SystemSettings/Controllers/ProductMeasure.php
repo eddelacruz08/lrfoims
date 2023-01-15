@@ -9,7 +9,7 @@ class ProductMeasure extends BaseController
 {
     function  __construct(){
         $this->productMeasureModel = new SystemSettings\ProductMeasureModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()

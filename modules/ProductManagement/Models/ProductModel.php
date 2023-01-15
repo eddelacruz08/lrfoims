@@ -44,6 +44,31 @@ class ProductModel extends BaseModel
 
         return $this->findAll();
     }
+    
+    public function getProductData($product_category_id = null){
+        
+        $this->select('lrfoims_products.*, pc.product_description, ps.name, pd.name as description');
+        $this->join('lrfoims_product_measures as pd', 'pd.id = lrfoims_products.product_description_id', 'left');
+        $this->join('lrfoims_product_status as ps', 'ps.id = lrfoims_products.product_status_id', 'left');
+
+        $this->where('lrfoims_products.product_category_id', $product_category_id);
+        $this->orderBy('lrfoims_products.product_category_id', 'ASC');
+
+        return $this->findAll();
+    }
+
+    public function getIngredientLowQuantityStatus($conditions = []){
+        
+        $this->select('lrfoims_products.*');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->where('lrfoims_products.unit_quantity <=', 500);
+        $this->orderBy('lrfoims_products.unit_quantity', 'ASC');
+
+        return $this->findAll();
+    }
 
     public function getTotalStockIngredientPerYears($conditions = []){
         

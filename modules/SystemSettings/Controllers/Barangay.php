@@ -9,7 +9,7 @@ class Barangay extends BaseController
 {
     function __construct(){
         $this->barangayModel = new SystemSettings\BarangayModel();
-        helper(['form']);
+        helper(['form','link']);
     }
 
     public function index()
