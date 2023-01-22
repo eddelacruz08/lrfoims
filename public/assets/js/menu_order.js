@@ -1,34 +1,53 @@
 function adminMenu(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("admin-menu").innerHTML = this.responseText;
-  }
-  xhttp.open("GET","/orders/admin-menu/admin-menu-page-reload");
-  xhttp.send();
+  var element = $('#admin-menu');
+  $.ajax({
+    url: "/orders/admin-menu/admin-menu-page-reload",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // console.log(xhr.responseText);
+      // console.log(thrownError);
+    }
+  });
 }
 
 adminMenu();
 
 function orderTypeMenuList(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("menu-list-data").innerHTML = this.responseText;
-  }
-  xhttp.open("GET","/orders/admin-menu/order-menu-list-data");
-  xhttp.send();
+  var element = $('#menu-list-data');
+  $.ajax({
+    url: "/orders/admin-menu/order-menu-list-data",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // console.log(xhr.responseText);
+      // console.log(thrownError);
+    }
+  });
 }
 
-// setInterval(function(){
-  orderTypeMenuList();
-// }, 2000);
+orderTypeMenuList();
 
 function cartRefreshAndCancelButtons(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("cart-refresh-and-cancel-buttons").innerHTML = this.responseText;
-  }
-  xhttp.open("GET","/orders/admin-menu/cart-refresh-and-cancel-buttons");
-  xhttp.send();
+  var element = $('#cart-refresh-and-cancel-buttons');
+  $.ajax({
+    url: "/orders/admin-menu/cart-refresh-and-cancel-buttons",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // console.log(xhr.responseText);
+      // console.log(thrownError);
+    }
+  });
 }
 
 setInterval(function(){
@@ -55,8 +74,8 @@ function displayCartListInfo(route, id){
             element.html(html);
           },
           error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.responseText);
-            alert(thrownError);
+            console.log(xhr.responseText);
+            console.log(thrownError);
           }
         });
     });
@@ -142,19 +161,6 @@ function addCodeCouponDiscount(route, orderId, url){
 	});
 }
 
-let input = document.querySelector("#payment_method");
-let button = document.querySelector("#checkoutAdminCartButton");
-button.disabled = true;
-input.addEventListener("change", stateHandle);
-
-function stateHandle() {
-    if(document.querySelector("#payment_method").value === "") {
-        button.disabled = true;
-    } else {
-        button.disabled = false;
-    }
-}
-
 function checkout(route, orderId, url){
   var payment_method_id = document.getElementById('payment_method').value;
   var order_type = document.getElementById('order_type').value;
@@ -199,44 +205,6 @@ function checkout(route, orderId, url){
       });
     }
   });
-}
-
-var fullscreenOpenAdminMenu = document.getElementById("fullscreenOpenAdminMenu");
-var fullscreenCloseAdminMenu = document.getElementById("fullscreenCloseAdminMenu");
-fullscreenCloseAdminMenu.style.display = 'none';
-
-var elem = document.getElementById("order_menu_fullscreen_display");
-
-function openFullscreenAdminMenuDisplay() {
-  if (elem.requestFullscreen) {
-    fullscreenOpenAdminMenu.style.display = 'none';
-    fullscreenCloseAdminMenu.style.display = 'block';
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    fullscreenOpenAdminMenu.style.display = 'none';
-    fullscreenCloseAdminMenu.style.display = 'block';
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    fullscreenOpenAdminMenu.style.display = 'none';
-    fullscreenCloseAdminMenu.style.display = 'block';
-    elem.msRequestFullscreen();
-  }
-}
-
-function closeFullscreenAdminMenuDisplay() {
-  if (document.exitFullscreen) {
-    fullscreenCloseAdminMenu.style.display = 'none';
-    fullscreenOpenAdminMenu.style.display = 'block';
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) { /* Safari */
-    fullscreenCloseAdminMenu.style.display = 'none';
-    fullscreenOpenAdminMenu.style.display = 'block';
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) { /* IE11 */
-    fullscreenCloseAdminMenu.style.display = 'none';
-    fullscreenOpenAdminMenu.style.display = 'block';
-    document.msExitFullscreen();
-  }
 }
 
 function cancelOrder(route, url, orderId){

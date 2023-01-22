@@ -8,4 +8,6 @@ $routes->group('ingredient-reports',['namespace' => 'Modules\IngredientReportMan
     $routes->match(['get', 'post'], 'u/(:num)', 'IngredientReport::edit/$1');
     $routes->match(['get', 'post'], 'generate-report', 'IngredientReport::generateReport');
     $routes->add('d/(:num)', 'IngredientReport::delete/$1');
+    // ajax
+    $routes->match(['get', 'post'], 'get-stock-ingredients', 'IngredientReport::getStockIngredients');
 });

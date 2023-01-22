@@ -7,7 +7,7 @@ function printOrders(orderId, orderNumber, orderType, createdDate, orderStatus, 
         type: 'get',
         data: { id: orderId },
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             var html = '<div style="background-color: white; color: black; padding: 5px;">';
                 html +='<p style="margin-bottom: 5px; font-size: 20px; font-weight: bold; text-align: center;">Order#'+orderNumber+'</p>';
             for (let a = 0; a < data.getOrderTypeDetails.length; ++a) {
@@ -21,6 +21,45 @@ function printOrders(orderId, orderNumber, orderType, createdDate, orderStatus, 
                 html +='        </tr>';
                 html +='    </tbody>';
                 html +='</table>';
+                
+                if(data.getOrderTypeDetails[a]['order_type'] == 3){
+                    for (let f = 0; f < data.userLists.length; ++f) {
+                        if(data.getOrderTypeDetails[a]['user_id'] === data.userLists[f]['id']){
+                            var full_address = '';
+                                full_address += data.userLists[f]['addtl_address']+', ';
+                                for (let ci = 0; ci < data.cities.length; ++ci) {
+                                    if(Number(data.cities[ci]['city_code']) == data.userLists[f]['city_id']){
+                                        var cit = data.cities[ci]['city_name'].toLowerCase();
+                                        var city = cit.charAt(0).toUpperCase() + cit.slice(1);
+                                        full_address += city + ', ';
+                                    }
+                                }
+                                for (let pr = 0; pr < data.provinces.length; ++pr) {
+                                    if(Number(data.provinces[pr]['province_code']) == data.userLists[f]['province_id']){
+                                        var prov = data.provinces[pr]['province_name'].toLowerCase();
+                                        var province = prov.charAt(0).toUpperCase() + prov.slice(1);
+                                        full_address += province + ', ';
+                                    }
+                                }
+                                for (let re = 0; re < data.regions.length; ++re) {
+                                    if(Number(data.regions[re]['region_code']) == data.userLists[f]['region_id']){
+                                        var reg = data.regions[re]['region_name'].toLowerCase();
+                                        var region = reg.charAt(0).toUpperCase() + reg.slice(1);
+                                        full_address += region;
+                                    }
+                                }
+                            html +='<table style="border-bottom: 1px solid gray; margin-bottom: 10px;">';
+                            html +='    <tbody>';
+                            html +='        <tr>';
+                            html +='            <td style="width: 450px;">'+full_address+'</td>';
+                            html +='            <td style="width: 150px;">'+data.userLists[f]['email_address']+'</td>';
+                            html +='            <td style="width: 150px;">'+data.userLists[f]['contact_number']+'</td>';
+                            html +='        </tr>';
+                            html +='    </tbody>';
+                            html +='</table>';
+                        }
+                    }
+                }
 
                 for (let b = 0; b < data.getCarts.length; ++b) {
                     html +='<table>';
@@ -92,17 +131,6 @@ function printOrders(orderId, orderNumber, orderType, createdDate, orderStatus, 
             window.print();
         
             document.body.innerHTML = originalContents;
-
-            var fullscreenOpenOrders = document.getElementById("fullscreenOpenOrders");
-            var fullscreenCloseOrders = document.getElementById("fullscreenCloseOrders");
-            fullscreenOpenOrders.style.display = 'block';
-            fullscreenCloseOrders.style.display = 'none';
-            
-            var fullscreenOpenAdminMenu = document.getElementById("fullscreenOpenAdminMenu");
-            var fullscreenCloseAdminMenu = document.getElementById("fullscreenCloseAdminMenu");
-
-            fullscreenOpenAdminMenu.style.display = 'block';
-            fullscreenCloseAdminMenu.style.display = 'none';
         },
     });
 

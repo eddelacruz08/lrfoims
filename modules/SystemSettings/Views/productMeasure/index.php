@@ -39,46 +39,31 @@
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
-                            <thead class="thead-dark">
+                        <table class="table table-sm table-hover dt-responsive nowrap w-100 text-center">
+                            <thead class="bg-dark text-white">
                                 <tr>
-                                    <th scope="col">
-                                        <center>#</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Name</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Description</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Actions</center>
-                                    </th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Low Stock Minimum Limit (Need for notification when low ingredients)</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 
-                                <?php $id = 1;
+                                <?php $id = 1; 
                                 foreach ($productMeasure as $row) : ?>
                                     <tr>
-                                        <th scope="row">
-                                            <center><?= $id ?></center>
-                                        </th>
+                                        <th scope="row"><?= $id++ ?></th>
+                                        <td><?= strtolower($row['name']); ?></td>
+                                        <td><?= strtolower($row['description']); ?></td>
+                                        <td><?= strtolower($row['low_stock_minimum_limit']); ?></td>
                                         <td>
-                                            <center><?= strtolower($row['name']); ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?= strtolower($row['description']); ?></center>
-                                        </td>
-                                        <td>
-                                            <center>
-                                                <a href="/ingredient-measures/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                <a onclick="confirmDelete('/ingredient-measures/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
-                                            </center>
+                                            <a href="/ingredient-measures/u/<?= $row['id']; ?>" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                            <a onclick="confirmDelete('/ingredient-measures/d/',<?=$row['id']?>)" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                         </td>
                                     </tr>
-                                <?php $id++;
-                                endforeach; ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

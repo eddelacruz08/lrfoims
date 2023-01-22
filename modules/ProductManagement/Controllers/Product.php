@@ -42,20 +42,18 @@ class Product extends BaseController
         ];
         return view('templates/index', $data);
     }
-
-    public function viewStocks($id) {
-        $this->hasPermissionRedirect('ingredients');
-        $ingredients = $this->productsModel->getProduct(['lrfoims_products.id'=>$id, 'lrfoims_products.status'=>'a'])[0];
-        $data = [
-            'page_title' => 'LRFOIMS | '.$ingredients['product_name'],
-            'title' => $ingredients['product_name'],
-            'view' => 'Modules\ProductManagement\Views\ingredient\viewStocks',
-            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.ingredient_id'=>$id]),
-            'pager' => $this->productsModel->pager
-        ];
-        return view('templates/index', $data);
-    }
     
+    public function viewStocks() {
+        $this->hasPermissionRedirect('ingredients');
+        $ingredients = $this->productsModel->getProduct(['lrfoims_products.id'=>$_GET['id'], 'lrfoims_products.status'=>'a'])[0];
+        $data = [
+            'title' => $ingredients['product_name'],
+            'category_id' => $_GET['category_id'],
+            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.ingredient_id'=>$_GET['id']])
+        ];
+        return view('Modules\ProductManagement\Views\ingredient\viewStocks', $data);
+    }
+
     public function getIngredientList() {
         $data = [
             'page_title' => 'LRFOIMS | Ingredients',
@@ -93,6 +91,20 @@ class Product extends BaseController
             'getIngredients' => $this->productsModel->getProduct(),
         ];
         return $this->response->setJSON($data);
+    }
+
+    public function notifLowQuantityIngredients(){
+        $data = [
+            'getIngredients' => $this->productsModel->getProduct(['lrfoims_products.status'=>'a']),
+        ];
+        return $this->response->setJSON($data);
+    }
+
+    public function updateIngredientsOutOfStock($id){
+        $data = [
+            'product_status_id' => 2,
+        ];
+        $this->ingredientsModel->update($id, $data);
     }
 
     public function importCsvFile() {
@@ -227,6 +239,13 @@ class Product extends BaseController
         return view('templates/index', $data);
     }
 
+    public function updateStocksByExpirationDateSetStockStatus(){
+        $dataStatus = [
+            'stock_status' => 3,
+        ];
+        $this->ingredientReportModel->update($_POST['id'], $dataStatus);
+    }
+
     public function updateStocksByExpirationDate($ingredientId, $stockId){
 
         $ingredients = $this->productsModel->get(['id' => $ingredientId, 'status' => 'a'])[0];
@@ -248,6 +267,27 @@ class Product extends BaseController
         ];
         $this->ingredientReportModel->update($stockId, $dataStocks);
         $this->productsModel->update($ingredientId, $dataIngredient);
+
+        $data =[
+            'status' => 'Success!',
+            'status_text' => 'Successfully Updated!',
+            'status_icon' => 'success'
+        ];
+        return $this->response->setJSON($data);
+    }
+    
+    public function updateStocksByExpirationDateCancel($stockId){
+        $dataStatus = [
+            'status' => 'd',
+        ];
+        $this->ingredientReportModel->update($stockId, $dataStatus);
+
+        $data =[
+            'status' => 'Success!',
+            'status_text' => 'Successfully Cancelled!',
+            'status_icon' => 'success'
+        ];
+        return $this->response->setJSON($data);
     }
 
     public function updateDateStocks($stockId){
@@ -257,7 +297,7 @@ class Product extends BaseController
         $this->ingredientReportModel->update($stockId, $dataStocks);
     }
 
-    public function notification(){
+    public function notification($id, $routeType){
         $notificationData = [
             'user_id' => $_POST['user_id'],
             'name' => $_POST['name'],
@@ -266,6 +306,17 @@ class Product extends BaseController
             'notif_date_status' => $this->time->format('Y-m-d'),
         ];
         $this->notificationModel->add($notificationData);
+        if($routeType == 1){
+            $dataStocks = [
+                'updated_at' => $this->time->format('Y-m-d H:i:s'),
+            ];
+            $this->ingredientReportModel->update($id, $dataStocks);
+        }else{
+            $dataIngredients = [
+                'updated_at' => $this->time->format('Y-m-d H:i:s'),
+            ];
+            $this->productsModel->update($id, $dataIngredients);
+        }
     }
 
     public function notificationMarked($id){
@@ -276,52 +327,55 @@ class Product extends BaseController
         return redirect()->to('/'.$_POST['marked_link']);
     }
 
-    public function stockReport($id) {
+    public function addStockViewForm() {
         $this->hasPermissionRedirect('ingredients/stocks');
         
+        $ingredients = $this->productsModel->get(['id' => $_GET['id'], 'status' => 'a'])[0];
+
         $data = [
-            'page_title' => 'LRFOIMS | Ingredients',
-            'title' => 'Add Stock Ingredient',
-            'view' => 'Modules\ProductManagement\Views\ingredient\singleStockForm',
-            'productSortByCategory' => $this->productsCategoryModel->get(),
-            'ingredients' => $this->productsModel->getProduct(),
-            'ingredientReports' => $this->ingredientReportModel->getIngredientStockIn(),
-            'date' => $this->dateAndTime,
-            'id' => $id
+            'title' => 'Add stock in '.$ingredients['product_name'].' ingredient.',
+            'category_id' => $_GET['category_id'],
+            'id' => $_GET['id']
         ];
-        $ingredients = $this->productsModel->get(['id' => $id, 'status' => 'a'])[0];
-        if ($this->request->getMethod() == 'post') {
-            if (!$this->validate('ingredientStockIn')) {
-                $data['errors'] = $this->validation->getErrors();
-                $data['value'] = $_POST;
-            } else {
-                $this->dateAndTime = new \DateTime($_POST['date_expiration']);
-                $dataStocks = [
-                    'ingredient_id' => $id,
-                    'unit_quantity' => $_POST['unit_quantity'],
-                    'unit_price' => $_POST['price'],
-                    'product_description_id' => $ingredients['product_description_id'],
-                    'stock_status' => 1,
-                    'date_expiration' => $this->dateAndTime->format('Y-m-d'),
-                ];
-                $dataIngredient = [
-                    'unit_quantity' => $ingredients['unit_quantity'] + $_POST['unit_quantity'],
-                    'price' => $_POST['price'],
-                    'stock_out_date' => $this->time->format('Y-m-d H:i:s'),
-                    'product_status_id' => 1,
-                ];
-                if($this->ingredientReportModel->add($dataStocks)){
-                    $this->productsModel->update($ingredients['id'], $dataIngredient);
-                    $this->session->setFlashdata('success', 'Successfully Added!');
-                    return redirect()->to('/ingredients');
-                } else{
-                    $this->session->setFlashdata('error', 'Oops! Something went wrong!');
-                    return redirect()->to('/ingredients');
-                }
-            }
+        return view('Modules\ProductManagement\Views\ingredient\addStockForm', $data);
+    }
+
+    public function addStocks() {
+        $this->hasPermissionRedirect('ingredients/stocks');
+        
+        $ingredients = $this->productsModel->get(['id' => $_POST['ingredient_id'], 'status' => 'a'])[0];
+
+        $this->dateAndTime = new \DateTime($_POST['date_expiration']);
+        $dataStocks = [
+            'ingredient_id' => $ingredients['id'],
+            'unit_quantity' => $_POST['unit_quantity'],
+            'unit_price' => $_POST['price'],
+            'product_description_id' => $ingredients['product_description_id'],
+            'stock_status' => 1,
+            'date_expiration' => $this->dateAndTime->format('Y-m-d'),
+        ];
+        $dataIngredient = [
+            'unit_quantity' => $ingredients['unit_quantity'] + $_POST['unit_quantity'],
+            'price' => $_POST['price'],
+            'stock_out_date' => $this->time->format('Y-m-d H:i:s'),
+            'product_status_id' => 1,
+        ];
+        if($this->ingredientReportModel->add($dataStocks)){
+            $this->productsModel->update($ingredients['id'], $dataIngredient);
+            $data =[
+                'status' => 'Success!',
+                'status_text' => 'Successfully Added!',
+                'status_icon' => 'success'
+            ];
+            return $this->response->setJSON($data);
+        } else{
+            $data =[
+                'status' => 'Oops!',
+                'status_text' => 'Something went wrong!',
+                'status_icon' => 'error'
+            ];
+            return $this->response->setJSON($data);
         }
-        return view('templates/index', $data);
-    
     }
     
     public function updateIngredientReport($id, $ingredientId) {

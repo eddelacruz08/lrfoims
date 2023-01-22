@@ -53,7 +53,7 @@ class BaseController extends Controller
 	{
 		$this->session = \Config\Services::session();
 
-		helper(['link', 'namesearch', 'paging', 'document']);
+		helper(['link', 'namesearch', 'document']);
 	}
 
 	protected function hasPermissionRedirect($slugs)
@@ -61,13 +61,12 @@ class BaseController extends Controller
 		$this->modulesModel = new UserManagement\ModulesModel();
 		$this->permissionsModel = new UserManagement\PermissionsModel();
 		$this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
-		
+
 		$isValidSlug = 0;
 		$userPermissionView = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id')]);
 		$permissions = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id'), 'p.slug'=> $slugs]);
 		if(!empty($permissions)){
 			session()->set(['userPermissionView' => $userPermissionView]);
-			// $this->session->setFlashdata('error', 'You don\'t have permission to this function!');
 			$isValidSlug = 1;
 		}else{
 			$isValidSlug = 0;

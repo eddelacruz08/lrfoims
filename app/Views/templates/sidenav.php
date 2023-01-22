@@ -104,6 +104,9 @@
                                 <?php if(user_link('extensions', session()->get('userPermissionView'))):?>
                                     <a href="/extensions" class="dropdown-item">Extension Names</a>
                                 <?php endif; ?>
+                                <?php if(user_link('notifications', session()->get('userPermissionView'))):?>
+                                    <a href="/notifications" class="dropdown-item">Notifications</a>
+                                <?php endif; ?>
                                 <div class="dropdown">
                                     <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-order" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Order <div class="arrow-down"></div>
@@ -114,6 +117,21 @@
                                         <?php endif; ?>
                                         <?php if(user_link('order-max-limit', session()->get('userPermissionView'))):?>
                                             <a href="/order-max-limit" class="dropdown-item">Order Limit</a>
+                                        <?php endif; ?>
+                                        <?php if(user_link('order-user-discounts', session()->get('userPermissionView'))):?>
+                                            <a href="/order-user-discounts" class="dropdown-item">User Type Discounts</a>
+                                        <?php endif; ?>
+                                        <?php if(user_link('coupons', session()->get('userPermissionView'))):?>
+                                            <a href="/coupons" class="dropdown-item">Coupons</a>
+                                        <?php endif; ?>
+                                        <?php if(user_link('delivery-fee', session()->get('userPermissionView'))):?>
+                                            <a href="/delivery-fee" class="dropdown-item">Delivery Fee</a>
+                                        <?php endif; ?>
+                                        <?php if(user_link('payment-methods', session()->get('userPermissionView'))):?>
+                                            <a href="/payment-methods" class="dropdown-item">Payment Method</a>
+                                        <?php endif; ?>
+                                        <?php if(user_link('vat', session()->get('userPermissionView'))):?>
+                                            <a href="/vat" class="dropdown-item">Value-Added Tax (VAT)</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>

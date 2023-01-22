@@ -32,10 +32,10 @@ class ProductModel extends BaseModel
     
     public function getProduct($conditions = []){
         
-        $this->select('lrfoims_products.*, pc.product_description, ps.name, pd.name as description');
-        $this->join('lrfoims_product_categories as pc', 'pc.id = lrfoims_products.product_category_id');
-        $this->join('lrfoims_product_measures as pd', 'pd.id = lrfoims_products.product_description_id');
-        $this->join('lrfoims_product_status as ps', 'ps.id = lrfoims_products.product_status_id');
+        $this->select('lrfoims_products.*, pc.product_description, ps.name, pm.name as description, pm.low_stock_minimum_limit as limit');
+        $this->join('lrfoims_product_categories as pc', 'pc.id = lrfoims_products.product_category_id', 'left');
+        $this->join('lrfoims_product_measures as pm', 'pm.id = lrfoims_products.product_description_id', 'left');
+        $this->join('lrfoims_product_status as ps', 'ps.id = lrfoims_products.product_status_id', 'left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
@@ -64,7 +64,7 @@ class ProductModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->where('lrfoims_products.unit_quantity <=', 500);
+        $this->where('lrfoims_products.unit_quantity <=', 1000);
         $this->orderBy('lrfoims_products.unit_quantity', 'ASC');
 
         return $this->findAll();

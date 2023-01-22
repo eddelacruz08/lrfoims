@@ -84,7 +84,7 @@
         <script src="/assets/js/vendor/typeahead.bundle.min.js"></script>
 
         <!-- Demo -->
-        <script src="/assets/js/pages/demo.typehead.js"></script>
+        <!-- <script src="/assets/js/pages/demo.typehead.js"></script> -->
 
         <!-- demo app -->
         <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->
@@ -94,72 +94,12 @@
         <!-- end demo js-->
 
         <script src="/assets/js/myAlerts.js"></script>
-        <script src="/assets/js/permissions.js"></script>
+        <!-- <script src="/assets/js/permissions.js"></script>
         <script src="/assets/js/orders.js"></script>
         <script src="/assets/js/ingredients.js"></script>
         <script src="/assets/js/printer.js"></script>
-        <script src="/assets/js/menu_order.js"></script>
+        <script src="/assets/js/menu_order.js"></script> -->
         <!-- <script src="/assets/js/invoiceOrders.js"></script> -->
-        
-        <script>
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
-            $(document).ready(function() {
-                $('.js-example-basic-multiple').select2();
-            });
-            // <!-- orders tabs -->
-            $(document).ready(function(){
-                $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
-                    localStorage.setItem('activeTab', $(e.target).attr('href'));
-                });
-                var activeTab = localStorage.getItem('activeTab');
-                if(activeTab){
-                    $('#orderTypeTab a[href="' + activeTab + '"]').tab('show');
-                }
-            });
-
-            $("#dateYearPicker").datepicker({
-                format: "yyyy",
-                viewMode: "years", 
-                minViewMode: "years",
-                autoclose:true
-            });
-
-        // <!-- maintenance/menu-ingredients accordion collapse -->
-            $(document).ready(function(){
-                var acc = document.getElementsByClassName("accordionMenuIngredients");
-                var i;
-                for (i = 0; i < acc.length; i++) {
-                    acc[i].addEventListener("click", function(e) {
-                        localStorage.setItem('activePanelMenuIngredients', $(e.target).attr('id'));
-                    });
-                }
-                var activePanelMenuIngredients = localStorage.getItem('activePanelMenuIngredients');
-                if(activePanelMenuIngredients){
-                    $('div[id="' + activePanelMenuIngredients + '"]').collapse('show');
-                }else{
-                    $('div[id="' + activePanelMenuIngredients + '"]').collapse('hide');
-                }
-            });
-            // modal hide and show
-            $(document).ready(function(){
-                $('a[data-bs-toggle="modal"]').on('shown.bs.modal', function(e) {
-                    localStorage.setItem('activeModal', $(e.target).attr('data-bs-target'));
-                });
-                $('a[data-bs-toggle="modal"]').on('hidden.bs.modal', function(e) {
-                    localStorage.setItem('notActiveModal', $(e.target).attr('data-bs-target'));
-                    localStorage.removeItem("activeModal");
-                });
-                var activeModal = localStorage.getItem('activeModal');
-                var notActiveModal = localStorage.getItem('notActiveModal');
-                if(activeModal){
-                    $('div[id="' + notActiveModal + '"]').modal('show');
-                }else{
-                    $('div[id="' + notActiveModal + '"]').modal('hide');
-                }
-            });
-        </script>
 	
         <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 

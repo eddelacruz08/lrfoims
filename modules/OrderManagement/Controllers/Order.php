@@ -29,7 +29,7 @@ class Order extends BaseController
 		$this->orderDiscountModel = new SystemSettings\OrderDiscountModel();
 		$this->VATModel = new SystemSettings\VATModel();
 		$this->couponModel = new SystemSettings\CouponModel();
-		helper(['link','form']);
+		helper(['link','form', 'paginater']);
         $this->take_out = 1;
         $this->dine_in = 2;
         $this->delivery = 3;
@@ -54,6 +54,27 @@ class Order extends BaseController
 		];
 
 		return view('templates/index', $data); 
+	}
+
+	public function getPendingOrders(){
+
+		$offset = 0;
+		$data['all_items'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a']);
+		$data['offset'] = $offset;
+		$data['limitPerTable'] = $this->limitPerTable;
+		$data['getPendingOrders'] = $this->ordersModel->getPendingOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $offset);
+		
+		return view('Modules\DashboardManagement\Views\dashboard\pendingOrders', $data);
+	}
+	
+	public function getPendingOrdersPerPage(){
+
+		$data['all_items'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a']);
+		$data['offset'] = $_GET['offset'];
+		$data['limitPerTable'] = $this->limitPerTable;
+		$data['getPendingOrders'] = $this->ordersModel->getPendingOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $_GET['offset']);
+		
+		return view('Modules\DashboardManagement\Views\dashboard\pendingOrders', $data);
 	}
 
     public function orderTypeListData($orderType){
@@ -84,6 +105,10 @@ class Order extends BaseController
     }
     
     public function getCartInfoForPrint(){
+		$data['userLists'] = $this->usersModel->get();
+		$data['regions'] = $this->regionModel->get(['status'=>'a']); 
+		$data['provinces'] = $this->provinceModel->get(['status'=>'a']); 
+		$data['cities'] = $this->cityModel->get(['status'=>'a']);
         $data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
         $data['getVAT'] = $this->VATModel->get(['status'=>'a'])[0];
         $getVatable = $this->VATModel->get(['status'=>'a'])[0];
@@ -92,7 +117,7 @@ class Order extends BaseController
         $data['orderMaxLimit'] = $this->orderLimitModel->get(['status' => 'a'])[0];
         $data['getCarts'] = $this->cartsModel->getCarts(['lrfoims_carts.status' => 'a']);
         $data['getCartTotalPrice'] = $this->cartsModel->getCartTotalPrice(['lrfoims_carts.status' => 'a'], null, null, $getVatable['divide_vat'], $getVatable['multiply_vat']);
-        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeInfo($_GET['id'], [1, 2, 3, 4, 5]);
+        $data['getOrderTypeDetails'] = $this->ordersModel->getOrderTypeInfo($_GET['id'], [1, 2, 3, 4, 5, 7]);
         return $this->response->setJSON($data);
     }
 
@@ -246,8 +271,6 @@ class Order extends BaseController
 	}
 
     public function adminMenu(){
-        $this->hasPermissionRedirect('orders/admin-menu');
-
 		return view('Modules\OrderManagement\Views\menuList\adminMenu');
 	}
 

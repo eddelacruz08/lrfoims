@@ -11,6 +11,7 @@ class OrderModel extends BaseModel
         'menu_id',
         'quantity',
         'order_status_id',
+        'total_amount_order',
         'total_amount',
         'total_amount_vat',
         'c_cash',
@@ -40,6 +41,20 @@ class OrderModel extends BaseModel
         $this->groupBy('lrfoims_orders.number');
 
         return $this->findAll();
+    }
+
+    public function getPendingOrderDetails($conditions = [], $limit = 0, $offset = 0){
+
+        $this->select('lrfoims_orders.number, lrfoims_orders.created_at, os.order_status, ot.type');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->orderBy('lrfoims_orders.updated_at', 'ASC');
+
+        return $this->findAll($limit, $offset);
     }
 
     public function getCustomerOrderDetails($conditions = []){ 
@@ -264,8 +279,9 @@ class OrderModel extends BaseModel
     
     public function getOrderReports($conditions = []){
 
-        $this->select('lrfoims_orders.*, os.order_status');
-        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id');
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

@@ -172,6 +172,11 @@ class IngredientReport extends BaseController
 		}
 	}
 
+	public function getStockIngredients(){
+		$data['getStockIngredients'] = $this->ingredientReportModel->getDetails();
+        return $this->response->setJSON($data);
+	}
+
 	public function generateReport() {
         $this->hasPermissionRedirect('ingredient-reports/generate-report');
 

@@ -6,6 +6,7 @@ use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
 use Modules\OrderManagement\Models as OrderManagement;
 use Modules\SystemSettings\Models as SystemSettings;
+use Modules\IngredientReportManagement\Models as IngredientReportManagement;
 use App\Controllers\SendMail as SendMail;
 
 class Security extends BaseController{
@@ -22,6 +23,7 @@ class Security extends BaseController{
 		$this->barangayModel = new SystemSettings\BarangayModel();
 		$this->infoModel = new SystemSettings\HomeInfoModel();
 		$this->notificationModel = new SystemSettings\NotificationModel();
+        $this->stocksModel = new IngredientReportManagement\IngredientReportModel();
         $this->email = \Config\Services::email();
         // $this->sendMail = new SendMail();
     }
@@ -39,7 +41,7 @@ class Security extends BaseController{
             
                 return 'Anonymous_'.$key;
             }
-
+            
             $data = [
                 'page_title' => 'LRFOIMS | Sign in',
                 'title' => 'Lamon Restaurant Food Ordering',
@@ -108,7 +110,7 @@ class Security extends BaseController{
             'isLoggedIn' => true,
             'permissions' => $this->rolesPermissionsModel->getPermissions(['lrfoims_roles_permissions.role_id' => $user['role_id']]),
             'modules' => $this->rolesPermissionsModel->getModules(['lrfoims_roles_permissions.role_id' => $user['role_id']]),
-            'getOrderCounts' => $this->ordersModel->getCountOrdersHome(['user_id' => $user['id'], 'status'=>'a', 'order_status_id'=> 5])[0],
+            'getOrderCounts' => $this->ordersModel->getCountOrdersHome(['user_id' => $user['id'], 'status'=>'a', 'order_status_id'=> 7])[0],
         ];
 
         session()->set($data);
@@ -296,7 +298,7 @@ class Security extends BaseController{
     }
     
 	public function getNotifications() {
-		$data = $this->notificationModel->orderBy('id', 'DESC')->findAll();
+		$data['getNotifications'] = $this->notificationModel->orderBy('updated_at', 'DESC')->findAll(15);
 		return $this->response->setJSON($data);
 	}
 
