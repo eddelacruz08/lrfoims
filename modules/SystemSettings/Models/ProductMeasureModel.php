@@ -8,6 +8,7 @@ class ProductMeasureModel extends BaseModel
     protected $allowedFields = [
         'name', 
         'description',
+        'low_stock_minimum_limit',
         'status', 
         'created_at', 
         'updated_at', 

@@ -10,7 +10,7 @@ $routes->group('ingredients', ['namespace' => 'Modules\ProductManagement\Control
     $routes->match(['get', 'post'], 'expire-date/d/(:num)', 'Product::updateStocksByExpirationDateCancel/$1');
     $routes->match(['get', 'post'], 'update-date/u/(:num)', 'Product::updateDateStocks/$1');
     $routes->match(['get', 'post'], 'notify-marked/u/(:num)', 'Product::notificationMarked/$1');
-    $routes->match(['get', 'post'], 'notification/a/(:num)', 'Product::notification/$1');
+    $routes->match(['get', 'post'], 'notification/a/(:num)/(:num)', 'Product::notification/$1/$2');
     $routes->match(['get', 'post'], 'status/(:num)', 'Product::editStatus/$1');
     $routes->add('d/(:num)', 'Product::delete/$1');
     $routes->match(['get', 'post'], 'batch-upload/export', 'Product::exportIngredients');
@@ -22,4 +22,6 @@ $routes->group('ingredients', ['namespace' => 'Modules\ProductManagement\Control
     $routes->add('v', 'Product::viewStocks');
     $routes->add('stocks/form/v', 'Product::addStockViewForm');
     $routes->match(['get', 'post'], 'stocks/a', 'Product::addStocks');
+    $routes->add('notif-low-quantity-ingredients', 'Product::notifLowQuantityIngredients');
+    $routes->match(['get', 'post'], 'update-ingredients-out-of-stock/u/(:num)', 'Product::updateIngredientsOutOfStock/$1');
 });

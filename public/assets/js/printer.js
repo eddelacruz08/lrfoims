@@ -7,7 +7,7 @@ function printOrders(orderId, orderNumber, orderType, createdDate, orderStatus, 
         type: 'get',
         data: { id: orderId },
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             var html = '<div style="background-color: white; color: black; padding: 5px;">';
                 html +='<p style="margin-bottom: 5px; font-size: 20px; font-weight: bold; text-align: center;">Order#'+orderNumber+'</p>';
             for (let a = 0; a < data.getOrderTypeDetails.length; ++a) {

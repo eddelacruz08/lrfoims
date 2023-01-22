@@ -19,33 +19,51 @@ function alert_no_flash(message, status_icon){
 }
 
 function orderTypeDineInList(){
-  const xhttpDineIn = new XMLHttpRequest();
-  xhttpDineIn.onload = function(){
-    var element = $('#order-type-dine-in-list-data');
-    element.html(this.responseText);
-  }
-  xhttpDineIn.open("GET","/orders/order-type-dine-in-list-data/1");
-  xhttpDineIn.send();
+  var element = $('#order-type-dine-in-list-data');
+  $.ajax({
+    url: "/orders/order-type-dine-in-list-data/1",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // alert(xhr.responseText);
+      // alert(thrownError);
+    }
+  });
 }
 
 function orderTypeTakeOutList(){
-  const xhttpTakeOut = new XMLHttpRequest();
-  xhttpTakeOut.onload = function(){
-    var element = $('#order-type-take-out-list-data');
-    element.html(this.responseText);
-  }
-  xhttpTakeOut.open("GET","/orders/order-type-take-out-list-data/2");
-  xhttpTakeOut.send();
+  var element = $('#order-type-take-out-list-data');
+  $.ajax({
+    url: "/orders/order-type-take-out-list-data/2",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // alert(xhr.responseText);
+      // alert(thrownError);
+    }
+  });
 }
 
 function orderTypeDeliveryList(){
-  const xhttpDelivery = new XMLHttpRequest();
-  xhttpDelivery.onload = function(){
-    var element = $('#order-type-delivery-list-data');
-    element.html(this.responseText);
-  }
-  xhttpDelivery.open("GET","/orders/order-type-delivery-list-data/3");
-  xhttpDelivery.send();
+  var element = $('#order-type-delivery-list-data');
+  $.ajax({
+    url: "/orders/order-type-delivery-list-data/3",
+    type: 'GET',
+    data: {},
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      // alert(xhr.responseText);
+      // alert(thrownError);
+    }
+  });
 }
 
 setInterval(function(){
@@ -242,41 +260,3 @@ function confirmDeleteCart(route, cartId, menuId, orderId, cartQyt, routeType, u
     }
   });
 }
-
-// var fullscreenOpenOrders = document.getElementById("fullscreenOpenOrders");
-// var fullscreenCloseOrders = document.getElementById("fullscreenCloseOrders");
-// fullscreenCloseOrders.style.display = 'none';
-
-// var elem = document.getElementById("order_menu_fullscreen_display");
-
-// function openFullscreenOrdersDisplay() {
-//   if (elem.requestFullscreen) {
-//     fullscreenOpenOrders.style.display = 'none';
-//     fullscreenCloseOrders.style.display = 'block';
-//     elem.requestFullscreen();
-//   } else if (elem.webkitRequestFullscreen) {
-//     fullscreenOpenOrders.style.display = 'none';
-//     fullscreenCloseOrders.style.display = 'block';
-//     elem.webkitRequestFullscreen();
-//   } else if (elem.msRequestFullscreen) {
-//     fullscreenOpenOrders.style.display = 'none';
-//     fullscreenCloseOrders.style.display = 'block';
-//     elem.msRequestFullscreen();
-//   }
-// }
-
-// function closeFullscreenOrdersDisplay() {
-//   if (document.exitFullscreen) {
-//     fullscreenCloseOrders.style.display = 'none';
-//     fullscreenOpenOrders.style.display = 'block';
-//     document.exitFullscreen();
-//   } else if (document.webkitExitFullscreen) {
-//     fullscreenCloseOrders.style.display = 'none';
-//     fullscreenOpenOrders.style.display = 'block';
-//     document.webkitExitFullscreen();
-//   } else if (document.msExitFullscreen) {
-//     fullscreenCloseOrders.style.display = 'none';
-//     fullscreenOpenOrders.style.display = 'block';
-//     document.msExitFullscreen();
-//   }
-// }

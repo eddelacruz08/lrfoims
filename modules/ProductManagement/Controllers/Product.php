@@ -93,6 +93,20 @@ class Product extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function notifLowQuantityIngredients(){
+        $data = [
+            'getIngredients' => $this->productsModel->getProduct(['lrfoims_products.status'=>'a']),
+        ];
+        return $this->response->setJSON($data);
+    }
+
+    public function updateIngredientsOutOfStock($id){
+        $data = [
+            'product_status_id' => 2,
+        ];
+        $this->ingredientsModel->update($id, $data);
+    }
+
     public function importCsvFile() {
         $this->hasPermissionRedirect('ingredients/batch-upload/stock-in');
 
@@ -283,7 +297,7 @@ class Product extends BaseController
         $this->ingredientReportModel->update($stockId, $dataStocks);
     }
 
-    public function notification($stockId){
+    public function notification($id, $routeType){
         $notificationData = [
             'user_id' => $_POST['user_id'],
             'name' => $_POST['name'],
@@ -292,10 +306,17 @@ class Product extends BaseController
             'notif_date_status' => $this->time->format('Y-m-d'),
         ];
         $this->notificationModel->add($notificationData);
-        $dataStocks = [
-            'updated_at' => $this->time->format('Y-m-d H:i:s'),
-        ];
-        $this->ingredientReportModel->update($stockId, $dataStocks);
+        if($routeType == 1){
+            $dataStocks = [
+                'updated_at' => $this->time->format('Y-m-d H:i:s'),
+            ];
+            $this->ingredientReportModel->update($id, $dataStocks);
+        }else{
+            $dataIngredients = [
+                'updated_at' => $this->time->format('Y-m-d H:i:s'),
+            ];
+            $this->productsModel->update($id, $dataIngredients);
+        }
     }
 
     public function notificationMarked($id){

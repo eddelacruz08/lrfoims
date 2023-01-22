@@ -155,9 +155,11 @@
                     $('div[id="' + notActiveModal + '"]').modal('hide');
                 }
             });
+            // start get stocks expiration ingredients
             setInterval(
                 getStockIngredients()
             , 1000);
+
             function getStockIngredients() {
                 $.ajax({
                     type: "GET",
@@ -227,8 +229,9 @@
                         const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
                         const currentDate = moment(dateNow).format('YYYY-MM-DD');
                         if(updated_at != currentDate){
+                            var routeType = 1;
                             $.ajax({
-                                url: "/ingredients/notification/a/"+demoId,
+                                url: "/ingredients/notification/a/"+demoId+"/"+routeType,
                                 type: "POST",
                                 data:{
                                     user_id: user_id,
@@ -242,6 +245,71 @@
                                 }
                             });
                         }
+                    }
+                }, 1000);
+            }
+            // end get stocks expiration ingredients
+
+            // start get low quantity ingredients
+            setInterval(
+                getLowQuantityIngredients()
+            , 1000);
+            
+            function getLowQuantityIngredients() {
+                $.ajax({
+                    type: "GET",
+                    url: '/ingredients/notif-low-quantity-ingredients',
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        // console.log(data);
+                        for(let i = 0; i < data.getIngredients.length; i++){ 
+                            if(data.getIngredients[i]['unit_quantity'] <= data.getIngredients[i]['limit'] && data.getIngredients[i]['product_status_id'] == 1){
+                                sendLowQuantityIngredients(
+                                    data.getIngredients[i]['id'], 0, data.getIngredients[i]['product_name'], 
+                                    data.getIngredients[i]['product_status_id'], data.getIngredients[i]['unit_quantity'],
+                                    data.getIngredients[i]['updated_at']
+                                )
+                            }
+                        }
+                    }
+                });
+            }
+
+            function sendLowQuantityIngredients(id, user_id, title, stock_status, quantity, updated_at_date){
+                var x = setInterval(function(){
+                    if(stock_status == 1){
+                        var dateNow = new Date();
+                        const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
+                        const currentDate = moment(dateNow).format('YYYY-MM-DD');
+                        if(updated_at != currentDate){
+                            var routeType = 2;
+                            $.ajax({
+                                url: "/ingredients/notification/a/"+id+"/"+routeType,
+                                type: "POST",
+                                data:{
+                                    user_id: user_id,
+                                    name: title,
+                                    description: 'This ingredient has low quantity!',
+                                    link: "dashboard",
+                                },
+                                cache: false,
+                                success: function () {
+                                    console.log(title + 'has low quantity!');
+                                }
+                            });
+                        }
+                    }
+                    if(stock_status == 1 && quantity <= 1){
+                        $.ajax({
+                            url: "/ingredients/update-ingredients-out-of-stock/u/"+id,
+                            type: "GET",
+                            data:{},
+                            cache: false,
+                            success: function () {
+                                console.log("Out of stock!");
+                            }
+                        });
                     }
                 }, 1000);
             }

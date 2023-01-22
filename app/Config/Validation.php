@@ -550,6 +550,10 @@ class Validation
 			'rules' => 'required',
 			'label' => 'Measure Description',
 		],
+		'low_stock_minimum_limit' => [
+			'rules' => 'required|numeric',
+			'label' => 'Low stocks minimum limit',
+		],
 	];
 
 

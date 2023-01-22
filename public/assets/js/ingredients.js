@@ -1,4 +1,59 @@
 
+function displayPendingOrders(){
+  var element = $('#display-pending-orders-table');
+  var spinner = '<div class="spinner-border text-center m-4" role="status">';
+      spinner += '<span class="visually-hidden">Loading...</span>';
+      spinner += '</div>';
+  $.ajax({
+    url: "/dashboard/get-pending-orders/v",
+    type: 'GET',
+    data: {},
+    beforeSend: function () {
+      element.html(spinner);
+    },
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    }
+  });
+}
+displayPendingOrders();
+
+function paginateTables(route, offset = null, divTextId = null){
+  var searchInput = $('searchPendingOrders').value;
+  $(document).ready(function () {
+    $(divTextId).each(function () {
+      console.log(searchInput);
+      var element = $(divTextId);
+      var spinner = '<div class="d-flex align-items-center">';
+          spinner += '<strong>Loading...</strong>';
+          spinner += '<div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>';
+          spinner += '</div>';
+      $.ajax({
+        url: route,
+        type: 'GET',
+        data: {
+          offset: offset,
+          search: searchInput,
+        },
+        beforeSend: function () {
+          element.html(spinner);
+        },
+        success: function (html) {
+          element.html(html);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          console.log(xhr.responseText);
+          console.log(thrownError);
+        }
+      });
+    });
+  });
+}
+
 $(document).ready(function(){
   $('a[data-bs-toggle="pill"]').on('show.bs.tab', function(e) {
     localStorage.setItem('active-ingredients-tab', $(e.target).attr('href'));
