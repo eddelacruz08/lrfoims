@@ -17,4 +17,13 @@ class NotificationModel extends BaseModel
         'deleted_at'
     ];
 
+    public function getNotifications(){
+        $this->select('lrfoims_notifications.*');
+        $this->where('status', 'a');
+        $this->orderBy('id', 'DESC');
+        $this->limit(10);
+
+        return $this->findAll();
+    }
+
 }

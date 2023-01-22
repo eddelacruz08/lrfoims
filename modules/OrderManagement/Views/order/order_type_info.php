@@ -101,7 +101,7 @@
                                         <button onclick="printOrders(
                                                 <?=$typeInfo['id']?>, <?=$typeInfo['number']?>, '<?=ucwords($typeInfo['type'])?>',
                                                 '<?= date('F d, Y - H:i a',strtotime($typeInfo['created_at']));?>', '<?=$order_status;?>',<?=$typeInfo['order_user_discount_id'];?>
-                                            );" title="Add Food" class="btn btn-sm btn-outline-dark me-1" type="button">
+                                            );" title="Invoice" class="btn btn-sm btn-outline-dark me-1" type="button">
                                             Invoice
                                         </button>
 

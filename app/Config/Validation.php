@@ -346,11 +346,7 @@ class Validation
 		],
 	];
 
-	public $ingredientStockIn = [
-		// 'stock_type' => [
-		// 	'rules' => 'required',
-		// 	'label' => 'Stock Type'
-		// ],
+	public $addStockIngredients = [
 		'unit_quantity' => [
 			'rules' => 'required|numeric|greater_than[0]|regex_match[[+-]?([0-9]*[.])?[0-9]+]',
 			'label' => 'Unit of Measure',
@@ -650,4 +646,74 @@ class Validation
 		]
 	];
 
+	public $coupon = [
+		'name' => [
+			'rules' => 'required',
+			'label' => 'Name'
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Description'
+		],
+		'amount' => [
+			'rules' => 'required|numeric',
+			'label' => 'Amount'
+		],
+		'expiration_date' => [
+			'rules' => 'required',
+			'label' => 'Expiration Date'
+		],
+	];
+
+	public $deliveryFee = [
+		'delivery_fee' => [
+			'rules' => 'required|numeric',
+			'label' => 'Delivery Fee'
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Description'
+		],
+	];
+
+	public $discount = [
+		'customer_type' => [
+			'rules' => 'required',
+			'label' => 'Customer Type'
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Description'
+		],
+		'discount_amount' => [
+			'rules' => 'required|numeric',
+			'label' => 'Discount Amount'
+		],
+	];
+
+	public $method = [
+		'payment_method' => [
+			'rules' => 'required',
+			'label' => 'Payment Method'
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Description'
+		],
+	];
+
+	public $vat = [
+		'divide_vat' => [
+			'rules' => 'required|numeric',
+			'label' => 'Divide VAT'
+		],
+		'multiply_vat' => [
+			'rules' => 'required|numeric',
+			'label' => 'Multiply VAT'
+		],
+		'description' => [
+			'rules' => 'required',
+			'label' => 'Description'
+		],
+	];
 }

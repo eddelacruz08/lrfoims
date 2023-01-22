@@ -92,3 +92,45 @@ $routes->group('order-max-limit', ['namespace' => 'Modules\SystemSettings\Contro
 $routes->group('generate-qrcode-link', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'QrCode::index');
 });
+
+$routes->group('coupons', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'Coupon::index');
+    $routes->match(['get', 'post'], 'a', 'Coupon::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'Coupon::edit/$1');
+    $routes->add('d/(:num)', 'Coupon::delete/$1');
+});
+
+$routes->group('delivery-fee', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'DeliveryFee::index');
+    $routes->match(['get', 'post'], 'a', 'DeliveryFee::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'DeliveryFee::edit/$1');
+    $routes->add('d/(:num)', 'DeliveryFee::delete/$1');
+});
+
+$routes->group('notifications', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'Notification::index');
+    $routes->match(['get', 'post'], 'a', 'Notification::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'Notification::edit/$1');
+    $routes->add('d/(:num)', 'Notification::delete/$1');
+});
+
+$routes->group('order-user-discounts', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'OrderDiscount::index');
+    $routes->match(['get', 'post'], 'a', 'OrderDiscount::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'OrderDiscount::edit/$1');
+    $routes->add('d/(:num)', 'OrderDiscount::delete/$1');
+});
+
+$routes->group('payment-methods', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'PaymentMethod::index');
+    $routes->match(['get', 'post'], 'a', 'PaymentMethod::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'PaymentMethod::edit/$1');
+    $routes->add('d/(:num)', 'PaymentMethod::delete/$1');
+});
+
+$routes->group('vat', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
+    $routes->add('/', 'VAT::index');
+    $routes->match(['get', 'post'], 'a', 'VAT::add');
+    $routes->match(['get', 'post'], 'u/(:num)', 'VAT::edit/$1');
+    $routes->add('d/(:num)', 'VAT::delete/$1');
+});

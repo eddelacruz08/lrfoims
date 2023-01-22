@@ -38,7 +38,8 @@
         
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
+        <!-- <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
         <script src="https://kit.fontawesome.com/9cef9fee62.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>
@@ -46,6 +47,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
         <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <!-- bundle -->
         <script src="/assets/js/vendor.min.js"></script>
         <script src="/assets/js/app.min.js"></script>
@@ -68,15 +70,17 @@
         <!-- third party js ends -->
 
         <!-- Datatable Init js -->
-        <script src="/assets/js/pages/demo.datatable-init.js"></script>
+        <!-- <script src="/assets/js/pages/demo.datatable-init.js"></script> -->
 
         <!-- Typehead -->
-        <script src="/assets/js/vendor/handlebars.min.js"></script>
-        <script src="/assets/js/vendor/typeahead.bundle.min.js"></script>
+        <!-- <script src="/assets/js/vendor/handlebars.min.js"></script>
+        <script src="/assets/js/vendor/typeahead.bundle.min.js"></script> -->
 
         <!-- Demo -->
-        <script src="/assets/js/pages/demo.typehead.js"></script>
+        <!-- <script src="/assets/js/pages/demo.typehead.js"></script> -->
 
+        <!-- Timepicker -->
+        <script src="/assets/js/pages/demo.timepicker.js"></script>
         <!-- demo app -->
         <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->
         <!-- <script src="assets/js/pages/demo.chartjs.js"></script> -->
@@ -90,6 +94,7 @@
         <script src="/assets/js/ingredients.js"></script>
         <script src="/assets/js/printer.js"></script>
         <script src="/assets/js/menu_order.js"></script>
+        <script src="/assets/js/dashboard.js"></script>
         <!-- <script src="/assets/js/invoiceOrders.js"></script> -->
         
         <script>
@@ -149,6 +154,166 @@
                 }else{
                     $('div[id="' + notActiveModal + '"]').modal('hide');
                 }
+            });
+            setInterval(
+                getStockIngredients()
+            , 1000);
+            function getStockIngredients() {
+                $.ajax({
+                    type: "GET",
+                    url: '/ingredient-reports/get-stock-ingredients',
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        for(let i = 0; i < data.getStockIngredients.length; i++){ 
+                            setInterval(
+                                getExpirationDate(
+                                    data.getStockIngredients[i]['date_expiration'], data.getStockIngredients[i]['status'], 
+                                    data.getStockIngredients[i]['updated_at'], 0, data.getStockIngredients[i]['product_name'], 
+                                    data.getStockIngredients[i]['unit_quantity'], data.getStockIngredients[i]['ingredient_id'], 
+                                    data.getStockIngredients[i]['id'], data.getStockIngredients[i]['date_expiration']
+                                )
+                            , 1000);
+                        }
+                    }
+                });
+            }
+
+            function getExpirationDate(date_expiration, stock_status, updated_at_date, user_id, title, unit_quantity, ingredient_id, demoId, date){
+                var countDownDate = new Date(date).getTime();
+                var x = setInterval(function(){
+                    // console.log('reload');
+                    var now = new Date().getTime();
+                    var distance = countDownDate - now;
+                    
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    var dateNow = new Date();
+
+                    var element = $('#demo'+demoId);
+                    if(days <= 3 && stock_status === 'a'){
+                        var message = "<button class='btn btn-sm btn-outline-danger'>"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s </button>";
+                    }else{
+                        var message = "<button class='btn btn-sm btn-outline-dark'>"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s </button>";
+                    }
+                    element.html(message);
+
+                    if (distance < 0) {
+                        if(stock_status == 'd'){
+                            var el = $('#demo'+demoId);
+                            var expiredMsg = "<button class='btn btn-sm btn-danger' disabled>EXPIRED</button>";
+                            el.html(expiredMsg);
+                        }else{
+                            $.ajax({
+                                url: "/ingredients/expire-date/set-stock-status",
+                                type: "POST",
+                                data:{
+                                    id: demoId,
+                                },
+                                cache: false,
+                                success: function (response) {
+                                    localStorage.removeItem('Stock Id: '+demoId);
+                                    var el = $('#demo'+demoId);
+                                    var expiredMsg = "<button class='btn btn-sm btn-danger' disabled>EXPIRED</button>";
+                                    el.html(expiredMsg);
+                                }
+                            });
+                        }
+                    }
+                    if(days <= 3 && stock_status == 'a'){
+                        const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
+                        const currentDate = moment(dateNow).format('YYYY-MM-DD');
+                        if(updated_at != currentDate){
+                            $.ajax({
+                                url: "/ingredients/notification/a/"+demoId,
+                                type: "POST",
+                                data:{
+                                    user_id: user_id,
+                                    name: title,
+                                    description: 'Expiring after '+days+' days!',
+                                    link: "dashboard",
+                                },
+                                cache: false,
+                                success: function () {
+                                    console.log("Notified!");
+                                }
+                            });
+                        }
+                    }
+                }, 1000);
+            }
+
+            setInterval( showNotification(), 1000);
+
+            function showNotification() {
+                var x = setInterval(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: '/get-notifications',
+                        async: true,
+                        dataType: 'JSON',
+                        success: function(data) {
+                            var element = $('#notifications');
+                            var html = '';
+                            if(data == ''){
+                                html +='<a href="javascript:void(0);" class="dropdown-item notify-item">';
+                                html +='    <p class="notify-details">No notifications!</p>';
+                                html +='</a>';
+                            }else{
+                                for(let i = 0; i <= data.getNotifications.length; i++){
+                                    if(data.getNotifications[i]['status'] == 'a'){
+                                        html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[i].id+'" id="notifFormId">';
+                                        html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item text-break">';
+                                        html +='        <div class="notify-icon bg-primary">';
+                                        html +='            <i class="mdi mdi-email-outline"></i>';
+                                        html +='        </div>';
+                                        html +='        <input type="hidden" value="'+data.getNotifications[i].link+'" name="marked_link">';
+                                        html +='        <p class="notify-details text-break">'+data.getNotifications[i].name;
+                                        html +='           <small class="text-muted">'+data.getNotifications[i].description+'</small>';
+                                        html +='           <small class="text-muted">'+moment(data.getNotifications[i].created_at).startOf('minute').fromNow()+'</small>';
+                                        html +='        </p>';
+                                        html +='    </button>';
+                                        html +='</form>';
+                                        html +='<hr class="m-0 p-0"/>';
+                                    }else{
+                                        html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[i].id+'" id="notifFormId">';
+                                        html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item">';
+                                        html +='        <div class="notify-icon bg-secondary">';
+                                        html +='            <i class="mdi mdi-email-open-outline"></i>';
+                                        html +='        </div>';
+                                        html +='        <input type="hidden" value="'+data.getNotifications[i].link+'" name="marked_link">';
+                                        html +='        <p class="notify-details">'+data.getNotifications[i].name;
+                                        html +='           <small class="text-muted">'+data.getNotifications[i].description+'</small>';
+                                        html +='           <small class="text-muted">'+moment(data.getNotifications[i].created_at).startOf('minute').fromNow()+'</small>';
+                                        html +='        </p>';
+                                        html +='    </button>';
+                                        html +='</form>';
+                                        html +='<hr class="m-0 p-0"/>';
+                                    }
+                                    element.html(html);
+                                }
+                            }
+                        }
+                    });
+                }, 1000);
+            }
+            $(() => {
+                $("#submitNotifButton").click(function(ev) {
+                    var form = $("#notifFormId");
+                    var url = form.attr('action');
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(),
+                        cache: false,
+                        // success: function(data) {
+                        //     viewStocks('/ingredients/v',);
+                        // }
+                    });
+                });
             });
         </script>
     </body>

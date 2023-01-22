@@ -20,10 +20,11 @@ class Dashboard extends BaseController
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
 		$this->menuModel = new MenuManagement\MenuModel();
         $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel();
-		helper(['form','link']);
+		helper(['form','link', 'paginater']);
+		$this->limitPerTable = 10;
 	}
 
-	public function index() { 
+	public function index($offset = 0) { 
         $this->hasPermissionRedirect('dashboard');
 
 		$data = [
@@ -32,8 +33,8 @@ class Dashboard extends BaseController
 			'view' => 'Modules\DashboardManagement\Views\dashboard\index',
         	'ingredients' => $this->ingredientsModel->getProduct(['lrfoims_products.status'=>'a']),
         	'getIngredientLowQuantityStatus' => $this->ingredientsModel->getIngredientLowQuantityStatus(['lrfoims_products.status'=>'a']),
-            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.stock_status'=>1,'lrfoims_ingredient_out.status'=>'a']),
-			'getTotalOrders' => $this->ordersModel->getTotalOrders(['order_status_id' => 5, 'status' => 'a']),
+            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.stock_status'=>3,'lrfoims_ingredient_out.status'=>'a']),
+			'getTotalOrders' => $this->ordersModel->getTotalOrders(['order_status_id' => 7, 'status' => 'a']),
 			'getTotalPendingOrders' => $this->ordersModel->getTotalPendingOrders(['order_status_id' => 2, 'status' => 'a']),
 			'getTotalIngredients' => $this->ingredientsModel->getTotalIngredients(['status' => 'a']),
 			'menu' => $this->menuModel->get(),
@@ -44,5 +45,24 @@ class Dashboard extends BaseController
 		return view('templates/index', $data);
 	}
 
-	//--------------------------------------------------------------------
+	public function getPendingOrders(){
+
+		$offset = 0;
+		$data['all_items'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a']);
+		$data['offset'] = $offset;
+		$data['limitPerTable'] = $this->limitPerTable;
+		$data['getPendingOrders'] = $this->ordersModel->getPendingOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $offset);
+		
+		return view('Modules\DashboardManagement\Views\dashboard\pendingOrders', $data);
+	}
+	
+	public function getPendingOrdersPerPage(){
+
+		$data['all_items'] = $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a']);
+		$data['offset'] = $_GET['id'];
+		$data['limitPerTable'] = $this->limitPerTable;
+		$data['getPendingOrders'] = $this->ordersModel->getPendingOrderDetails(['lrfoims_orders.order_status_id'=>2,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $_GET['id']);
+		
+		return view('Modules\DashboardManagement\Views\dashboard\pendingOrders', $data);
+	}
 }

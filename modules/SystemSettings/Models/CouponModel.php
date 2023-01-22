@@ -10,6 +10,7 @@ class CouponModel extends BaseModel
         'description',
         'code',
         'amount',
+        'expiration_date',
         'status', 
         'created_at', 
         'updated_at', 

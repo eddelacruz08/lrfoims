@@ -252,30 +252,30 @@
                             <?php endforeach;?>,
                         <?php endif;?>
                       ]
-              }]
-          },
-                  l.push(this.respChart(d("#orders-revenue-bar-chart-example"),"Bar",
-                  t,
-                  {maintainAspectRatio:!1,
-                      legend:{display:!1},
-                      scales:{
-                          yAxes:[{
-                              gridLines:{
-                                  display:!1,
-                                  color:"rgba(0,0,0,0.05)"},
-                              stacked:!1,ticks:{
-                                  stepSize:20
-                              }}],
-                          xAxes:[{
-                              barPercentage:.7,
-                              categoryPercentage:.5,
-                              stacked:!1,
-                              gridLines:{
-                                  color:"rgba(0,0,0,0.01)"
-                              }
-                          }]
-                          }
-                      }))),
+                }]
+            },
+            l.push(this.respChart(d("#orders-revenue-bar-chart-example"),"Bar",
+            t,
+            {maintainAspectRatio:!1,
+                legend:{display:!1},
+                scales:{
+                    yAxes:[{
+                        gridLines:{
+                            display:!1,
+                            color:"rgba(0,0,0,0.05)"},
+                        stacked:!1,ticks:{
+                            stepSize:20
+                        }}],
+                    xAxes:[{
+                        barPercentage:.7,
+                        categoryPercentage:.5,
+                        stacked:!1,
+                        gridLines:{
+                            color:"rgba(0,0,0,0.01)"
+                        }
+                    }]
+                    }
+                }))),
       0<d("#donut-chart-example").length&&(
           e={labels:["Direct","Affilliate","Sponsored","E-mail"],
           datasets:[{data:[300,135,48,154],

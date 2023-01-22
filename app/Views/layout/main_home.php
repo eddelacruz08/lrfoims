@@ -84,7 +84,7 @@
         <script src="/assets/js/vendor/typeahead.bundle.min.js"></script>
 
         <!-- Demo -->
-        <script src="/assets/js/pages/demo.typehead.js"></script>
+        <!-- <script src="/assets/js/pages/demo.typehead.js"></script> -->
 
         <!-- demo app -->
         <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->

@@ -2,6 +2,7 @@
 
 use Modules\OrderReportManagement\Models as OrderReportManagement;
 use Modules\OrderManagement\Models as OrderManagement;
+use Modules\SystemSettings\Models as SystemSettings;
 use TCPDF;
 use App\Controllers\BaseController;
 // Extend the TCPDF class to create custom Header and Footer
@@ -36,6 +37,7 @@ class OrderReport extends BaseController
 {
 	function __construct(){
 		$this->ordersModel = new OrderManagement\OrderModel();
+		$this->paymentMethodModel = new SystemSettings\PaymentMethodModel();
 		helper(['link','form']);
 	}
 
@@ -47,6 +49,7 @@ class OrderReport extends BaseController
 				'page_title' => 'LRFOIMS | Order Reports',
 				'title' => 'Order Reports',
 				'view' => 'Modules\OrderReportManagement\Views\orderReport\index',
+				'getPaymentMethod' => $this->paymentMethodModel->get(['status'=>'a']),
 				'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.status'=>'a']),
 			];
 			session()->set([
@@ -74,6 +77,7 @@ class OrderReport extends BaseController
 				'page_title' => 'LRFOIMS | Order Reports',
 				'title' => 'Order Reports',
 				'view' => 'Modules\OrderReportManagement\Views\orderReport\index',
+				'getPaymentMethod' => $this->paymentMethodModel->get(['status'=>'a']),
 				'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a']),
 			];
 			session()->set([
@@ -108,7 +112,6 @@ class OrderReport extends BaseController
         $this->hasPermissionRedirect('order-reports/generate-report');
 
         if($this->request->getMethod() == 'post'){
-			// die($_POST['date'].' '.$_POST['date_status']);
 			if($this->validate('report')){
 				$data = [
 					'page_title' => 'generate',
@@ -116,8 +119,8 @@ class OrderReport extends BaseController
 					'type' => 'report',
 				];
 				if($_POST['date_status'] == 1){
-					$data['orders'] = $this->ordersModel->getOrderReports(['lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
-					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
+					$data['orders'] = $this->ordersModel->getOrderReports(['lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
+					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
 					$data['date'] = $_POST['date'];
 					$data['date_status'] = $_POST['date_status'];
 				}else{
@@ -126,8 +129,8 @@ class OrderReport extends BaseController
 					$strStartDate = $startDate[2].'-'.$startDate[0].'-'.$startDate[1];
 					$endDate = explode('/', $explodeDate[1]);
 					$strEndDate = $endDate[2].'-'.$endDate[0].'-'.$endDate[1];
-					$data['orders'] = $this->ordersModel->getOrderReports(['CAST(lrfoims_orders.created_at AS DATE) >=' => $strStartDate, 'CAST(lrfoims_orders.created_at AS DATE) <=' => $strEndDate, 'lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.status' => 'a']);
-					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['CAST(lrfoims_orders.created_at AS DATE) >=' => $strStartDate, 'CAST(lrfoims_orders.created_at AS DATE) <=' => $strEndDate, 'lrfoims_orders.order_status_id' => 5, 'lrfoims_orders.status' => 'a']);
+					$data['orders'] = $this->ordersModel->getOrderReports(['CAST(lrfoims_orders.created_at AS DATE) >=' => $strStartDate, 'CAST(lrfoims_orders.created_at AS DATE) <=' => $strEndDate, 'lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.status' => 'a']);
+					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['CAST(lrfoims_orders.created_at AS DATE) >=' => $strStartDate, 'CAST(lrfoims_orders.created_at AS DATE) <=' => $strEndDate, 'lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.status' => 'a']);
 					$data['date_status'] = $_POST['date_status'];
 					$data['strStartDate'] = $strStartDate;
 					$data['strEndDate'] = $strEndDate;

@@ -26,16 +26,16 @@
                     <center>Order Number</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Status</center>
+                    <center>Type</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Amount</center>
+                    <center>Total Bill</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Cash</center>
+                    <center>Amount Due</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Change</center>
+                    <center>Less (12%) VAT</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
                     <center>Date</center>
@@ -50,16 +50,16 @@
                             Order#<?=$row['number']?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            <?=$row['order_status']?>
+                            <?=$row['type']?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             Php <?=number_format($row['total_amount'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['c_cash'], 2)?>
+                            Php <?=number_format($row['total_amount_order'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['c_balance'], 2)?>
+                            Php <?=number_format($row['total_amount_vat'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             <?= Date('F d, Y - h:i a', strtotime($row['created_at']))?>

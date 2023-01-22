@@ -19,42 +19,45 @@ function alert_no_flash(message, status_icon){
 }
 
 function orderTypeDineInList(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("order-type-dine-in-list-data").innerHTML = this.responseText;
+  const xhttpDineIn = new XMLHttpRequest();
+  xhttpDineIn.onload = function(){
+    var element = $('#order-type-dine-in-list-data');
+    element.html(this.responseText);
   }
-  xhttp.open("GET","/orders/order-type-dine-in-list-data/1");
-  xhttp.send();
+  xhttpDineIn.open("GET","/orders/order-type-dine-in-list-data/1");
+  xhttpDineIn.send();
 }
 
 function orderTypeTakeOutList(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("order-type-take-out-list-data").innerHTML = this.responseText;
+  const xhttpTakeOut = new XMLHttpRequest();
+  xhttpTakeOut.onload = function(){
+    var element = $('#order-type-take-out-list-data');
+    element.html(this.responseText);
   }
-  xhttp.open("GET","/orders/order-type-take-out-list-data/2");
-  xhttp.send();
+  xhttpTakeOut.open("GET","/orders/order-type-take-out-list-data/2");
+  xhttpTakeOut.send();
 }
 
 function orderTypeDeliveryList(){
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function(){
-    document.getElementById("order-type-delivery-list-data").innerHTML = this.responseText;
+  const xhttpDelivery = new XMLHttpRequest();
+  xhttpDelivery.onload = function(){
+    var element = $('#order-type-delivery-list-data');
+    element.html(this.responseText);
   }
-  xhttp.open("GET","/orders/order-type-delivery-list-data/3");
-  xhttp.send();
+  xhttpDelivery.open("GET","/orders/order-type-delivery-list-data/3");
+  xhttpDelivery.send();
 }
 
 setInterval(function(){
-  orderTypeDineInList();
+    orderTypeDineInList()
 }, 2000);
 
 setInterval(function(){
-  orderTypeTakeOutList();
+    orderTypeTakeOutList()
 }, 2000);
 
 setInterval(function(){
-  orderTypeDeliveryList();
+    orderTypeDeliveryList()
 }, 2000);
 
 function displayOrderTypeInfo(route, id, orderNumber, orderMaxLimit){
@@ -64,26 +67,26 @@ function displayOrderTypeInfo(route, id, orderNumber, orderMaxLimit){
       var spinner = '<div class="spinner-border text-center m-4" role="status">';
           spinner += '<span class="visually-hidden">Loading...</span>';
           spinner += '</div>';
-        $.ajax({
-          url: route,
-          type: 'get',
-          data: { id: id },
-          beforeSend: function () {
-            element.html(spinner);
-          },
-          success: function (html) {
-            // console.log(html);
-            localStorage.setItem('BorderStyle','borderStyle'+id);
-            var getBorderStyle = localStorage.getItem('BorderStyle');
-            $('#'+getBorderStyle).addClass('border-warning');
+      $.ajax({
+        url: route,
+        type: 'get',
+        data: { id: id },
+        beforeSend: function () {
+          element.html(spinner);
+        },
+        success: function (html) {
+          localStorage.setItem('BorderStyle','borderStyle'+id);
 
-            element.html(html);
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.responseText);
-            alert(thrownError);
-          }
-        });
+          var getBorderStyle = localStorage.getItem('BorderStyle');
+          $('#'+getBorderStyle).addClass('border-warning');
+
+          element.html(html);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.responseText);
+          alert(thrownError);
+        }
+      });
     });
   });
 }
@@ -240,40 +243,40 @@ function confirmDeleteCart(route, cartId, menuId, orderId, cartQyt, routeType, u
   });
 }
 
-var fullscreenOpenOrders = document.getElementById("fullscreenOpenOrders");
-var fullscreenCloseOrders = document.getElementById("fullscreenCloseOrders");
-fullscreenCloseOrders.style.display = 'none';
+// var fullscreenOpenOrders = document.getElementById("fullscreenOpenOrders");
+// var fullscreenCloseOrders = document.getElementById("fullscreenCloseOrders");
+// fullscreenCloseOrders.style.display = 'none';
 
-var elem = document.getElementById("order_menu_fullscreen_display");
+// var elem = document.getElementById("order_menu_fullscreen_display");
 
-function openFullscreenOrdersDisplay() {
-  if (elem.requestFullscreen) {
-    fullscreenOpenOrders.style.display = 'none';
-    fullscreenCloseOrders.style.display = 'block';
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    fullscreenOpenOrders.style.display = 'none';
-    fullscreenCloseOrders.style.display = 'block';
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    fullscreenOpenOrders.style.display = 'none';
-    fullscreenCloseOrders.style.display = 'block';
-    elem.msRequestFullscreen();
-  }
-}
+// function openFullscreenOrdersDisplay() {
+//   if (elem.requestFullscreen) {
+//     fullscreenOpenOrders.style.display = 'none';
+//     fullscreenCloseOrders.style.display = 'block';
+//     elem.requestFullscreen();
+//   } else if (elem.webkitRequestFullscreen) {
+//     fullscreenOpenOrders.style.display = 'none';
+//     fullscreenCloseOrders.style.display = 'block';
+//     elem.webkitRequestFullscreen();
+//   } else if (elem.msRequestFullscreen) {
+//     fullscreenOpenOrders.style.display = 'none';
+//     fullscreenCloseOrders.style.display = 'block';
+//     elem.msRequestFullscreen();
+//   }
+// }
 
-function closeFullscreenOrdersDisplay() {
-  if (document.exitFullscreen) {
-    fullscreenCloseOrders.style.display = 'none';
-    fullscreenOpenOrders.style.display = 'block';
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) { /* Safari */
-    fullscreenCloseOrders.style.display = 'none';
-    fullscreenOpenOrders.style.display = 'block';
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) { /* IE11 */
-    fullscreenCloseOrders.style.display = 'none';
-    fullscreenOpenOrders.style.display = 'block';
-    document.msExitFullscreen();
-  }
-}
+// function closeFullscreenOrdersDisplay() {
+//   if (document.exitFullscreen) {
+//     fullscreenCloseOrders.style.display = 'none';
+//     fullscreenOpenOrders.style.display = 'block';
+//     document.exitFullscreen();
+//   } else if (document.webkitExitFullscreen) {
+//     fullscreenCloseOrders.style.display = 'none';
+//     fullscreenOpenOrders.style.display = 'block';
+//     document.webkitExitFullscreen();
+//   } else if (document.msExitFullscreen) {
+//     fullscreenCloseOrders.style.display = 'none';
+//     fullscreenOpenOrders.style.display = 'block';
+//     document.msExitFullscreen();
+//   }
+// }

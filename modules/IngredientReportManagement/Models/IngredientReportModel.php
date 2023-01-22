@@ -19,7 +19,7 @@ class IngredientReportModel extends BaseModel
 
     public function getDetails($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*');
+        $this->select('lrfoims_ingredient_out.*, p.product_name');
         $this->join('lrfoims_products as p', 'lrfoims_ingredient_out.ingredient_id = p.id');
 
         foreach($conditions as $field => $value){
