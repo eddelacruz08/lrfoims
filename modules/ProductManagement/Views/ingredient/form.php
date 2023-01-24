@@ -63,7 +63,6 @@
                             <div class="col-md-6">
                                 <label for="inputEmail4">Measurement: <small class="text-danger">*</small></label>
                                 <div class="input-group">
-                                    <!-- <input type="text" aria-describedby="basic-addon1" class="form-control <?= isset($errors['unit_quantity']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="unit_quantity" placeholder="Enter Unit Number" value="<?= isset($value['unit_quantity']) ? $value['unit_quantity'] : '' ?>"> -->
                                     <select class="form-select <?= isset($errors['product_description_id']) ? 'is-invalid':'is-valid' ?>" name="product_description_id">
                                         <option value="" <?= isset($validation) ? null : 'selected' ?>>-- select measure --</option>
                                         <?php foreach ($productDescription as $option) : ?>
@@ -77,20 +76,10 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <!-- <?php if(isset($errors['unit_quantity'])):?>
-                                    <small class="text-danger"><?=esc($errors['unit_quantity'])?> |</small>
-                                <?php endif;?> -->
                                 <?php if(isset($errors['product_description_id'])):?>
                                     <small class="text-danger"> <?=esc($errors['product_description_id'])?></small>
                                 <?php endif;?>
                             </div>
-                            <!-- <div class="col-md-6">
-                                <label for="inputAddress2">Total Amount <small class="text-danger">*</small></label>
-                                <input type="number" class="form-control  <?= isset($errors['price']) ? 'is-invalid':'is-valid' ?>" id="inputAddress2" name="price" placeholder="Price" value="<?= isset($value['price']) ? $value['price'] : '' ?>">
-                                <?php if(isset($errors['price'])):?>
-                                    <small class="text-danger"><?=esc($errors['price'])?></small>
-                                <?php endif;?>
-                            </div> -->
                         </div>
 
                         <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>

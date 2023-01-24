@@ -67,6 +67,8 @@
         <script src="/assets/js/vendor/dataTables.keyTable.min.js"></script>
         <script src="/assets/js/vendor/dataTables.select.min.js"></script>
         <script src="/assets/js/vendor/Chart.bundle.min.js"></script>
+        <script src="/assets/js/vendor/d3.min.js"></script>
+        <script src="/assets/js/vendor/britecharts.min.js"></script>
         <!-- third party js ends -->
 
         <!-- Datatable Init js -->
@@ -237,7 +239,7 @@
                                     user_id: user_id,
                                     name: title,
                                     description: 'Expiring after '+days+' days!',
-                                    link: "dashboard",
+                                    link: "ingredient-reports",
                                 },
                                 cache: false,
                                 success: function () {
@@ -291,7 +293,7 @@
                                     user_id: user_id,
                                     name: title,
                                     description: 'This ingredient has low quantity!',
-                                    link: "dashboard",
+                                    link: "ingredient-reports",
                                 },
                                 cache: false,
                                 success: function () {

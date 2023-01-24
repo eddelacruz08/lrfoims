@@ -34,15 +34,6 @@
                     <form method="POST" action="/barangay/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
                         <div class="row">
                             <div class="col-md-12">
-                                <label>psgcCode <small class="text-danger">*</small></label>
-                                <input type="text" class="form-control <?= isset($errors['psgcCode']) ? 'is-invalid':'is-valid' ?>" name="psgcCode" placeholder="psgcCode" value="<?= isset($value['psgcCode']) ? esc($value['psgcCode']) : '' ?>">
-                                <?php if(isset($errors['psgcCode'])):?>
-                                    <small class="text-danger"><?=esc($errors['psgcCode'])?></small>
-                                <?php endif;?>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <label>Barangay Name <small class="text-danger">*</small></label>
                                 <input type="text" class="form-control <?= isset($errors['barangay_name']) ? 'is-invalid':'is-valid' ?>" name="barangay_name" placeholder="Barangay Name" value="<?= isset($value['barangay_name']) ? esc($value['barangay_name']) : '' ?>">
                                 <?php if(isset($errors['barangay_name'])):?>

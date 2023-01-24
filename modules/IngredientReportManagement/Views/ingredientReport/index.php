@@ -21,6 +21,8 @@
 </div>
 <!-- end page title -->
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
     <li class="nav-item">
         <a href="#ingredientStatus" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 active">
@@ -93,6 +95,127 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-2">Confirmation for Expired Ingredients</h4>
+                        <div class="table-responsive">
+                            <table id="expiring-ingredients-data-table" class="table-sm table-centered table-nowrap table-hover text-center w-100 mb-0">
+                                <thead class="bg-dark text-white">
+                                    <tr>
+                                        <th>Ingredient Name</th>
+                                        <th>Unit Quantity</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($ingredientStockIn as $stockIn) : ?>
+                                        <?php foreach ($ingredients as $ingredient) : ?>
+                                            <?php if ($ingredient['id'] == $stockIn['ingredient_id']) : ?>
+                                                <tr>
+                                                    <td><?= ucfirst($ingredient['product_name']) ?></td>
+                                                    <td><?= number_format($stockIn['unit_quantity'],2) ?></td>
+                                                    <td><?= date('M d, Y',strtotime($stockIn['date_expiration'])); ?></td>
+                                                    <td>
+                                                        <?= ($stockIn['stock_status'] == 3 ? "<span class='badge bg-danger'>Expired</span>":
+                                                        "<span class='badge bg-success'>Ongoing</span>") ?>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" onclick="confirmationStockIngredients('/ingredients/expire-date/u', <?=$stockIn['id']?>, 
+                                                            <?=$stockIn['unit_quantity']?>, <?=$ingredient['id']?> );" class="btn btn-info btn-sm">
+                                                            Confirm this expired ingredient
+                                                        </button>
+                                                        <button type="button" onclick="confirmCancelExpiredStocks('/ingredients/expire-date/d', <?=$stockIn['id']?>);" 
+                                                            class="btn btn-danger btn-sm">
+                                                            Cancel
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#expiring-ingredients-data-table').DataTable({
+                                        order: [[3, 'asc']],
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-1 mb-3">Running Out Ingredients Quantity</h4>
+
+                        <div class="row">
+                            <div class="col-sm-3 mb-2 mb-sm-0">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <?php foreach($getIngredientMeasures as $measures): ?>
+                                        <a class="nav-link show" id="v-pills-home-tab<?=$measures['id']?>" data-bs-toggle="pill" href="#v-pills-home<?=$measures['id']?>" role="tab" aria-controls="v-pills-home<?=$measures['id']?>"
+                                            aria-selected="true">
+                                            <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                                            <span class="d-none d-md-block"><?= ucwords($measures['description'])?></span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-9">
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <?php foreach($getIngredientMeasures as $measures): ?>
+                                        <div class="tab-pane fade show" id="v-pills-home<?=$measures['id']?>" role="tabpanel" aria-labelledby="v-pills-home-tab<?=$measures['id']?>">
+                                            <div class="table-responsive">
+                                                <table id="running-out-ingredients-data-table<?=$measures['id']?>" class="table-sm table-hover dt-responsive nowrap w-100">
+                                                    <thead class="bg-dark text-white">
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Unit Quantity</th>
+                                                            <th style="width: 40%;"> Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($getIngredientLowQuantityStatus as $row): ?> 
+                                                            <?php if($measures['id'] == $row['product_description_id']): ?> 
+                                                                <tr class="border-bottom">
+                                                                    <td><?= ucfirst($row['product_name']) ?></td>
+                                                                    <td><?= number_format($row['unit_quantity'], 2).' '.$measures['name'] ?></td>
+                                                                    <td>
+                                                                        <div class="progress" style="height: 10px;">
+                                                                            <div class="progress-bar bg-primary <?= $row['unit_quantity'] <= 10 ? 'bg-danger': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? 'bg-warning' : '' ?>" role="progressbar"
+                                                                                style="width: <?= $row['unit_quantity'] <= 10 ? '25': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>%; height: 20px;" aria-valuenow="<?= $row['unit_quantity'] <= 10 ? '25': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>"
+                                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $('#running-out-ingredients-data-table<?=$measures['id']?>').DataTable({
+                                                            order: [[1, 'asc']],
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div> 
+                            </div> 
                         </div>
                     </div>
                 </div>

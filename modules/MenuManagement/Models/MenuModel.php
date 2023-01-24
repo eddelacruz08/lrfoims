@@ -25,6 +25,7 @@ class MenuModel extends BaseModel
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
+        
         // $this->groupBy('lrfoims_menus.id');
 
         return $this->findAll();

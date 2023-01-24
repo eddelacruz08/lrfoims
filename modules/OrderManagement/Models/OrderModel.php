@@ -141,6 +141,31 @@ class OrderModel extends BaseModel
         return $this->findAll();
     }
 
+    public function getOrderReportsDetails($conditions = [], $limit = null, $offset = null, $searchItem = null){
+
+        $this->select('lrfoims_orders.*, os.order_status, ot.type');
+        $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
+        $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        if($searchItem != null){
+            $this->where('lrfoims_orders.number', $searchItem);
+        }
+        $this->orderBy('lrfoims_orders.updated_at', 'ASC');
+
+        return $this->findAll($limit, $offset);
+    }
+
+    public function getTotalOrderDetails($conditions = []) {
+        $this->select('COUNT(lrfoims_orders.id) as total_order_reports');
+        foreach($conditions as $field => $value){
+            $this->where($field, $value);
+        }
+        return $this->findAll();
+    }
+
     public function getOrderDeliveryDetails($conditions = []){
 
         $this->select('lrfoims_orders.*, os.order_status, ot.type');

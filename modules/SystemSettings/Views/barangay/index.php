@@ -38,58 +38,16 @@
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-6">
+                            <div class="input-group input-group-sm justify-content-end mb-1">
+                                <input type="text" id="searchBarangay" class="form-control form-control-sm" placeholder="Search . . ." name="searchBarangay">
+                                <button onclick="paginateTables('/barangay/v/offset',0,'#display-barangay-table', document.getElementById('searchBarangay').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">
-                                        <center>Barangay Code</center> 
-                                    </th>
-                                    <th scope="col">
-                                        <center>Barangay Name</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Region Code</center> 
-                                    </th>
-                                    <th scope="col">
-                                        <center>Province Code</center> 
-                                    </th>
-                                    <th scope="col">
-                                        <center>City Code</center> 
-                                    </th>
-                                    <th scope="col">
-                                        <center>Actions</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($barangay as $row) : ?>
-                                    <tr>
-                                        <th scope="row">
-                                            <center><?= $row['barangay_code']; ?></center>
-                                        </th>
-                                        <td>
-                                            <center><?= $row['barangay_name']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?= $row['region_code']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?= $row['province_code']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?= $row['city_code']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center>
-                                                <a href="/barangay/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                <a onclick="confirmDelete('/barangay/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div id="display-barangay-table" onload="displayBarangayData();"></div>
                     </div>
                 </div>
             </div>

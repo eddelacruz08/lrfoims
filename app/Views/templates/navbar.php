@@ -13,7 +13,7 @@
         </a>
 
         <ul class="list-unstyled topbar-menu float-end mb-0">
-            <?php if(session()->get('role_id') == 1 || session()->get('role_id') == 2):?>
+            <?php if(user_link('notifications', session()->get('userPermissionView'))):?>
 
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">

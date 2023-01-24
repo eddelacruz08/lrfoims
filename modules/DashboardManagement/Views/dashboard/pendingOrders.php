@@ -4,7 +4,6 @@
         <tr>
             <th>Order#</th>
             <th>Status</th>
-            <th>Order Type</th>
             <th>Date & Time</th>
         </tr>
     </thead>
@@ -12,8 +11,7 @@
         <?php foreach ($getPendingOrders as $row): ?> 
             <tr>
                 <td>Order#<?=$row['number']?></td>
-                <td><span class="badge bg-warning"><?=$row['order_status']?></span></td>
-                <td><span class="badge bg-primary"><?=$row['type']?></span></td>
+                <td><span class="badge bg-secondary"><?=$row['order_status']?></span></td>
                 <td><?= Date('M d, Y - h:i a', strtotime($row['created_at']))?></td>
             </tr>
         <?php endforeach; ?>

@@ -39,12 +39,14 @@ class IngredientReport extends BaseController
         $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel();
         $this->ingredientCategoryModel = new SystemSettings\ProductCategoryModel();
         $this->ingredientsModel = new ProductManagement\ProductModel();
+        $this->ingredientMeasureModel = new SystemSettings\ProductMeasureModel();
         $this->time = new \DateTime();
         $this->dateAndTime = $this->time->format('Y-m-d');
 		helper(['form','link']);
 	}
 
 	public function index($year = null) {
+		$yearNow = $this->time->format('Y');
         $this->hasPermissionRedirect('ingredient-reports');
 		if($year != null){
 			$dateYear = $year; 
@@ -53,6 +55,9 @@ class IngredientReport extends BaseController
 				'title' => 'Ingredient Reports',
 				'view' => 'Modules\IngredientReportManagement\Views\ingredientReport\index',
 				'dateYear' => $dateYear,
+				'getIngredientMeasures' => $this->ingredientMeasureModel->get(['status'=>'a']),
+				'getIngredientLowQuantityStatus' => $this->ingredientsModel->getIngredientLowQuantityStatus(['lrfoims_products.status'=>'a']),
+				'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.stock_status'=>3,'lrfoims_ingredient_out.status'=>'a']),
 				'ingredientSortByCategory' => $this->ingredientCategoryModel->get(['status'=>'a']),
 				'ingredients' => $this->ingredientsModel->getProduct(['lrfoims_products.status'=>'a']),
 				'countIngredientReports' => $this->ingredientReportModel->getCountIngredientReports(['lrfoims_ingredient_out.status'=>'a']),
@@ -60,8 +65,6 @@ class IngredientReport extends BaseController
 			session()->set([
 				'dateYear' => $dateYear,
 				'getTotalStockIngredientPerYears' => $this->ingredientsModel->getTotalStockIngredientPerYears(['YEAR(lrfoims_products.created_at)'=>$dateYear,'lrfoims_products.status'=>'a']),
-				'getTotalGoodSoldIngredientPerYears' => $this->ingredientReportModel->getTotalGoodSoldIngredientPerYears(['YEAR(created_at)'=>$dateYear,'status'=>'a']),
-				'getTotalGoodSoldIngredientToday' => $this->ingredientReportModel->getTotalGoodSoldIngredientPerYears(['YEAR(created_at)'=>$dateYear, 'DATE(created_at)'=>$this->dateAndTime,'status'=>'a']),
 				'totalIngredientsPerMonth' => $this->ingredientsModel->getTotalIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'status'=>'a']),
 				// total count per month Stock Ingredients report
 				'totalAmountStockIngredientsJan' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 1,'status'=>'a']),
@@ -76,42 +79,19 @@ class IngredientReport extends BaseController
 				'totalAmountStockIngredientsOct' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 10,'status'=>'a']),
 				'totalAmountStockIngredientsNov' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 11,'status'=>'a']),
 				'totalAmountStockIngredientsDec' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 12,'status'=>'a']),
-				// total count per month Goods Sold report
-				'totalCountIngredientsJan' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 1,'status'=>'a']),
-				'totalCountIngredientsFeb' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 2,'status'=>'a']),
-				'totalCountIngredientsMar' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 3,'status'=>'a']),
-				'totalCountIngredientsApr' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 4,'status'=>'a']),
-				'totalCountIngredientsMay' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 5,'status'=>'a']),
-				'totalCountIngredientsJun' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 6,'status'=>'a']),
-				'totalCountIngredientsJul' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 7,'status'=>'a']),
-				'totalCountIngredientsAug' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 8,'status'=>'a']),
-				'totalCountIngredientsSept' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 9,'status'=>'a']),
-				'totalCountIngredientsOct' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 10,'status'=>'a']),
-				'totalCountIngredientsNov' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 11,'status'=>'a']),
-				'totalCountIngredientsDec' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 12,'status'=>'a']),
-				// total amount per month Goods Sold report
-				'totalAmountIngredientsJan' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 1,'status'=>'a']),
-				'totalAmountIngredientsFeb' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 2,'status'=>'a']),
-				'totalAmountIngredientsMar' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 3,'status'=>'a']),
-				'totalAmountIngredientsApr' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 4,'status'=>'a']),
-				'totalAmountIngredientsMay' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 5,'status'=>'a']),
-				'totalAmountIngredientsJun' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 6,'status'=>'a']),
-				'totalAmountIngredientsJul' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 7,'status'=>'a']),
-				'totalAmountIngredientsAug' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 8,'status'=>'a']),
-				'totalAmountIngredientsSept' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 9,'status'=>'a']),
-				'totalAmountIngredientsOct' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 10,'status'=>'a']),
-				'totalAmountIngredientsNov' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 11,'status'=>'a']),
-				'totalAmountIngredientsDec' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['YEAR(created_at)'=>$dateYear,'MONTH(created_at)'=> 12,'status'=>'a']),
+				
 			]);
 		}else{
-			$time = new \DateTime();
-			$dateYears = $time->format('Y');
-			$dateToday = $time->format('Y-m-d');
+			$dateYears = $yearNow;
+			$dateToday = $this->time->format('Y-m-d');
 			$data = [
 				'page_title' => 'LRFOIMS | Ingredient Reports',
 				'title' => 'Ingredient Reports',
 				'view' => 'Modules\IngredientReportManagement\Views\ingredientReport\index',
 				'dateYear' => $dateYears,
+				'getIngredientMeasures' => $this->ingredientMeasureModel->get(['status'=>'a']),
+				'getIngredientLowQuantityStatus' => $this->ingredientsModel->getIngredientLowQuantityStatus(['lrfoims_products.status'=>'a']),
+				'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.stock_status'=>3,'lrfoims_ingredient_out.status'=>'a']),
 				'ingredientSortByCategory' => $this->ingredientCategoryModel->get(['status'=>'a']),
 				'ingredients' => $this->ingredientsModel->getProduct(['lrfoims_products.status'=>'a']),
 				'countIngredientReports' => $this->ingredientReportModel->getCountIngredientReports(['lrfoims_ingredient_out.status'=>'a']),
@@ -119,8 +99,6 @@ class IngredientReport extends BaseController
 			session()->set([
 				'dateYear' => $dateYears,
 				'getTotalStockIngredientPerYears' => $this->ingredientsModel->getTotalStockIngredientPerYears(['lrfoims_products.status'=>'a']),
-				'getTotalGoodSoldIngredientPerYears' => $this->ingredientReportModel->getTotalGoodSoldIngredientPerYears(['status'=>'a']),
-				'getTotalGoodSoldIngredientToday' => $this->ingredientReportModel->getTotalGoodSoldIngredientPerYears(['DATE(created_at)'=>$dateToday,'status'=>'a']),
 				'totalIngredientsPerMonth' => $this->ingredientsModel->getTotalIngredientPerMonth(['status'=>'a']),
 				// total count per month Stock Ingredients report
 				'totalAmountStockIngredientsJan' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['MONTH(created_at)'=> 1,'status'=>'a']),
@@ -135,32 +113,6 @@ class IngredientReport extends BaseController
 				'totalAmountStockIngredientsOct' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['MONTH(created_at)'=> 10,'status'=>'a']),
 				'totalAmountStockIngredientsNov' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['MONTH(created_at)'=> 11,'status'=>'a']),
 				'totalAmountStockIngredientsDec' => $this->ingredientsModel->getTotalAmountStockIngredientPerMonth(['MONTH(created_at)'=> 12,'status'=>'a']),
-				// total count per month Goods Sold report
-				'totalCountIngredientsJan' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 1,'status'=>'a']),
-				'totalCountIngredientsFeb' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 2,'status'=>'a']),
-				'totalCountIngredientsMar' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 3,'status'=>'a']),
-				'totalCountIngredientsApr' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 4,'status'=>'a']),
-				'totalCountIngredientsMay' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 5,'status'=>'a']),
-				'totalCountIngredientsJun' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 6,'status'=>'a']),
-				'totalCountIngredientsJul' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 7,'status'=>'a']),
-				'totalCountIngredientsAug' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 8,'status'=>'a']),
-				'totalCountIngredientsSept' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 9,'status'=>'a']),
-				'totalCountIngredientsOct' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 10,'status'=>'a']),
-				'totalCountIngredientsNov' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 11,'status'=>'a']),
-				'totalCountIngredientsDec' => $this->ingredientReportModel->getCountTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 12,'status'=>'a']),
-				// total amount per month Goods Sold report
-				'totalAmountIngredientsJan' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 1,'status'=>'a']),
-				'totalAmountIngredientsFeb' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 2,'status'=>'a']),
-				'totalAmountIngredientsMar' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 3,'status'=>'a']),
-				'totalAmountIngredientsApr' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 4,'status'=>'a']),
-				'totalAmountIngredientsMay' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 5,'status'=>'a']),
-				'totalAmountIngredientsJun' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 6,'status'=>'a']),
-				'totalAmountIngredientsJul' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 7,'status'=>'a']),
-				'totalAmountIngredientsAug' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 8,'status'=>'a']),
-				'totalAmountIngredientsSept' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 9,'status'=>'a']),
-				'totalAmountIngredientsOct' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 10,'status'=>'a']),
-				'totalAmountIngredientsNov' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 11,'status'=>'a']),
-				'totalAmountIngredientsDec' => $this->ingredientReportModel->getTotalAmountIngredientPerMonth(['MONTH(created_at)'=> 12,'status'=>'a']),
 			]);
 		}
 		return view('templates/index', $data);

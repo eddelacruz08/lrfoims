@@ -77,6 +77,8 @@ $routes->group('cities', ['namespace' => 'Modules\SystemSettings\Controllers'], 
 
 $routes->group('barangay', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'Barangay::index');
+    $routes->add('v', 'Barangay::getBarangay');
+    $routes->match(['get', 'post'], 'v/offset', 'Barangay::getBarangayPerPage');
     $routes->match(['get', 'post'], 'a', 'Barangay::add');
     $routes->match(['get', 'post'], 'u/(:num)', 'Barangay::edit/$1');
     $routes->add('d/(:num)', 'Barangay::delete/$1');

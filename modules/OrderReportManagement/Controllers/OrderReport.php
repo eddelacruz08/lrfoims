@@ -38,6 +38,9 @@ class OrderReport extends BaseController
 	function __construct(){
 		$this->ordersModel = new OrderManagement\OrderModel();
 		$this->paymentMethodModel = new SystemSettings\PaymentMethodModel();
+        $this->orderTypeModel = new SystemSettings\OrderTypeModel();
+        $this->time = new \DateTime();
+		$this->limitPerTable = 10;
 		helper(['link','form']);
 	}
 
@@ -49,11 +52,16 @@ class OrderReport extends BaseController
 				'page_title' => 'LRFOIMS | Order Reports',
 				'title' => 'Order Reports',
 				'view' => 'Modules\OrderReportManagement\Views\orderReport\index',
+				'getOrderType' => $this->orderTypeModel->get(['status'=>'a']),
 				'getPaymentMethod' => $this->paymentMethodModel->get(['status'=>'a']),
 				'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.status'=>'a']),
 			];
 			session()->set([
 				'dateYear' => $dateYear,
+				'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsDineIn' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.order_type'=>1,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsTakeOut' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.order_type'=>2,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsDelivery' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'YEAR(lrfoims_orders.created_at)'=>$dateYear,'lrfoims_orders.order_type'=>3,'lrfoims_orders.status'=>'a']),
 				'totalOrderPerYears' => $this->ordersModel->getTotalOrderPerYears(['order_status_id'=>7,'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
 				'ordersPerMonth' => $this->ordersModel->getCountOrdersPerMonth(['order_status_id'=>7,'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
 				'totalAmountOrdersJan' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>7,'MONTH(created_at)'=> 1, 'YEAR(created_at)'=>$dateYear, 'status'=>'a']),
@@ -82,6 +90,10 @@ class OrderReport extends BaseController
 			];
 			session()->set([
 				'dateYear' => $dateYears,
+				'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsDineIn' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.order_type'=>1,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsTakeOut' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.order_type'=>2,'lrfoims_orders.status'=>'a']),
+				'getOrderDetailsDelivery' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.order_type'=>3,'lrfoims_orders.status'=>'a']),
 				'totalOrderPerYears' => $this->ordersModel->getTotalOrderPerYears(['order_status_id'=>7, 'status'=>'a']),
 				'ordersPerMonth' => $this->ordersModel->getCountOrdersPerMonth(['order_status_id'=>7, 'YEAR(created_at)'=>$dateYears, 'status'=>'a']),
 				'totalAmountOrdersJan' => $this->ordersModel->getSumTotalAmountOrdersPerMonth(['order_status_id'=>7,'MONTH(created_at)'=> 1, 'YEAR(created_at)'=>$dateYears, 'status'=>'a']),
@@ -100,6 +112,35 @@ class OrderReport extends BaseController
 			]);
 		}
 		return view('templates/index', $data);
+	}
+
+	public function getOrderReports(){
+		$offset = 0;
+		$data['all_items'] = $this->ordersModel->getTotalOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'])[0];
+		$data['offset'] = $offset;
+		$data['limitPerTable'] = $this->limitPerTable;
+		$data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+		$data['getOrderReports'] = $this->ordersModel->getOrderReportsDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $offset);
+		
+		return view('Modules\OrderReportManagement\Views\orderReport\orderReportsData', $data);
+	}
+	
+	public function getOrderReportsPerPage(){
+		if(!empty($_GET['search'])){
+			$search = $_GET['search'];
+			$data['all_items'] = $this->ordersModel->getTotalOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'])[0];
+			$data['offset'] = 0;
+			$data['limitPerTable'] = $this->limitPerTable;
+			$data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+			$data['getOrderReports'] = $this->ordersModel->getOrderReportsDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $_GET['offset'], $search);
+		}else{
+			$data['all_items'] = $this->ordersModel->getTotalOrderDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'])[0];
+			$data['offset'] = $_GET['offset'];
+			$data['limitPerTable'] = $this->limitPerTable;
+			$data['getPaymentMethod'] = $this->paymentMethodModel->get(['status'=>'a']);
+			$data['getOrderReports'] = $this->ordersModel->getOrderReportsDetails(['lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a'], $this->limitPerTable, $_GET['offset']);
+		}
+		return view('Modules\OrderReportManagement\Views\orderReport\orderReportsData', $data);
 	}
 
 	public function indexDateFilter() {

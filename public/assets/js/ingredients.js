@@ -22,11 +22,55 @@ function displayPendingOrders(){
 }
 displayPendingOrders();
 
-function paginateTables(route, offset = null, divTextId = null){
-  var searchInput = $('searchPendingOrders').value;
+function displayBarangayData(){
+  var element = $('#display-barangay-table');
+  var spinner = '<div class="spinner-border text-center m-4" role="status">';
+      spinner += '<span class="visually-hidden">Loading...</span>';
+      spinner += '</div>';
+  $.ajax({
+    url: "/barangay/v",
+    type: 'GET',
+    data: {},
+    beforeSend: function () {
+      element.html(spinner);
+    },
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    }
+  });
+}
+displayBarangayData();
+
+function displayOrderReportsData(){
+  var element = $('#display-order-reports-table');
+  var spinner = '<div class="spinner-border text-center m-4" role="status">';
+      spinner += '<span class="visually-hidden">Loading...</span>';
+      spinner += '</div>';
+  $.ajax({
+    url: "/order-reports/v",
+    type: 'GET',
+    data: {},
+    beforeSend: function () {
+      element.html(spinner);
+    },
+    success: function (html) {
+      element.html(html);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      console.log(xhr.responseText);
+      console.log(thrownError);
+    }
+  });
+}
+displayOrderReportsData();
+
+function paginateTables(route, offset = null, divTextId = null, searchInput = null){
   $(document).ready(function () {
     $(divTextId).each(function () {
-      console.log(searchInput);
       var element = $(divTextId);
       var spinner = '<div class="d-flex align-items-center">';
           spinner += '<strong>Loading...</strong>';
