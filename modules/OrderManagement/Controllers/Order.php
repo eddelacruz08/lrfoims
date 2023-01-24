@@ -258,7 +258,7 @@ class Order extends BaseController
 
     public function menu(){
         $this->hasPermissionRedirect('orders/admin-menu');
-
+        // session()->set('local_admin_menu_order_id', 26);
 		$data = [
 			'page_title' => 'LRFOIMS | Order Menu',
 			'title' => 'Order Menu',

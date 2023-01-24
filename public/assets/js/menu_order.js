@@ -6,10 +6,11 @@ function adminMenu(){
     data: {},
     success: function (html) {
       element.html(html);
+      orderTypeMenuList();
     },
     error: function (xhr, ajaxOptions, thrownError) {
-      // console.log(xhr.responseText);
-      // console.log(thrownError);
+      console.log(xhr.responseText);
+      console.log(thrownError);
     }
   });
 }
@@ -42,6 +43,7 @@ function cartRefreshAndCancelButtons(){
     data: {},
     success: function (html) {
       element.html(html);
+      // orderTypeMenuList();
     },
     error: function (xhr, ajaxOptions, thrownError) {
       // console.log(xhr.responseText);
