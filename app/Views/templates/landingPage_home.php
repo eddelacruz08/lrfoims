@@ -77,7 +77,7 @@
                         <li class="nav-item"><a class="nav-link" href="/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
                     <?php else: ?>
                         <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="modules/HomeManagement/Views/menu.php">Menu</a></li>
                         <li class="nav-item"><a class="nav-link" href="/register">Cart</a></li>
                         <li class="nav-item"><a class="nav-link" href="/register">Profile</a></li>
 

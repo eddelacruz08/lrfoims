@@ -51,7 +51,7 @@
                                                 <br>
                                                 <!-- <?= ucfirst($row['description']); ?> -->
                                                 <h5>₱ <?=$row['price']?></h5>
-                                                <input type="number" name="quantity" min="1" max="10" required onkeydown="if(event.key==='.'){event.preventDefault();}"  
+                                                <input type="hidden" name="quantity" min="1" max="10" required onkeydown="if(event.key==='.'){event.preventDefault();}"  
                                                     oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" value="1" class="form-control <?= isset($errors['quantity']) ? 'is-invalid':'' ?>" placeholder="Quantity">
                                                 
                                                 <input type="hidden" name="menu_id" value="<?=$row['id']?>">
