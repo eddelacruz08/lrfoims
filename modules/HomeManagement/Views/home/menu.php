@@ -4,13 +4,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <div class="page-title-right">
+                    <!-- <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li class="breadcrumb-item active">Menu</li>
                         </ol>
-                    </div>
-                    <h4 class="page-title">Menu</h4>
+                    </div> -->
                 </div>
             </div>
         </div>     
@@ -22,6 +21,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="special-menu text-center">
+                        <h4 id="menu-title" class="page-title">Menu</h4>
                             <div class="button-group filter-button-group">
                                 <button class="active" data-filter="*">All</button>
                                 <?php foreach($menuCategory as $category):?>

@@ -1,4 +1,3 @@
-
 <div class="row">
     <?php if(empty($getCreatedOrderNumber)):?>
         <div class="col-md-12 col-lg-12 col-xxl-12 d-grid gap-2 d-md-block">
@@ -7,16 +6,24 @@
             </button>
         </div>
     <?php else: ?>
+            <div class="special-menu text-center">
+                <div class="button-group filter-button-group">
+                    <button class="active" data-filter="*">All</button>
+                        <?php foreach($menuCategory as $category):?>
+                            <button data-filter=".<?=$category['id']?>"><?=$category['name']?></button>
+                        <?php endforeach; ?>
+                </div>
+            </div>                   
         <?php foreach ($getCreatedOrderNumber as $orderDetails) : ?>
             <?php if(!empty($menuCategory)):?>
-                <?php foreach ($menuCategory as $category) : ?> 
-                    <div class="col-md-12 col-lg-12 col-xxl-12">
+                <?php foreach ($menuCategory as $category) : ?>                        
+                    <!-- <div class="col-md-12 col-lg-12 col-xxl-12">
                         <div class="card border-secondary bg-dark text-white border rounded mb-2 p-0">
                             <div class="card-body m-0 p-2">
                                 <h5 class="card-title m-0 p-0"><?= ucfirst($category['name']); ?></h5>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php if(!empty($menuLists)):?>
                         <?php foreach ($menuLists as $row) : ?>
                             <?php if($category['id'] == $row['menu_category_id']): ?>

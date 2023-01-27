@@ -56,7 +56,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Best Seller</h2>
+						<h2 id="best-seller-title">Best Seller</h2>
 					</div>
 				</div>
 			</div>
