@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+=======
+CRITICAL - 2023-01-26 13:57:36 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
 #2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
@@ -10,7 +14,11 @@ CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of t
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+=======
+CRITICAL - 2023-01-26 13:57:36 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
 #2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
@@ -22,7 +30,11 @@ CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of t
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+=======
+CRITICAL - 2023-01-26 13:57:36 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
 #2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
@@ -34,6 +46,7 @@ CRITICAL - 2023-01-26 09:53:23 --> Argument 2 passed to user_link() must be of t
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:53:24 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2633,11 +2646,37 @@ CRITICAL - 2023-01-26 09:56:22 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('1')
+=======
+CRITICAL - 2023-01-26 14:11:43 --> Undefined variable: orderDetails
+#0 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Views\home\menu.php(65): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 65, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\HomeMan...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage_home.php(94): view('Modules\\HomeMan...')
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('templates/landi...', Array, true)
+#8 C:\xampp\htdocs\lrfoims\modules\HomeManagement\Controllers\Home.php(99): view('templates/landi...', Array)
+#9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\HomeManagement\Controllers\Home->menu()
+#10 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\HomeManagement\Controllers\Home))
+#11 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2023-01-26 14:34:34 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 19, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:22 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2645,11 +2684,21 @@ CRITICAL - 2023-01-26 09:56:22 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('3')
+=======
+CRITICAL - 2023-01-26 14:34:34 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 19, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2657,11 +2706,21 @@ CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('2')
+=======
+CRITICAL - 2023-01-26 14:34:38 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 19, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2669,11 +2728,21 @@ CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('1')
+=======
+CRITICAL - 2023-01-26 14:34:38 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 19, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2681,11 +2750,21 @@ CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('2')
+=======
+CRITICAL - 2023-01-26 14:35:06 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2693,11 +2772,21 @@ CRITICAL - 2023-01-26 09:56:23 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('3')
+=======
+CRITICAL - 2023-01-26 14:35:06 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2705,11 +2794,21 @@ CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('1')
+=======
+CRITICAL - 2023-01-26 14:36:02 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2717,11 +2816,21 @@ CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('3')
+=======
+CRITICAL - 2023-01-26 14:36:02 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2729,11 +2838,21 @@ CRITICAL - 2023-01-26 09:56:25 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('2')
+=======
+CRITICAL - 2023-01-26 14:36:37 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 29, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2741,11 +2860,21 @@ CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('1')
+=======
+CRITICAL - 2023-01-26 14:36:38 --> Undefined variable: row
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 29, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2753,11 +2882,21 @@ CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('2')
+=======
+CRITICAL - 2023-01-26 14:44:50 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 37, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php on line 3
 #0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\order\order_type_list_data.php(3): user_link('orders/preparin...', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2765,11 +2904,21 @@ CRITICAL - 2023-01-26 09:56:27 --> Argument 2 passed to user_link() must be of t
 #3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
 #4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(83): view('Modules\\OrderMa...', Array)
 #5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->orderTypeListData('3')
+=======
+CRITICAL - 2023-01-26 14:44:50 --> Undefined variable: menu
+#0 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Views\menuList\menuList.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 37, Array)
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#4 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
 #6 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
 #7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+<<<<<<< HEAD
 CRITICAL - 2023-01-26 10:29:38 --> Argument 2 passed to user_link() must be of the type array, null given, called in C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage_home.php on line 16
 #0 C:\xampp\htdocs\lrfoims\app\Views\templates\landingPage_home.php(16): user_link('home', NULL)
 #1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(220): include('C:\\xampp\\htdocs...')
@@ -2978,3 +3127,45 @@ CRITICAL - 2023-01-26 11:02:25 --> Argument 2 passed to user_link() must be of t
 #8 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
 #9 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
 #10 {main}
+=======
+CRITICAL - 2023-01-26 16:34:55 --> syntax error, unexpected 'endif' (T_ENDIF)
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#2 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+CRITICAL - 2023-01-26 16:34:55 --> syntax error, unexpected 'endif' (T_ENDIF)
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#2 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+CRITICAL - 2023-01-26 16:34:58 --> syntax error, unexpected 'endif' (T_ENDIF)
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#2 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+CRITICAL - 2023-01-26 16:34:59 --> syntax error, unexpected 'endif' (T_ENDIF)
+#0 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\View\View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Common.php(1217): CodeIgniter\View\View->render('Modules\\OrderMa...', Array, true)
+#2 C:\xampp\htdocs\lrfoims\modules\OrderManagement\Controllers\Order.php(285): view('Modules\\OrderMa...', Array)
+#3 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(935): Modules\OrderManagement\Controllers\Order->menuList()
+#4 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(431): CodeIgniter\CodeIgniter->runController(Object(Modules\OrderManagement\Controllers\Order))
+#5 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\CodeIgniter.php(332): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\lrfoims\public\index.php(44): CodeIgniter\CodeIgniter->run()
+#7 C:\xampp\htdocs\lrfoims\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(45): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155

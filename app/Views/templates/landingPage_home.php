@@ -16,6 +16,7 @@
                     <?php if(user_link('/', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <?php else: ?>
+<<<<<<< HEAD
                         <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <?php endif; ?>
                     <?php if(user_link('cart', session()->get('userPermissionView'))):?>
@@ -38,6 +39,13 @@
                         <li class="nav-item"><a class="nav-link active" href="javascript: void(0);">Profile</a></li>
                     <?php endif; ?>
                     <?php if(session()->get('role_id')==null):?>
+=======
+                        <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="modules/HomeManagement/Views/menu.php">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Cart</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Profile</a></li>
+
+>>>>>>> d13c5c1d47340e0aef65e0739d454e0b95965155
                         <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                     <?php else: ?>
