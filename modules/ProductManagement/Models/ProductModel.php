@@ -45,6 +45,20 @@ class ProductModel extends BaseModel
         return $this->findAll();
     }
     
+    public function getProductLowIngredients($conditions = []){
+        
+        $this->select('lrfoims_products.id, lrfoims_products.updated_at, pm.low_stock_minimum_limit as limit, 
+            lrfoims_products.product_name, lrfoims_products.unit_quantity');
+        $this->join('lrfoims_product_measures as pm', 'pm.id = lrfoims_products.product_description_id', 'left');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
+        $this->orderBy('lrfoims_products.id', 'ASC');
+
+        return $this->findAll();
+    }
+    
     public function getProductData($product_category_id = null){
         
         $this->select('lrfoims_products.*, pc.product_description, ps.name, pd.name as description');

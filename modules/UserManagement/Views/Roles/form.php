@@ -62,7 +62,7 @@
                                                         <?php $selected = true;?>
                                                     <?php endif; ?>
                                                 <?php endif;?>
-                                                <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($index['description']); ?></option>
+                                                <option value="<?= $option['id'] ?>" <?= $selected ? 'selected' : null ?>><?= ucwords($option['permission']); ?></option>
                                             <?php endif;?>
                                         <?php endforeach; ?>
                                     <?php endforeach; ?>

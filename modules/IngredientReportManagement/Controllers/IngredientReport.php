@@ -125,7 +125,7 @@ class IngredientReport extends BaseController
 	}
 
 	public function getStockIngredients(){
-		$data['getStockIngredients'] = $this->ingredientReportModel->getDetails();
+		$data['getStockIngredients'] = $this->ingredientReportModel->getDetails(['lrfoims_ingredient_out.status' => 'a','lrfoims_ingredient_out.stock_status' => 1]);
         return $this->response->setJSON($data);
 	}
 

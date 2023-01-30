@@ -222,7 +222,7 @@
                                                         <?php if ($details['order_type'] == 3):?>
                                                             <div class="card p-0 mt-3">
                                                                 <div class="card-body p-1 m-1 border-success">
-                                                                    <ul class="conversation-list p-1" data-simplebar style="max-height: 200px">
+                                                                    <ul class="conversation-list p-1" id="conversation-list" data-simplebar style="max-height: 200px">
                                                                         <div id="getBotmsg"></div>
                                                                         <div id="getmsg<?=$details['id']?>"></div>
                                                                     </ul>
@@ -327,6 +327,11 @@
                                                                                 "</li>";
                                                                             $("#getBotmsg").html(htmlBot);
                                                                             $("#getmsg<?=$details['id']?>").html(html);
+                                                                            const messages = document.getElementById('conversation-list');
+                                                                            $(".conversation-list").animate({
+                                                                                scrollTop: $(
+                                                                                '.conversation-list').get(0).scrollHeight
+                                                                            }, 1000);
                                                                         }
                                                                     });
                                                                 }

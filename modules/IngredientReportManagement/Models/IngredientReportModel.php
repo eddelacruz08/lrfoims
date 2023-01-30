@@ -19,7 +19,8 @@ class IngredientReportModel extends BaseModel
 
     public function getDetails($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*, p.product_name');
+        $this->select('lrfoims_ingredient_out.date_expiration, lrfoims_ingredient_out.status, lrfoims_ingredient_out.updated_at, p.product_name,
+            lrfoims_ingredient_out.unit_quantity, lrfoims_ingredient_out.ingredient_id, lrfoims_ingredient_out.id, lrfoims_ingredient_out.stock_status');
         $this->join('lrfoims_products as p', 'lrfoims_ingredient_out.ingredient_id = p.id');
 
         foreach($conditions as $field => $value){
@@ -32,7 +33,9 @@ class IngredientReportModel extends BaseModel
 
     public function getIngredientStockIn($conditions = []){
 
-        $this->select('lrfoims_ingredient_out.*');
+        $this->select('lrfoims_ingredient_out.unit_quantity, lrfoims_ingredient_out.ingredient_id, lrfoims_ingredient_out.stock_status, 
+            lrfoims_ingredient_out.unit_price, lrfoims_ingredient_out.date_expiration, 
+            lrfoims_ingredient_out.id, lrfoims_ingredient_out.status, lrfoims_ingredient_out.created_at,');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

@@ -175,7 +175,7 @@
                                     data.getStockIngredients[i]['date_expiration'], data.getStockIngredients[i]['status'], 
                                     data.getStockIngredients[i]['updated_at'], 0, data.getStockIngredients[i]['product_name'], 
                                     data.getStockIngredients[i]['unit_quantity'], data.getStockIngredients[i]['ingredient_id'], 
-                                    data.getStockIngredients[i]['id'], data.getStockIngredients[i]['date_expiration']
+                                    data.getStockIngredients[i]['id'], data.getStockIngredients[i]['stock_status']
                                 )
                             , 1000);
                         }
@@ -183,9 +183,9 @@
                 });
             }
 
-            function getExpirationDate(date_expiration, stock_status, updated_at_date, user_id, title, unit_quantity, ingredient_id, demoId, date){
-                var countDownDate = new Date(date).getTime();
-                var x = setInterval(function(){
+            function getExpirationDate(date_expiration, status, updated_at_date, user_id, title, unit_quantity, ingredient_id, demoId, stock_status){
+                var countDownDate = new Date(date_expiration).getTime();
+                setInterval(function(){
                     // console.log('reload');
                     var now = new Date().getTime();
                     var distance = countDownDate - now;
@@ -198,15 +198,15 @@
                     var dateNow = new Date();
 
                     var element = $('#demo'+demoId);
-                    if(days <= 3 && stock_status === 'a'){
-                        var message = "<button class='btn btn-sm btn-outline-danger'>"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s </button>";
-                    }else{
+                    if(days >= 4 && status === 'a' && stock_status == 1){
                         var message = "<button class='btn btn-sm btn-outline-dark'>"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s </button>";
+                    }else{
+                        var message = "<button class='btn btn-sm btn-outline-danger'>"+days + "d " + hours + "h "+ minutes + "m " + seconds + "s </button>";
                     }
                     element.html(message);
 
                     if (distance < 0) {
-                        if(stock_status == 'd'){
+                        if(status == 'd'){
                             var el = $('#demo'+demoId);
                             var expiredMsg = "<button class='btn btn-sm btn-danger' disabled>EXPIRED</button>";
                             el.html(expiredMsg);
@@ -227,7 +227,7 @@
                             });
                         }
                     }
-                    if(days <= 3 && stock_status == 'a'){
+                    if(days <= 3 && status == 'a'){
                         const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
                         const currentDate = moment(dateNow).format('YYYY-MM-DD');
                         if(updated_at != currentDate){
@@ -264,7 +264,6 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        // console.log(data);
                         for(let i = 0; i < data.getIngredients.length; i++){ 
                             if(data.getIngredients[i]['unit_quantity'] <= data.getIngredients[i]['limit'] && data.getIngredients[i]['product_status_id'] == 1){
                                 sendLowQuantityIngredients(
@@ -279,7 +278,7 @@
             }
 
             function sendLowQuantityIngredients(id, user_id, title, stock_status, quantity, updated_at_date){
-                var x = setInterval(function(){
+                setInterval(function(){
                     if(stock_status == 1){
                         var dateNow = new Date();
                         const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
@@ -328,43 +327,21 @@
                         success: function(data) {
                             var element = $('#notifications');
                             var html = '';
-                            if(data == ''){
-                                html +='<a href="javascript:void(0);" class="dropdown-item notify-item">';
-                                html +='    <p class="notify-details">No notifications!</p>';
-                                html +='</a>';
-                            }else{
-                                for(let i = 0; i <= data.getNotifications.length; i++){
-                                    if(data.getNotifications[i]['status'] == 'a'){
-                                        html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[i].id+'" id="notifFormId">';
-                                        html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item text-break">';
-                                        html +='        <div class="notify-icon bg-primary">';
-                                        html +='            <i class="mdi mdi-email-outline"></i>';
-                                        html +='        </div>';
-                                        html +='        <input type="hidden" value="'+data.getNotifications[i].link+'" name="marked_link">';
-                                        html +='        <p class="notify-details text-break">'+data.getNotifications[i].name;
-                                        html +='           <small class="text-muted">'+data.getNotifications[i].description+'</small>';
-                                        html +='           <small class="text-muted">'+moment(data.getNotifications[i].created_at).startOf('minute').fromNow()+'</small>';
-                                        html +='        </p>';
-                                        html +='    </button>';
-                                        html +='</form>';
-                                        html +='<hr class="m-0 p-0"/>';
-                                    }else{
-                                        html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[i].id+'" id="notifFormId">';
-                                        html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item">';
-                                        html +='        <div class="notify-icon bg-secondary">';
-                                        html +='            <i class="mdi mdi-email-open-outline"></i>';
-                                        html +='        </div>';
-                                        html +='        <input type="hidden" value="'+data.getNotifications[i].link+'" name="marked_link">';
-                                        html +='        <p class="notify-details">'+data.getNotifications[i].name;
-                                        html +='           <small class="text-muted">'+data.getNotifications[i].description+'</small>';
-                                        html +='           <small class="text-muted">'+moment(data.getNotifications[i].created_at).startOf('minute').fromNow()+'</small>';
-                                        html +='        </p>';
-                                        html +='    </button>';
-                                        html +='</form>';
-                                        html +='<hr class="m-0 p-0"/>';
-                                    }
-                                    element.html(html);
-                                }
+                            for(let z = 0; z <= data.getNotifications.length; z++){
+                                html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[z]['id']+'" id="notifFormId">';
+                                html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item text-break">';
+                                html +='        <div class="notify-icon '+(data.getNotifications[z]['status'] == 'a' ? 'bg-primary' : 'bg-secondary')+'">';
+                                html +='            <i class="mdi mdi-email-outline"></i>';
+                                html +='        </div>';
+                                html +='        <input type="hidden" value="'+data.getNotifications[z]['link']+'" name="marked_link">';
+                                html +='        <p class="notify-details text-break">'+data.getNotifications[z]['name'];
+                                html +='           <small class="text-muted">'+data.getNotifications[z]['description']+'</small>';
+                                html +='           <small class="text-muted">'+moment(data.getNotifications[z]['created_at']).startOf('minute').fromNow()+'</small>';
+                                html +='        </p>';
+                                html +='    </button>';
+                                html +='</form>';
+                                html +='<hr class="m-0 p-0"/>';
+                                element.html(html);
                             }
                         }
                     });

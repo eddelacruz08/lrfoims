@@ -47,7 +47,7 @@ class Email extends BaseConfig
 	 * @var string
 	 */
 	// Enter your email id from where you send email
-	public $SMTPUser = 'stackoverflow.pupt@gmail.com';
+	public $SMTPUser = 'leyte.lamonrestaurant@gmail.com';
 	
 
 	/**
@@ -57,7 +57,7 @@ class Email extends BaseConfig
 	 */
 	// Enter your email's password
 	// public $SMTPPass = 'STACKoverflow2022.';
-	public $SMTPPass = 'fzetxqfbovxziuii';
+	public $SMTPPass = 'elzgoqjnjaqfmzlb';
 
 	/**
 	 * SMTP Port

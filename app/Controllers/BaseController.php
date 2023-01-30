@@ -53,7 +53,7 @@ class BaseController extends Controller
 	{
 		$this->session = \Config\Services::session();
 
-		helper(['link', 'namesearch', 'document']);
+		helper(['form', 'link', 'namesearch', 'document']);
 	}
 
 	protected function hasPermissionRedirect($slugs)
