@@ -43,35 +43,25 @@
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
                     <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-sm table-hover dt-responsive w-100">
-                            <thead class="thead-dark">
+                        <table id="basic-datatable" class="table table-sm table-hover text-center dt-responsive w-100">
+                            <thead class="bg-dark text-white">
                                 <tr>
-                                    <th scope="col">
-                                        <center>Role</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Permissions</center>
-                                    </th>
-                                    <th scope="col">
-                                        <center>Actions</center>
-                                    </th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Permissions</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($roles as $role) : ?>
                                     <tr>
-                                        <td>
-                                            <center><?= strtolower($role['role_name']); ?></center>
-                                        </td>
+                                        <td><?= strtolower($role['role_name']); ?></td>
                                         <td class="permissions-data" id="<?=$role['id']?>"></td>
                                         <td>
-                                            <center>
-                                                <?php if(user_link('roles-permissions/u', session()->get('userPermissionView'))):?>
-                                                    <a href="/roles-permissions/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                <?php else: ?>
-                                                    <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit Button</button>
-                                                <?php endif; ?>
-                                            </center>
+                                            <?php if(user_link('roles-permissions/u', session()->get('userPermissionView'))):?>
+                                                <a href="/roles-permissions/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                            <?php else: ?>
+                                                <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit</button>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -22,9 +22,6 @@ class RolesPermissions extends BaseController
         'title' => 'Roles Permissions',
         'view' => 'Modules\UserManagement\Views\RolesPermissions\index',
         'roles' => $this->rolesModel->get(),
-        'rolesPermissions' => $this->rolesPermissionsModel->getDetails(),
-        'permissions' => $this->permissionsModel->get(),
-        'modules' => $this->modulesModel->get(),
     ];
     
     return view('templates/index',$data);

@@ -1,15 +1,15 @@
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
         <div class="card rounded mt-2 shadow mb-1">
             <div class="card-body p-0 m-0">
                 <p class="h4 float-start ms-2"><?= $title?></p>
-                <!-- <button id="fullscreenOpenOrders" onclick="openFullscreenOrdersDisplay();" type="button" class="btn btn-sm btn-default m-1 float-end"><i class="dripicons-expand"></i></button>
-                <button id="fullscreenCloseOrders" onclick="closeFullscreenOrdersDisplay();" type="button" class="btn btn-sm btn-default m-1 float-end"><i class="dripicons-contract"></i></button> -->
+                <button id="fullscreenOpenOrders" onclick="openFullscreenOrdersDisplay();" type="button" class="btn btn-sm btn-default m-1 float-end"><i class="dripicons-expand"></i></button>
+                <button id="fullscreenCloseOrders" onclick="closeFullscreenOrdersDisplay();" type="button" class="btn btn-sm btn-default m-1 float-end"><i class="dripicons-contract"></i></button>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="row mt-1">
     <div class="col-sm-4 col-md-4 col-lg-4 col-xxl-4">
         <div class="card">
@@ -50,9 +50,9 @@
     </div>
 
     <div class="col-sm-8 col-md-8 col-lg-8 col-xxl-8">
-        <div class="card h-100">
+        <div class="card">
             <div class="card-body p-2 m-0 border rounded shadow orderTypeDisplayInfo" id="orderTypeDisplayInfo">
-                <h1 class="text-muted text-bold mt-5 text-center">Select an order to display.</h1>
+                <h1 class="text-muted text-bold mt-5 mb-5 text-center">Select an order to display.</h1>
             </div>
         </div>
     </div>

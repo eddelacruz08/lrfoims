@@ -20,7 +20,7 @@
                                 <td><?=$ingredient['product_name']?></td>
                                 <td><?=$ingredient['unit_quantity'].' '.$ingredient['description']?></td>
                                 <td>₱ <?=$ingredient['price']?></td>
-                                <td><?=$ingredient['product_name'] == 1 ? '<span class="badge badge-spill bg-secondary">'.$ingredient['name'].'</span>' : '<span class="badge badge-spill bg-dark">'.$ingredient['name'].'</span>' ?> </td>
+                                <td><?=$ingredient['product_status_id'] != 1 ? '<span class="badge badge-spill bg-secondary">'.$ingredient['name'].'</span>' : '<span class="badge badge-spill bg-dark">'.$ingredient['name'].'</span>' ?> </td>
                                 <td><a onclick="addStockForm('/ingredients/stocks/form/v', <?=$ingredient['id']?>, <?=$category['id']?>);" title="Add" class="btn btn-sm btn-primary">Add</a></td>
                                 <td><a onclick="viewStocks('/ingredients/v', <?=$ingredient['id']?>, <?=$category['id']?>);" title="View" class="btn btn-sm btn-info">View</a></td>
                                 <td><a href="/ingredients/u/<?=$ingredient['id']?>" title="Edit" class="btn btn-sm btn-warning">Edit</a></td>

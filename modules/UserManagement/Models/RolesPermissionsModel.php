@@ -54,7 +54,7 @@ class RolesPermissionsModel extends BaseModel
 
   public function getModules($conditions = []){
 
-    $this->select('m.id as module_id, m.module, p.permission_type, p.slug, p.icon, p.id, m.button_link_type, p.landing_page_type');
+    $this->select('m.id as module_id, m.module, p.permission_type, p.slug, p.icon, p.id');
     $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
     $this->join('lrfoims_modules as m', 'm.id = p.module_id');
     foreach ($conditions as $condition => $value) {
@@ -66,7 +66,7 @@ class RolesPermissionsModel extends BaseModel
   }
 
   public function getPermissions($conditions = []){
-    $this->select('p.id, p.permission, p.module_id, p.permission_type, p.slug, p.icon, p.selection_id, p.landing_page_type');
+    $this->select('p.id, p.permission, p.module_id, p.permission_type, p.slug, p.icon');
     $this->join('lrfoims_permissions as p', 'p.id = lrfoims_roles_permissions.permission_id');
     foreach ($conditions as $condition => $value) {
       $this->where($condition , $value);

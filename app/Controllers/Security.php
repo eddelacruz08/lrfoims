@@ -1,7 +1,5 @@
 <?php namespace App\Controllers;
 
-use Modules\UserManagement\Models\UsersModel;
-use Modules\UserManagement\Models\LogsModel;
 use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
 use Modules\OrderManagement\Models as OrderManagement;
@@ -14,9 +12,9 @@ class Security extends BaseController{
     function __construct(){
         helper(['form','link']);
         $this->rolesPermissionsModel = new UserManagement\RolesPermissionsModel();
+        $this->usersModel = new UserManagement\UsersModel();
 		$this->cartsModel = new HomeManagement\CartModel();
 		$this->ordersModel = new OrderManagement\OrderModel();
-        $this->logsModel = new UserManagement\LogsModel(); 
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
@@ -68,18 +66,14 @@ class Security extends BaseController{
                 if (!$this->validate($rules, $errors)) {
                     $data['validation'] = $this->validator;
                 } else {
-                    $model = new UsersModel();
 
-                    $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
+                    $user = $this->usersModel->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
 
                     $this->setUserMethod($user);
                     $this->session->setFlashdata('success_login', 'Successfully logged in!');
                     
-                    $logData = [
-                        'user_id' => session()->get('id'),
-                        'description' => 'signed in'
-                    ];
-                    $this->logsModel->add($logData);
+		            $userPermissionView = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id')]);
+                    session()->set(['userPermissionView' => $userPermissionView]);
                     return redirect()->to(session()->get('landing_page'));
 
                 }
@@ -177,12 +171,10 @@ class Security extends BaseController{
                 $this->email->setSubject($subject);
                 $this->email->setMessage($message);
                 if($this->email->send()){
-                    $session = session();
-                    $session->setFlashdata('success','Email sent!');
+                    $this->session->setFlashdata('success','Email sent!');
                     return redirect()->to('/submit-email-verification');
                 }
-                $session = session();
-                $session->setFlashdata('error','Email not sent!');
+                $this->session->setFlashdata('error','Email not sent!');
                 return redirect()->to('/register');
             }
 
@@ -204,12 +196,10 @@ class Security extends BaseController{
         $this->email->setSubject($subject);
         $this->email->setMessage($message);
         if($this->email->send()){
-            $session = session();
-            $session->setFlashdata('success','Email sent!');
+            $this->session->setFlashdata('success','Email sent!');
             return redirect()->to('/submit-email-verification');
         }else{
-            $session = session();
-            $session->setFlashdata('error','Email not sent!');
+            $this->session->setFlashdata('error','Email not sent!');
             return redirect()->to('/submit-email-verification');
         }
     }
@@ -227,12 +217,10 @@ class Security extends BaseController{
         $this->email->setSubject($subject);
         $this->email->setMessage($message);
         if($this->email->send()){
-            $session = session();
-            $session->setFlashdata('success','Email sent!');
+            $this->session->setFlashdata('success','Email sent!');
             return redirect()->to('/register-submit-email-verification');
         }else{
-            $session = session();
-            $session->setFlashdata('error','Email not sent!');
+            $this->session->setFlashdata('error','Email not sent!');
             return redirect()->to('/register-submit-email-verification');
         }
     }
@@ -253,7 +241,6 @@ class Security extends BaseController{
                 $data['value'] = $_POST;
             } else {
                 if($_POST['email_code'] == session()->get('local_email_code')){
-                    $model = new UsersModel();
                     $newData = [
                         'first_name' => session()->get('local_first_name'),
                         'last_name' => session()->get('local_last_name'),
@@ -268,7 +255,7 @@ class Security extends BaseController{
                         'role_id' => session()->get('local_role_id'),
                         'status' => session()->get('local_status')
                     ];
-                    $model->save($newData);
+                    $this->usersModel->save($newData);
 
                     session()->remove('local_first_name');
                     session()->remove('local_last_name');
@@ -282,12 +269,10 @@ class Security extends BaseController{
                     session()->remove('local_password');
                     session()->remove('local_role_id');
                     session()->remove('local_status');
-                    $session = session();
-                    $session->setFlashdata('success','Successfully Registered!');
+                    $this->session->setFlashdata('success','Successfully Registered!');
                     return redirect()->to('/login');
                 }else{
-                    $session = session();
-                    $session->setFlashdata('error','Invalid Code!');
+                    $this->session->setFlashdata('error','Invalid Code!');
                     return redirect()->to('/submit-email-verification');
                 }
             }
@@ -298,7 +283,7 @@ class Security extends BaseController{
     }
     
 	public function getNotifications() {
-		$data['getNotifications'] = $this->notificationModel->orderBy('updated_at', 'DESC')->findAll(15);
+		$data['getNotifications'] = $this->notificationModel->getNotifications();
 		return $this->response->setJSON($data);
 	}
 
@@ -321,106 +306,6 @@ class Security extends BaseController{
 		$data = $this->barangayModel->where('barangay_code', $id)->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
 	}
-
-    // public function guestMode(){
-    //     helper(['form']);
-    //     if($this->request->getMethod() == 'post'){
-    //         $model = new UsersModel();
-    //         if(!empty($model->where(['email_address'=>$_POST['email_address'],'status'=>'a'])->findAll())){
-                
-    //             function random_string($length) {
-    //                 $key = '';
-    //                 $keys = array_merge(range(0, 9), range('a', 'z'));
-    //                 for ($i = 0; $i < $length; $i++) {
-    //                     $key .= $keys[array_rand($keys)];
-    //                 }
-    //                 return $key;
-    //             }
-
-    //             $email = $this->request->getVar('email_address');
-
-    //             $code = random_string(6);
-
-    //             $localData = [
-    //                 'local_register_username' =>  $this->request->getVar('email_address'),
-    //                 'local_register_email_address' => $this->request->getVar('email_address'),
-    //                 'local_register_role_id' => 5,
-    //                 'local_register_status' => 'a',
-    //                 'local_register_email_code' => $code
-    //             ];
-    //             session()->set($localData);
-
-    //             $code = random_string(6);
-    //             $message = '';
-    //             $message .= '<p>Email Verification';
-    //             $message .= '<br><p>Code: <b>'.$code.'</b></p>';
-    //             $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
-    //             $to = 'willsondelacruz12@gmail.com';
-    //             $subject = 'Email Verification';
-    //             $this->email->setTo($to);
-    //             $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
-    //             $this->email->setSubject($subject);
-    //             $this->email->setMessage($message);
-    //             if($this->email->send()){
-    //                 $session = session();
-    //                 $session->setFlashdata('success','Email sent!');
-    //                 return redirect()->to('/register-submit-email-verification');
-    //             }
-    //             $session = session();
-    //             $session->setFlashdata('error','Email not sent!');
-    //             return redirect()->to('/login');
-    //         } else {
-    //         }
-    //     }
-    // }
-
-    // public function emailVerificationGuestMode(){
-    //     $data = [
-    //         'page_title' => 'LRFOIMS | Verify Email',
-    //         'view' => 'register_email_verification_guest_mode',
-	// 		'homeDetails' => $this->infoModel->get()[0],
-    //         'regions' => $this->regionModel->get(['status'=>'a']),
-    //         'provinces' => $this->provinceModel->get(['status'=>'a']),
-    //         'cities' => $this->cityModel->get(['status'=>'a']),
-    //     ];
-    //     helper(['form']);
-    //     if($this->request->getMethod() == 'post'){
-    //         if(!$this->validate('emailCode')) {
-    //             $data['errors'] = $this->validation->getErrors();
-    //             $data['value'] = $_POST;
-    //         } else {
-    //             if($_POST['email_code'] == session()->get('local_email_code')){
-    //                 $model = new UsersModel();
-    //                 $newData = [
-    //                     'username' => session()->get('local_register_username'),
-    //                     'email_address' => session()->get('local_register_email_address'),
-    //                     'role_id' => session()->get('local_register_role_id'),
-    //                     'status' => session()->get('local_register_status')
-    //                 ];
-    //                 $model->save($newData);
-
-    //                 session()->remove('local_register_username');
-    //                 session()->remove('local_register_email_address');
-    //                 session()->remove('local_register_role_id');
-    //                 session()->remove('local_register_status');
-
-    //                 $user = $model->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
-
-    //                 $this->setUserMethod($user);
-
-    //                 $this->session->setFlashdata('success_login', 'Successfully logged in!');
-    //                 return redirect()->to('/menu');
-    //             }else{
-    //                 $session = session();
-    //                 $session->setFlashdata('error','Invalid Code!');
-    //                 return redirect()->to('/register-submit-email-verification');
-    //             }
-    //         }
-
-    //     }
-
-    //     return view('templates/landingPage',$data);
-    // }
 
     public function fileNotFound($slugs)
 	{
@@ -451,9 +336,8 @@ class Security extends BaseController{
                 $data['errors'] = $this->validation->getErrors();
                 $data['value'] = $_POST;
             } else {
-                $model = new UsersModel();
                 $existing = 0;
-                $user = $model->get(['status'=>'a']);
+                $user = $this->usersModel->get(['status'=>'a']);
                 foreach($user as $value){
                     if($value['email_address'] == $this->request->getVar('email_address')){
                         $existing = 1;
@@ -490,16 +374,13 @@ class Security extends BaseController{
                     $this->email->setSubject($subject);
                     $this->email->setMessage($message);
                     if($this->email->send()){
-                        $session = session();
-                        $session->setFlashdata('success','Email sent!');
+                        $this->session->setFlashdata('success','Email sent!');
                         return redirect()->to('/forgot-password');
                     }
-                    $session = session();
-                    $session->setFlashdata('error','Email not sent!');
+                    $this->session->setFlashdata('error','Email not sent!');
                     return redirect()->to('/forgot-password');
                 }else{
-                    $session = session();
-                    $session->setFlashdata('error','Email address is not exist!');
+                    $this->session->setFlashdata('error','Email address does not exist!');
                     return redirect()->to('/forgot-password');
                 }
             }
@@ -534,10 +415,8 @@ class Security extends BaseController{
                         }
                         return $key;
                     }
-    
-                    $model = new UsersModel();
 
-                    $user = $model->getDetails(['lrfoims_users.email_address'=>$this->request->getVar('email_address'),'lrfoims_users.status'=>'a'])[0];
+                    $user = $this->usersModel->getDetails(['lrfoims_users.email_address'=>$this->request->getVar('email_address'),'lrfoims_users.status'=>'a'])[0];
                     
                     $password = random_string(10);
 
@@ -553,9 +432,6 @@ class Security extends BaseController{
                     $this->email->setSubject($subject);
                     $this->email->setMessage($message);
                     if($this->email->send()){
-                        $session = session();
-                        $session->setFlashdata('success','Successfully Verified!');
-
                         session()->remove('local_forgot_password_email_address');
                         session()->remove('local_forgot_password_email_code');
 
@@ -564,14 +440,14 @@ class Security extends BaseController{
                         ];
                         $model->update($user['id'], $jdata);
 
+                        $this->session->setFlashdata('success','Successfully Verified!');
                         return redirect()->to('/login');
+                    }else{
+                        $this->session->setFlashdata('error','I\\\'m sorry! Failed to verify if it\\\'s you. :(');
+                        return redirect()->to('/forgot-password');
                     }
-                    $session = session();
-                    $session->setFlashdata('error','I\\\'m sorry! Failed to verify if it\\\'s you. :(');
-                    return redirect()->to('/forgot-password');
                 }else{
-                    $session = session();
-                    $session->setFlashdata('error','Invalid Code!');
+                    $this->session->setFlashdata('error','Invalid Code!');
                     return redirect()->to('/forgot-password');
                 }
             }
@@ -581,13 +457,7 @@ class Security extends BaseController{
     }
 
     public function signOut(){
-        $logData = [
-            'user_id' => session()->get('id'),
-            'description' => 'signed out'
-        ];
-        $this->logsModel->add($logData);
-        $session = session();
-        $session->destroy();
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }

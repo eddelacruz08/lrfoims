@@ -3,7 +3,7 @@
 
 <!-- Start header -->
 <header class="top-navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
@@ -13,77 +13,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbars-rs-food">
                 <ul class="navbar-nav ml-auto">
-                    <?php if (isset($_SESSION['modules'])): ?>
-                        <?php foreach ($_SESSION['modules']as $modules): ?>
-                            <?php foreach ($_SESSION['permissions'] as $permissions): ?>
-                                <?php if ($permissions['module_id'] == $modules['module_id'] && $permissions['selection_id'] == 5
-                                            && $permissions['permission_type'] == 16): ?>
-                                    <?php if ($permissions['slug'] == '/'): ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
-                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
-                                                    <?php if ($permissions['slug'] == 'cart'): ?>
-                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                    <?php if ($permissions['slug'] == 'menu'): ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
-                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
-                                                    <?php if ($permissions['slug'] == 'cart'): ?>
-                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                    <?php if ($permissions['slug'] == 'cart'): ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
-                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
-                                                    <?php if ($permissions['slug'] == 'cart'): ?>
-                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                    <?php if ($permissions['slug'] == 'profile'): ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
-                                                <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
-                                                    <?php if ($permissions['slug'] == 'cart'): ?>
-                                                        <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                                            <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endforeach; ?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
+                    <?php if(user_link('/', session()->get('userPermissionView'))):?>
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <?php else: ?>
-                        <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="modules/HomeManagement/Views/menu.php">Menu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Cart</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Profile</a></li>
-
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <?php endif; ?>
+                    <?php if(user_link('cart', session()->get('userPermissionView'))):?>
+                        <li class="nav-item"><a class="nav-link" href="/cart">Cart
+                            <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
+                                <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                            <?php endforeach; ?>
+                        </a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Cart</a></li>
+                    <?php endif; ?>
+                    <?php if(user_link('menu', session()->get('userPermissionView'))):?>
+                        <li class="nav-item"><a class="nav-link" href="/menu">Menu</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Menu</a></li>
+                    <?php endif; ?>
+                    <?php if(user_link('profile', session()->get('userPermissionView'))):?>
+                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Profile</a></li>
+                    <?php endif; ?>
+                    <?php if(session()->get('role_id')==null):?>
                         <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
                     <?php endif; ?>
+                    
                 </ul>
             </div>
         </div>

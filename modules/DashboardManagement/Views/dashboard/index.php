@@ -44,7 +44,7 @@
             <div class="card-body">
                 <h4 class="header-title mb-2">Pending Orders</h4>
                 <div class="row">
-                    <div class="col-md-6 offset-md-6">
+                    <div class="col-md-3 offset-md-9">
                         <div class="input-group input-group-sm justify-content-end mb-1">
                             <input type="text" id="searchPendingOrders" class="form-control form-control-sm" placeholder="Search . . ." name="searchPendingOrders">
                             <button onclick="paginateTables('/dashboard/get-pending-orders/v/offset',0,'#display-pending-orders-table', document.getElementById('searchPendingOrders').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>

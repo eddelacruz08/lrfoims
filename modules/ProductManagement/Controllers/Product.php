@@ -49,7 +49,8 @@ class Product extends BaseController
         $data = [
             'title' => $ingredients['product_name'],
             'category_id' => $_GET['category_id'],
-            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.ingredient_id'=>$_GET['id']])
+            'ingredientStockIn' => $this->ingredientReportModel->getIngredientStockIn(['lrfoims_ingredient_out.ingredient_id'=>$_GET['id'],
+                'lrfoims_ingredient_out.status'=>'a','lrfoims_ingredient_out.stock_status'=>1])
         ];
         return view('Modules\ProductManagement\Views\ingredient\viewStocks', $data);
     }
@@ -95,7 +96,7 @@ class Product extends BaseController
 
     public function notifLowQuantityIngredients(){
         $data = [
-            'getIngredients' => $this->productsModel->getProduct(['lrfoims_products.status'=>'a']),
+            'getIngredients' => $this->productsModel->getProductLowIngredients(['lrfoims_products.status'=>'a']),
         ];
         return $this->response->setJSON($data);
     }

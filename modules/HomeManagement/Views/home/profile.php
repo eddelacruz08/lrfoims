@@ -1,7 +1,8 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="container">
     <div class="content">
         <!-- start page title -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
@@ -13,7 +14,7 @@
                     <h4 class="page-title">Profile</h4>
                 </div>
             </div>
-        </div>     
+        </div>      -->
         <!-- end page title --> 
 
         <?php if(isset($_SESSION['success'])):?>
@@ -30,7 +31,7 @@
             </div>
         <?php endif;?>
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-sm-12">
                 <!-- Profile -->
                 <div class="card bg-primary">
@@ -111,7 +112,7 @@
                 <div class="card">
                     <div class="card-title m-3 mb-0 h4">Order History</div>
                         <div class="card-body">
-                            <table class="table table-sm table-centered mb-0 text-center">
+                            <table id="order-history-data-table" class="table table-sm table-centered mb-0 text-center">
                                 <thead>
                                     <tr>
                                         <th>Order#</th>
@@ -135,6 +136,13 @@
                                     <?php endforeach;?>
                                 </tbody>
                             </table>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#order-history-data-table').DataTable({
+                                        order: [[5, 'asc']],
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>

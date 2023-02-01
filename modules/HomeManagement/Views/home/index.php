@@ -77,8 +77,8 @@
                 <?php foreach($menuCategory as $category):?>
                     <?php foreach($menu as $row):?>
                         <?php if($row['menu_category_id'] == $category['id']):?>
-                            <div class="col-lg-4 col-md-6 special-grid <?=$category['id']?>">
-                                <div class="gallery-single fix">
+                            <div class="col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>">
+                                <div class="gallery-single fix rounded">
                                     <img src="/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
                                     <div class="why-text">
                                         <h4><?=$row['menu']?></h4>

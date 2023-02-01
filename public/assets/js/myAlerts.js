@@ -427,7 +427,7 @@ function updateIngredientReportClick(route, id, ingredientId){
 function applyPayment(route, orderId, totalAmount, url, orderNumber, orderMaxLimit, ...rest_param ){
 	Swal.fire({
 		title: 'Customer Payment',
-		inputLabel: 'Your bill is ₱' + rest_param[0].toFixed(2),
+		inputLabel: 'Your bill is ₱' + rest_param[0].toFixed(2),			
 		input: 'number',
 		inputAttributes: {
 			min: 0
@@ -452,35 +452,23 @@ function applyPayment(route, orderId, totalAmount, url, orderNumber, orderMaxLim
 	}).then((result) => {
 		const inputValue = result.value
 		if (result.isConfirmed) {
-			Swal.fire({
-				title: 'Processing...',
-				html: 'Please wait.',
-				icon: 'info',
-				timer: 2000,
-				timerProgressBar: true,
-				allowOutsideClick: false,
-				didOpen: () => {
-					Swal.showLoading()
-				},
-			}).then((result) => {
-				$.ajax({
-					url: route + orderId + '/' + totalAmount,
-					type: "POST",
-					data:{
-						c_cash: inputValue,
-						total_amount_order: totalAmount,
-						total_amount: rest_param[0].toFixed(2),
-						total_amount_vat: rest_param[1].toFixed(2),
-						discount_amount: rest_param[2].toFixed(2),
+			$.ajax({
+				url: route + orderId + '/' + totalAmount,
+				type: "POST",
+				data:{
+					c_cash: inputValue,
+					total_amount_order: totalAmount,
+					total_amount: rest_param[0].toFixed(2),
+					total_amount_vat: rest_param[1].toFixed(2),
+					discount_amount: rest_param[2],
 
-					},
-					cache: false,
-					success: function (response) {
-						displayOrderTypeInfo(url, orderId, orderNumber, orderMaxLimit);
-						alert_no_flash(response.status_text, response.status_icon);
-					}
-				});
-			})
+				},
+				cache: false,
+				success: function (response) {
+					displayOrderTypeInfo(url, orderId, orderNumber, orderMaxLimit);
+					alert_no_flash(response.status_text, response.status_icon);
+				}
+			});
 		}
 	});
 }

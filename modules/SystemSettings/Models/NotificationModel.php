@@ -18,12 +18,12 @@ class NotificationModel extends BaseModel
     ];
 
     public function getNotifications(){
-        $this->select('lrfoims_notifications.*');
-        $this->where('status', 'a');
-        $this->orderBy('id', 'DESC');
-        $this->limit(10);
+        $this->select('lrfoims_notifications.name, lrfoims_notifications.description, lrfoims_notifications.link, 
+            lrfoims_notifications.notif_date_status, lrfoims_notifications.status, lrfoims_notifications.created_at, 
+            lrfoims_notifications.id');
+        $this->orderBy('lrfoims_notifications.id', 'DESC');
 
-        return $this->findAll();
+        return $this->findAll(15);
     }
 
 }
