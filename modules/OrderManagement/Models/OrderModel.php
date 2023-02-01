@@ -112,12 +112,14 @@ class OrderModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getOrderTypeInfo($orderId = null, $orderStatusId = []){
+    public function getOrderTypeInfo($orderId = null, $orderStatusId = [], $userId = null){
 
         $this->select('lrfoims_orders.*, os.order_status, ot.type');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
         $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
-
+        if(!empty($userId)){
+            $this->where("lrfoims_orders.user_id ='$userId'");
+        }
         $this->where("lrfoims_orders.id ='$orderId'");
         $this->where("lrfoims_orders.status ='a'");
         $this->whereIn('lrfoims_orders.order_status_id', $orderStatusId);

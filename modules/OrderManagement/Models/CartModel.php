@@ -83,39 +83,33 @@ class CartModel extends BaseModel
             $this->where([$field => $value]);
         }
         if($takeOut != null && $dineIn != null){
-            $this->whereIn('lrfoims_orders.order_type', [$takeOut, $dineIn]);
+            $this->whereIn('o.order_type', [$takeOut, $dineIn]);
         }
         $this->groupBy('lrfoims_carts.order_id');
 
         return $this->findAll();
     }
     
-    public function getCartDeliveryTotalPrice($conditions = []){
+    public function getCustomerCartDetails($conditions = []){
 
-        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
-        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
-        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+        $this->select('lrfoims_carts.*, m.image, m.menu, m.price, mc.name, (lrfoims_carts.quantity * m.price) as sub_total_price');
+        $this->join('lrfoims_menus as m', 'm.id = lrfoims_carts.menu_id');
+        $this->join('lrfoims_menu_category as mc', 'mc.id = m.menu_category_id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->whereIn('o.order_status_id', [2,3]);
-        $this->groupBy('lrfoims_carts.order_id');
-
         return $this->findAll();
     }
 
-    public function getCartDeliveryShipmentTotalPrice($conditions = []){
+    public function getCustomerCountCarts($conditions = []){
 
-        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, o.order_status_id, o.c_cash, o.c_balance, o.total_amount');
+        $this->select('COUNT(lrfoims_carts.id) as customer_count_carts');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
-        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        $this->whereIn('o.order_status_id', [4]);
-        $this->groupBy('lrfoims_carts.order_id');
 
         return $this->findAll();
     }

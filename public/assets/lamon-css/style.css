@@ -173,7 +173,7 @@ button:focus{
 }
 
 .top-navbar .navbar-light .navbar-nav .nav-link{
-	color: #010101;
+	color: #f8f8f8;
 	font-size: 18px;
 	padding: 0px 20px;
 	border-radius: 4px;
@@ -181,11 +181,11 @@ button:focus{
 
 .top-navbar .navbar-light .navbar-nav .nav-item .nav-link:hover{
 	background: #d0a772;
-	color: #ffffff;
+	color: #000000;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item.active .nav-link{
 	background: #d0a772;
-	color: #ffffff;
+	color: #e8e4e4;
 	border-radius: 4px;
 }
 
@@ -369,7 +369,7 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .menu-box{
-	padding: 70px 0px;
+	padding: 10px 0px;
 }
 
 .heading-title{
@@ -389,7 +389,7 @@ button:focus{
 .filter-button-group {
     border: 1px solid #e4e4e4;
     border-radius: 4px;
-    margin: 10px 15px;
+    margin: 5px;
     display: inline-block;
 }
 
@@ -9492,7 +9492,7 @@ h1, h2, h3, h4, h5,
   background: #e3b04b !important; }
 
 .ftco-section {
-  padding: 7em 0; }
+  padding: 1em 0; }
 
 .ftco-no-pt {
   padding-top: 0; }
@@ -17837,7 +17837,7 @@ h1, h2, h3, h4, h5,
     background: #e3b04b !important; }
   
   .ftco-section {
-    padding: 7em 0; }
+    padding: 2.5em 0; }
   
   .ftco-no-pt {
     padding-top: 0; }

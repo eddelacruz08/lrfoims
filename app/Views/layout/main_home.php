@@ -93,13 +93,7 @@
         <?= $this->rendersection('ordersReportCharts'); ?>
         <!-- end demo js-->
 
-        <script src="/assets/js/myAlerts.js"></script>
-        <!-- <script src="/assets/js/permissions.js"></script>
-        <script src="/assets/js/orders.js"></script>
-        <script src="/assets/js/ingredients.js"></script>
-        <script src="/assets/js/printer.js"></script>
-        <script src="/assets/js/menu_order.js"></script> -->
-        <!-- <script src="/assets/js/invoiceOrders.js"></script> -->
+        <script src="/assets/js/menu_order_customer.js"></script>
 	
         <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 

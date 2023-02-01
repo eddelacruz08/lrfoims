@@ -125,11 +125,11 @@
                                         <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
                                             <?php if($totalPrice['order_id'] == $typeInfo['id']):?>
                                                 <?php if($typeInfo['order_user_discount_id'] == 0):?>
-                                                    <?php $total_amount_bill = number_format($totalPrice['total_amount_bill_no_discount'],2);?>
+                                                    <?php $total_amount_bill = $totalPrice['total_amount_bill_no_discount'];?>
                                                 <?php else: ?>
-                                                    <?php $total_amount_bill = number_format($totalPrice['total_amount_bill'],2);?>
+                                                    <?php $total_amount_bill = $totalPrice['total_amount_bill'];?>
                                                 <?php endif; ?>
-                                                <button type="button" onclick="applyPayment('/orders/admin/add-payment/u/',<?=$typeInfo['id']?>,<?=$totalPrice['total_price']?>,'/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,<?=$total_amount_bill?>,<?=$totalPrice['total_amount_vat']?>,<?=$totalPrice['total_amount_user_discount']?>);" title="Payment" class="btn btn-sm btn-success float-end">
+                                                <button type="button" onclick="applyPayment('/orders/admin/add-payment/u/',<?=$typeInfo['id']?>,<?=$totalPrice['total_price']?>,'/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,<?=$total_amount_bill;?>,<?=$totalPrice['total_amount_vat']?>,<?=$totalPrice['total_amount_user_discount'];?>);" title="Payment" class="btn btn-sm btn-success float-end">
                                                     Payment
                                                 </button>
                                             <?php endif; ?>
@@ -232,10 +232,6 @@
                                                                 "</li>";
                                                             }
                                                             $("#getmsg<?=$typeInfo['id']?>").html(html);
-                                                        },
-                                                        error: function(err)
-                                                        {
-                                                            console.log(err);
                                                         }
                                                     });
                                                 }
