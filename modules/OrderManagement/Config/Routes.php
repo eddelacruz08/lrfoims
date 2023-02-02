@@ -1,5 +1,8 @@
 <?php
 $routes->group('orders', ['namespace' => 'Modules\OrderManagement\Controllers'], function ($routes) {
+    
+    $routes->match(['get', 'post'], 'add-chat', 'Order::addChat');
+    $routes->add('get-message/(:num)', 'Order::getMessage/$1');
     // orders
     $routes->add('/', 'Order::index');
     $routes->match(['get', 'post'], 'a', 'Order::addOrder'); 

@@ -198,8 +198,16 @@ button:focus{
 	background: #d0a772;
 	color: #ffffff;
 }
+.navbar-toggler{
+	/* background: #272726; */
+	color: #ffffff;
+}
+.navbar-toggler .navbar-toggler-icon{
+	/* background: #272726; */
+	color: #ffffff;
+}
 .navbar-light .navbar-toggler:hover{
-	background: #cfa671;
+	background: #d0a772;
 }
 
 /*------------------------------------------------------------------
@@ -431,7 +439,7 @@ button:focus{
     bottom: -100%;
     right: 0;
     height: 100%;
-    background: rgba(207, 166, 113, 0.9);
+    background: rgba(34, 33, 33, 0.9);
     padding: 12px 12px;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
@@ -611,7 +619,7 @@ button:focus{
 	padding-bottom: 0px;
 }
 .bg-f{
-	background-image: url("../images/footer-lamon.jpg");
+	background-image: url("/assets/img/footer-lamon.jpg");
 	background-attachment: scroll;
 	background-clip: initial;
 	background-color: rgba(0, 0, 0, 0);
@@ -622,15 +630,15 @@ button:focus{
 	position: relative;
 }
 .bg-f::before {
-    background: #010101;
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-	opacity: 0.8;
+  background: #010101;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.8;
 }
 
 .footer-area .container{
@@ -9505,7 +9513,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .img {
-  background-size: cover;
+  background-size: fill;
   background-repeat: no-repeat;
   background-position: center center; }
 
@@ -17850,9 +17858,18 @@ h1, h2, h3, h4, h5,
     color: #000; }
   
   .img {
-    background-size: cover;
+    background-image: url("/assets/lamon-images/login_bg.jpg");
+    background-attachment: scroll;
+    background-clip: initial;
+    background-color: rgba(0, 0, 0, 0);
+    background-origin: initial;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-position: center center; }
+    background-size: 100% 100%;;
+    position: relative;
+    height: auto;
+    max-width: 100%;
+  }
   
   .wrap {
     width: 100%;
@@ -17864,14 +17881,21 @@ h1, h2, h3, h4, h5,
     box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24); }
   
   .img, .login-wrap {
-    width: 50%; }
-    @media (max-width: 991.98px) {
-      .img, .login-wrap {
-        width: 100%; } }
+    width: 50%; 
+    /* padding-left: 200px;
+    padding-right: 200px; */
+  }
+  @media (max-width: 991.98px) {
+    .img, .login-wrap {
+      width: 100%; 
+    } 
+  }
   
   @media (max-width: 767.98px) {
     .wrap .img {
-      height: 250px; } }
+      height: 300px; 
+    } 
+  }
   
   .login-wrap {
     position: relative;

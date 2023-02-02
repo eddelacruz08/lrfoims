@@ -7,7 +7,6 @@ use Modules\OrderManagement\Models as OrderManagement;
 use Modules\SystemSettings\Models as SystemSettings;
 use Modules\ProductManagement\Models as ProductManagement;
 use Modules\IngredientReportManagement\Models as IngredientReportManagement;
-use Modules\DeliveryManagement\Models as DeliveryManagement;
 use App\Controllers\BaseController;
 
 class Home extends BaseController
@@ -29,7 +28,7 @@ class Home extends BaseController
         $this->ingredientsModel = new ProductManagement\ProductModel();
         $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel(); 
 		$this->infoModel = new SystemSettings\HomeInfoModel();
-		$this->messageModel = new DeliveryManagement\MessageModel();
+		$this->messageModel = new OrderManagement\MessageModel();
 		$this->regionModel = new SystemSettings\RegionModel();
 		$this->provinceModel = new SystemSettings\ProvinceModel();
 		$this->cityModel = new SystemSettings\CityModel();
@@ -55,12 +54,21 @@ class Home extends BaseController
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
+			'getCartsFoodRates' => $this->cartsModel->getCartFoodRates(),
 		];
 		$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),'lrfoims_carts.status'=>'a'
 				,'o.order_status_id'=>1]);
 		session()->set($dataSession);
 
 		return view('templates/landingPage_home',$data);
+	}
+
+	public function orderUpdateStatusList(){
+		$data =[
+			'preparingOrders' => $this->ordersModel->get(['order_status_id'=> 2,'status'=>'a']),
+			'servingOrders' => $this->ordersModel->get(['order_status_id'=> 3,'status'=>'a']),
+		];
+        return view('Modules\HomeManagement\Views\home\orderUpdates', $data);
 	}
 
 	public function ongoingOrderStatusList() {
@@ -76,11 +84,9 @@ class Home extends BaseController
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
-			'preparingOrders' => $this->ordersModel->get(['order_status_id'=> 2,'status'=>'a']),
-			'servingOrders' => $this->ordersModel->get(['order_status_id'=> 3,'status'=>'a']),
 		];
 
-		return view('templates/landingPage_home',$data);
+		return view('templates/landingPage_OrderStatusList',$data);
 	}
 
 	public function menu() {
@@ -97,6 +103,7 @@ class Home extends BaseController
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
+			'getCartsFoodRates' => $this->cartsModel->getCartFoodRates(),
 		];
 		$dataSession['getCustomerCountCarts'] = $this->cartsModel->getCustomerCountCarts(['o.user_id'=>session()->get('id'),
 										'lrfoims_carts.status'=>'a','o.order_status_id'=>1]);
@@ -586,6 +593,7 @@ class Home extends BaseController
 			'regions' => $this->regionModel->get(['status'=>'a']),
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
+			'getCartForRating' => $this->cartsModel->getCartsForRating(['lrfoims_carts.status'=>'a']),
 			'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.user_id'=>session()->get('id'),'lrfoims_orders.order_status_id'=>5,'lrfoims_orders.status'=>'a']),
 		];
 		$user = $this->usersModel->getDetails(['lrfoims_users.id'=>session()->get('id'),'lrfoims_users.status'=>'a'])[0];
@@ -609,6 +617,47 @@ class Home extends BaseController
 		return view('templates/landingPage_home',$data);
 	}
 	
+    public function applyRating($id) {
+		$data = [
+			'page_title' => 'LRFOIMS | Profile',
+			'title' => 'Profile',
+			'view' => 'Modules\HomeManagement\Views\home\profile',
+			'orderMaxLimit' => $this->orderLimitModel->get(['status' => 'a'])[0],
+			'homeDetails' => $this->infoModel->get()[0],
+			'regions' => $this->regionModel->get(['status'=>'a']),
+			'provinces' => $this->provinceModel->get(['status'=>'a']),
+			'cities' => $this->cityModel->get(['status'=>'a']),
+			'getCartForRating' => $this->cartsModel->getCartsForRating(['lrfoims_carts.status'=>'a']),
+			'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.user_id'=>session()->get('id'),'lrfoims_orders.order_status_id'=>5,'lrfoims_orders.status'=>'a']),
+		];
+
+        if ($this->request->getMethod() == 'post') {
+			$success = 0;
+			$star_rate = $_POST['star_rate'];
+			foreach ($star_rate as $cartId => $starRate) {
+				foreach ($starRate as $rates) {
+					$rate = ['star_rate' => $rates];
+					if($this->cartsModel->update($cartId, $rate)){
+						$success = 1;
+					}else{
+						$this->session->setFlashdata('error', 'Something went wrong!');
+						return redirect()->to('/profile');
+					}
+				}
+			}
+			if($success == 1){
+				$rate_status = ['rate_status' => 'd'];
+				$this->ordersModel->update($id, $rate_status);
+				$this->session->setFlashdata('success', 'Thank you for your rate!');
+				return redirect()->to('/profile');
+			}else{
+				$this->session->setFlashdata('error', 'Something went wrong!');
+				return redirect()->to('/profile');
+			}
+        }
+        return view('templates/landingPage_home', $data);
+    }
+
     public function editProfile($id) {
         $this->hasPermissionRedirect('profile/u');
 

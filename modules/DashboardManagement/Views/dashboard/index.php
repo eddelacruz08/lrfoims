@@ -14,26 +14,30 @@
 <!-- end page title --> 
 <div class="row">
     <div class="col-xl-3 col-lg-4">
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class='mdi mdi-cart-check float-end'></i>
-                <h6 class="text-uppercase mt-0">Total Orders</h6>
-                <h2 class="my-2 pt-1" id="active-views-count">
-                    <?php foreach ($getTotalOrders as $totalOrders): ?>
-                        <?=$totalOrders['getTotalOrders'];?>
-                    <?php endforeach; ?>
-                </h2>
+        <div class="col">
+            <div class="card tilebox-one">
+                <div class="card-body">
+                    <i class='mdi mdi-cart-check float-end'></i>
+                    <h6 class="text-uppercase mt-0">Total Orders</h6>
+                    <h2 class="my-2 pt-1" id="active-views-count">
+                        <?php foreach ($getTotalOrders as $totalOrders): ?>
+                            <?=$totalOrders['getTotalOrders'];?>
+                        <?php endforeach; ?>
+                    </h2>
+                </div>
             </div>
         </div>
-        <div class="card tilebox-one">
-            <div class="card-body">
-                <i class='mdi mdi-cart-minus float-end'></i>
-                <h6 class="text-uppercase mt-0">Total Pending Orders</h6>
-                <h2 class="my-2 pt-1" id="active-users-count">
-                    <?php foreach ($getTotalPendingOrders as $totalPendingOrders): ?>
-                        <?=$totalPendingOrders['getTotalPendingOrders'];?>
-                    <?php endforeach; ?>
-                </h2>
+        <div class="col">
+            <div class="card tilebox-one">
+                <div class="card-body">
+                    <i class='mdi mdi-cart-minus float-end'></i>
+                    <h6 class="text-uppercase mt-0">Total Pending Orders</h6>
+                    <h2 class="my-2 pt-1" id="active-users-count">
+                        <?php foreach ($getTotalPendingOrders as $totalPendingOrders): ?>
+                            <?=$totalPendingOrders['getTotalPendingOrders'];?>
+                        <?php endforeach; ?>
+                    </h2>
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +48,7 @@
             <div class="card-body">
                 <h4 class="header-title mb-2">Pending Orders</h4>
                 <div class="row">
-                    <div class="col-md-3 offset-md-9">
+                    <div class="col-md-4 offset-md-8">
                         <div class="input-group input-group-sm justify-content-end mb-1">
                             <input type="text" id="searchPendingOrders" class="form-control form-control-sm" placeholder="Search . . ." name="searchPendingOrders">
                             <button onclick="paginateTables('/dashboard/get-pending-orders/v/offset',0,'#display-pending-orders-table', document.getElementById('searchPendingOrders').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
@@ -104,7 +108,13 @@
                             <?php foreach ($menu as $row) : ?>
                                 <tr>
                                     <td><?= ucfirst($row['menu']) ?></td>
-                                    <td><?= number_format($row['star_rate'], 2) ?></td>
+                                    <td>
+                                        <?php foreach($getCartsFoodRates as $rates):?>
+                                            <?php if($row['id'] == $rates['menu_id']):?>
+                                                <?=$rates['sum_per_rating_for_food']?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </td>
                                     <?php foreach ($getTotalBestFoods as $total) : ?>
                                         <?php if ($total['menu_id'] == $row['id']) : ?>
                                             <td><?= $total['count_per_best_food'] ?></td>

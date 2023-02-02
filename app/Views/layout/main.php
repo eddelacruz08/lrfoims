@@ -315,50 +315,52 @@
                 }, 1000);
             }
 
-            setInterval( showNotification(), 1000);
-
-            function showNotification() {
-                var x = setInterval(function() {
-                    $.ajax({
-                        type: "GET",
-                        url: '/get-notifications',
-                        async: true,
-                        dataType: 'JSON',
-                        success: function(data) {
-                            var element = $('#notifications');
-                            var html = '';
-                            for(let z = 0; z <= data.getNotifications.length; z++){
-                                html +='<form method="post" action="/ingredients/notify-marked/u/'+data.getNotifications[z]['id']+'" id="notifFormId">';
-                                html +='    <button type="submit" id="submitNotifButton" class="dropdown-item notify-item text-break">';
-                                html +='        <div class="notify-icon '+(data.getNotifications[z]['status'] == 'a' ? 'bg-primary' : 'bg-secondary')+'">';
-                                html +='            <i class="mdi mdi-email-outline"></i>';
-                                html +='        </div>';
-                                html +='        <input type="hidden" value="'+data.getNotifications[z]['link']+'" name="marked_link">';
-                                html +='        <p class="notify-details text-break">'+data.getNotifications[z]['name'];
-                                html +='           <small class="text-muted">'+data.getNotifications[z]['description']+'</small>';
-                                html +='           <small class="text-muted">'+moment(data.getNotifications[z]['created_at']).startOf('minute').fromNow()+'</small>';
-                                html +='        </p>';
-                                html +='    </button>';
-                                html +='</form>';
-                                html +='<hr class="m-0 p-0"/>';
-                                element.html(html);
+            $(document).ready(function(){
+                showNotification();
+                function showNotification() {
+                    setInterval(function() {
+                        $.ajax({
+                            type: "GET",
+                            url: '/notifications/get-notifications',
+                            async: true,
+                            dataType: 'JSON',
+                            success: function(response) {
+                                    // console.log(response);
+                                var element = $('#notifications');
+                                var html = "";
+                                for(var z = 0; z <= response.getNotifications.length; z++){
+                                    html +="<form id='notifFormId' method='post' action='/ingredients/notify-marked/u/"+response.getNotifications[z].id+"'>";
+                                    html +="    <button type='submit' id='submitNotifButton' class='dropdown-item notify-item text-break'>";
+                                    html +="        <div class='notify-icon "+(response.getNotifications[z].status == "a" ? "bg-primary" : "bg-secondary")+"'>";
+                                    html +="            <i class='mdi mdi-email-outline'></i>";
+                                    html +="        </div>";
+                                    html +="        <input type='hidden' value='"+response.getNotifications[z].link+"' name='marked_link'/>";
+                                    html +="        <p class='notify-details text-break'>"+response.getNotifications[z].name+"";
+                                    html +="           <small class='text-muted'>"+response.getNotifications[z].description+"</small>";
+                                    html +="           <small class='text-muted'>"+moment(response.getNotifications[z].created_at).startOf("minute").fromNow()+"</small>";
+                                    html +="        </p>";
+                                    html +="    </button>";
+                                    html +="</form>";
+                                    html +="<hr class='m-0 p-0'/>";
+                                    element.html(html);
+                                }
                             }
-                        }
-                    });
-                }, 1000);
-            }
-            $(() => {
-                $("#submitNotifButton").click(function(ev) {
-                    var form = $("#notifFormId");
-                    var url = form.attr('action');
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: form.serialize(),
-                        cache: false,
-                        // success: function(data) {
-                        //     viewStocks('/ingredients/v',);
-                        // }
+                        })
+                    }, 1000)
+                }
+                $(() => {
+                    $("#submitNotifButton").click(function(ev) {
+                        var form = $("#notifFormId");
+                        var url = form.attr('action');
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: form.serialize(),
+                            cache: false,
+                            // success: function(data) {
+                            //     viewStocks('/ingredients/v',);
+                            // }
+                        });
                     });
                 });
             });

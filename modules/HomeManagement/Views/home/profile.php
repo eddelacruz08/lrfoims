@@ -34,7 +34,7 @@
         <div class="row mt-4">
             <div class="col-sm-12">
                 <!-- Profile -->
-                <div class="card bg-primary">
+                <div class="card bg-info">
                     <div class="card-body profile-user-box">
 
                         <div class="row">
@@ -50,11 +50,11 @@
                                             <h4 class="mt-1 mb-1 text-white"><?= session()->get('first_name').' '.session()->get('last_name');?></h4>
                                             <p class="font-13 text-white-50"><?= session()->get('role_name')?></p>
 
-                                            <ul class="mb-0 list-inline text-light">
+                                            <ul class="mb-0 list-inline text-white">
                                                 <li class="list-inline-item">
-                                                    <h5 class="mb-1">
+                                                    <h5 class="mb-1 text-white">
                                                         <?php foreach (session()->get('getOrderCounts') as $getOrderCounts):?>
-                                                            <?= ($getOrderCounts)? $getOrderCounts : '0'?>
+                                                            (<?= ($getOrderCounts)? $getOrderCounts : '0'?>)
                                                         <?php endforeach;?>
                                                     </h5>
                                                     <p class="mb-0 font-13 text-white-50">Number of Orders</p>
@@ -121,17 +121,59 @@
                                         <th>Cash</th>
                                         <th>Change</th>
                                         <th>Date & Time</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($getOrderDetails as $row):?>
                                         <tr>
                                             <td>Order#<?=$row['number']?></td>
-                                            <td><span class="badge bg-primary"><?=$row['order_status']?></span></td>
+                                            <td><span class="badge bg-info"><?=$row['order_status']?></span></td>
                                             <td>₱ <?=number_format($row['total_amount'])?></td>
                                             <td>₱ <?=number_format($row['c_cash'])?></td>
                                             <td>₱ <?=number_format($row['c_balance'])?></td>
-                                            <td><?= Date('F d, Y - h:i a', strtotime($row['created_at']))?></td>
+                                            <td><?= Date('M d, Y h:i a', strtotime($row['created_at']))?></td>
+                                            <td>
+                                                <?php if($row['rate_status'] == 'a'):?>
+                                                    <button 
+                                                        type="button" 
+                                                        class="btn btn-sm btn-warning" 
+                                                        data-bs-toggle="offcanvas" 
+                                                        data-bs-target="#offcanvasRight<?=$row['id']?>" 
+                                                        aria-controls="offcanvasRight<?=$row['id']?>"
+                                                        >
+                                                        To Rate
+                                                    </button>
+                                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight<?=$row['id']?>" aria-labelledby="offcanvasRightLabel<?=$row['id']?>">
+                                                        <div class="offcanvas-header">
+                                                            <h5 id="offcanvasRightLabel<?=$row['id']?>">To Rate | Order#<?=$row['number']?></h5>
+                                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="offcanvas-body">
+                                                            <form action="/profile/apply-rating/a/<?=$row['id']?>" method="post">
+                                                                <?php foreach ($getCartForRating as $rate):?>
+                                                                    <?php if ($rate['order_id'] == $row['id']):?>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6"><?=$rate['menu']?></div>
+                                                                            <div class="col-sm-6">
+                                                                                <input type="number" min="0" max="5" name="star_rate[<?=$rate['id']?>][]" value="5" class="form-control form-control-sm w-75" required/>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php endif;?>
+                                                                <?php endforeach;?>
+                                                                <button 
+                                                                    type="submit" 
+                                                                    class="btn btn-warning btn-sm mt-2"
+                                                                >
+                                                                    Rate
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                <?php else:?>
+                                                    <button type="button" class="btn btn-sm btn-outline-warning" disabled>Rated</button>
+                                                <?php endif;?>
+                                            </td>
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>

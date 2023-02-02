@@ -59,7 +59,7 @@
 
                     <!-- item-->
                     <a href="/signout" class="dropdown-item notify-item">
-                        <i class="mdi mdi-logout me-1"></i>
+                        <!-- <i class="mdi mdi-logout me-1"></i> -->
                         <span>Logout</span>
                     </a>
 

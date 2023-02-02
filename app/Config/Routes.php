@@ -45,7 +45,6 @@ $routes->get('/get-regions', 'Security::getRegions');
 $routes->get('/get-provinces/(:num)', 'Security::getProvinces/$1');
 $routes->get('/get-cities/(:num)', 'Security::getCities/$1');
 $routes->get('/get-barangay/(:num)', 'Security::getBarangay/$1'); 
-$routes->match(['get','post'],'get-notifications', 'Security::getNotifications');
 $routes->get('/submit-email-verification', 'Security::emailVerification');
 // $routes->get('/submit', 'Security::send');
 $routes->match(['get','post'],'submit', 'Security::send');
