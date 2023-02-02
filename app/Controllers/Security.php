@@ -281,11 +281,6 @@ class Security extends BaseController{
 
         return view('templates/landingPage_home',$data);
     }
-    
-	public function getNotifications() {
-		$data['getNotifications'] = $this->notificationModel->getNotifications();
-		return $this->response->setJSON($data);
-	}
 
 	public function getRegions() {
 		$data = $this->regionModel->where('status', 'a')->orderBy('id', 'ASC')->findAll();

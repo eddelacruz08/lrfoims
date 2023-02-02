@@ -142,7 +142,7 @@
 
                                 <div class="col-lg-4">
                                     <div class="border p-3 mt-4 mt-lg-0 rounded">
-                                        <h4 class="header-title">Order Summary</h4>
+                                        <h4 class="mb-1">Order Summary</h4>
                                         <?php foreach ($getCartTotalPrice as $totalPrice) : ?>
                                             <?php if($totalPrice['order_id'] == $orderDetails['id']):?>
                                                 <div class="row" id="resize-contents">
@@ -344,7 +344,7 @@
                                                 function showmsg(){
                                                     $.ajax({
                                                         type: "GET",
-                                                        url: '/delivery/get-message/<?=$orderDetails['id']?>',
+                                                        url: '/orders/get-message/<?=$orderDetails['id']?>',
                                                         async: true,
                                                         dataType: 'JSON',
                                                         success: function(data){ 

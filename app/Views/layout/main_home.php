@@ -82,7 +82,9 @@
         <!-- Typehead -->
         <script src="/assets/js/vendor/handlebars.min.js"></script>
         <script src="/assets/js/vendor/typeahead.bundle.min.js"></script>
-
+        
+        <script src="/assets/js/vendor/jquery.rateit.min.js"></script>
+        <script src="/assets/js/ui/component.rating.js"></script>
         <!-- Demo -->
         <!-- <script src="/assets/js/pages/demo.typehead.js"></script> -->
 
@@ -93,7 +95,31 @@
         <?= $this->rendersection('ordersReportCharts'); ?>
         <!-- end demo js-->
 
+        <script src="/assets/js/myAlerts.js"></script>
         <script src="/assets/js/menu_order_customer.js"></script>
+
+        <script>
+            // $(document).ready(function () {
+            //     $(".offcanvaright-body").each(function () {
+            //         var element = $(this);
+            //         $.ajax({
+            //         url: '/profile/apply-rating-form/v',
+            //         type: 'get',
+            //         data: { id: $(this).attr("id") },
+            //         beforeSend: function () {
+            //             element.html('Fetching Data...');
+            //         },
+            //         success: function (html) {
+            //             element.html(html);
+            //         },
+            //         error: function (xhr, ajaxOptions, thrownError) {
+            //             alert(xhr.responseText);
+            //             alert(thrownError);
+            //         }
+            //         });
+            //     });
+            // });
+        </script>
 	
         <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 

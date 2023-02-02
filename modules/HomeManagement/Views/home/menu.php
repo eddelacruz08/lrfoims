@@ -40,13 +40,24 @@
                                     <div class="gallery-single fix rounded">
                                         <img src="/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
                                         <div class="why-text">
-                                            <h4 class="mb-1"><?=$row['menu']?></h4>
-                                            <?= $row['menu_status'] == 'a' ? '<span class="badge bg-warning">Available</span>' : '<span class="badge bg-secondary">Unavailable</span>'?>
-                                            <span class="text-warning mdi mdi-star"></span>
-                                            <span class="text-warning mdi mdi-star"></span>
-                                            <span class="text-warning mdi mdi-star"></span>
-                                            <span class="text-warning mdi mdi-star"></span>
-                                            <span class="text-warning mdi mdi-star"></span>
+                                            <h4 class="mb-0"><?=$row['menu']?></h4>
+                                            <h4 class="mb-0">₱<?=number_format($row['price'],2)?></h4>
+                                            <?php foreach($getCartsFoodRates as $rates):?>
+                                                <?php if($row['id'] == $rates['menu_id']):?>
+                                                    <div 
+                                                        class="rateit m-0" 
+                                                        data-rateit-mode="font"
+                                                        data-rateit-value="<?=$rates['sum_per_rating_for_food']?>" 
+                                                        data-rateit-ispreset="true"
+                                                        data-rateit-readonly="true">
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <?php if($row['menu_status'] == 'a'):?>
+                                                <span class="badge bg-warning float-end">Available</span>
+                                            <?php else:?>
+                                                <span class="badge bg-secondary float-end">Unavailable</span>
+                                            <?php endif; ?>
                                             <br>
                                             <?php if(user_link('menu/a', session()->get('userPermissionView'))):?>
                                                 <button class="btn btn-sm <?= $row['menu_status'] == 'a' ? 'btn-success':'btn-secondary'?>" 

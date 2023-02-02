@@ -41,6 +41,7 @@ class Dashboard extends BaseController
 			'getTotalPendingOrders' => $this->ordersModel->getTotalPendingOrders(['order_status_id' => 1, 'status' => 'a']),
 			'getTotalIngredients' => $this->ingredientsModel->getTotalIngredients(['status' => 'a']),
 			'menu' => $this->menuModel->get(),
+			'getCartsFoodRates' => $this->cartsModel->getCartFoodRates(),
 			'getTotalBestFoods' => $this->cartsModel->getTotalBestFoods(),
 			'getPendingOrders' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=>1,'lrfoims_orders.status'=>'a']),
 			'getCancelledOrders' => $this->ordersModel->getOrderDetails(['lrfoims_orders.order_status_id'=> 6,'lrfoims_orders.status'=>'a']),

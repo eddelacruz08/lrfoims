@@ -8,8 +8,8 @@
             <a class="navbar-brand" href="/">
                 <img src="/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" style="color: white; border: 1px solid white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="mdi mdi-menu text-white" style="color: white;"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbars-rs-food">
                 <ul class="navbar-nav ml-auto">
@@ -17,6 +17,11 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <?php endif; ?>
+                    <?php if(user_link('menu', session()->get('userPermissionView'))):?>
+                        <li class="nav-item"><a class="nav-link" href="/menu">Menu</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Menu</a></li>
                     <?php endif; ?>
                     <?php if(user_link('cart', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link" href="/cart">Cart
@@ -27,22 +32,17 @@
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Cart</a></li>
                     <?php endif; ?>
-                    <?php if(user_link('menu', session()->get('userPermissionView'))):?>
-                        <li class="nav-item"><a class="nav-link" href="/menu">Menu</a></li>
-                    <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Menu</a></li>
-                    <?php endif; ?>
                     <?php if(user_link('profile', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Profile</a></li>
                     <?php endif; ?>
                     <?php if(session()->get('role_id')==null):?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signout">Logout</a></li>
                     <?php endif; ?>
                     
                 </ul>

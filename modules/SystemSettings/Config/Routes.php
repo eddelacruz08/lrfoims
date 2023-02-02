@@ -111,9 +111,7 @@ $routes->group('delivery-fee', ['namespace' => 'Modules\SystemSettings\Controlle
 
 $routes->group('notifications', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {
     $routes->add('/', 'Notification::index');
-    $routes->match(['get', 'post'], 'a', 'Notification::add');
-    $routes->match(['get', 'post'], 'u/(:num)', 'Notification::edit/$1');
-    $routes->add('d/(:num)', 'Notification::delete/$1');
+    $routes->add('get-notifications', 'Notification::getNotifications');
 });
 
 $routes->group('order-user-discounts', ['namespace' => 'Modules\SystemSettings\Controllers'], function ($routes) {

@@ -23,4 +23,12 @@ class Notification extends BaseController
         
         return view('templates/index',$data);
     }
+    
+	public function getNotifications() {
+        
+        $data = [
+            'getNotifications' => $this->notifModel->getNotifications(['lrfoims_notifications.status'=>'a']),
+        ];
+        return $this->response->setJSON($data);
+	}
 }

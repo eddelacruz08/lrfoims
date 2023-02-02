@@ -194,7 +194,7 @@
                                                 function showmsg(){
                                                     $.ajax({
                                                         type: "GET",
-                                                        url: '/delivery/get-message/<?=$typeInfo['id']?>',
+                                                        url: '/orders/get-message/<?=$typeInfo['id']?>',
                                                         async: true,
                                                         dataType: 'JSON',
                                                         success: function(data){ 
@@ -241,7 +241,7 @@
                                                     var orderId = $("#orderId<?=$typeInfo['id']?>").val();
                                                     $.ajax({
                                                         type: "POST",
-                                                        url: '/delivery/add-chat',
+                                                        url: '/orders/add-chat',
                                                         dataType: 'JSON',
                                                         data: {
                                                             message: msg,

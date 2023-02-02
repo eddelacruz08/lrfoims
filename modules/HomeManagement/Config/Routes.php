@@ -8,6 +8,7 @@ $routes->group('',['namespace' => 'Modules\HomeManagement\Controllers'],function
     $routes->match(['get', 'post'], '/menu/customer/add-to-cart', 'Home::addToCart');
 
     $routes->add('order-status-list', 'Home::ongoingOrderStatusList');
+    $routes->add('order-status-list/order-update-status-list', 'Home::orderUpdateStatusList');
 
     $routes->add('cart', 'Home::cart');
     // $routes->match(['get', 'post'], '/cart/qty/(:num)', 'Home::editCartQuantity/$1');
@@ -21,6 +22,7 @@ $routes->group('',['namespace' => 'Modules\HomeManagement\Controllers'],function
     $routes->match(['get', 'post'], 'cart/apply-coupon', 'Home::applyCouponDiscount');
 
     $routes->add('profile', 'Home::profile');
+    $routes->match(['get', 'post'], 'profile/apply-rating/a/(:num)', 'Home::applyRating/$1');
     $routes->match(['get', 'post'], '/edit-profile/u/(:num)', 'Home::editProfile/$1');
     $routes->match(['get', 'post'], '/profile/u', 'Home::editProfile');
 });

@@ -22,6 +22,7 @@ class OrderModel extends BaseModel
         'coupon_code',
         'payment_method_id',
         'order_type',
+        'rate_status',
         'status',
         'created_at',
         'updated_at',

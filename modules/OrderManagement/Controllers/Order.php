@@ -27,6 +27,7 @@ class Order extends BaseController
 		$this->deliveryFeeModel = new SystemSettings\DeliveryFeeModel();
 		$this->paymentMethodModel = new SystemSettings\PaymentMethodModel();
 		$this->orderDiscountModel = new SystemSettings\OrderDiscountModel();
+		$this->messageModel = new OrderManagement\MessageModel();
 		$this->VATModel = new SystemSettings\VATModel();
 		$this->couponModel = new SystemSettings\CouponModel();
 		helper(['link','form', 'paginater']);
@@ -54,6 +55,35 @@ class Order extends BaseController
 		];
 
 		return view('templates/index', $data); 
+	}
+
+	public function addChat() {
+		if(!session()->get('username')) return redirect()->to('/');
+
+		if($this->request->getMethod() == 'post') {
+			$rules = [
+				'message' => 'required'
+			];
+
+			if(!$this->validate($rules)) {
+				return $this->fail($this->validator->getErrors());
+			} else {
+				$msg = [
+					'username' => session()->get('username'),
+					'order_id' => $this->request->getVar('order_id'),
+					'user_id' => session()->get('id'),
+					'message' => $this->request->getVar('message')
+				];
+				$this->messageModel->save($msg);
+				return $this->response->setJSON($msg);
+			}
+
+		}
+	}
+
+	public function getMessage($orderId) {
+		$data = $this->messageModel->where('order_id', $orderId)->orderBy('id', 'ASC')->findAll();
+		return $this->response->setJSON($data);
 	}
 
 	public function getPendingOrders(){

@@ -10,6 +10,7 @@ class CartModel extends BaseModel
         'menu_id',
         'quantity',
         'status',
+        'star_rate',
         'created_at',
         'updated_at',
         'deleted_at'];
@@ -39,6 +40,18 @@ class CartModel extends BaseModel
         return $this->findAll();
     }
     
+    public function getCartFoodRates(){
+
+        $this->select('lrfoims_carts.*, SUM(lrfoims_carts.star_rate)/COUNT(lrfoims_carts.star_rate) as sum_per_rating_for_food');
+
+        $this->where('lrfoims_carts.status', 'a');
+
+        $this->orderBy('COUNT(lrfoims_carts.menu_id)', 'DESC');
+        $this->groupBy('lrfoims_carts.menu_id');
+
+        return $this->findAll();
+    }
+    
     public function getCountMenuTypePerOrder($conditions = []){
 
         $this->select('lrfoims_carts.*, COUNT(lrfoims_carts.id) as total_menu');
@@ -52,17 +65,28 @@ class CartModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getCarts($conditions = []){
+    public function getCartsForRating($conditions = []){
 
-        $this->select('lrfoims_carts.*, m.menu, m.price, m.image, o.user_id, 
-                        (lrfoims_carts.quantity * m.price) as subTotal, o.id as orders_id');
-        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
-        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');
+        $this->select('lrfoims_carts.created_at, lrfoims_carts.order_id, lrfoims_carts.id, m.menu');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id','left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);
         }
-        // $this->groupBy('lrfoims_orders.order_number');
+
+        return $this->findAll();
+    }
+
+    public function getCarts($conditions = []){
+
+        $this->select('lrfoims_carts.*, m.menu, m.price, m.image, o.user_id, o.number, o.created_at as added_date,
+                        (lrfoims_carts.quantity * m.price) as subTotal, o.id as orders_id');
+        $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id','left');
+        $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id','left');
+
+        foreach($conditions as $field => $value){
+            $this->where([$field => $value]);
+        }
 
         return $this->findAll();
     }
