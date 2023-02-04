@@ -77,6 +77,31 @@
         </div>
     </div>
 
+    <div class="col-xl-6 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Total Orders in <?= session()->get('dateYear')?></h4>
+                <div dir="ltr">
+                    <div style="height: 260px;" class="chartjs-chart">
+                        <canvas id="orders-bar-chart-example" data-colors="#fa5c7c,#35b8e0"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-xl-6 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Total Orders Amount in <?= session()->get('dateYear')?>
+                    <div style="height: 260px;" class="chartjs-chart">
+                        <canvas id="orders-revenue-bar-chart-example" data-colors="#fa5c7c,green"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
     <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12">
         <!-- Chart-->
         <div class="card">
@@ -117,30 +142,5 @@
             </div>
         </div>
     </div>
-
-    <div class="col-xl-6 col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title mb-3">Total Orders in <?= session()->get('dateYear')?></h4>
-                <div dir="ltr">
-                    <div style="height: 260px;" class="chartjs-chart">
-                        <canvas id="orders-bar-chart-example" data-colors="#fa5c7c,#35b8e0"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
-
-    <div class="col-xl-6 col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title mb-3">Total Orders Amount in <?= session()->get('dateYear')?>
-                    <div style="height: 260px;" class="chartjs-chart">
-                        <canvas id="orders-revenue-bar-chart-example" data-colors="#fa5c7c,green"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
 
 </div>
