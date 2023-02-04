@@ -450,13 +450,11 @@ class Home extends BaseController
 
 	public function getMessage($orderId) {
 		$data = $this->messageModel->where('order_id', $orderId)->orderBy('id', 'ASC')->findAll();
-		// $data = $this->messageModel->getDetails(['lrfoims_user_messages.status'=>'a']);
 		return $this->response->setJSON($data);
 	}
 
 	public function placeOrder(){
         // $this->hasPermissionRedirect('place-order/u');
-
 
         if ($this->request->getMethod() == 'post') {
             $getCart = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status'=>'a']);

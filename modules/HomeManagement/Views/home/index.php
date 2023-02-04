@@ -27,6 +27,7 @@
 					</div>
 				</div>
 			</li>
+		</ul>
 	</div>
 	<!-- End slides -->
 	
@@ -35,7 +36,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<img src="/assets/lamon-images/wings-lunch.gif" alt="">
+					<img src="/assets/lamon-images/wings-lunch.gif" alt="gif" class="rounded">
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
@@ -54,8 +55,8 @@
 	<div class="menu-box">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
+				<div class="col-lg-12 p-1">
+					<div class="heading-title m-2 text-center">
 						<h2 id="best-seller-title">Best Seller</h2>
 					</div>
 				</div>

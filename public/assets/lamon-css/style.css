@@ -173,6 +173,7 @@ button:focus{
 }
 
 .top-navbar .navbar-light .navbar-nav .nav-link{
+	font-family: 'Arbutus Slab', serif;
 	color: #f8f8f8;
 	font-size: 18px;
 	padding: 0px 20px;
@@ -180,12 +181,12 @@ button:focus{
 }
 
 .top-navbar .navbar-light .navbar-nav .nav-item .nav-link:hover{
-	background: #d0a772;
+	background: #eedc40;
 	color: #000000;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item.active .nav-link{
-	background: #d0a772;
-	color: #e8e4e4;
+	background: #eedc40;
+	color: #000000;
 	border-radius: 4px;
 }
 
@@ -195,8 +196,8 @@ button:focus{
 }
 
 .navbar-expand-lg .navbar-nav .dropdown-menu a.dropdown-item:hover{
-	background: #d0a772;
-	color: #ffffff;
+	background: #eedc40;
+	color: #000000;
 }
 .navbar-toggler{
 	/* background: #272726; */
@@ -215,7 +216,7 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .cover-slides{
-	height: 100vh;
+	height: 70vh;
 }
 .slides-navigation a {
 	background: #cfa671;
@@ -290,7 +291,7 @@ button:focus{
     width: 100%;
     left: 0;
     top: 0;
-	opacity: 0.5;
+	  opacity: 0.5;
 }
 
 .cover-slides h1{
@@ -316,7 +317,7 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .about-section-box{
-	padding: 70px 0px;
+	padding: 50px 0px 0px 0px;
 }
 .about-section-box .img-fluid{
 	box-shadow: -10px -10px 0px #d0a772;
@@ -377,7 +378,7 @@ button:focus{
 -------------------------------------------------------------------*/
 
 .menu-box{
-	padding: 10px 0px;
+	padding: 30px 0px;
 }
 
 .heading-title{
@@ -439,7 +440,7 @@ button:focus{
     bottom: -100%;
     right: 0;
     height: 100%;
-    background: rgba(34, 33, 33, 0.9);
+    background: rgba(42, 40, 40, 0.5);
     padding: 12px 12px;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
@@ -5134,7 +5135,7 @@ input[type="button"].btn-block {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem; }
+  padding: 0rem; }
 
 .card-title {
   margin-bottom: 0.75rem; }
