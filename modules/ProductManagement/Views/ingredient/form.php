@@ -7,7 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/ingredients">Ingredients</a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/ingredients">Ingredients</a></li>
                             <li class="breadcrumb-item active"><?= $edit?'Edit ':'Add '?><?= $title ?></li>
                         </ol>
                     </div>
@@ -31,7 +31,7 @@
                 <h5 class="card-title mb-0"><?= $edit?'Edit ':'Add '?><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="POST" action="/ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
+                    <form method="POST" action="<?=base_url()?>/ingredients/<?= $edit ? 'u/'.esc($id) : 'a' ?>">
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="inputEmail4">Ingredient Name <small class="text-danger">*</small></label>

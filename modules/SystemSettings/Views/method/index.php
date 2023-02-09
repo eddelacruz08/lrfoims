@@ -34,7 +34,7 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/payment-methods/a" role="button">  Add </a>
+                <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/payment-methods/a" role="button">  Add </a>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -55,8 +55,8 @@
                                         <td><?= $row['payment_method']; ?></th>
                                         <td><?= $row['description']; ?></td>
                                         <td>
-                                            <a href="/payment-methods/u/<?= $row['id']; ?>" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                            <a onclick="confirmDelete('/payment-methods/d/',<?=$row['id']?>)" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                            <a href="<?=base_url()?>/payment-methods/u/<?= $row['id']; ?>" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                            <a onclick="confirmDelete('<?=base_url()?>/payment-methods/d/',<?=$row['id']?>)" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

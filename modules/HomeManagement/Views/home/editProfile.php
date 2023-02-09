@@ -6,8 +6,8 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/profile">Profile</a></li>
                             <li class="breadcrumb-item active">Edit Profile</li>
                         </ol>
                     </div>
@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <form method="POST" action="/edit-profile/<?= $edit ? 'u/'.esc($id) : 'a' ?>" id="formId">
+                <form method="POST" action="<?=base_url()?>/edit-profile/<?= $edit ? 'u/'.esc($id) : 'a' ?>" id="formId">
                     <?php if($edit):?>
                         <input type="hidden" name="userID" value="<?=$id?>">                             
                     <?php endif;?>
@@ -136,11 +136,10 @@
             function showRegion() {
                 $.ajax({
                     type: "GET",
-                    url: '/get-regions',
+                    url: '<?=base_url()?>/get-regions',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        console.log(data);
                         for(i=0; i<data.length; i++){
                             $('#region_id').append($('<option>', {value: data[i].region_code, text: data[i].region_name}));
                         }
@@ -154,11 +153,10 @@
                 var regionCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/get-provinces/'+ regionCode ,
+                    url: '<?=base_url()?>/get-provinces/'+ regionCode ,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
-                        console.log(data);
                             $('#province_id').find('option').remove();
                             $('#province_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select province --'}));
                         for(i=0; i<data.length; i++){
@@ -174,11 +172,10 @@
                 var provinceCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/get-cities/'+provinceCode,
+                    url: '<?=base_url()?>/get-cities/'+provinceCode,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
-                        console.log(data);
                         $('#city_id').find('option').remove();
                             $('#city_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select city --'}));
                         for(i=0; i<data.length; i++){

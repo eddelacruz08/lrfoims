@@ -3,7 +3,7 @@
    <div class="col-sm-3 mb-2 mb-sm-0">
        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <?php foreach($ingredientCategory as $category):?>
-                <a class="nav-link show" onclick="displayIngredients('/ingredients/ingredient-list-data', <?=$category['id']?>);" id="ingredientsTab-tab-<?=$category['id']?>" data-bs-toggle="pill" href="#ingredientsTab-<?=$category['id']?>" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                <a class="nav-link show" onclick="displayIngredients('<?=base_url()?>/ingredients/ingredient-list-data', <?=$category['id']?>);" id="ingredientsTab-tab-<?=$category['id']?>" data-bs-toggle="pill" href="#ingredientsTab-<?=$category['id']?>" role="tab" aria-controls="v-pills-home" aria-selected="true">
                     <span class=" d-md-none d-block"><?=$category['product_name']?></span>
                     <span class="d-none d-md-block"><?=$category['product_name']?></span>
                 </a>

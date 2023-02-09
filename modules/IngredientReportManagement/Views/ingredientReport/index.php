@@ -3,14 +3,14 @@
     <div class="col-12">
         <div class="page-title-box">
             <div class="page-title-right">
-                <form method="POST" action="/ingredient-reports/date-filter" class="d-flex">
+                <form method="POST" action="<?=base_url()?>/ingredient-reports/date-filter" class="d-flex">
                     <div class="input-group">
                         <input type="text" class="form-control form-control-light" value="<?=session()->get('dateYear')?>" id="dateYearPicker" name="date" autocomplete="off">
                         <button type="submit" class="input-group-text bg-primary border-primary text-white">
                             <i class="mdi mdi-calendar-range font-13"></i>
                         </button>
                     </div>
-                    <a href="/ingredient-reports" class="btn btn-primary ms-2" title="Reset Filter">
+                    <a href="<?=base_url()?>/ingredient-reports" class="btn btn-primary ms-2" title="Reset Filter">
                         <i class="mdi mdi-autorenew"></i>
                     </a>
                 </form>
@@ -63,7 +63,7 @@
                             </div>
                             <?php if(user_link('ingredient-reports/generate-report', session()->get('userPermissionView'))):?>
                                 <div class="col">
-                                    <form method="POST" action="/ingredient-reports/generate-report" target="_blank">
+                                    <form method="POST" action="<?=base_url()?>/ingredient-reports/generate-report" target="_blank">
                                         <div class="input-group">
                                             <input type="hidden" name="date_status" value="0">
                                             <input type="text" class="form-control form-control-light form-control-sm date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning" name="date" autocomplete="off">
@@ -129,11 +129,11 @@
                                                         "<span class='badge bg-success'>Ongoing</span>") ?>
                                                     </td>
                                                     <td>
-                                                        <button type="button" onclick="confirmationStockIngredients('/ingredients/expire-date/u', <?=$stockIn['id']?>, 
+                                                        <button type="button" onclick="confirmationStockIngredients('<?=base_url()?>/ingredients/expire-date/u', <?=$stockIn['id']?>, 
                                                             <?=$stockIn['unit_quantity']?>, <?=$ingredient['id']?> );" class="btn btn-info btn-sm">
                                                             Confirm this expired ingredient
                                                         </button>
-                                                        <button type="button" onclick="confirmCancelExpiredStocks('/ingredients/expire-date/d', <?=$stockIn['id']?>);" 
+                                                        <button type="button" onclick="confirmCancelExpiredStocks('<?=base_url()?>/ingredients/expire-date/d', <?=$stockIn['id']?>);" 
                                                             class="btn btn-danger btn-sm">
                                                             Cancel
                                                         </button>
@@ -194,8 +194,8 @@
                                                                     <td><?= number_format($row['unit_quantity'], 2).' '.$measures['name'] ?></td>
                                                                     <td>
                                                                         <div class="progress" style="height: 10px;">
-                                                                            <div class="progress-bar bg-primary <?= $row['unit_quantity'] <= 10 ? 'bg-danger': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? 'bg-warning' : '' ?>" role="progressbar"
-                                                                                style="width: <?= $row['unit_quantity'] <= 10 ? '25': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>%; height: 20px;" aria-valuenow="<?= $row['unit_quantity'] <= 10 ? '25': $row['unit_quantity'] <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>"
+                                                                            <div class="progress-bar bg-primary <?= ($row['unit_quantity'] <= 10 ? 'bg-danger': $row['unit_quantity']) <= $measures['low_stock_minimum_limit'] ? 'bg-warning' : '' ?>" role="progressbar"
+                                                                                style="width: <?= ($row['unit_quantity'] <= 10 ? '25': $row['unit_quantity']) <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>%; height: 20px;" aria-valuenow="<?= ($row['unit_quantity'] <= 10 ? '25': $row['unit_quantity']) <= $measures['low_stock_minimum_limit'] ? '75' : '100' ?>"
                                                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                                                         </div>
                                                                     </td>

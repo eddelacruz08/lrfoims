@@ -5,8 +5,8 @@
 <header class="top-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
+            <a class="navbar-brand" href="<?=base_url()?>/">
+                <img src="<?=base_url()?>/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
                                             && $permissions['permission_type'] == 16): ?>
                                     <?php if ($permissions['slug'] == '/'): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                            <a class="nav-link active" href="<?=base_url()?>/<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
                                                 <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
                                                     <?php if ($permissions['slug'] == 'cart'): ?>
                                                         <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
@@ -33,7 +33,7 @@
                                     <?php endif; ?>
                                     <?php if ($permissions['slug'] == 'menu'): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                            <a class="nav-link" href="<?=base_url()?>/<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
                                                 <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
                                                     <?php if ($permissions['slug'] == 'cart'): ?>
                                                         <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
@@ -46,7 +46,7 @@
                                     <?php endif; ?>
                                     <?php if ($permissions['slug'] == 'cart'): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                            <a class="nav-link" href="<?=base_url()?>/<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
                                                 <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
                                                     <?php if ($permissions['slug'] == 'cart'): ?>
                                                         <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
@@ -59,7 +59,7 @@
                                     <?php endif; ?>
                                     <?php if ($permissions['slug'] == 'profile'): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
+                                            <a class="nav-link" href="<?=base_url()?>/<?=$permissions['slug']?>"><?=ucwords(esc($permissions['permission']))?>
                                                 <?php if (isset($_SESSION['getCustomerCountCarts'])): ?>
                                                     <?php if ($permissions['slug'] == 'cart'): ?>
                                                         <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
@@ -73,16 +73,16 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/order-status-list">Order Status List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/signout"><i class="mdi mdi-logout me-1"></i> Logout</a></li>
                     <?php else: ?>
-                        <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Menu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Cart</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Profile</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="<?=base_url()?>/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/register">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/register">Cart</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/register">Profile</a></li>
 
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status List</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/order-status-list">Order Status List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/login">Login</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

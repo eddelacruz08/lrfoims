@@ -23,7 +23,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-                        <form action="/login" class="signin-form" method="post">
+                        <form action="<?=base_url()?>/login" class="signin-form" method="post">
                             <div class="form-group mb-3">
                                 <label class="label" for="name">Username</label>
                                 <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
@@ -43,11 +43,11 @@
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="/forgot-password">Forgot Password</a>
+                                    <a href="<?=base_url()?>/forgot-password">Forgot Password</a>
                                 </div>
                             </div>
                         </form>
-                        <p class="text-center">Not a member? <a data-toggle="tab" href="/register">Sign Up</a></p>
+                        <p class="text-center">Not a member? <a data-toggle="tab" href="<?=base_url()?>/register">Sign Up</a></p>
                     </div>
                 </div>
             </div>

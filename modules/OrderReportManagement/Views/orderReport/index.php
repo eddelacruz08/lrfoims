@@ -3,14 +3,14 @@
     <div class="col-12">
         <div class="page-title-box">
             <div class="page-title-right">
-                <form method="POST" action="/order-reports/date-filter" class="d-flex">
+                <form method="POST" action="<?=base_url()?>/order-reports/date-filter" class="d-flex">
                     <div class="input-group">
                         <input type="text" class="form-control form-control-light" value="<?=session()->get('dateYear')?>" id="dateYearPicker" name="date" autocomplete="off">
                         <button type="submit" class="input-group-text bg-primary border-primary text-white">
                             <i class="mdi mdi-calendar-range font-13"></i>
                         </button>
                     </div>
-                    <a href="/order-reports" class="btn btn-primary ms-2" title="Reset Filter">
+                    <a href="<?=base_url()?>/order-reports" class="btn btn-primary ms-2" title="Reset Filter">
                         <i class="mdi mdi-autorenew"></i>
                     </a>
                 </form>
@@ -132,7 +132,7 @@
                     <div class="col-md-4 offset-md-8">
                         <div class="input-group input-group-sm justify-content-end mb-1">
                             <input type="text" id="searchOrderReports" class="form-control form-control-sm" placeholder="Search order number . . ." name="searchOrderReports">
-                            <button onclick="paginateTables('/order-reports/v/offset',0,'#display-order-reports-table', document.getElementById('searchOrderReports').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
+                            <button onclick="paginateTables('<?=base_url()?>/order-reports/v/offset',0,'#display-order-reports-table', document.getElementById('searchOrderReports').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
                         </div>
                     </div>
                 </div>

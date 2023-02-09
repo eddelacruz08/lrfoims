@@ -1,16 +1,11 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
-// Load the system's routing file first, so that the app and ENVIRONMENT
-// can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
-	require SYSTEMPATH . 'Config/Routes.php';
-}
-
-/**
+/*
  * --------------------------------------------------------------------
  * Router Setup
  * --------------------------------------------------------------------
@@ -21,8 +16,13 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
+// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
+// where controller filters or CSRF protection are bypassed.
+// If you don't want to define all routes, please use the Auto Routing (Improved).
+// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
+// $routes->setAutoRoute(false);
 
-/**
+/*
  * --------------------------------------------------------------------
  * Route Definitions
  * --------------------------------------------------------------------
@@ -38,7 +38,6 @@ $routes->match(['get','post'],'register', 'Security::register');
 $routes->match(['get','post'],'guest-mode', 'Security::guestMode');
 $routes->match(['get','post'],'register-email-verification', 'Security::emailVerificationGuestMode');
 $routes->match(['get','post'],'register-submit-email-verification', 'Security::emailVerificationGuestMode');
-// $routes->add('/send', 'SendMail::send');
 $routes->get('/import', 'Import::index');
 $routes->get('/(:alpha)/403', 'Security::fileNotFound/$1');
 $routes->get('/get-regions', 'Security::getRegions');
@@ -46,13 +45,13 @@ $routes->get('/get-provinces/(:num)', 'Security::getProvinces/$1');
 $routes->get('/get-cities/(:num)', 'Security::getCities/$1');
 $routes->get('/get-barangay/(:num)', 'Security::getBarangay/$1'); 
 $routes->get('/submit-email-verification', 'Security::emailVerification');
-// $routes->get('/submit', 'Security::send');
 $routes->match(['get','post'],'submit', 'Security::send');
 $routes->match(['get','post'],'register-submit', 'Security::sendRegister');
 $routes->match(['get','post'],'email-verification', 'Security::emailVerification');
 $routes->match(['get','post'],'forgot-password', 'Security::forgotPassword');
 $routes->match(['get','post'],'temporary-password', 'Security::emailTemporaryPassword');
-/**
+
+/*
  * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
@@ -65,15 +64,10 @@ $routes->match(['get','post'],'temporary-password', 'Security::emailTemporaryPas
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
-	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
-/*
-*----------------------------------------------------------
-* Module Route Files
-*----------------------------------------------------------
-*/
+
 if(file_exists(ROOTPATH.'modules')){
 	$modulesPath = ROOTPATH.'modules/';
 	$modules = scandir($modulesPath);

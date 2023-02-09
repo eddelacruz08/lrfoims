@@ -30,11 +30,29 @@
     <!-- content-page -->
 </div>
 <?= $this->endsection('content'); ?>
+
 <?= $this->section('ordersReportCharts'); ?>
-<?= $this->include('Modules\OrderReportManagement\Views\orderReport\orderReportCharts'); ?>
+    <?= $this->include('Modules\OrderReportManagement\Views\orderReport\orderReportCharts'); ?>
 <?= $this->endsection('ordersReportCharts'); ?>
 <?= $this->section('ingredientReportCharts'); ?>
-<?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\ingredientReportCharts'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\ingredientReportCharts'); ?>
 <?= $this->endsection('ingredientReportCharts'); ?>
+
+<?= $this->section('ingredients'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\ingredients'); ?>
+<?= $this->endsection('ingredients'); ?>
+<?= $this->section('menu_order'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\menu_order'); ?>
+<?= $this->endsection('menu_order'); ?>
+<?= $this->section('orders'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\orders'); ?>
+<?= $this->endsection('orders'); ?>
+<?= $this->section('permissions'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\permissions'); ?>
+<?= $this->endsection('permissions'); ?>
+<?= $this->section('printer'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\printer'); ?>
+<?= $this->endsection('printer'); ?>
+
 <?= $this->include('templates/notifications'); ?>
 

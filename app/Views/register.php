@@ -9,7 +9,7 @@
                             <hr>
                         </div>
                     </div>
-                    <form method="post" action="/register" id="formId">
+                    <form method="post" action="<?=base_url()?>/register" id="formId">
                         <div class="row mb-1">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -136,7 +136,7 @@
             function showRegion() {
                 $.ajax({
                     type: "GET",
-                    url: '/get-regions',
+                    url: '<?=base_url()?>/get-regions',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
@@ -151,11 +151,10 @@
                 var regionCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/get-provinces/'+ regionCode ,
+                    url: '<?=base_url()?>/get-provinces/'+ regionCode ,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
-                        console.log(data);
                             $('#province_id').find('option').remove();
                             $('#province_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select province --'}));
                         for(i=0; i<data.length; i++){
@@ -169,11 +168,10 @@
                 var provinceCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '/get-cities/'+provinceCode,
+                    url: '<?=base_url()?>/get-cities/'+provinceCode,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
-                        console.log(data);
                         $('#city_id').find('option').remove();
                             $('#city_id').append($('<option>', {selected: true, disabled: true, value: null, text:'-- select city --'}));
                         for(i=0; i<data.length; i++){

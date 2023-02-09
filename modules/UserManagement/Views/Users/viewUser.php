@@ -4,7 +4,7 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="/users">Users</a></li>
+                    <li class="breadcrumb-item"><a href="<?=base_url()?>/users">Users</a></li>
                     <li class="breadcrumb-item active"><?=$action;?></li>
                 </ol>
             </div>
@@ -27,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <div class="avatar-lg">
-                                        <img src="/assets/img/user.jpg" alt="" class="rounded-circle img-thumbnail">
+                                        <img src="<?=base_url()?>/assets/img/user.jpg" alt="" class="rounded-circle img-thumbnail">
                                     </div>
                                 </div> 
                                 <div class="col">
@@ -53,7 +53,7 @@
                         <div class="col-sm-4">
                             <div class="text-center mt-sm-0 mt-3 text-sm-end">
                                 <?php if(user_link('users/u', session()->get('userPermissionView'))):?>
-                                    <a href="/users/u/<?= $user['id'] ?>" type="button" class="btn btn-light">
+                                    <a href="<?=base_url()?>/users/u/<?= $user['id'] ?>" type="button" class="btn btn-light">
                                         <i class="mdi mdi-account-edit me-1"></i> Edit Profile
                                     </a>
                                 <?php else: ?>

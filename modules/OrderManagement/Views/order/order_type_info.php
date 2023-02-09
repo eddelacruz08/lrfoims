@@ -55,13 +55,13 @@
                         <div class="btn-group d-print-none">
                             <?php if(empty($typeInfo['total_amount'])):?>
                                 <?php if($typeInfo['order_status_id'] == 2):?>
-                                    <button onclick="getMenuList('/orders/a/response',<?=$typeInfo['id']?>,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info')" title="Add Food" class="btn btn-sm btn-dark me-1" type="button">
+                                    <button onclick="getMenuList('<?=base_url()?>/orders/a/response',<?=$typeInfo['id']?>,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info')" title="Add Food" class="btn btn-sm btn-dark me-1" type="button">
                                         Menu
                                     </button>
                                 <?php endif; ?>  
                                 <?php if(user_link('orders/d', session()->get('userPermissionView'))):?>
                                     <?php if($typeInfo['order_status_id'] == 1):?>
-                                        <button type="button" onclick="confirmDeleteOrder('/orders/d/',<?=$typeInfo['id']?>,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>)" class="btn btn-sm btn-outline-danger me-1" title="Remove">
+                                        <button type="button" onclick="confirmDeleteOrder('<?=base_url()?>/orders/d/',<?=$typeInfo['id']?>,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>)" class="btn btn-sm btn-outline-danger me-1" title="Remove">
                                             Remove
                                         </button>
                                     <?php endif; ?>
@@ -103,19 +103,19 @@
                         <?php if(user_link('orders/place-order/u', session()->get('userPermissionView'))):?>
                             <?php if($typeInfo['order_status_id'] == 1):?>
                                 <?php if(user_link('orders/orderin', session()->get('userPermissionView'))):?>
-                                    <button onclick="confirmPlaceOrder('continue to prepare','/orders/place-order/u',<?=$typeInfo['id']?>, 2,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
+                                    <button onclick="confirmPlaceOrder('continue to prepare','<?=base_url()?>/orders/place-order/u',<?=$typeInfo['id']?>, 2,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
                                         Continue to prepare
                                     </button>
                                 <?php endif;?>
                             <?php elseif($typeInfo['order_status_id'] == 2): ?>
                                 <?php if(user_link('orders/preparing', session()->get('userPermissionView'))):?>
-                                    <button onclick="confirmPlaceOrder('continue to serve','/orders/place-order/u',<?=$typeInfo['id']?>, 3,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
+                                    <button onclick="confirmPlaceOrder('continue to serve','<?=base_url()?>/orders/place-order/u',<?=$typeInfo['id']?>, 3,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
                                         Continue to serve
                                     </button>
                                 <?php endif;?>
                             <?php elseif($typeInfo['order_status_id'] == 3): ?>
                                 <?php if(user_link('orders/serving', session()->get('userPermissionView'))):?>
-                                    <button onclick="confirmPlaceOrder('continue to payment','/orders/place-order/u',<?=$typeInfo['id']?>, 4,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
+                                    <button onclick="confirmPlaceOrder('continue to payment','<?=base_url()?>/orders/place-order/u',<?=$typeInfo['id']?>, 4,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
                                         Continue to payment
                                     </button>
                                 <?php endif;?>
@@ -129,7 +129,7 @@
                                                 <?php else: ?>
                                                     <?php $total_amount_bill = $totalPrice['total_amount_bill'];?>
                                                 <?php endif; ?>
-                                                <button type="button" onclick="applyPayment('/orders/admin/add-payment/u/',<?=$typeInfo['id']?>,<?=$totalPrice['total_price']?>,'/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,<?=$total_amount_bill;?>,<?=$totalPrice['total_amount_vat']?>,<?=$totalPrice['total_amount_user_discount'];?>);" title="Payment" class="btn btn-sm btn-success float-end">
+                                                <button type="button" onclick="applyPayment('<?=base_url()?>/orders/admin/add-payment/u/',<?=$typeInfo['id']?>,<?=$totalPrice['total_price']?>,'<?=base_url()?>/orders/get-info',<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,<?=$total_amount_bill;?>,<?=$totalPrice['total_amount_vat']?>,<?=$totalPrice['total_amount_user_discount'];?>);" title="Payment" class="btn btn-sm btn-success float-end">
                                                     Payment
                                                 </button>
                                             <?php endif; ?>
@@ -137,7 +137,7 @@
                                     <?php endif; ?>   
                                 <?php endif; ?>  
                             <?php elseif($typeInfo['order_status_id'] == 5): ?>
-                                <button onclick="confirmPlaceOrder('send to report','/orders/place-order/u',<?=$typeInfo['id']?>, 7,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
+                                <button onclick="confirmPlaceOrder('send to report','<?=base_url()?>/orders/place-order/u',<?=$typeInfo['id']?>, 7,<?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>,'<?=base_url()?>/orders/get-info')" class="btn btn-sm btn-primary float-end" type="button">
                                     Add to report
                                 </button>
                             <?php else: ?>
@@ -194,7 +194,7 @@
                                                 function showmsg(){
                                                     $.ajax({
                                                         type: "GET",
-                                                        url: '/orders/get-message/<?=$typeInfo['id']?>',
+                                                        url: '<?=base_url()?>/orders/get-message/<?=$typeInfo['id']?>',
                                                         async: true,
                                                         dataType: 'JSON',
                                                         success: function(data){ 
@@ -218,7 +218,7 @@
                                                                 html += 
                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                     "<div class='chat-avatar'>"+
-                                                                        "<img src='/assets/img/user.jpg' class='rounded-circle' alt='"+data[i].username+"' />"+
+                                                                        "<img src='<?=base_url()?>/assets/img/user.jpg' class='rounded-circle' alt='"+data[i].username+"' />"+
                                                                         "<i>"+strTime+"</i>"+
                                                                     "</div>"+
                                                                     "<div class='conversation-text'>"+
@@ -241,7 +241,7 @@
                                                     var orderId = $("#orderId<?=$typeInfo['id']?>").val();
                                                     $.ajax({
                                                         type: "POST",
-                                                        url: '/orders/add-chat',
+                                                        url: '<?=base_url()?>/orders/add-chat',
                                                         dataType: 'JSON',
                                                         data: {
                                                             message: msg,
@@ -283,7 +283,7 @@
                                             <td class="p-0">
                                                 <div class="card border-warning border card-menu-image-style p-0 m-1" style="white-space: nowrap;">
                                                     <div class="card-body p-0">
-                                                        <img src="<?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
+                                                        <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
                                                     </div>
                                                 </div>
                                             </td>
@@ -296,15 +296,15 @@
                                             <td class="p-0 pe-2" width="200">
                                                 <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
                                                     <div class="input-group">
-                                                        <button onclick="plusAndMinusCartQuantity('/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,
-                                                            <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1, 'minus','/orders/get-info',<?= $typeInfo['number'] ?>,
+                                                        <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,
+                                                            <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1, 'minus','<?=base_url()?>/orders/get-info',<?= $typeInfo['number'] ?>,
                                                             <?=$orderMaxLimit['max_limit']?>);" class="btn btn-md btn-outline-dark" type="button" id="minusButton">
                                                             <i class="mdi mdi-minus m-0"></i>
                                                         </button>
                                                         <input type="text" disabled class="form-control form-control-sm text-center border-dark" width="50" id="quantityOrderCartAdmin<?= $carts['id']; ?>" 
                                                             value="<?= $carts['quantity'] ?>" width="10">
-                                                        <button onclick="plusAndMinusCartQuantity('/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,
-                                                            <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1, 'plus','/orders/get-info',<?= $typeInfo['number'] ?>,
+                                                        <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,
+                                                            <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1, 'plus','<?=base_url()?>/orders/get-info',<?= $typeInfo['number'] ?>,
                                                             <?=$orderMaxLimit['max_limit']?>);" class="btn btn-md btn-outline-dark" type="button" id="plusButton">
                                                             <i class="mdi mdi-plus m-0"></i>
                                                         </button>
@@ -315,8 +315,8 @@
                                             </td>
                                             <td class="p-0">
                                                 <?php if(user_link('orders/cart/d', session()->get('userPermissionView'))):?>
-                                                    <a onclick="confirmDeleteCart('/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,
-                                                        <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1,'/orders/get-info',<?=$typeInfo['id']?>,
+                                                    <a onclick="confirmDeleteCart('<?=base_url()?>/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,
+                                                        <?=$carts['order_id']?>,<?=$carts['quantity']?>, 1,'<?=base_url()?>/orders/get-info',<?=$typeInfo['id']?>,
                                                         <?= $typeInfo['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" title="Remove" class="btn btn-md btn-outline-danger">
                                                         <i class="dripicons-trash"></i>
                                                     </a>
@@ -330,7 +330,7 @@
                                             <td class="p-0">
                                                 <div class="card border-warning border card-menu-image-style p-0 m-1">
                                                     <div class="card-body p-0">
-                                                        <img src="<?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
+                                                        <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
                                                     </div>
                                                 </div>
                                             </td>

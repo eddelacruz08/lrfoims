@@ -30,7 +30,7 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/menu-list/a" role="button">  Add </a>
+                <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/menu-list/a" role="button">  Add </a>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -69,14 +69,14 @@
                                                     <center><?= $id++; ?></center>
                                                 </th>
                                                 <td>
-                                                <center><img src="<?= '/assets/uploads/menu/'.$row['image'] ?>" class="img-fluid" style="height: 80px; width: 80px;"></center>
+                                                <center><img src="<?=base_url()?><?= '/assets/uploads/menu/'.$row['image'] ?>" class="img-fluid" style="height: 80px; width: 80px;"></center>
                                                 </td>
                                                 <td>
                                                     <center><?= ucfirst($row['menu']) ?></center>
                                                 </td>
                                                 <td>
                                                     <center>
-                                                        <form action="/menu-list/menu-status/u/<?=$row['id']?>" method="POST">
+                                                        <form action="<?=base_url()?>/menu-list/menu-status/u/<?=$row['id']?>" method="POST">
                                                             <input type="checkbox" onclick="if(this.checked){this.form.submit()}else{this.form.submit()}" name="menu_status" id="switch<?=$row['id']?>" <?=$row['menu_status']=='a'?'checked value="'.$row['menu_status'].'"':'value="'.$row['menu_status'].'"' ?> data-switch="success"/>
                                                             <label for="switch<?=$row['id']?>" data-on-label="Yes" data-off-label="No"></label>
                                                         </form>
@@ -84,8 +84,8 @@
                                                 </td>
                                                 <td>
                                                     <center>
-                                                    <a href="/menu-list/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                    <a onclick="confirmDelete('/menu-list/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                                    <a href="<?=base_url()?>/menu-list/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                    <a onclick="confirmDelete('<?=base_url()?>/menu-list/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                                 </center>
                                             </td>
                                         </tr>

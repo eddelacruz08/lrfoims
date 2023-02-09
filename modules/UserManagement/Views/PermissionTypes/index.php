@@ -35,7 +35,7 @@
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
                 <?php if(user_link('permission-types/a', session()->get('userPermissionView'))):?>
-                    <a class="btn btn-primary btn-sm float-end" href="/permission-types/a" role="button">  Add </a>
+                    <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/permission-types/a" role="button">  Add </a>
                 <?php else: ?>
                     <button type="button" class="btn btn-secondary btn-sm">No Permission | Add Button</button>
                 <?php endif; ?>
@@ -76,12 +76,12 @@
                                         <td>
                                             <center>
                                                 <?php if(user_link('permission-types/u', session()->get('userPermissionView'))):?>
-                                                    <a href="/permission-types/u/<?= $permissionType['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                    <a href="<?=base_url()?>/permission-types/u/<?= $permissionType['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
                                                 <?php else: ?>
                                                     <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit Button</button>
                                                 <?php endif; ?>
                                                 <?php if(user_link('permission-types/d', session()->get('userPermissionView'))):?>
-                                                    <a onclick="confirmDelete('/permission-types/d/',<?=$permissionType['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                                    <a onclick="confirmDelete('<?=base_url()?>/permission-types/d/',<?=$permissionType['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                                 <?php else: ?>
                                                     <button type="button" class="btn btn-secondary btn-sm">No Permission | Delete Button</button>
                                                 <?php endif; ?>

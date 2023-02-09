@@ -18,8 +18,8 @@
                 <td><?= $row['province_code']; ?></td>
                 <td><?= $row['city_code']; ?></td>
                 <td>
-                    <a href="/barangay/u/<?= $row['id']; ?>" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                    <a onclick="confirmDelete('/barangay/d/',<?=$row['id']?>)" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                    <a href="<?=base_url()?>/barangay/u/<?= $row['id']; ?>" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                    <a onclick="confirmDelete('<?=base_url()?>/barangay/d/',<?=$row['id']?>)" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -38,11 +38,11 @@
                 <ul class="pagination justify-content-end">
                     <?php if($offset > 0) { ?>
                         <li class="page-item">
-                            <a class="page-link" type="button" onclick="paginateTables('/barangay/v/offset', <?=($offset - $limitPerTable)?>,'#display-barangay-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/barangay/v/offset', <?=($offset - $limitPerTable)?>,'#display-barangay-table')">Previous</a>
                         </li>
                     <?php } else { ?>
                         <li class="page-item disabled">
-                            <a class="page-link" type="button" onclick="paginateTables('/barangay/v/offset', <?=($offset - $limitPerTable)?>,'#display-barangay-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/barangay/v/offset', <?=($offset - $limitPerTable)?>,'#display-barangay-table')">Previous</a>
                         </li>
                     <?php 
                         }
@@ -55,20 +55,20 @@
                             $cntPerPage = (($cnt-1)*$limitPerTable);
                     ?>
                     <li class="page-item <?=($isActive == true ? "active":"")?>">
-                        <a class="page-link" type="button" onclick="paginateTables('/barangay/v/offset', <?=$cntPerPage?>,'#display-barangay-table')"><?=$cnt?></a>
+                        <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/barangay/v/offset', <?=$cntPerPage?>,'#display-barangay-table')"><?=$cnt?></a>
                     </li>
                     <?php 
                         }
                         if($active == ($linkcount -1)) { ?>
                             <li class="page-item disabled">
-                                <a class="page-link" type="button" onclick="paginateTables('/barangay/v/offset', <?=$offset?>,'#display-barangay-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/barangay/v/offset', <?=$offset?>,'#display-barangay-table')">Next</a>
                             </li>
                     <?php 
                         } else { 
                             $activePerPage = (($active+1)*$limitPerTable);
                     ?>
                             <li class="page-item">
-                                <a class="page-link" type="button" onclick="paginateTables('/barangay/v/offset', <?=$activePerPage?>,'#display-barangay-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/barangay/v/offset', <?=$activePerPage?>,'#display-barangay-table')">Next</a>
                             </li>
                     <?php 
                         } 

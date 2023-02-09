@@ -35,7 +35,7 @@
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
                 <?php if ($orderLimit == null) : ?>
-                    <a class="btn btn-primary btn-sm float-end" href="/order-max-limit/a" role="button">  Add </a>
+                    <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/order-max-limit/a" role="button">  Add </a>
                 <?php endif; ?>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
@@ -66,7 +66,7 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <a href="/order-max-limit/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                <a href="<?=base_url()?>/order-max-limit/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
                                             </center>
                                         </td>
                                     </tr>

@@ -34,7 +34,7 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/coupons/a" role="button">  Add </a>
+                <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/coupons/a" role="button">  Add </a>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -63,7 +63,7 @@
                                         <td><?= $row['expiration_date']; ?></td>
                                         <td><?= $row['status'] == 'd' ? '<span class="badge bg-danger">Not Available</span>' : '<span class="badge bg-success">Available</span>'?></td>
                                         <td>
-                                            <a onclick="confirmDelete('/coupons/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                            <a onclick="confirmDelete('<?=base_url()?>/coupons/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

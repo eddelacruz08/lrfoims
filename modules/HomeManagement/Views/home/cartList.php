@@ -96,7 +96,7 @@
                                                         <?php if($carts['order_id'] == $orderDetails['id']):?>
                                                             <tr>
                                                                 <td>
-                                                                    <img src="<?= '/assets/uploads/menu/'.$carts['image'] ?>" alt="contact-img"
+                                                                    <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" alt="contact-img"
                                                                         title="contact-img" class="rounded me-3" height="64" />
                                                                 </td>
                                                                 <td>
@@ -114,11 +114,11 @@
                                                                     <?php else: ?>
                                                                         <?php if(user_link('cart/u', session()->get('userPermissionView'))):?>
                                                                             <div class="input-group" id="quantity-resize-contents">
-                                                                                <button onclick="plusAndMinusCartQuantity('/cart/customer/qty',<?= $carts['id']; ?>, 'minus',<?= $carts['quantity']; ?>, <?= $carts['menu_id']; ?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
+                                                                                <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/cart/customer/qty',<?= $carts['id']; ?>, 'minus',<?= $carts['quantity']; ?>, <?= $carts['menu_id']; ?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
                                                                                     <i class="mdi mdi-minus m-0"></i>
                                                                                 </button>
                                                                                 <input id="inputQuantityValue" type="text" disabled class="form-control form-control-sm text-center" width="50" id="quantityOrderCartAdmin<?= $carts['id']; ?>" value="<?= $carts['quantity'] ?>" width="30">
-                                                                                <button onclick="plusAndMinusCartQuantity('/cart/customer/qty',<?= $carts['id']; ?>, 'plus',<?= $carts['quantity']; ?>,<?= $carts['menu_id']; ?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
+                                                                                <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/cart/customer/qty',<?= $carts['id']; ?>, 'plus',<?= $carts['quantity']; ?>,<?= $carts['menu_id']; ?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
                                                                                     <i class="mdi mdi-plus m-0"></i>
                                                                                 </button>
                                                                             </div>
@@ -172,7 +172,7 @@
                                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                                         <p class="float-start h5">Select Payment Method: <small class="text-danger">*</small></p>
                                                                         <select class="form-select form-select-sm float-end mb-1" name="payment_method" id="payment_method">
-                                                                            <option disabled selected value=""> -- Select payment method-- </option>
+                                                                            <option disabled selected> -- Select payment method-- </option>
                                                                             <?php foreach ($getPaymentMethod as $method) : ?>
                                                                                 <option value="<?=$method['id']?>"><?= ucwords($method['payment_method']);?></option>
                                                                             <?php endforeach; ?>
@@ -227,7 +227,7 @@
                                                                             <?= ucwords($orderDetails['coupon_code'].' : -&nbsp;₱'.$orderDetails['coupon_discount']);?>
                                                                         </p>
                                                                     <?php else:?>
-                                                                    <a type="button" class="btn btn-sm btn-link text-danger float-end" onclick="addCodeCouponDiscount('/cart/apply-coupon', <?=$orderDetails['id']?>);">
+                                                                    <a type="button" class="btn btn-sm btn-link text-danger float-end" onclick="addCodeCouponDiscount('<?=base_url()?>/cart/apply-coupon', <?=$orderDetails['id']?>);">
                                                                             <u> Apply Coupon</u>
                                                                         </a>
                                                                     <?php endif;?>
@@ -289,7 +289,7 @@
                                                 <?php if ($orderDetails['order_status_id'] == 1):?> 
                                                     <div class="row m-1 p-0">
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
-                                                            <button type="button" onclick="checkout('/cart/place-order',<?= $orderDetails['id'];?>);" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
+                                                            <button type="button" onclick="checkout('<?=base_url()?>/cart/place-order',<?= $orderDetails['id'];?>);" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
                                                         </div>
                                                     </div> 
                                                 <?php endif; ?>
@@ -344,7 +344,7 @@
                                                 function showmsg(){
                                                     $.ajax({
                                                         type: "GET",
-                                                        url: '/orders/get-message/<?=$orderDetails['id']?>',
+                                                        url: '<?=base_url()?>/orders/get-message/<?=$orderDetails['id']?>',
                                                         async: true,
                                                         dataType: 'JSON',
                                                         success: function(data){ 
@@ -369,7 +369,7 @@
                                                                 html += 
                                                                 "<li class='clearfix "+ odd +" mb-1'>"+
                                                                     "<div class='chat-avatar'>"+
-                                                                        "<img src='/assets/img/user.jpg' class='rounded-circle' alt='"+data[i].username+"' />"+
+                                                                        "<img src='<?=base_url()?>/assets/img/user.jpg' class='rounded-circle' alt='"+data[i].username+"' />"+
                                                                         "<i>"+strTime+"</i>"+
                                                                     "</div>"+
                                                                     "<div class='conversation-text'>"+
@@ -393,7 +393,7 @@
                                                             htmlBot += 
                                                             "<li class='clearfix mb-1'>"+
                                                                 "<div class='chat-avatar'>"+
-                                                                    "<img src='/assets/img/user.jpg' class='rounded-circle' alt='LAMON Restaurant' />"+
+                                                                    "<img src='<?=base_url()?>/assets/img/user.jpg' class='rounded-circle' alt='LAMON Restaurant' />"+
                                                                     "<i>"+strTime+"</i>"+
                                                                 "</div>"+
                                                                 "<div class='conversation-text'>"+
@@ -416,7 +416,7 @@
                                                     var orderId = $("#orderId<?=$orderDetails['id']?>").val();
                                                     $.ajax({
                                                         type: "POST",
-                                                        url: '/cart/add-chat',
+                                                        url: '<?=base_url()?>/cart/add-chat',
                                                         dataType: 'JSON',
                                                         data: {
                                                             message: msg,

@@ -17,14 +17,14 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <form method="post" action="/register-submit">
+                                <form method="post" action="<?=base_url()?>/register-submit">
                                     <input type="hidden" id="sendCodeVerifyId">
                                     <button type="submit" id="sendCodeVerifyBtn" class="sendCodeVerifyBtn btn btn-sm btn-success">Send&nbspCode <div id="cDown"></div></button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <form method="post" action="/register-email-verification" id="emailformIdRegister">
+                    <form method="post" action="<?=base_url()?>/register-email-verification" id="emailformIdRegister">
                         <input type="hidden" name="email_address" value="<?= session()->get('local_register_email_address');?>">
                         <div class="row mb-2">
                             <div class="col-sm-12">

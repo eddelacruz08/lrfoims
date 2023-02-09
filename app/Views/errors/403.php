@@ -4,7 +4,7 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="/<?=$slugs?>"><?=ucwords($slugs)?></a></li>
+                    <li class="breadcrumb-item"><a href="<?=base_url()?>/<?=$slugs?>"><?=ucwords($slugs)?></a></li>
                     <li class="breadcrumb-item active">403</li>
                 </ol>
             </div>
@@ -17,7 +17,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-4">
         <div class="text-center">
-            <img src="/assets/images/file-searching.svg" height="90" alt="File not found Image">
+            <img src="<?=base_url()?>/assets/images/file-searching.svg" height="90" alt="File not found Image">
 
             <h1 class="text-error mt-4">403</h1>
             <h4 class="text-uppercase text-danger mt-3">Forbidden! You don't have permission to access on this page.</h4>

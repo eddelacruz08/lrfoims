@@ -41,7 +41,7 @@
                         <div class="row mb-2">
                             <div class="col-md-12">
                                 <label for="inputEmail4">Logo</label><br>
-                                <img src="assets/img/<?= isset($row['image']) ? $row['image'] : '' ?>" alt="restaurant logo" class="img-fluid" width="100" height="200"/><br>
+                                <img src="<?=base_url()?>/assets/img/<?= isset($row['image']) ? $row['image'] : '' ?>" alt="restaurant logo" class="img-fluid" width="100" height="200"/><br>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -105,7 +105,7 @@
                                 <input disabled type="text" class="form-control" id="inputEmail4" name="fb_link" placeholder="Facebook Link" value="<?=$row['fb_link']?>">
                             </div>
                         </div>
-                        <a href="/home-details/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-warning float-end">Edit Details <i class=" dripicons-pencil"></i></a>
+                        <a href="<?=base_url()?>/home-details/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-warning float-end">Edit Details <i class=" dripicons-pencil"></i></a>
                     <?php endforeach; ?>
                 </div>
             </div>

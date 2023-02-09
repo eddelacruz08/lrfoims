@@ -7,7 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/modules"><?= $title ?></a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/modules"><?= $title ?></a></li>
                             <li class="breadcrumb-item active"><?= $edit?'Edit ':'Add '?><?= $title ?></li>
                         </ol>
                     </div>
@@ -31,7 +31,7 @@
                 <h5 class="card-title mb-0"><?= $edit?'Edit ':'Add '?><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="POST" action="/modules/<?= $edit ? 'u/'.esc($id) : 'a'?>">
+                    <form method="POST" action="<?=base_url()?>/modules/<?= $edit ? 'u/'.esc($id) : 'a'?>">
                         <?php if($edit):?>
                             <input type="hidden" name="moduleID" value="<?=$id?>">                             
                         <?php endif;?>

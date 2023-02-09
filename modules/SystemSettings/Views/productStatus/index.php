@@ -34,7 +34,7 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/ingredient-status/a" role="button">  Add </a>
+                <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/ingredient-status/a" role="button">  Add </a>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -72,7 +72,7 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <a href="/ingredient-status/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                <a href="<?=base_url()?>/ingredient-status/u/<?= $row['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
                                                 <!-- <a onclick="confirmDelete('/product-status/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a> -->
                                             </center>
                                         </td>

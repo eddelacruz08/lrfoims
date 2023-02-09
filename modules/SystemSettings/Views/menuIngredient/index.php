@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="ingredient-card-header card-header m-0 p-0" id="headingFour">
                                         <h5 class="m-0 p-1">
-                                            <a href="/menu-ingredients/a/<?=$name['id'];?>" type="button" class="btn btn-primary float-end btn-sm m-0">Add</a>
+                                            <a href="<?=base_url()?>/menu-ingredients/a/<?=$name['id'];?>" type="button" class="btn btn-primary float-end btn-sm m-0">Add</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -84,8 +84,8 @@
                                                                 <div class="col-md-4"><p class="p-0 m-0"><?= ucwords($row['ingredient_name']); ?></p></div>
                                                                 <div class="col-md-3"><p class="p-0 m-0"><?= number_format($row['unit_quantity'],2).' '.$row['description'] ?></p></div>
                                                                 <div class="col-md-3"><p class="p-0 m-0">
-                                                                    <a href="/menu-ingredients/u/<?= $row['id']; ?>/<?=$name['id'];?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
-                                                                    <a onclick="confirmDelete('/menu-ingredients/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
+                                                                    <a href="<?=base_url()?>/menu-ingredients/u/<?= $row['id']; ?>/<?=$name['id'];?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                                    <a onclick="confirmDelete('<?=base_url()?>/menu-ingredients/d/',<?=$row['id']?>)" data-toggle="tooltip" data-placement="bottom" title="Delete" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-trash"></i></a>
                                                                 </p></div>
                                                             </div>
                                                         <?php endif; ?>

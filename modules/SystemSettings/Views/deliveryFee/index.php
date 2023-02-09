@@ -35,7 +35,7 @@
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
                 <?php if ($deliveryFee == null) : ?>
-                    <a class="btn btn-primary btn-sm float-end" href="/delivery-fee/a" role="button">  Add </a>
+                    <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/delivery-fee/a" role="button">  Add </a>
                 <?php endif; ?>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
@@ -55,7 +55,7 @@
                                         <th><?= $row['delivery_fee']; ?></th>
                                         <td><?= $row['description']; ?></td>
                                         <td>
-                                            <a href="/delivery-fee/u/<?= $row['id']; ?>" title="Edit" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                            <a href="<?=base_url()?>/delivery-fee/u/<?= $row['id']; ?>" title="Edit" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -51,7 +51,7 @@
                     <div class="col-md-4 offset-md-8">
                         <div class="input-group input-group-sm justify-content-end mb-1">
                             <input type="text" id="searchPendingOrders" class="form-control form-control-sm" placeholder="Search . . ." name="searchPendingOrders">
-                            <button onclick="paginateTables('/dashboard/get-pending-orders/v/offset',0,'#display-pending-orders-table', document.getElementById('searchPendingOrders').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
+                            <button onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset',0,'#display-pending-orders-table', document.getElementById('searchPendingOrders').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
                         </div>
                     </div>
                 </div>

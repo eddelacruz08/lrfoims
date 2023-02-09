@@ -7,7 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/ingredients">Ingredients</a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/ingredients">Ingredients</a></li>
                             <li class="breadcrumb-item active"><?= $title ?></li>
                         </ol>
                     </div>
@@ -31,7 +31,7 @@
                 <h5 class="card-title mb-0"><?= $title ?></h5>
 
                 <div id="cardCollpase1" class="collapse pt-3 show">
-                    <form method="post" action="/ingredients/batch-upload/stock-in" enctype="multipart/form-data">
+                    <form method="post" action="<?=base_url()?>/ingredients/batch-upload/stock-in" enctype="multipart/form-data">
                         <div class="row mb-1">
                             <div class="col">
                                 <input type="file" name="upload_file" class="form-control <?= isset($errors['upload_file']) ? 'is-invalid':'is-valid' ?>" 

@@ -76,11 +76,11 @@
                 <ul class="pagination justify-content-end">
                     <?php if($offset > 0) { ?>
                         <li class="page-item">
-                            <a class="page-link" type="button" onclick="paginateTables('/order-reports/v/offset', <?=($offset - $limitPerTable)?>,'#display-order-reports-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/order-reports/v/offset', <?=($offset - $limitPerTable)?>,'#display-order-reports-table')">Previous</a>
                         </li>
                     <?php } else { ?>
                         <li class="page-item disabled">
-                            <a class="page-link" type="button" onclick="paginateTables('/order-reports/v/offset', <?=($offset - $limitPerTable)?>,'#display-order-reports-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/order-reports/v/offset', <?=($offset - $limitPerTable)?>,'#display-order-reports-table')">Previous</a>
                         </li>
                     <?php 
                         }
@@ -93,20 +93,20 @@
                             $cntPerPage = (($cnt-1)*$limitPerTable);
                     ?>
                     <li class="page-item <?=($isActive == true ? "active":"")?>">
-                        <a class="page-link" type="button" onclick="paginateTables('/order-reports/v/offset', <?=$cntPerPage?>,'#display-order-reports-table')"><?=$cnt?></a>
+                        <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/order-reports/v/offset', <?=$cntPerPage?>,'#display-order-reports-table')"><?=$cnt?></a>
                     </li>
                     <?php 
                         }
                         if($active == ($linkcount -1)) { ?>
                             <li class="page-item disabled">
-                                <a class="page-link" type="button" onclick="paginateTables('/order-reports/v/offset', <?=$offset?>,'#display-order-reports-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/order-reports/v/offset', <?=$offset?>,'#display-order-reports-table')">Next</a>
                             </li>
                     <?php 
                         } else { 
                             $activePerPage = (($active+1)*$limitPerTable);
                     ?>
                             <li class="page-item">
-                                <a class="page-link" type="button" onclick="paginateTables('/order-reports/v/offset', <?=$activePerPage?>,'#display-order-reports-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/order-reports/v/offset', <?=$activePerPage?>,'#display-order-reports-table')">Next</a>
                             </li>
                     <?php 
                         } 

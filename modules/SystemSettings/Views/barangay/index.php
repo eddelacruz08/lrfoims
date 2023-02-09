@@ -34,7 +34,7 @@
         <!-- Portlet card -->
         <div class="card mb-md-0 mb-3">
             <div class="card-body">
-                <a class="btn btn-primary btn-sm float-end" href="/barangay/a" role="button">  Add </a>
+                <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/barangay/a" role="button">  Add </a>
                 <h5 class="card-title mb-0"><?= $title ?></h5>
                                 
                 <div id="cardCollpase1" class="collapse pt-3 show">
@@ -42,7 +42,7 @@
                         <div class="col-md-6 offset-md-6">
                             <div class="input-group input-group-sm justify-content-end mb-1">
                                 <input type="text" id="searchBarangay" class="form-control form-control-sm" placeholder="Search . . ." name="searchBarangay">
-                                <button onclick="paginateTables('/barangay/v/offset',0,'#display-barangay-table', document.getElementById('searchBarangay').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
+                                <button onclick="paginateTables('<?=base_url()?>/barangay/v/offset',0,'#display-barangay-table', document.getElementById('searchBarangay').value)" class="btn btn-sm btn-outline-dark" type="button">Search</button>
                             </div>
                         </div>
                     </div>

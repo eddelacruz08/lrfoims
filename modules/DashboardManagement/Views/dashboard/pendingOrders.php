@@ -30,11 +30,11 @@
                 <ul class="pagination justify-content-end">
                     <?php if($offset > 0) { ?>
                         <li class="page-item">
-                            <a class="page-link" type="button" onclick="paginateTables('/dashboard/get-pending-orders/v/offset', <?=($offset - $limitPerTable)?>,'#display-pending-orders-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset', <?=($offset - $limitPerTable)?>,'#display-pending-orders-table')">Previous</a>
                         </li>
                     <?php } else { ?>
                         <li class="page-item disabled">
-                            <a class="page-link" type="button" onclick="paginateTables('/dashboard/get-pending-orders/v/offset', <?=($offset - $limitPerTable)?>,'#display-pending-orders-table')">Previous</a>
+                            <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset', <?=($offset - $limitPerTable)?>,'#display-pending-orders-table')">Previous</a>
                         </li>
                     <?php 
                         }
@@ -47,20 +47,20 @@
                             $cntPerPage = (($cnt-1)*$limitPerTable);
                     ?>
                     <li class="page-item <?=($isActive == true ? "active":"")?>">
-                        <a class="page-link" type="button" onclick="paginateTables('/dashboard/get-pending-orders/v/offset', <?=$cntPerPage?>,'#display-pending-orders-table')"><?=$cnt?></a>
+                        <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset', <?=$cntPerPage?>,'#display-pending-orders-table')"><?=$cnt?></a>
                     </li>
                     <?php 
                         }
                         if($active == ($linkcount -1)) { ?>
                             <li class="page-item disabled">
-                                <a class="page-link" type="button" onclick="paginateTables('/dashboard/get-pending-orders/v/offset', <?=$offset?>,'#display-pending-orders-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset', <?=$offset?>,'#display-pending-orders-table')">Next</a>
                             </li>
                     <?php 
                         } else { 
                             $activePerPage = (($active+1)*$limitPerTable);
                     ?>
                             <li class="page-item">
-                                <a class="page-link" type="button" onclick="paginateTables('/dashboard/get-pending-orders/v/offset', <?=$activePerPage?>,'#display-pending-orders-table')">Next</a>
+                                <a class="page-link" type="button" onclick="paginateTables('<?=base_url()?>/dashboard/get-pending-orders/v/offset', <?=$activePerPage?>,'#display-pending-orders-table')">Next</a>
                             </li>
                     <?php 
                         } 

@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
         <div class="page-title-box p-0 m-0">
             <h4 class="float-start pb-1 ps-1 pe-1 border-bottom border-primary"><?= $title ?></h4>
-            <button type="button" onclick="displayIngredients('/ingredients/ingredient-list-data',<?=$category_id?>);" class="btn btn-sm btn-outline-dark float-end">Go back</button>
+            <button type="button" onclick="displayIngredients('<?=base_url()?>/ingredients/ingredient-list-data',<?=$category_id?>);" class="btn btn-sm btn-outline-dark float-end">Go back</button>
         </div>
     </div>
 </div>

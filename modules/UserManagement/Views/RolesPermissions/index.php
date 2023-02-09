@@ -58,7 +58,7 @@
                                         <td class="permissions-data" id="<?=$role['id']?>"></td>
                                         <td>
                                             <?php if(user_link('roles-permissions/u', session()->get('userPermissionView'))):?>
-                                                <a href="/roles-permissions/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
+                                                <a href="<?=base_url()?>/roles-permissions/u/<?= $role['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" animation="true" class="btn btn-sm btn-default"><i class=" dripicons-pencil"></i></a>
                                             <?php else: ?>
                                                 <button type="button" class="btn btn-secondary btn-sm">No Permission | Edit</button>
                                             <?php endif; ?>

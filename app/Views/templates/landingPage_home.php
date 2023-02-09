@@ -5,8 +5,8 @@
 <header class="top-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark text-white">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
+            <a class="navbar-brand" href="<?=base_url()?>/">
+                <img src="<?=base_url()?>/assets/img/<?= isset($homeDetails['image']) ? $homeDetails['image'] : 'image'?>" height="49" alt="restaurant logo" />
             </a>
             <button class="navbar-toggler" style="color: white; border: 1px solid white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="mdi mdi-menu text-white" style="color: white;"></span>
@@ -14,17 +14,17 @@
             <div class="collapse navbar-collapse" id="navbars-rs-food">
                 <ul class="navbar-nav ml-auto">
                     <?php if(user_link('/', session()->get('userPermissionView'))):?>
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/">Home</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/">Home</a></li>
                     <?php endif; ?>
                     <?php if(user_link('menu', session()->get('userPermissionView'))):?>
-                        <li class="nav-item"><a class="nav-link" href="/menu">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/menu">Menu</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Menu</a></li>
                     <?php endif; ?>
                     <?php if(user_link('cart', session()->get('userPermissionView'))):?>
-                        <li class="nav-item"><a class="nav-link" href="/cart">Cart
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/cart">Cart
                             <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
                                 <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
                             <?php endforeach; ?>
@@ -33,16 +33,16 @@
                         <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Cart</a></li>
                     <?php endif; ?>
                     <?php if(user_link('profile', session()->get('userPermissionView'))):?>
-                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/profile">Profile</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Profile</a></li>
                     <?php endif; ?>
                     <?php if(session()->get('role_id')==null):?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/order-status-list">Order Status</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/login">Login</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/signout">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/order-status-list">Order Status</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/signout">Logout</a></li>
                     <?php endif; ?>
                     
                 </ul>
@@ -167,7 +167,7 @@
                         <button type="submit" class="submit">SUBSCRIBE</button>
                         <div class="clearfix"></div>
                     </form>
-                </div>
+                </div>  
                 <ul class="list-inline f-social">
                     <li class="list-inline-item"><a href="javascript: void(0);"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                     <li class="list-inline-item"><a href="javascript: void(0);"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -191,3 +191,7 @@
     
 </footer>
 <?= $this->endsection('content_home'); ?>
+
+<?= $this->section('menu_order_customer'); ?>
+    <?= $this->include('Modules\IngredientReportManagement\Views\ingredientReport\menu_order_customer'); ?>
+<?= $this->endsection('menu_order_customer'); ?>

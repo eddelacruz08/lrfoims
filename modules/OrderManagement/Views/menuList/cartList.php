@@ -13,7 +13,7 @@
                                         <div class="col-md-4 col-sm-4 col-lg-4 col-xxl-4 text-center">
                                             <div class="card border-warning border card-menu-image-style p-0 m-1">
                                                 <div class="card-body p-0">
-                                                    <img src="<?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
+                                                    <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -30,11 +30,11 @@
                                         <div class="col-md-8 col-sm-8 col-lg-8 col-xxl-8 text-center pt-2">
                                             <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
                                                 <div class="input-group" id="quantity-resize-contents">
-                                                    <button onclick="plusAndMinusCartQuantity('/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'minus','/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
+                                                    <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'minus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
                                                         <i class="mdi mdi-minus m-0"></i>
                                                     </button>
                                                     <input id="inputQuantityValue" type="text" disabled class="form-control form-control-sm text-center" width="50" id="quantityOrderCartAdmin<?= $carts['id']; ?>" value="<?= $carts['quantity'] ?>" width="10">
-                                                    <button onclick="plusAndMinusCartQuantity('/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'plus','/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
+                                                    <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'plus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
                                                         <i class="mdi mdi-plus m-0"></i>
                                                     </button>
                                                 </div>
@@ -44,7 +44,7 @@
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-lg-4 col-xxl-4 text-center pt-2">
                                             <?php if(user_link('orders/cart/d', session()->get('userPermissionView'))):?>
-                                                <a id="deletePerCartButton" onclick="confirmDeleteCart('/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2,'/orders/admin-menu/order-cart-list-data',<?=$orderDetails['id']?>,<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" 
+                                                <a id="deletePerCartButton" onclick="confirmDeleteCart('<?=base_url()?>/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2,'<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?=$orderDetails['id']?>,<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" 
                                                     title="Remove" class="btn btn-sm btn-outline-danger float-end">
                                                     <i class="dripicons-trash"></i>
                                                 </a>
@@ -111,7 +111,7 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                     <p class="float-start h5">Select Payment Method: <small class="text-danger">*</small></p>
                                                     <select class="form-select form-select-sm float-end mb-1" name="payment_method" id="payment_method">
-                                                        <option disabled selected value=""> -- Select payment method-- </option>
+                                                        <option disabled selected> -- Select payment method-- </option>
                                                         <?php foreach ($getPaymentMethod as $method) : ?>
                                                             <option value="<?=$method['id']?>"><?= ucwords($method['payment_method']);?></option>
                                                         <?php endforeach; ?>
@@ -128,7 +128,7 @@
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                 <p class="float-start h5">Select Order Type: <small class="text-danger">*</small></p>
                                                 <select class="form-select form-select-sm float-end mb-1" name="order_type" id="order_type">
-                                                    <option disabled selected value=""> -- Select order type -- </option>
+                                                    <option disabled selected> -- Select order type -- </option>
                                                     <?php foreach ($getOrderType as $orderType) : ?>
                                                         <?php if ($orderType['id'] != 3) : ?>
                                                             <option value="<?=$orderType['id']?>"><?= ucwords($orderType['type']);?></option>
@@ -167,7 +167,7 @@
                                                     <?= ucwords($orderDetails['coupon_code'].' : -&nbsp;₱'.$orderDetails['coupon_discount']);?>
                                                 </p>
                                             <?php else:?>
-                                                <a type="button" class="btn btn-sm btn-link text-danger float-end" onclick="addCodeCouponDiscount('admin-menu/order-cart-list-data/apply-coupon', <?=$orderDetails['id']?>,'/orders/admin-menu/order-cart-list-data');">
+                                                <a type="button" class="btn btn-sm btn-link text-danger float-end" onclick="addCodeCouponDiscount('<?=base_url()?>/admin-menu/order-cart-list-data/apply-coupon', <?=$orderDetails['id']?>,'<?=base_url()?>/orders/admin-menu/order-cart-list-data');">
                                                     <u> Apply Coupon</u>
                                                 </a>
                                             <?php endif;?>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="row m-1 p-0">
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
-                                    <button type="button" onclick="checkout('/orders/admin-menu/place-order',<?= $orderDetails['id'];?>, '/orders/admin-menu/order-cart-list-data');" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
+                                    <button type="button" onclick="checkout('<?=base_url()?>/orders/admin-menu/place-order',<?= $orderDetails['id'];?>, '<?=base_url()?>/orders/admin-menu/order-cart-list-data');" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
                                 </div>
                             </div>
                         <?php endif; ?>

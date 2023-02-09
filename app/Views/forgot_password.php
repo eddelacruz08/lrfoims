@@ -18,14 +18,14 @@
                             </div>  
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <form method="post" action="/forgot-password">
+                                    <form method="post" action="<?=base_url()?>/forgot-password">
                                         <input type="hidden" name="email_address" value="<?= session()->get('local_forgot_password_email_address');?>">
                                         <button type="submit" id="sendCodeVerifyBtn" class="sendCodeVerifyBtn btn btn-sm btn-success">Resend&nbspCode <div id="cDown"></div></button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <form method="post" action="/temporary-password" id="emailCodeFormIdForgotPassword">
+                        <form method="post" action="<?=base_url()?>/temporary-password" id="emailCodeFormIdForgotPassword">
                             <input type="hidden" name="email_address" value="<?= session()->get('local_forgot_password_email_address');?>">
                             <div class="row mb-2">
                                 <div class="col-sm-12">
@@ -45,7 +45,7 @@
                             </div>
                         </form>
                     <?php else:?>
-                        <form method="post" action="/forgot-password" id="emailAddressFormIdForgotPassword">
+                        <form method="post" action="<?=base_url()?>/forgot-password" id="emailAddressFormIdForgotPassword">
                             <div class="row mb-2">
                                 <div class="col-sm-12">
                                     <div class="form-group">

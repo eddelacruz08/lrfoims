@@ -7,7 +7,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="<?=base_url()?>/">Home</a></li>
                             <li class="breadcrumb-item active">Profile</li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-auto">
                                         <div class="avatar-lg">
-                                            <img src="/assets/img/user.jpg" alt="" class="rounded-circle img-thumbnail">
+                                            <img src="<?=base_url()?>/assets/img/user.jpg" alt="" class="rounded-circle img-thumbnail">
                                         </div>
                                     </div>
                                     <div class="col">
@@ -66,8 +66,8 @@
                                         <div>
                                             <h4 class="header-title mt-0 mb-3 text-white">Customer Information: </h4>
                                             <div class="text-start font-13 text-white">
-                                                <p class=" text-white"><strong>Contact Number :</strong><span class="ms-2"><?= session()->get('contact_number');?></span></p>
-                                                <p class=" text-white"><strong>Email :</strong> <span class="ms-2"><?= session()->get('email_address');?></span></p>
+                                                <p class="text-white"><strong>Contact Number :</strong><span class="ms-2"><?= session()->get('contact_number');?></span></p>
+                                                <p class="text-white"><strong>Email :</strong> <span class="ms-2"><?= session()->get('email_address');?></span></p>
                                                 <p class="text-white"><strong>Location :</strong> 
                                                     <span class="ms-2">
                                                         <?php
@@ -100,7 +100,7 @@
 
                             <div class="col-sm-4">
                                 <div class="text-center mt-sm-0 mt-3 text-sm-end">
-                                    <a href="/edit-profile/u/<?= session()->get('id')?>" type="button" class="btn btn-light">
+                                    <a href="<?=base_url()?>/edit-profile/u/<?= session()->get('id')?>" type="button" class="btn btn-light">
                                         <i class="mdi mdi-account-edit me-1"></i> Edit Profile
                                     </a>
                                 </div>
@@ -150,7 +150,7 @@
                                                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                                         </div>
                                                         <div class="offcanvas-body">
-                                                            <form action="/profile/apply-rating/a/<?=$row['id']?>" method="post">
+                                                            <form action="<?=base_url()?>/profile/apply-rating/a/<?=$row['id']?>" method="post">
                                                                 <?php foreach ($getCartForRating as $rate):?>
                                                                     <?php if ($rate['order_id'] == $row['id']):?>
                                                                         <div class="row">

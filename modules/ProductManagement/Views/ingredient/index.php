@@ -24,7 +24,7 @@
             <div class="card-header m-0 p-1">
                 <p class="float-start h5 m-0 mt-1 ms-2">Categories:</p>
                 <?php if(user_link('ingredients/a', session()->get('userPermissionView'))):?>
-                    <a class="btn btn-primary btn-sm float-end" href="/ingredients/a" role="button"> Add Ingredient</a>
+                    <a class="btn btn-primary btn-sm float-end" href="<?=base_url()?>/ingredients/a" role="button"> Add Ingredient</a>
                 <?php else: ?>
                     <button type="button" class="btn btn-primary btn-sm mt-1">No Permission | add ingredient</button>
                 <?php endif; ?>
@@ -34,7 +34,7 @@
                     <div class="col-sm-3 mb-2 mb-sm-0">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <?php foreach($ingredientCategory as $category):?>
-                                <a class="nav-link show border-bottom" onclick="displayIngredients('/ingredients/ingredient-list-data',<?=$category['id']?>);" id="ingredientsTab-tab-<?=$category['id']?>" data-bs-toggle="pill" href="#ingredientsTab-<?=$category['id']?>" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                <a class="nav-link show border-bottom" onclick="displayIngredients('<?=base_url()?>/ingredients/ingredient-list-data',<?=$category['id']?>);" id="ingredientsTab-tab-<?=$category['id']?>" data-bs-toggle="pill" href="#ingredientsTab-<?=$category['id']?>" role="tab" aria-controls="v-pills-home" aria-selected="true">
                                     <span class=" d-md-none d-block"><?=$category['product_name']?></span>
                                     <span class="d-none d-md-block"><?=$category['product_name']?></span>
                                 </a>

@@ -4,7 +4,7 @@
 	<div id="slides" class="cover-slides">
 		<ul class="slides-container">
 			<li class="text-center">
-				<img src="/assets/lamon-images/slider-01.jpg" alt="">
+				<img src="<?=base_url()?>/assets/lamon-images/slider-01.jpg" alt="">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
@@ -16,7 +16,7 @@
 				</div>
 			</li>
 			<li class="text-center">
-				<img src="/assets/lamon-images/slider-02.jpg" alt="">
+				<img src="<?=base_url()?>/assets/lamon-images/slider-02.jpg" alt="">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
@@ -36,7 +36,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<img src="/assets/lamon-images/wings-lunch.gif" alt="gif" class="rounded">
+					<img src="<?=base_url()?>/assets/lamon-images/wings-lunch.gif" alt="gif" class="rounded">
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
@@ -80,7 +80,7 @@
                         <?php if($row['menu_category_id'] == $category['id']):?>
                             <div class="col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>">
                                 <div class="gallery-single fix rounded">
-                                    <img src="/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
+                                    <img src="<?=base_url()?>/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
                                     <div class="why-text">
 										<h4 class="mb-0"><?=$row['menu']?></h4>
 										<h4 class="mb-0">₱<?=number_format($row['price'],2)?></h4>
