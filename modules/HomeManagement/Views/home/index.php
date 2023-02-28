@@ -10,7 +10,7 @@
 						<div class="col-md-12">
 							<h1 class="m-b-20"><strong>Welcome To <br> Lamon - Wings and Sisig House</strong></h1>
 							<p class="m-b-40">Let's roam around Mantahan and Macrohon. Let's have a trip, GALAMON! 🤗</p>
-							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Order Here</a></p>
+							<p><a class="btn btn-lg btn-circle btn-outline-new-white text-white" href="<?=base_url()?>/menu">Order Here</a></p>
 						</div>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 						<div class="col-md-12">
 							<h1 class="m-b-20"><strong>Welcome To <br> Lamon - Wings and Sisig House</strong></h1>
 							<p class="m-b-40">Let's roam around Mantahan and Macrohon. Let's have a trip, GALAMON! 🤗</p>
-							<p><a class="btn btn-lg btn-circle btn-outline-new-white" href="#">Order Here</a></p>
+							<p><a class="btn btn-lg btn-circle btn-outline-new-white text-white" href="<?=base_url()?>/menu">Order Here</a></p>
 						</div>
 					</div>
 				</div>
@@ -35,8 +35,8 @@
 	<div class="about-section-box">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<img src="<?=base_url()?>/assets/lamon-images/wings-lunch.gif" alt="gif" class="rounded">
+				<div class="col-lg-6 col-md-6 col-sm-12 justify-content-center">
+					<img src="<?=base_url()?>/assets/lamon-images/wings-lunch.gif" alt="gif" class="rounded w-100" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
@@ -78,7 +78,7 @@
                 <?php foreach($menuCategory as $category):?>
                     <?php foreach($menu as $row):?>
                         <?php if($row['menu_category_id'] == $category['id']):?>
-                            <div class="col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>">
+                            <div class="col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
                                 <div class="gallery-single fix rounded">
                                     <img src="<?=base_url()?>/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
                                     <div class="why-text">

@@ -8,7 +8,7 @@
                     <?php foreach ($preparingOrders as $row): ?> 
                         <?php if($row['order_type'] == 1 || $row['order_type'] == 2):?>
                             <tr class="border-bottom">
-                                <th>Order#<?=$row['number']?></th>
+                                <th>#<?=$row['number']?></th>
                                 <td>
                                     <span class="badge badge-outline-dark">
                                         <?php if($row['order_type'] == 1):?>
@@ -42,7 +42,7 @@
                     <?php foreach ($servingOrders as $row): ?> 
                         <?php if($row['order_type'] == 1 || $row['order_type'] == 2):?>
                             <tr class="border-bottom">
-                                <th>Order#<?=$row['number']?></th>
+                                <th>#<?=$row['number']?></th>
                                 <td>
                                     <span class="badge badge-outline-dark">
                                         <?php if($row['order_type'] == 1):?>

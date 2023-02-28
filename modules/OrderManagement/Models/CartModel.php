@@ -94,10 +94,11 @@ class CartModel extends BaseModel
     public function getCartTotalPrice($conditions = [], $takeOut = null, $dineIn = null, $orderDivideVAT = null, $orderMultiplyVAT = null){
 
         $this->select('lrfoims_carts.*, SUM(lrfoims_carts.quantity * m.price) as total_price, 
-                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') - (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') * oud.discount_amount + o.delivery_fee - o.coupon_discount as total_amount_bill,
-                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.') + o.delivery_fee - o.coupon_discount as total_amount_bill_no_discount,
-                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * '.$orderMultiplyVAT.') as total_amount_vat,
-                        SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * oud.discount_amount as total_amount_user_discount,
+                        SUM(lrfoims_carts.quantity * m.price) - (SUM(lrfoims_carts.quantity * m.price) * oud.discount_amount) + o.delivery_fee - o.coupon_discount as total_amount_bill,
+                        (SUM(lrfoims_carts.quantity * m.price) + o.delivery_fee) - o.coupon_discount as total_amount_bill_no_discount,
+                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * '.$orderMultiplyVAT.') as total_amount_discount_with_vat,
+                        (SUM(lrfoims_carts.quantity * m.price) / '.$orderDivideVAT.' * '.$orderMultiplyVAT.') as total_amount_regular_customer_with_vat,
+                        SUM(lrfoims_carts.quantity * m.price) * oud.discount_amount as total_amount_user_discount_without_vat,
                         o.order_status_id, o.c_cash, o.c_balance, o.total_amount, o.discount_amount');
         $this->join('lrfoims_orders as o', 'lrfoims_carts.order_id = o.id');
         $this->join('lrfoims_menus as m', 'lrfoims_carts.menu_id = m.id');

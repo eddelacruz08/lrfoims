@@ -112,79 +112,81 @@
                 <div class="card">
                     <div class="card-title m-3 mb-0 h4">Order History</div>
                         <div class="card-body">
-                            <table id="order-history-data-table" class="table table-sm table-centered mb-0 text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Order#</th>
-                                        <th>Status</th>
-                                        <th>Amount</th>
-                                        <th>Cash</th>
-                                        <th>Change</th>
-                                        <th>Date & Time</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($getOrderDetails as $row):?>
+                            <div class="table-responsive">
+                                <table id="order-history-data-table" class="table table-sm table-centered mb-0 text-center">
+                                    <thead>
                                         <tr>
-                                            <td>Order#<?=$row['number']?></td>
-                                            <td><span class="badge bg-info"><?=$row['order_status']?></span></td>
-                                            <td>₱ <?=number_format($row['total_amount'])?></td>
-                                            <td>₱ <?=number_format($row['c_cash'])?></td>
-                                            <td>₱ <?=number_format($row['c_balance'])?></td>
-                                            <td><?= Date('M d, Y h:i a', strtotime($row['created_at']))?></td>
-                                            <td>
-                                                <?php if($row['rate_status'] == 'a'):?>
-                                                    <button 
-                                                        type="button" 
-                                                        class="btn btn-sm btn-warning" 
-                                                        data-bs-toggle="offcanvas" 
-                                                        data-bs-target="#offcanvasRight<?=$row['id']?>" 
-                                                        aria-controls="offcanvasRight<?=$row['id']?>"
-                                                        >
-                                                        To Rate
-                                                    </button>
-                                                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight<?=$row['id']?>" aria-labelledby="offcanvasRightLabel<?=$row['id']?>">
-                                                        <div class="offcanvas-header">
-                                                            <h5 id="offcanvasRightLabel<?=$row['id']?>">To Rate | Order#<?=$row['number']?></h5>
-                                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="offcanvas-body">
-                                                            <form action="<?=base_url()?>/profile/apply-rating/a/<?=$row['id']?>" method="post">
-                                                                <?php foreach ($getCartForRating as $rate):?>
-                                                                    <?php if ($rate['order_id'] == $row['id']):?>
-                                                                        <div class="row">
-                                                                            <div class="col-sm-6"><?=$rate['menu']?></div>
-                                                                            <div class="col-sm-6">
-                                                                                <input type="number" min="0" max="5" name="star_rate[<?=$rate['id']?>][]" value="5" class="form-control form-control-sm w-75" required/>
-                                                                            </div>
-                                                                        </div>
-                                                                    <?php endif;?>
-                                                                <?php endforeach;?>
-                                                                <button 
-                                                                    type="submit" 
-                                                                    class="btn btn-warning btn-sm mt-2"
-                                                                >
-                                                                    Rate
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                <?php else:?>
-                                                    <button type="button" class="btn btn-sm btn-outline-warning" disabled>Rated</button>
-                                                <?php endif;?>
-                                            </td>
+                                            <th>Order#</th>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                            <th>Cash</th>
+                                            <th>Change</th>
+                                            <th>Date & Time</th>
+                                            <th>Action</th>
                                         </tr>
-                                    <?php endforeach;?>
-                                </tbody>
-                            </table>
-                            <script>
-                                $(document).ready(function () {
-                                    $('#order-history-data-table').DataTable({
-                                        order: [[5, 'asc']],
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($getOrderDetails as $row):?>
+                                            <tr>
+                                                <td>Order#<?=$row['number']?></td>
+                                                <td><span class="badge bg-info"><?=$row['order_status']?></span></td>
+                                                <td>₱ <?=number_format($row['total_amount'])?></td>
+                                                <td>₱ <?=number_format($row['c_cash'])?></td>
+                                                <td>₱ <?=number_format($row['c_balance'])?></td>
+                                                <td><?= Date('M d, Y h:i a', strtotime($row['created_at']))?></td>
+                                                <td>
+                                                    <?php if($row['rate_status'] == 'a'):?>
+                                                        <button 
+                                                            type="button" 
+                                                            class="btn btn-sm btn-warning" 
+                                                            data-bs-toggle="offcanvas" 
+                                                            data-bs-target="#offcanvasRight<?=$row['id']?>" 
+                                                            aria-controls="offcanvasRight<?=$row['id']?>"
+                                                            >
+                                                            To Rate
+                                                        </button>
+                                                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight<?=$row['id']?>" aria-labelledby="offcanvasRightLabel<?=$row['id']?>">
+                                                            <div class="offcanvas-header">
+                                                                <h5 id="offcanvasRightLabel<?=$row['id']?>">To Rate | Order#<?=$row['number']?></h5>
+                                                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="offcanvas-body">
+                                                                <form action="<?=base_url()?>/profile/apply-rating/a/<?=$row['id']?>" method="post">
+                                                                    <?php foreach ($getCartForRating as $rate):?>
+                                                                        <?php if ($rate['order_id'] == $row['id']):?>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6"><?=$rate['menu']?></div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number" min="0" max="5" name="star_rate[<?=$rate['id']?>][]" value="5" class="form-control form-control-sm w-75" required/>
+                                                                                </div>
+                                                                            </div>
+                                                                        <?php endif;?>
+                                                                    <?php endforeach;?>
+                                                                    <button 
+                                                                        type="submit" 
+                                                                        class="btn btn-warning btn-sm mt-2"
+                                                                    >
+                                                                        Rate
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    <?php else:?>
+                                                        <button type="button" class="btn btn-sm btn-outline-warning" disabled>Rated</button>
+                                                    <?php endif;?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                                <script>
+                                    $(document).ready(function () {
+                                        $('#order-history-data-table').DataTable({
+                                            order: [[5, 'asc']],
+                                        });
                                     });
-                                });
-                            </script>
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -94,7 +94,7 @@
                                                 <?php if(!empty($getCustomerCartDetails)):?>
                                                     <?php foreach ($getCustomerCartDetails as $carts) : ?>
                                                         <?php if($carts['order_id'] == $orderDetails['id']):?>
-                                                            <tr>
+                                                            <tr class="border-bottom">
                                                                 <td>
                                                                     <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" alt="contact-img"
                                                                         title="contact-img" class="rounded me-3" height="64" />
@@ -148,8 +148,8 @@
                                                 <div class="row" id="resize-contents">
                                                     <div class="row m-1 p-0">
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                            <p class="float-start h5">Order Number:</p>
-                                                            <p class="float-end h5">#<?=$orderDetails['number'] ?></p>
+                                                            <p class="float-start h6">Order Number:</p>
+                                                            <p class="float-end h6">#<?=$orderDetails['number'] ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 p-0">
@@ -157,10 +157,10 @@
                                                             <?php if(user_link('cart/add-payment-method', session()->get('userPermissionView'))):?>
                                                                 <div class="row m-1 p-0">
                                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                        <p class="float-start h5">Payment Method:</p>
+                                                                        <p class="float-start h6">Payment Method:</p>
                                                                         <?php foreach ($getPaymentMethod as $method) : ?>
                                                                             <?php if($method['id'] == $orderDetails['payment_method_id']):?>
-                                                                                <p class="float-end h5"><?= ucwords($method['payment_method']);?></p>
+                                                                                <p class="float-end h6"><?= ucwords($method['payment_method']);?></p>
                                                                             <?php endif; ?>
                                                                         <?php endforeach; ?>
                                                                     </div>
@@ -170,24 +170,38 @@
                                                             <?php if(user_link('cart/add-payment-method', session()->get('userPermissionView'))):?>
                                                                 <div class="row m-1 p-0">
                                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                        <p class="float-start h5">Select Payment Method: <small class="text-danger">*</small></p>
-                                                                        <select class="form-select form-select-sm float-end mb-1" name="payment_method" id="payment_method">
-                                                                            <option disabled selected> -- Select payment method-- </option>
+                                                                        <p class="float-start h6">Select Payment Method: <small class="text-danger">*</small></p>
+                                                                        <select class="form-control form-select mb-1 h6" name="payment_method" id="payment_method<?=$orderDetails['id']?>">
+                                                                            <option disabled selected value=""> -- Select payment method-- </option>
                                                                             <?php foreach ($getPaymentMethod as $method) : ?>
                                                                                 <option value="<?=$method['id']?>"><?= ucwords($method['payment_method']);?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
-                                                                        <div class="invalid-feedback float-start" id="error_payment_method">
-                                                                            * Please select payment method.
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
-                                                        <?php if($orderDetails['order_type'] == 0):?>
+                                                        <?php if($orderDetails['order_status_id'] == 1):?>
+                                                            <?php if($orderDetails['order_user_discount_id'] == 0):?>
+                                                                <div class="row m-1 p-0">
+                                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
+                                                                        <p class="float-start h6">Customer Discount: <small class="text-dark">(optional)</small></p>
+                                                                        <select class="form-control form-select mb-1 h6" name="order_user_discount_id" id="order_user_discount_id<?=$orderDetails['id']?>">
+                                                                            <option disabled selected value=""> -- Select customer type -- </option>
+                                                                            <?php foreach ($getOrderUserDiscount as $customerType) : ?>
+                                                                                <option value="<?=$customerType['id']?>"><?= ucwords($customerType['customer_type']);?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                        <p class="float-start h6">ID No.: <small class="text-dark">(optional)</small></p>
+                                                                        <input type="number" class="form-control mb-1" name="cust_id_no" id="cust_id_no<?=$orderDetails['id']?>" placeholder="Enter card id number">
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                        <!-- <?php if($orderDetails['order_type'] == 0):?>
                                                             <div class="row m-1 p-0">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                    <p class="float-start h5">Select Order Type: <small class="text-danger">*</small></p>
+                                                                    <p class="float-start h6">Select Order Type: <small class="text-danger">*</small></p>
                                                                     <select class="form-select form-select-sm float-end mb-1" name="order_type" id="order_type">
                                                                         <option disabled selected value=""> -- Select order type -- </option>
                                                                         <?php foreach ($getOrderType as $orderType) : ?>
@@ -199,14 +213,14 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        <?php endif; ?>
+                                                        <?php endif; ?> -->
                                                         <?php if(!empty($orderDetails['order_user_discount_id'])):?>
                                                             <div class="row m-1 p-0">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                                     <?php foreach ($getOrderUserDiscount as $discount) : ?>
                                                                         <?php if($discount['id'] == $orderDetails['order_user_discount_id']):?>
-                                                                            <p class="float-start h5"><?= ucwords($discount['description']);?>&nbsp; discount:</p>
-                                                                            <p class="float-end h5">-&nbsp;<?= ucwords($discount['discount_amount']);?>%</p>
+                                                                            <p class="float-start h6"><?= ucwords($discount['description']);?>&nbsp; discount:</p>
+                                                                            <p class="float-end h6">-&nbsp;<?= ucwords($discount['discount_amount']);?>%</p>
                                                                         <?php endif; ?>
                                                                     <?php endforeach; ?>
                                                                 </div>
@@ -214,16 +228,16 @@
                                                         <?php endif; ?>
                                                         <div class="row m-1 p-0">
                                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Amount Due:</p>
-                                                                <p class="float-end h5">&nbsp;₱<?= number_format($totalPrice['total_price'],2);?></p>
+                                                                <p class="float-start h6">Amount Due:</p>
+                                                                <p class="float-end h6">&nbsp;₱<?= number_format($totalPrice['total_price'],2);?></p>
                                                             </div>
                                                         </div>
-                                                        <div class="row m-1 p-0">
+                                                        <!-- <div class="row m-1 p-0">
                                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Coupon:</p>
+                                                                <p class="float-start h6">Coupon:</p>
                                                                 <?php if ($orderDetails['order_status_id'] == 1):?> 
                                                                     <?php if(!empty($orderDetails['coupon_discount'])):?>
-                                                                        <p class="float-end h5">
+                                                                        <p class="float-end h6">
                                                                             <?= ucwords($orderDetails['coupon_code'].' : -&nbsp;₱'.$orderDetails['coupon_discount']);?>
                                                                         </p>
                                                                     <?php else:?>
@@ -232,55 +246,59 @@
                                                                         </a>
                                                                     <?php endif;?>
                                                                 <?php else:?>
-                                                                    <p class="float-end h5">
+                                                                    <p class="float-end h6">
                                                                         <?= ucwords($orderDetails['coupon_code'].' : -&nbsp;₱'.$orderDetails['coupon_discount']);?>
                                                                     </p>
                                                                 <?php endif;?>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <?php if($orderDetails['order_type'] == 3):?>
                                                             <div class="row m-1 p-0">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                    <p class="float-start h5">Delivery fee:</p>
-                                                                    <p class="float-end h5">+&nbsp;₱<?= number_format($getDeliveryFee['delivery_fee']);?></p>
+                                                                    <p class="float-start h6">Delivery fee:</p>
+                                                                    <p class="float-end h6">+&nbsp;₱<?= number_format($getDeliveryFee['delivery_fee']);?></p>
                                                                 </div>
                                                             </div>
                                                         <?php endif; ?>
+                                                        <?php if($orderDetails['order_status_id'] != 1):?>
+                                                            <?php if($orderDetails['order_user_discount_id'] != 0):?>
+                                                                <!-- <div class="row m-1 p-0">
+                                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
+                                                                        <p class="float-start h6">Less &nbsp;(<?= $getVAT['description'];?>) VAT:</p>
+                                                                        <p class="float-end h6">-&nbsp;₱<?= number_format($totalPrice['total_amount_regular_customer_with_vat'],2);?></p>
+                                                                    </div>
+                                                                </div> -->
+                                                                <div class="row m-1 p-0">
+                                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
+                                                                        <p class="float-start h6">Discount:</p>
+                                                                        <?php if(!empty($totalPrice['total_amount_user_discount_without_vat'])):?>
+                                                                            <p class="float-end h6">-&nbsp;₱<?= number_format($totalPrice['total_amount_user_discount_without_vat']);?></p>
+                                                                        <?php else: ?>
+                                                                            <p class="float-end h6">-&nbsp;₱0</p>
+                                                                        <?php endif; ?>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
                                                         <div class="row m-1 p-0">
                                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Less &nbsp;(<?= $getVAT['description'];?>) VAT:</p>
-                                                                <p class="float-end h5">-&nbsp;₱<?= number_format($totalPrice['total_amount_vat'],2);?></p>
+                                                                <p class="float-start h6">Cash:</p>
+                                                                <p class="float-end h6">&nbsp;₱<?= number_format($totalPrice['c_cash']);?></p>
                                                             </div>
                                                         </div>
                                                         <div class="row m-1 p-0">
                                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Discount:</p>
-                                                                <?php if(!empty($totalPrice['discount_amount'])):?>
-                                                                    <p class="float-end h5">-&nbsp;₱<?= number_format($totalPrice['discount_amount']);?></p>
-                                                                <?php else: ?>
-                                                                    <p class="float-end h5">-&nbsp;₱0</p>
-                                                                <?php endif; ?>
+                                                                <p class="float-start h6">Change:</p>
+                                                                <p class="float-end h6">&nbsp;₱<?= number_format($totalPrice['c_balance']);?></p>
                                                             </div>
                                                         </div>
                                                         <div class="row m-1 p-0">
                                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Cash:</p>
-                                                                <p class="float-end h5">&nbsp;₱<?= number_format($totalPrice['c_cash']);?></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-1 p-0">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Change:</p>
-                                                                <p class="float-end h5">&nbsp;₱<?= number_format($totalPrice['c_balance']);?></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-1 p-0">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                                <p class="float-start h5">Total bill:</p>
+                                                                <p class="float-start h6">Total bill:</p>
                                                                 <?php if($orderDetails['order_user_discount_id'] == 0):?>
-                                                                    <p class="float-end h5">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill_no_discount'],2);?></p>
+                                                                    <p class="float-end h6">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill_no_discount'],2);?></p>
                                                                 <?php else: ?>
-                                                                    <p class="float-end h5">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill'],2);?></p>
+                                                                    <p class="float-end h6">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill'],2);?></p>
                                                                 <?php endif; ?>
                                                             </div>
                                                         </div>
@@ -289,7 +307,14 @@
                                                 <?php if ($orderDetails['order_status_id'] == 1):?> 
                                                     <div class="row m-1 p-0">
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
-                                                            <button type="button" onclick="checkout('<?=base_url()?>/cart/place-order',<?= $orderDetails['id'];?>);" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
+                                                            <button type="button" onclick="checkout('/cart/place-order',<?= $orderDetails['id'];?>, 
+                                                                $('#payment_method<?=$orderDetails['id']?>').val(),
+                                                                $('#order_user_discount_id<?=$orderDetails['id']?>').val(),
+                                                                $('#cust_id_no<?=$orderDetails['id']?>').val(),
+                                                                $('#payment_method<?=$orderDetails['id']?>'),
+                                                                $('#order_user_discount_id<?=$orderDetails['id']?>'),
+                                                                $('#cust_id_no<?=$orderDetails['id']?>'),
+                                                                );" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
                                                         </div>
                                                     </div> 
                                                 <?php endif; ?>

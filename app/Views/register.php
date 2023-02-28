@@ -9,7 +9,7 @@
                             <hr>
                         </div>
                     </div>
-                    <form method="post" action="<?=base_url()?>/register" id="formId">
+                    <form method="post" action="/register" id="formId">
                         <div class="row mb-1">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -136,7 +136,7 @@
             function showRegion() {
                 $.ajax({
                     type: "GET",
-                    url: '<?=base_url()?>/get-regions',
+                    url: '/get-regions',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
@@ -151,7 +151,7 @@
                 var regionCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '<?=base_url()?>/get-provinces/'+ regionCode ,
+                    url: '/get-provinces/'+ regionCode ,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
@@ -168,7 +168,7 @@
                 var provinceCode = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: '<?=base_url()?>/get-cities/'+provinceCode,
+                    url: '/get-cities/'+provinceCode,
                     async: true,
                     dataType: 'JSON',
                     success: function(data){

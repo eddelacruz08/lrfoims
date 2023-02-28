@@ -36,12 +36,34 @@
                     <?php foreach($menuCategory as $category):?>
                         <?php foreach($menu as $row):?>
                             <?php if($row['menu_category_id'] == $category['id']):?>
-                                <div class="col-sm-3 col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>">
+                                <div class="col-sm-3 col-lg-4 col-md-6 m-0 p-0 special-grid <?=$category['id']?>" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
                                     <div class="gallery-single fix rounded">
                                         <img src="<?=base_url()?>/assets/uploads/menu/<?=$row['image']?>" class="img-fluid" alt="Image">
                                         <div class="why-text">
-                                            <h4 class="mb-0"><?=$row['menu']?></h4>
-                                            <h4 class="mb-0">₱<?=number_format($row['price'],2)?></h4>
+                                            <h4 class="mb-0"
+                                                style="
+                                                	font-family: 'Arbutus Slab', serif;
+                                                	color: #ffffff;
+                                                	font-size: 20px;
+                                                	font-weight: 500;
+                                                	margin: 0px;
+                                                	padding-bottom: 0px;
+                                                	margin-top: 0px;
+                                                	margin-bottom: 0px;
+                                                "
+                                            ><?=$row['menu']?></h4>
+                                            <h4 class="mb-0"
+                                                style="
+                                                	font-family: 'Arbutus Slab', serif;
+                                                	color: #ffffff;
+                                                	font-size: 20px;
+                                                	font-weight: 500;
+                                                	margin: 0px;
+                                                	padding-bottom: 0px;
+                                                	margin-top: 5px;
+                                                	margin-bottom: 0px;
+                                                "
+                                            >₱<?=number_format($row['price'],2)?></h4>
                                             <?php foreach($getCartsFoodRates as $rates):?>
                                                 <?php if($row['id'] == $rates['menu_id']):?>
                                                     <div 
@@ -53,11 +75,6 @@
                                                     </div>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
-                                            <?php if($row['menu_status'] == 'a'):?>
-                                                <span class="badge bg-warning float-end">Available</span>
-                                            <?php else:?>
-                                                <span class="badge bg-secondary float-end">Unavailable</span>
-                                            <?php endif; ?>
                                             <br>
                                             <?php if(user_link('menu/a', session()->get('userPermissionView'))):?>
                                                 <button class="btn btn-sm <?= $row['menu_status'] == 'a' ? 'btn-success':'btn-secondary'?>" 

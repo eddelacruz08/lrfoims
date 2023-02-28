@@ -729,4 +729,19 @@ class Validation extends BaseConfig
 			'label' => 'Description'
 		],
 	];
+
+	public $addStocks = [
+		'unit_quantity' => [
+			'rules' => 'required|numeric',
+			'label' => 'Unit quantity'
+		],
+		'price' => [
+			'rules' => 'required|numeric',
+			'label' => 'Price'
+		],
+		'date_expiration' => [
+			'rules' => 'required',
+			'label' => 'Expiration Date'
+		],
+	];
 }

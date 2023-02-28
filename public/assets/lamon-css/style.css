@@ -445,26 +445,27 @@ button:focus{
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
 }
+/*.why-text h4{*/
+/*	color: #ffffff;*/
+/*	font-size: 24px;*/
+/*	font-weight: 500;*/
+/*	font-family: 'Arbutus Slab', serif;*/
+/*}*/
 .why-text h4{
-	color: #ffffff;
-	font-size: 24px;
-	font-weight: 500;
 	font-family: 'Arbutus Slab', serif;
-}
-.why-text p{
 	color: #ffffff;
-	font-size: 18px;
-	border-bottom: 1px dashed #010101;
+	font-size: 12px;
+	font-weight: 500;
 	margin: 0px;
-	padding-bottom: 15px;
-	margin-top: 15px;
-	margin-bottom: 15px;
+	/*padding-bottom: 15px;*/
+	/*margin-top: 15px;*/
+	/*margin-bottom: 15px;*/
 }
-.why-text h5{
-	font-size: 28px;
-	font-weight: 600;
-	color: #ffffff;
-}
+/*.why-text h5{*/
+/*	font-size: 28px;*/
+/*	font-weight: 600;*/
+/*	color: #ffffff;*/
+/*}*/
 
 .gallery-single:hover .why-text{
 	bottom: 0px;

@@ -542,14 +542,6 @@ class Order extends BaseController
         } else {
             $quantityCheck = $_POST['quantity'] + 1;
         }
-        if($quantityCheck == 0){
-            $jdata =[
-                'status' => 'Opss',
-                'status_text' => 'You cannot plus or minus a quantity if less than 1.',
-                'status_icon' => 'warning'
-            ];
-            return $this->response->setJSON($jdata);
-        }
         foreach ($menuIngredients as $menuIngredientsValue) {
             $ingredients = $this->ingredientsModel->get(['id' => $menuIngredientsValue['ingredient_id'], 'status' => 'a'])[0];
 
@@ -587,6 +579,16 @@ class Order extends BaseController
                 }
                 $this->cartsModel->update($cartId, $quantityData);
                 
+				if($_POST['operation'] == 'minus') {
+					$quantityCheck = $_POST['quantity'] - 1;
+				} else {
+					$quantityCheck = $_POST['quantity'] + 1;
+				}
+				
+				if($quantityCheck <= 0){
+					$this->cartsModel->softDelete($cartId);
+				}
+
                 $jdata =[
                     'status' => 'Success!',
                     'status_text' => 'Food quantity changed!',
@@ -689,31 +691,68 @@ class Order extends BaseController
         if ($this->request->getMethod() == 'post') {
             $getCart = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status'=>'a']);
             if(!empty($getCart)){
-                if(!empty($_POST['order_user_discount_id'])){
-                    $getOrderUserDiscount = $this->orderDiscountModel->get(['id'=>$_POST['order_user_discount_id'], 'status'=>'a'])[0];
-                }else{
-                    $getOrderUserDiscount['id'] = 0;
+				if($_POST['payment_method_id'] == "" && $_POST['order_user_discount_id'] == "" && $_POST['order_type'] == ""){
+					$data =[
+						'payment_method_id_and_order_user_discount_id_and_order_type' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Fields is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} elseif($_POST['payment_method_id'] == "") {
+					$data =[
+						'payment_method_id' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Payment method field is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} elseif($_POST['order_type'] == "") {
+					$data =[
+						'order_type' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Order type field is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} elseif($_POST['order_user_discount_id'] != "" && $_POST['cust_id_no'] == "") {
+					$data =[
+						'cust_id_no' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Id number field is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} else {
+                    if(!empty($_POST['order_user_discount_id'])){
+                        $getOrderUserDiscount = $this->orderDiscountModel->get(['id'=>$_POST['order_user_discount_id'], 'status'=>'a'])[0];
+                        $cust_id_no = $_POST['cust_id_no'];
+					}else{
+						$getOrderUserDiscount['id'] = 0;
+						$cust_id_no = "";
+					}
+                    $data = [
+						'payment_method_id' => $_POST['payment_method_id'],
+						'order_type' => $_POST['order_type'],
+						'order_user_discount_id' => $getOrderUserDiscount['id'],
+						'cust_id_no' => $cust_id_no,
+						'order_status_id' => 2,
+						'status' => 'a',
+					];
+                    $this->ordersModel->update($_POST['order_id'], $data); 
+
+                    $orderIdPerOrder = [
+                        'local_admin_menu_order_id' => null,
+                    ];
+                    session()->set($orderIdPerOrder);
+
+                    $jdata =[
+                        'status' => 'Success',
+                        'status_text' => 'Successfully checkout!',
+                        'status_icon' => 'success'
+                    ];
+                    return $this->response->setJSON($jdata);
                 }
-                $data = [
-                    'payment_method_id' => $_POST['payment_method_id'],
-                    'order_type' => $_POST['order_type'],
-                    'order_user_discount_id' => $getOrderUserDiscount['id'],
-                    'order_status_id' => 2,
-                    'status' => 'a',
-                ];
-                $this->ordersModel->update($_POST['order_id'], $data); 
-
-                $orderIdPerOrder = [
-                    'local_admin_menu_order_id' => null,
-                ];
-                session()->set($orderIdPerOrder);
-
-                $jdata =[
-                    'status' => 'Success',
-                    'status_text' => 'Successfully checkout!',
-                    'status_icon' => 'success'
-                ];
-                return $this->response->setJSON($jdata);
             }else{
                 $jdata =[
                     'status' => 'Error!',
@@ -735,7 +774,6 @@ class Order extends BaseController
                 $data = [
                     'total_amount_order' => $_POST['total_amount_order'],
                     'total_amount' =>$_POST['total_amount'],
-                    'total_amount_vat' =>$_POST['total_amount_vat'],
                     'discount_amount' =>isset($_POST['discount_amount']),
                     'c_cash' => $_POST['c_cash'],
                     'c_balance' => $_POST['c_cash'] - $_POST['total_amount'],
@@ -810,7 +848,7 @@ class Order extends BaseController
     }
 
     public function deleteCart($cartId, $menuId, $orderId, $cartQyt){
-        $this->hasPermissionRedirect('orders/cart/d');
+        $this->hasPermissionRedirect('orders/admin-menu/cart/d');
 
         $time = new \DateTime();
         $isDeleted = 0;
@@ -852,7 +890,7 @@ class Order extends BaseController
     }
 
     public function deleteOrderAdminMenu(){
-        $this->hasPermissionRedirect('orders/d');
+        $this->hasPermissionRedirect('orders/admin-menu/cart/d');
 
         $isDeleted = 0;
         $cartDetails = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status' => 'a']);

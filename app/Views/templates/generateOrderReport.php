@@ -36,7 +36,7 @@
                     <center>Amount Due</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
-                    <center>Less (12%) VAT</center>
+                    <center>Discount Amount</center>
                 </th>
                 <th scope="col" style="text-align:center; font-weight: bold; font-size: 10pt">
                     <center>Date</center>
@@ -53,14 +53,14 @@
                         <td style="text-align:center; font-size: 10pt">
                             <?=$row['type']?>
                         </td>
-                        <td style="text-align:center; font-size: 10pt">
+                        <td style="text-align:center; font-size: 10pt; background-color: yellow;">
                             Php <?=number_format($row['total_amount'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             Php <?=number_format($row['total_amount_order'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            Php <?=number_format($row['total_amount_vat'], 2)?>
+                            Php - <?=number_format($row['discount_amount'], 2)?>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
                             <?= Date('F d, Y - h:i a', strtotime($row['created_at']))?>
@@ -72,7 +72,7 @@
                         <th colspan="2" style="text-align:center; font-weight: bold; font-size: 10pt">
                             Total Amount:
                         </th>
-                        <td colspan="1" style="text-align:center; font-weight: bold; font-size: 10pt">
+                        <td colspan="1" style="text-align:center; font-weight: bold; font-size: 10pt; background-color: yellow;">
                             Php <?=number_format($rows['total_amount_price'], 2)?>
                         </td>
                         <td colspan="3" style="text-align:center; font-size: 10pt">
@@ -86,7 +86,6 @@
             <?php endif;?>
         </tbody>
     </table>
-    <p style="text-align:center; font-size: 10pt"><i>**This report is system generated.**</i></p>
-    <p style="text-align:center; font-size: 10pt; line-height: 30%"><i>**No signatures are required.**</i></p>
+    <p style="text-align:center; font-size: 10pt"><i>**This report is system generated. No signatures are required.**</i></p>
 </body>
 </html>

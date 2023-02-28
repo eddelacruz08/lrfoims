@@ -458,27 +458,58 @@ class Home extends BaseController
 
         if ($this->request->getMethod() == 'post') {
             $getCart = $this->cartsModel->get(['order_id' => $_POST['order_id'], 'status'=>'a']);
+			$deliveryFee = $this->deliveryFeeModel->get(['status'=>'a'])[0];
             if(!empty($getCart)){
-                if(!empty($_POST['order_user_discount_id'])){
-                    $getOrderUserDiscount = $this->orderDiscountModel->get(['id'=>$_POST['order_user_discount_id'], 'status'=>'a'])[0];
-                }else{
-                    $getOrderUserDiscount['id'] = 0;
-                }
-                $data = [
-                    'payment_method_id' => $_POST['payment_method_id'],
-                    'order_type' => $_POST['order_type'],
-                    'order_user_discount_id' => $getOrderUserDiscount['id'],
-                    'order_status_id' => 2,
-                    'status' => 'a',
-                ];
-                $this->ordersModel->update($_POST['order_id'], $data); 
-
-                $jdata =[
-                    'status' => 'Success',
-                    'status_text' => 'Successfully checkout!',
-                    'status_icon' => 'success'
-                ];
-                return $this->response->setJSON($jdata);
+				if($_POST['payment_method_id'] == "" && $_POST['order_user_discount_id'] == "" && $_POST['cust_id_no'] == ""){
+					$data =[
+						'payment_method_id_and_order_user_discount_id' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Fields is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} elseif($_POST['payment_method_id'] == "") {
+					$data =[
+						'payment_method_id' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Payment method field is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} elseif($_POST['order_user_discount_id'] != "" && $_POST['cust_id_no'] == "") {
+					$data =[
+						'cust_id_no' => '',
+						'status' => 'Failed!',
+						'status_text' => 'Id number field is required!',
+						'status_icon' => 'error'
+					];
+					return $this->response->setJSON($data);
+				} else {
+					if(!empty($_POST['order_user_discount_id'])){
+						$getOrderUserDiscount = $this->orderDiscountModel->get(['id'=>$_POST['order_user_discount_id'], 'status'=>'a'])[0];
+						$cust_id_no = $_POST['cust_id_no'];
+					}else{
+						$getOrderUserDiscount['id'] = 0;
+						$cust_id_no = "";
+					}
+					$data = [
+						'payment_method_id' => $_POST['payment_method_id'],
+						'order_type' => $_POST['order_type'],
+						'order_user_discount_id' => $getOrderUserDiscount['id'],
+						'cust_id_no' => $cust_id_no,
+						'delivery_fee' => $deliveryFee['delivery_fee'],
+						'order_status_id' => 2,
+						'status' => 'a',
+					];
+					$this->ordersModel->update($_POST['order_id'], $data); 
+	
+					$jdata =[
+						'status' => 'Success',
+						'status_text' => 'Successfully checkout!',
+						'status_icon' => 'success'
+					];
+					return $this->response->setJSON($jdata);
+				}
             }else{
                 $jdata =[
                     'status' => 'Error!',
@@ -592,7 +623,7 @@ class Home extends BaseController
 			'provinces' => $this->provinceModel->get(['status'=>'a']),
 			'cities' => $this->cityModel->get(['status'=>'a']),
 			'getCartForRating' => $this->cartsModel->getCartsForRating(['lrfoims_carts.status'=>'a']),
-			'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.user_id'=>session()->get('id'),'lrfoims_orders.order_status_id'=>5,'lrfoims_orders.status'=>'a']),
+			'getOrderDetails' => $this->ordersModel->getOrderDetails(['lrfoims_orders.user_id'=>session()->get('id'),'lrfoims_orders.order_status_id'=>7,'lrfoims_orders.status'=>'a']),
 		];
 		$user = $this->usersModel->getDetails(['lrfoims_users.id'=>session()->get('id'),'lrfoims_users.status'=>'a'])[0];
 		$jdata = [
@@ -607,7 +638,7 @@ class Home extends BaseController
             'province_id' => $user['province_id'],
             'city_id' => $user['city_id'],
             'addtl_address' => $user['addtl_address'],
-            'getOrderCounts' => $this->ordersModel->getCountOrdersHome(['user_id' => $user['id'], 'status'=>'a', 'order_status_id'=> 5])[0],
+            'getOrderCounts' => $this->ordersModel->getCountOrdersHome(['user_id' => $user['id'], 'status'=>'a', 'order_status_id'=> 7])[0],
         ];
 
         session()->set($jdata);

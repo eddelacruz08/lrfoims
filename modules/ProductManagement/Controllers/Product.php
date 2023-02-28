@@ -229,7 +229,7 @@ class Product extends BaseController
                 // if($_POST['unit_quantity'] <= 1){
                 //     $_POST['product_status_id'] = 2;
                 // }else{
-                    $_POST['product_status_id'] = 1;
+                    $_POST['product_status_id'] = 2;
                 // }
                 $this->productsModel->add($_POST);
                 $this->session->setFlashdata('success', 'Ingredient Successfully Added!');
@@ -344,38 +344,51 @@ class Product extends BaseController
     public function addStocks() {
         $this->hasPermissionRedirect('ingredients/stocks');
         
-        $ingredients = $this->productsModel->get(['id' => $_POST['ingredient_id'], 'status' => 'a'])[0];
+        if ($this->request->getMethod() == 'post') {
+            if (!$this->validate('addStocks')) {
+                $data =[
+                    'errors' => $this->validation->getErrors(),
+                    'value' => $_POST,
+                    'status' => 'Failed!',
+                    'status_text' => 'Something missing!',
+                    'status_icon' => 'error'
+                ];
+                return $this->response->setJSON($data);
+            } else {
+                $ingredients = $this->productsModel->get(['id' => $_POST['ingredient_id'], 'status' => 'a'])[0];
 
-        $this->dateAndTime = new \DateTime($_POST['date_expiration']);
-        $dataStocks = [
-            'ingredient_id' => $ingredients['id'],
-            'unit_quantity' => $_POST['unit_quantity'],
-            'unit_price' => $_POST['price'],
-            'product_description_id' => $ingredients['product_description_id'],
-            'stock_status' => 1,
-            'date_expiration' => $this->dateAndTime->format('Y-m-d'),
-        ];
-        $dataIngredient = [
-            'unit_quantity' => $ingredients['unit_quantity'] + $_POST['unit_quantity'],
-            'price' => $_POST['price'],
-            'stock_out_date' => $this->time->format('Y-m-d H:i:s'),
-            'product_status_id' => 1,
-        ];
-        if($this->ingredientReportModel->add($dataStocks)){
-            $this->productsModel->update($ingredients['id'], $dataIngredient);
-            $data =[
-                'status' => 'Success!',
-                'status_text' => 'Successfully Added!',
-                'status_icon' => 'success'
-            ];
-            return $this->response->setJSON($data);
-        } else{
-            $data =[
-                'status' => 'Oops!',
-                'status_text' => 'Something went wrong!',
-                'status_icon' => 'error'
-            ];
-            return $this->response->setJSON($data);
+                $this->dateAndTime = new \DateTime($_POST['date_expiration']);
+                $dataStocks = [
+                    'ingredient_id' => $ingredients['id'],
+                    'unit_quantity' => $_POST['unit_quantity'],
+                    'unit_price' => $_POST['price'],
+                    'product_description_id' => $ingredients['product_description_id'],
+                    'stock_status' => 1,
+                    'date_expiration' => $this->dateAndTime->format('Y-m-d'),
+                ];
+                $dataIngredient = [
+                    'unit_quantity' => $ingredients['unit_quantity'] + $_POST['unit_quantity'],
+                    'price' => $_POST['price'],
+                    'stock_out_date' => $this->time->format('Y-m-d H:i:s'),
+                    'product_status_id' => 1,
+                ];
+                if($this->ingredientReportModel->add($dataStocks)){
+                    $this->productsModel->update($ingredients['id'], $dataIngredient);
+                    $data =[
+                        'status' => 'Success!',
+                        'status_text' => 'Successfully Added!',
+                        'status_icon' => 'success'
+                    ];
+                    return $this->response->setJSON($data);
+                } else{
+                    $data =[
+                        'status' => 'Oops!',
+                        'status_text' => 'Something went wrong!',
+                        'status_icon' => 'error'
+                    ];
+                    return $this->response->setJSON($data);
+                }
+            }
         }
     }
     
@@ -447,7 +460,7 @@ class Product extends BaseController
                 // if($_POST['unit_quantity'] <=1){
                 //     $_POST['product_status_id'] = 2;
                 // }else{
-                    $_POST['product_status_id'] = 1;
+                    // $_POST['product_status_id'] = 1;
                 // }
                 $this->productsModel->update($id, $_POST);
                 $this->session->setFlashdata('success', 'Successfully Updated');

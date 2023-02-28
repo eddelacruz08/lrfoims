@@ -10,21 +10,22 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-sm <?= isset($errors['email_address']) ? 'is-invalid':'' ?>" name="email_address" value="<?= session()->get('local_email_address');?>" disabled>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <form method="post" action="<?=base_url()?>/submit">
-                                    <input type="hidden" id="sendCodeVerifyId">
-                                    <button type="submit" id="sendCodeVerifyBtn" class="sendCodeVerifyBtn btn btn-sm btn-success">Send&nbspCode <div id="cDown"></div></button>
+                                <form method="post" action="/submit">
+                                    <button type="submit" class="btn btn-sm btn-link"><u>Send&nbsp;Code</u></button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <form method="post" action="<?=base_url()?>/email-verification" id="emailformId">
+                    <form method="post" action="/email-verification">
                         <input type="hidden" name="email_address" value="<?= session()->get('local_email_address');?>">
                         <div class="row mb-2">
                             <div class="col-sm-12">
@@ -39,7 +40,7 @@
                         </div>
                         <div class="row mb-2 mt-2">
                             <div class="col-6">
-                                <button type="submit" id="emailSubmitButton" class="btn btn-success text-center">Submit</button>
+                                <button type="submit" class="btn btn-success text-center">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -48,40 +49,4 @@
         </div>
     </div>
 </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(() => {
-                $("#emailSubmitButton").click(function(ev) {
-                    var form = $("#emailformId");
-                    var url = form.attr('action');
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: form.serialize(),
-                        cache: false,
-                    });
-                });
-            });
-            $(() => {
-                var inputValue = $("#sendCodeVerifyId").value;
-                if(inputValue == null || inputValue == ''){
-                    document.getElementById("sendCodeVerifyId").value = "1";
-                }else{
-                    var timeleft = 90;
-                    var downloadTimer = setInterval(function(){
-                        if(timeleft <= 0){
-                            clearInterval(downloadTimer);
-                            btn.prop('disabled', false);
-                            document.getElementById("cDown").innerHTML = " null";
-                            document.getElementById("sendCodeVerifyId").value = "1";
-                        } else {
-                            btn.prop('disabled', true);
-                            document.getElementById("cDown").innerHTML = timeleft + " seconds remaining";
-                        }
-                        timeleft -= 1;
-                    }, 1000);
-                }
-            });
-        });
-    </script>
+

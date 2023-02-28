@@ -1,12 +1,11 @@
 <div class="container">
     <div class="content">
         <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
+        <div class="row mt-3">
+            <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="<?=base_url()?>/">Home</a></li>
                             <li class="breadcrumb-item"><a href="<?=base_url()?>/profile">Profile</a></li>
                             <li class="breadcrumb-item active">Edit Profile</li>
                         </ol>
@@ -18,7 +17,7 @@
         <!-- end page title --> 
 
 
-        <div class="row">
+        <div class="row pt-2 pb-3">
             <div class="col-sm-12">
                 <form method="POST" action="<?=base_url()?>/edit-profile/<?= $edit ? 'u/'.esc($id) : 'a' ?>" id="formId">
                     <?php if($edit):?>

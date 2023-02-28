@@ -53,4 +53,11 @@ class BaseModel extends Model
         return $this->delete($id);
     }
 
+    public function returnDataBeforeDelete($id)
+    {
+        $data['status'] = 'd';
+        $this->update($id, $data);
+        return $this->delete($id);
+    }
+
 }

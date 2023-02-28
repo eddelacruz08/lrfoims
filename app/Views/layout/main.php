@@ -4,31 +4,31 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="shortcut icon" type="image/png" href="<?=base_url()?>/assets/img/lamon_logo.png" />
+        <link rel="shortcut icon" type="image/png" href="/assets/img/lamon_logo.png" />
         <title><?= $page_title ?></title>
         <!-- third party css -->
-        <link href="<?=base_url()?>/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
         
         <!-- third party css -->
-        <link href="<?=base_url()?>/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/vendor/select.bootstrap5.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/select.bootstrap5.css" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
 
 
         <!-- Quill css -->
-        <link href="<?=base_url()?>/assets/css/vendor/quill.bubble.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/quill.bubble.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css" />
 
         <!-- App css -->
-        <link href="<?=base_url()?>/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url()?>/assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-        <link href="<?=base_url()?>/assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+        <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
+        <link href="/assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
-        <link href="<?=base_url()?>/assets/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -38,66 +38,48 @@
         
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
-        <!-- <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
         <script src="https://kit.fontawesome.com/9cef9fee62.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
         <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <!-- bundle -->
-        <script src="<?=base_url()?>/assets/js/vendor.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/app.min.js"></script>
+        <script src="/assets/js/vendor.min.js"></script>
+        <script src="/assets/js/app.min.js"></script>
         <!-- third party js -->
-        <!-- <script src="/assets/js/vendor/apexcharts.min.js"></script> -->
-        <script src="<?=base_url()?>/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/jquery.dataTables.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/dataTables.bootstrap5.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/dataTables.responsive.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/responsive.bootstrap5.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/dataTables.buttons.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/buttons.bootstrap5.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/buttons.html5.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/buttons.flash.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/buttons.print.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/dataTables.keyTable.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/dataTables.select.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/Chart.bundle.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/d3.min.js"></script>
-        <script src="<?=base_url()?>/assets/js/vendor/britecharts.min.js"></script>
+        <script src="/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="/assets/js/vendor/jquery.dataTables.min.js"></script>
+        <script src="/assets/js/vendor/dataTables.bootstrap5.js"></script>
+        <script src="/assets/js/vendor/dataTables.responsive.min.js"></script>
+        <script src="/assets/js/vendor/responsive.bootstrap5.min.js"></script>
+        <script src="/assets/js/vendor/dataTables.buttons.min.js"></script>
+        <script src="/assets/js/vendor/buttons.bootstrap5.min.js"></script>
+        <script src="/assets/js/vendor/buttons.html5.min.js"></script>
+        <script src="/assets/js/vendor/buttons.flash.min.js"></script>
+        <script src="/assets/js/vendor/buttons.print.min.js"></script>
+        <script src="/assets/js/vendor/dataTables.keyTable.min.js"></script>
+        <script src="/assets/js/vendor/dataTables.select.min.js"></script>
+        <script src="/assets/js/vendor/Chart.bundle.min.js"></script>
+        <script src="/assets/js/vendor/d3.min.js"></script>
+        <script src="/assets/js/vendor/britecharts.min.js"></script>
         <!-- third party js ends -->
 
-        <!-- Datatable Init js -->
-        <!-- <script src="/assets/js/pages/demo.datatable-init.js"></script> -->
-
-        <!-- Typehead -->
-        <!-- <script src="/assets/js/vendor/handlebars.min.js"></script>
-        <script src="/assets/js/vendor/typeahead.bundle.min.js"></script> -->
-
-        <!-- Demo -->
-        <!-- <script src="/assets/js/pages/demo.typehead.js"></script> -->
-
         <!-- Timepicker -->
-        <script src="<?=base_url()?>/assets/js/pages/demo.timepicker.js"></script>
+        <script src="/assets/js/pages/demo.timepicker.js"></script>
         <!-- demo app -->
-        <!-- <script src="/assets/js/pages/demo.dashboard.js"></script> -->
-        <!-- <script src="assets/js/pages/demo.chartjs.js"></script> -->
         <?= $this->rendersection('ingredientReportCharts'); ?>
         <?= $this->rendersection('ordersReportCharts'); ?>
         <!-- end demo js-->
 
-        <script src="<?=base_url()?>/assets/js/myAlerts.js"></script>
-        <?= $this->rendersection('permissions'); ?>
-        <?= $this->rendersection('orders'); ?>
-        <?= $this->rendersection('ingredients'); ?>
-        <?= $this->rendersection('printer'); ?>
-        <?= $this->rendersection('menu_order'); ?>
-        <?= $this->rendersection('menu_order_customer'); ?>
-        <!-- <script src="/assets/js/invoiceOrders.js"></script> -->
+        <script src="/assets/js/myAlerts.js"></script>
+        <script src="/assets/js/permissions.js"></script>
+        <script src="/assets/js/orders.js"></script>
+        <script src="/assets/js/ingredients.js"></script>
+        <script src="/assets/js/printer.js"></script>
+        <script src="/assets/js/menu_order.js"></script>
         
         <script>
             $(document).ready(function() {
@@ -165,7 +147,7 @@
             function getStockIngredients() {
                 $.ajax({
                     type: "GET",
-                    url: '<?=base_url()?>/ingredient-reports/get-stock-ingredients',
+                    url: '/ingredient-reports/get-stock-ingredients',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
@@ -212,7 +194,7 @@
                             el.html(expiredMsg);
                         }else{
                             $.ajax({
-                                url: "<?=base_url()?>/ingredients/expire-date/set-stock-status",
+                                url: "/ingredients/expire-date/set-stock-status",
                                 type: "POST",
                                 data:{
                                     id: demoId,
@@ -233,7 +215,7 @@
                         if(updated_at != currentDate){
                             var routeType = 1;
                             $.ajax({
-                                url: "<?=base_url()?>/ingredients/notification/a/"+demoId+"/"+routeType,
+                                url: "/ingredients/notification/a/"+demoId+"/"+routeType,
                                 type: "POST",
                                 data:{
                                     user_id: user_id,
@@ -260,7 +242,7 @@
             function getLowQuantityIngredients() {
                 $.ajax({
                     type: "GET",
-                    url: '<?=base_url()?>/ingredients/notif-low-quantity-ingredients',
+                    url: '/ingredients/notif-low-quantity-ingredients',
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
@@ -286,7 +268,7 @@
                         if(updated_at != currentDate){
                             var routeType = 2;
                             $.ajax({
-                                url: "<?=base_url()?>/ingredients/notification/a/"+id+"/"+routeType,
+                                url: "/ingredients/notification/a/"+id+"/"+routeType,
                                 type: "POST",
                                 data:{
                                     user_id: user_id,
@@ -303,7 +285,7 @@
                     }
                     if(stock_status == 1 && quantity <= 1){
                         $.ajax({
-                            url: "<?=base_url()?>/ingredients/update-ingredients-out-of-stock/u/"+id,
+                            url: "/ingredients/update-ingredients-out-of-stock/u/"+id,
                             type: "GET",
                             data:{},
                             cache: false,
@@ -321,23 +303,22 @@
                     setInterval(function() {
                         $.ajax({
                             type: "GET",
-                            url: '<?=base_url()?>/notifications/get-notifications',
+                            url: '/notifications/get-notifications',
                             async: true,
                             dataType: 'JSON',
-                            success: function(response) {
-                                    // console.log(response);
-                                var element = $('#notifications');
+                            success: function(responses) {
                                 var html = "";
-                                for(var z = 0; z <= response.getNotifications.length; z++){
-                                    html +="<form id='notifFormId' method='post' action='<?=base_url()?>/ingredients/notify-marked/u/"+response.getNotifications[z].id+"'>";
+                                var element = $('#notifications');
+                                for(var z = 0; z <= responses.getNotifications.length; z++){
+                                    html +="<form id='notifFormId' method='post' action='/ingredients/notify-marked/u/"+responses.getNotifications[z].id+"'>";
                                     html +="    <button type='submit' id='submitNotifButton' class='dropdown-item notify-item text-break'>";
-                                    html +="        <div class='notify-icon "+(response.getNotifications[z].status == "a" ? "bg-primary" : "bg-secondary")+"'>";
+                                    html +="        <div class='notify-icon "+(responses.getNotifications[z].status == "a" ? "bg-primary" : "bg-secondary")+"'>";
                                     html +="            <i class='mdi mdi-email-outline'></i>";
                                     html +="        </div>";
-                                    html +="        <input type='hidden' value='"+response.getNotifications[z].link+"' name='marked_link'/>";
-                                    html +="        <p class='notify-details text-break'>"+response.getNotifications[z].name+"";
-                                    html +="           <small class='text-muted'>"+response.getNotifications[z].description+"</small>";
-                                    html +="           <small class='text-muted'>"+moment(response.getNotifications[z].created_at).startOf("minute").fromNow()+"</small>";
+                                    html +="        <input type='hidden' value='"+responses.getNotifications[z].link+"' name='marked_link'/>";
+                                    html +="        <p class='notify-details text-break'>"+responses.getNotifications[z].name+"";
+                                    html +="           <small class='text-muted'>"+responses.getNotifications[z].description+"</small>";
+                                    html +="           <small class='text-muted'>"+moment(responses.getNotifications[z].created_at).startOf("minute").fromNow()+"</small>";
                                     html +="        </p>";
                                     html +="    </button>";
                                     html +="</form>";

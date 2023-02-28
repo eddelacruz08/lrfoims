@@ -3,12 +3,12 @@
     <div class="container">
 
         <!-- LOGO -->
-        <a href="<?=base_url()?>/" class="topnav-logo">
+        <a href="/" class="topnav-logo">
             <span class="topnav-logo-lg">
-                <img src="<?=base_url()?>/assets/img/lamon_logo.png" alt="" height="56">
+                <img src="/assets/img/lamon_logo.png" alt="" height="56">
             </span>
             <span class="topnav-logo-sm">
-                <img src="<?=base_url()?>/assets/img/lamon_logo.png" alt="" height="56">
+                <img src="/assets/img/lamon_logo.png" alt="" height="56">
             </span>
         </a>
 
@@ -32,7 +32,7 @@
                         </div>
 
                         <!-- All-->
-                        <a href="<?=base_url()?>/ingredient-reports" class="dropdown-item text-center text-primary notify-item notify-all">
+                        <a href="/ingredient-reports" class="dropdown-item text-center text-primary notify-item notify-all">
                             View All
                         </a>
 
@@ -44,7 +44,7 @@
                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
                     <span class="account-user-avatar"> 
-                        <img src="<?=base_url()?>/assets/img/user.jpg" alt="user-image" class="rounded-circle">
+                        <img src="/assets/img/user.jpg" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
                         <span class="account-user-name"><?= session()->get('first_name') != null ? session()->get('first_name').' '.session()->get('last_name') : 'Anonymous'?></span>
@@ -58,7 +58,7 @@
                     </div>
 
                     <!-- item-->
-                    <a href="<?=base_url()?>/signout" class="dropdown-item notify-item">
+                    <a href="/signout" class="dropdown-item notify-item">
                         <!-- <i class="mdi mdi-logout me-1"></i> -->
                         <span>Logout</span>
                     </a>

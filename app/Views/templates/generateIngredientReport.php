@@ -74,7 +74,6 @@
             <?php endif;?>
         </tbody>
     </table>
-    <p style="text-align:center; font-size: 10pt"><i>**This report is system generated.**</i></p>
-    <p style="text-align:center; font-size: 10pt; line-height: 30%"><i>**No signatures are required.**</i></p>
+    <p style="text-align:center; font-size: 10pt"><i>**This report is system generated. No signatures are required.**</i></p>
 </body>
 </html>

@@ -9,50 +9,48 @@
                         <?php foreach ($getCarts as $carts) : ?>
                             <?php if($carts['order_id'] == $orderDetails['id'] && $carts['orders_id'] == $orderDetails['id']):?>
                                 <div class="card p-1 m-1">
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-lg-4 col-xxl-4 text-center">
-                                            <div class="card border-warning border card-menu-image-style p-0 m-1">
-                                                <div class="card-body p-0">
-                                                    <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 col-sm-5 col-lg-5 col-xxl-5 text-center pt-2">
-                                            <?= ucfirst($carts['menu']); ?><br>
-                                            x<?= $carts['quantity']; ?><br>
-                                            ₱ <?= number_format($carts['price']); ?>
-                                        </div>
-                                        <div class="col-md-3 col-sm-3 col-lg-3 col-xxl-3 text-center pt-2">
-                                            ₱ <?= number_format($carts['subTotal']);?>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8 col-sm-8 col-lg-8 col-xxl-8 text-center pt-2">
-                                            <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
-                                                <div class="input-group" id="quantity-resize-contents">
-                                                    <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'minus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
-                                                        <i class="mdi mdi-minus m-0"></i>
-                                                    </button>
-                                                    <input id="inputQuantityValue" type="text" disabled class="form-control form-control-sm text-center" width="50" id="quantityOrderCartAdmin<?= $carts['id']; ?>" value="<?= $carts['quantity'] ?>" width="10">
-                                                    <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'plus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
-                                                        <i class="mdi mdi-plus m-0"></i>
-                                                    </button>
-                                                </div>
-                                            <?php else: ?>
-                                                -
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-lg-4 col-xxl-4 text-center pt-2">
-                                            <?php if(user_link('orders/cart/d', session()->get('userPermissionView'))):?>
-                                                <a id="deletePerCartButton" onclick="confirmDeleteCart('<?=base_url()?>/orders/cart/d/',<?=$carts['id']?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2,'<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?=$orderDetails['id']?>,<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" 
-                                                    title="Remove" class="btn btn-sm btn-outline-danger float-end">
-                                                    <i class="dripicons-trash"></i>
-                                                </a>
-                                            <?php else: ?>
-                                                -
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="card border-warning border card-menu-image-style p-0 m-1">
+                                                        <div class="card-body p-0">
+                                                            <img src="<?=base_url()?><?= '/assets/uploads/menu/'.$carts['image'] ?>" class="menu-image-style rounded" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <?= ucfirst($carts['menu']); ?><br>
+                                                    x<?= $carts['quantity']; ?><br>
+                                                    ₱<?= number_format($carts['price']); ?>
+                                                </td>
+                                                <td>
+                                                    ₱<?= number_format($carts['subTotal']);?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <?php if(user_link('orders/admin/cart/qty', session()->get('userPermissionView'))):?>
+                                                        <div class="input-group">
+                                                            <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'minus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="minusButton">
+                                                                <i class="mdi mdi-minus m-0"></i>
+                                                            </button>
+                                                            <input id="inputQuantityValue" type="text" disabled class="form-control form-control-sm text-center" width="50" id="quantityOrderCartAdmin<?= $carts['id']; ?>" value="<?= $carts['quantity'] ?>" width="10">
+                                                            <button onclick="plusAndMinusCartQuantity('<?=base_url()?>/orders/admin/cart/qty/',<?= $carts['id']; ?>,<?=$carts['menu_id']?>,<?=$carts['order_id']?>,<?=$carts['quantity']?>, 2, 'plus','<?=base_url()?>/orders/admin-menu/order-cart-list-data',<?= $orderDetails['number'] ?>,<?=$orderMaxLimit['max_limit']?>);" class="btn btn-sm btn-outline-secondary" type="button" id="plusButton">
+                                                                <i class="mdi mdi-plus m-0"></i>
+                                                            </button>
+                                                        </div>
+                                                    <?php else: ?>
+                                                        -
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -64,34 +62,6 @@
                         <?php if($totalPrice['order_id'] == $orderDetails['id']):?>
                             <div class="row" id="resize-contents">
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 p-0">
-                                    <?php if($orderDetails['order_user_discount_id'] != 0):?>
-                                        <?php if(user_link('orders/admin-menu/add-payment-method', session()->get('userPermissionView'))):?>
-                                            <div class="row m-1 p-0">
-                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                    <p class="float-start h5">Customer Type Discount:</p>
-                                                    <?php foreach ($getOrderUserDiscount as $discount) : ?>
-                                                        <?php if($discount['id'] == $orderDetails['order_user_discount_id']):?>
-                                                            <p class="float-end h5"><?= ucwords($discount['customer_type']);?></p>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <?php if(user_link('orders/admin-menu/add-payment-method', session()->get('userPermissionView'))):?>
-                                            <div class="row m-1 p-0">
-                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                                    <p class="float-start h5">Customer Type Discount: </p>
-                                                    <select class="form-select form-select-sm float-end mb-1" name="order_user_discount_id" id="order_user_discount_id">
-                                                        <option disabled selected value=""> -- customer type discount-- </option>
-                                                        <?php foreach ($getOrderUserDiscount as $discount) : ?>
-                                                            <option value="<?=$discount['id']?>"><?= ucwords($discount['customer_type']);?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
                                     <?php if($orderDetails['payment_method_id'] != 0):?>
                                         <?php if(user_link('orders/admin-menu/add-payment-method', session()->get('userPermissionView'))):?>
                                             <div class="row m-1 p-0">
@@ -110,15 +80,14 @@
                                             <div class="row m-1 p-0">
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                     <p class="float-start h5">Select Payment Method: <small class="text-danger">*</small></p>
-                                                    <select class="form-select form-select-sm float-end mb-1" name="payment_method" id="payment_method">
+                                                    <select class="form-select form-select-sm float-end mb-1" name="payment_method" id="payment_method<?=$orderDetails['id']?>">
                                                         <option disabled selected> -- Select payment method-- </option>
                                                         <?php foreach ($getPaymentMethod as $method) : ?>
-                                                            <option value="<?=$method['id']?>"><?= ucwords($method['payment_method']);?></option>
+                                                            <?php if($method['id'] != 4): ?>
+                                                                <option value="<?=$method['id']?>"><?= ucwords($method['payment_method']);?></option>
+                                                            <?php endif; ?>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <div class="invalid-feedback float-start" id="error_payment_method">
-                                                        * Please select payment method.
-                                                    </div>
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -127,17 +96,42 @@
                                         <div class="row m-1 p-0">
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                                 <p class="float-start h5">Select Order Type: <small class="text-danger">*</small></p>
-                                                <select class="form-select form-select-sm float-end mb-1" name="order_type" id="order_type">
-                                                    <option disabled selected> -- Select order type -- </option>
+                                                <select class="form-select form-select-sm float-end mb-1" name="order_type" id="order_type<?=$orderDetails['id']?>">
+                                                    <option disabled selected value=""> -- Select order type -- </option>
                                                     <?php foreach ($getOrderType as $orderType) : ?>
                                                         <?php if ($orderType['id'] != 3) : ?>
                                                             <option value="<?=$orderType['id']?>"><?= ucwords($orderType['type']);?></option>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 </select>
-                                                <div class="invalid-feedback float-start" id="error_order_type">
-                                                    * Please select order type.
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if($orderDetails['order_user_discount_id'] != 0):?>
+                                        <?php if(user_link('orders/admin-menu/add-payment-method', session()->get('userPermissionView'))):?>
+                                            <div class="row m-1 p-0">
+                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
+                                                    <p class="float-start h5">Customer Type Discount:</p>
+                                                    <?php foreach ($getOrderUserDiscount as $discount) : ?>
+                                                        <?php if($discount['id'] == $orderDetails['order_user_discount_id']):?>
+                                                            <p class="float-end h5"><?= ucwords($discount['customer_type']);?></p>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
                                                 </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <div class="row m-1 p-0">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
+                                                <p class="float-start h5">Customer Type Discount: <small class="text-dark">(optional)</small></p>
+                                                <select class="form-select form-select-sm float-end mb-1" name="order_user_discount_id" id="order_user_discount_id<?=$orderDetails['id']?>">
+                                                    <option selected value=""> -- customer type discount -- </option>
+                                                    <?php foreach ($getOrderUserDiscount as $discount) : ?>
+                                                        <option value="<?=$discount['id']?>"><?= ucwords($discount['customer_type']);?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <p class="float-start h6">ID No.: <small class="text-dark">(optional)</small></p>
+                                                <input type="number" class="form-control form-control-sm mb-1" name="cust_id_no" id="cust_id_no<?=$orderDetails['id']?>" placeholder="Enter card id number">
                                             </div>
                                         </div>
                                     <?php endif; ?>
@@ -159,7 +153,7 @@
                                             <p class="float-end h5">&nbsp;₱<?= number_format($totalPrice['total_price']);?></p>
                                         </div>
                                     </div>
-                                    <div class="row m-1 p-0">
+                                    <!-- <div class="row m-1 p-0">
                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                             <p class="float-start h5">Coupon:</p>
                                             <?php if(!empty($orderDetails['coupon_discount'])):?>
@@ -172,7 +166,7 @@
                                                 </a>
                                             <?php endif;?>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <?php if($orderDetails['order_type'] == 3):?>
                                         <div class="row m-1 p-0">
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
@@ -183,15 +177,9 @@
                                     <?php endif; ?>
                                     <div class="row m-1 p-0">
                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
-                                            <p class="float-start h5">Less &nbsp;(<?= $getVAT['description'];?>) VAT:</p>
-                                            <p class="float-end h5">-&nbsp;₱<?= number_format($totalPrice['total_amount_vat']);?></p>
-                                        </div>
-                                    </div>
-                                    <div class="row m-1 p-0">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                             <p class="float-start h5">Discount:</p>
-                                            <?php if(!empty($totalPrice['discount_amount'])):?>
-                                                <p class="float-end h5">-&nbsp;₱<?= number_format($totalPrice['discount_amount']);?></p>
+                                            <?php if(!empty($totalPrice['total_amount_user_discount_without_vat'])):?>
+                                                <p class="float-end h5">-&nbsp;₱<?= number_format($totalPrice['total_amount_user_discount_without_vat']);?></p>
                                             <?php else: ?>
                                                 <p class="float-end h5">-&nbsp;₱0</p>
                                             <?php endif; ?>
@@ -212,14 +200,27 @@
                                     <div class="row m-1 p-0">
                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12 border-bottom">
                                             <p class="float-start h5">Total bill:</p>
-                                            <p class="float-end h5">&nbsp;₱<?= number_format($totalPrice['total_amount_bill']);?></p>
+                                            <?php if($orderDetails['order_user_discount_id'] == 0):?>
+                                                <p class="float-end h6">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill_no_discount'],2);?></p>
+                                            <?php else: ?>
+                                                <p class="float-end h6">&nbsp;₱&nbsp;<?= number_format($totalPrice['total_amount_bill'],2);?></p>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row m-1 p-0">
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-12">
-                                    <button type="button" onclick="checkout('<?=base_url()?>/orders/admin-menu/place-order',<?= $orderDetails['id'];?>, '<?=base_url()?>/orders/admin-menu/order-cart-list-data');" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
+                                    <button type="button" onclick="checkout('/orders/admin-menu/place-order',<?= $orderDetails['id'];?>,
+                                        $('#payment_method<?=$orderDetails['id']?>').val(),
+                                        $('#order_user_discount_id<?=$orderDetails['id']?>').val(),
+                                        $('#order_type<?=$orderDetails['id']?>').val(),
+                                        $('#cust_id_no<?=$orderDetails['id']?>').val(),
+                                        $('#payment_method<?=$orderDetails['id']?>'),
+                                        $('#order_user_discount_id<?=$orderDetails['id']?>'),
+                                        $('#order_type<?=$orderDetails['id']?>'),
+                                        $('#cust_id_no<?=$orderDetails['id']?>'),
+                                     );" class="btn btn-sm btn-danger float-end" id="checkoutAdminCartButton">Checkout</button>
                                 </div>
                             </div>
                         <?php endif; ?>

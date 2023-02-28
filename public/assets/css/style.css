@@ -31,6 +31,61 @@
     /* height: 0; */
     overflow: hidden;
 }
+/* .button-add {
+    background-color: #CFA671;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    height: 390px;
+    width: 870px;
+    font-size: 50px;
+  } */
+.button-add {
+    background-color: #ffde00;
+    background-image: url("https://i.gifer.com/origin/02/027e5370f75ad9c4c6f6d0e70bb29305.gif");
+    background-repeat: no-repeat, repeat;
+    background-size: contain;
+    border-radius: 8px;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    margin: 4px 2px;
+    cursor: pointer;
+    /* max-height: 390px; */
+    /* max-width: 870px; */
+    /* height: 390px; */
+    /* width: 870px; */
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+    height: 390px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden */
+  }
+  .button-add p{
+    color: #000000;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.6;
+    border-radius: 8px;
+    font-weight: 900;
+  }
+/* .button-add:active {
+    background-color: #9b870c 
+    } */
 .card-menu-image-style {
     width: 65px;
     height: 65px;
@@ -78,7 +133,6 @@
 }
 
 .filter-button-group {
-    border: 1px solid #e4e4e4;
     border-radius: 4px;
     margin: 10px 15px;
     display: inline-block;
@@ -92,8 +146,8 @@
     font-size: 14px;
     cursor: pointer;
     background: #fff;
-    padding: 12px 40px;
-    border: none;
+    padding: 6px 30px;
+    border: 1px solid #e4e4e4;
     border-radius: 4px;
 }
 
@@ -154,8 +208,10 @@
 }
 /* tabs filter */
 #menu-list-hover{
-    border: 2px solid gray;
-    margin-right: 0px;
+    border: 2px solid #e4e4e4;
+    /* margin-left: 100px; */
+    width: 150px;
+    /* margin: 5px; */
 }
 #menu-list-hover:active::before{
     content: "";
@@ -180,19 +236,31 @@
 #resize-card-contents{
     margin-right: 2px;
 }
-#fullscreenOpenAdminMenu, #fullscreenCloseAdminMenu{
-    padding: 5px;
+.special-grid {
+    margin: 10px;
+    padding: 10px;
+    width: 180px;
 }
-#fullscreenOpenAdminMenu .mdi, #fullscreenCloseAdminMenu .mdi{
-    font-size: 50px;
-}
-#fullscreenOpenOrders, #fullscreenCloseOrders{
-    padding: 5px;
-}
-#fullscreenOpenOrders .mdi, #fullscreenCloseOrders .mdi{
-    font-size: 50px;
+.special-grid .card {
+    margin: 10px;
+    padding: 10px;
 }
 @media (max-width: 768px) {
+    #menu-list-hover{
+        width: 150px;
+    }
+    .filter-button-group button {
+        color: #333;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        background: #fff;
+        padding: 12px 8px;
+        border: 1px solid #e4e4e4;
+        border-radius: 4px;
+    }
     #resizeContentButton{
         font-size: 8px;
         padding: 5px;
@@ -246,5 +314,60 @@
     #inputQuantityValue, .inputQuantityValue, #order_user_discount_id, 
     #payment_method, #order_type, #error_payment_method, #error_order_type{
         font-size: 8px;
+    }
+    .button-add {
+        background-color: #ffde00;
+        background-image: url("https://i.gifer.com/origin/02/027e5370f75ad9c4c6f6d0e70bb29305.gif");
+        background-repeat: no-repeat, repeat;
+        background-size: contain;
+        border-radius: 8px;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 30px;
+        margin: 4px 2px;
+        cursor: pointer;
+        /* max-height: 390px; */
+        /* max-width: 870px; */
+        /* height: 390px; */
+        /* width: 870px; */
+        flex-shrink: 0;
+        min-width: 100%;
+        min-height: 100%
+        /* display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden */
+    }
+    .special-grid {
+        margin:auto;
+        padding: auto;
+    }
+}
+
+@media (width: 1024px){
+    #menu-list-hover{
+        width: 150px;
+        /* height: 220px; */
+        /* margin-left: 30px; */
+    }
+    #resize-card-contents{
+        width: 180px;
+        font-size: 10px;
+    }
+    .filter-button-group button {
+        color: #333;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        background: #fff;
+        padding: 12px 20px;
+        border: 1px solid #e4e4e4;
+        border-radius: 4px;
     }
 }

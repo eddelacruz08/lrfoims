@@ -8,7 +8,6 @@ class OrderModel extends BaseModel
     protected $allowedFields = [
         'number',
         'user_id',
-        'menu_id',
         'quantity',
         'order_status_id',
         'total_amount_order',
@@ -18,6 +17,8 @@ class OrderModel extends BaseModel
         'c_balance',
         'delivery_fee',
         'order_user_discount_id',
+        'discount_amount',
+        'cust_id_no',
         'coupon_discount',
         'coupon_code',
         'payment_method_id',

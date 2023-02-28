@@ -4,10 +4,11 @@ use Modules\UserManagement\Models as UserManagement;
 use Modules\HomeManagement\Models as HomeManagement;
 use Modules\OrderManagement\Models as OrderManagement;
 use Modules\SystemSettings\Models as SystemSettings;
+use Modules\ProductManagement\Models as ProductManagement;
 use Modules\IngredientReportManagement\Models as IngredientReportManagement;
 use App\Controllers\SendMail as SendMail;
 
-class Security extends BaseController{
+class Security extends BaseController {
 
     function __construct(){
         helper(['form','link']);
@@ -22,13 +23,30 @@ class Security extends BaseController{
 		$this->infoModel = new SystemSettings\HomeInfoModel();
 		$this->notificationModel = new SystemSettings\NotificationModel();
         $this->stocksModel = new IngredientReportManagement\IngredientReportModel();
+        $this->ingredientsModel = new ProductManagement\ProductModel();
+		$this->menuIngredientModel = new SystemSettings\MenuIngredientModel();
         $this->email = \Config\Services::email();
         // $this->sendMail = new SendMail();
     }
 
     public function index(){
         if(empty(session()->get('isLoggedIn'))) {
-        
+            session()->remove('local_first_name');
+            session()->remove('local_last_name');
+            session()->remove('local_username');
+            session()->remove('local_email_address');
+            session()->remove('local_contact_number');
+            session()->remove('local_region_id');
+            session()->remove('local_province_id');
+            session()->remove('local_city_id');
+            session()->remove('local_addtl_address');
+            session()->remove('local_password');
+            session()->remove('local_role_id');
+            session()->remove('local_status');
+            
+            session()->remove('local_forgot_password_email_address');
+            session()->remove('local_forgot_password_email_code');
+            
             function random_string($length) {
                 $key = '';
                 $keys = array_merge(range(0, 9), range('a', 'z'));
@@ -70,7 +88,6 @@ class Security extends BaseController{
                     $user = $this->usersModel->getDetails(['lrfoims_users.username'=>$this->request->getVar('username'),'lrfoims_users.status'=>'a'])[0];
 
                     $this->setUserMethod($user);
-                    $this->session->setFlashdata('success_login', 'Successfully logged in!');
                     
 		            $userPermissionView = $this->rolesPermissionsModel->getSecurityPermissions(['lrfoims_roles_permissions.role_id' => session()->get('role_id')]);
                     session()->set(['userPermissionView' => $userPermissionView]);
@@ -131,7 +148,7 @@ class Security extends BaseController{
 
                 function random_string($length) {
                     $key = '';
-                    $keys = array_merge(range(0, 9), range('a', 'z'));
+                    $keys = array_merge(range(0, 9), range('A', 'Z'));
                     for ($i = 0; $i < $length; $i++) {
                         $key .= $keys[array_rand($keys)];
                     }
@@ -159,7 +176,6 @@ class Security extends BaseController{
                 ];
                 session()->set($localData);
 
-                $code = random_string(6);
                 $message = '';
                 $message .= '<p>Email Verification';
                 $message .= '<br><p>Code: <b>'.$code.'</b></p>';
@@ -184,44 +200,54 @@ class Security extends BaseController{
     }
 
     public function send(){
-        $code = session()->get('local_email_code');
-        $message = '';
-        $message .= '<p>Email Verification';
-        $message .= '<br><p>Code: <b>'.$code.'</b></p>';
-        $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
-        $to = session()->get('local_email_address');
-        $subject = 'Email Verification';
-        $this->email->setTo($to);
-        $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
-        $this->email->setSubject($subject);
-        $this->email->setMessage($message);
-        if($this->email->send()){
-            $this->session->setFlashdata('success','Email sent!');
-            return redirect()->to('/submit-email-verification');
+        if(!empty(session()->get('local_email_address'))){
+            $code = session()->get('local_email_code');
+            $message = '';
+            $message .= '<p>Email Verification';
+            $message .= '<br><p>Code: <b>'.$code.'</b></p>';
+            $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
+            $to = session()->get('local_email_address');
+            $subject = 'Email Verification';
+            $this->email->setTo($to);
+            $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
+            $this->email->setSubject($subject);
+            $this->email->setMessage($message);
+            if($this->email->send()){
+                $this->session->setFlashdata('success','Email sent!');
+                return redirect()->to('/submit-email-verification');
+            }else{
+                $this->session->setFlashdata('error','Email not sent!');
+                return redirect()->to('/submit-email-verification');
+            }
         }else{
-            $this->session->setFlashdata('error','Email not sent!');
+            $this->session->setFlashdata('error','Please register before the email validation!');
             return redirect()->to('/submit-email-verification');
         }
     }
 
     public function sendRegister(){
-        $code = session()->get('local_email_code');
-        $message = '';
-        $message .= '<p>Email Verification';
-        $message .= '<br><p>Code: <b>'.$code.'</b></p>';
-        $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
-        $to = session()->get('local_email_address');
-        $subject = 'Email Verification';
-        $this->email->setTo($to);
-        $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
-        $this->email->setSubject($subject);
-        $this->email->setMessage($message);
-        if($this->email->send()){
-            $this->session->setFlashdata('success','Email sent!');
-            return redirect()->to('/register-submit-email-verification');
+        if(!empty(session()->get('local_email_address'))){
+            $code = session()->get('local_email_code');
+            $message = '';
+            $message .= '<p>Email Verification';
+            $message .= '<br><p>Code: <b>'.$code.'</b></p>';
+            $message .= "<br><p>** This email is system generated. Do not reply. **</p>";
+            $to = session()->get('local_email_address');
+            $subject = 'Email Verification';
+            $this->email->setTo($to);
+            $this->email->setFrom('Stack Overflow Development Team', 'LRFOIMS');	
+            $this->email->setSubject($subject);
+            $this->email->setMessage($message);
+            if($this->email->send()){
+                $this->session->setFlashdata('success','Email sent!');
+                return redirect()->to('/register-submit-email-verification');
+            }else{
+                $this->session->setFlashdata('error','Email not sent!');
+                return redirect()->to('/register-submit-email-verification');
+            }
         }else{
-            $this->session->setFlashdata('error','Email not sent!');
-            return redirect()->to('/register-submit-email-verification');
+            $this->session->setFlashdata('error','Please register before the email validation!');
+            return redirect()->to('/submit-email-verification');
         }
     }
 
@@ -255,20 +281,7 @@ class Security extends BaseController{
                         'role_id' => session()->get('local_role_id'),
                         'status' => session()->get('local_status')
                     ];
-                    $this->usersModel->save($newData);
-
-                    session()->remove('local_first_name');
-                    session()->remove('local_last_name');
-                    session()->remove('local_username');
-                    session()->remove('local_email_address');
-                    session()->remove('local_contact_number');
-                    session()->remove('local_region_id');
-                    session()->remove('local_province_id');
-                    session()->remove('local_city_id');
-                    session()->remove('local_addtl_address');
-                    session()->remove('local_password');
-                    session()->remove('local_role_id');
-                    session()->remove('local_status');
+                    $this->usersModel->add($newData);
                     $this->session->setFlashdata('success','Successfully Registered!');
                     return redirect()->to('/login');
                 }else{
@@ -276,12 +289,10 @@ class Security extends BaseController{
                     return redirect()->to('/submit-email-verification');
                 }
             }
-
         }
-
         return view('templates/landingPage_home',$data);
     }
-
+    
 	public function getRegions() {
 		$data = $this->regionModel->where('status', 'a')->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
@@ -341,7 +352,7 @@ class Security extends BaseController{
                 if($existing == 1){
                     function random_string($length) {
                         $key = '';
-                        $keys = array_merge(range(0, 9), range('a', 'z'));
+                        $keys = array_merge(range(0, 9), range('A', 'Z'));
                         for ($i = 0; $i < $length; $i++) {
                             $key .= $keys[array_rand($keys)];
                         }
@@ -404,7 +415,7 @@ class Security extends BaseController{
                 if($_POST['email_code'] == session()->get('local_forgot_password_email_code')){
                     function random_string($length) {
                         $key = '';
-                        $keys = array_merge(range(0, 9), range('a', 'z'));
+                        $keys = array_merge(range(0, 9), range('A', 'Z'));
                         for ($i = 0; $i < $length; $i++) {
                             $key .= $keys[array_rand($keys)];
                         }
@@ -427,13 +438,11 @@ class Security extends BaseController{
                     $this->email->setSubject($subject);
                     $this->email->setMessage($message);
                     if($this->email->send()){
-                        session()->remove('local_forgot_password_email_address');
-                        session()->remove('local_forgot_password_email_code');
 
                         $jdata = [
                             'password' => $password,
                         ];
-                        $model->update($user['id'], $jdata);
+                        $this->usersModel->update($user['id'], $jdata);
 
                         $this->session->setFlashdata('success','Successfully Verified!');
                         return redirect()->to('/login');

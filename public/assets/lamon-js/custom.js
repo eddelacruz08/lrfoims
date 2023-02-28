@@ -77,10 +77,10 @@
     BaguetteBox
     ................................................. */
 	
-	baguetteBox.run('.tz-gallery', {
-		animation: 'fadeIn',
-		noScrollbars: true
-	});
+// 	baguetteBox.run('.tz-gallery', {
+// 		animation: 'fadeIn',
+// 		noScrollbars: true
+// 	});
 	
 	
 	
