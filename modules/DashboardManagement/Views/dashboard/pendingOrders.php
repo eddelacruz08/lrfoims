@@ -15,7 +15,7 @@
                 <td><span class="badge bg-secondary"><?=$row['order_status']?></span></td>
                 <td><?= Date('M d, Y - h:i a', strtotime($row['created_at']))?></td>
                 <td>
-                    <button onclick="returnIngredients('/dashboard/return-ingredients/', <?=$row['number']?>)" type="button" class="btn btn-warning btn-sm">Return Ingredients</button>
+                    <button onclick="returnIngredients('/dashboard/return-ingredients/', <?=$row['id']?>)" type="button" class="btn btn-warning btn-sm">Return Ingredients</button>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -47,7 +47,7 @@ class OrderModel extends BaseModel
 
     public function getPendingOrderDetails($conditions = [], $limit = 0, $offset = 0){
 
-        $this->select('lrfoims_orders.number, lrfoims_orders.created_at, os.order_status, ot.type');
+        $this->select('lrfoims_orders.id, lrfoims_orders.number, lrfoims_orders.created_at, os.order_status, ot.type');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
         $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
 

@@ -43,6 +43,11 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+	
+	public $ingredients_spreadsheet = [
+		'ingredients' => 'uploaded[ingredients]|ext_in[ingredients,xlsx]'
+	];
+
     public $users = [
         'first_name' => [
 			'rules' => 'required|min_length[2]|max_length[100]',
@@ -150,7 +155,7 @@ class Validation extends BaseConfig
 		],
 		'contact_number' => [
 			'label'  => 'Contact Number',
-			'rules'  => 'required|numeric|regex_match[((^(\+)(\d){12}$)|(^\d{11}$))]',
+			'rules'  => 'required|numeric|regex_match[/09[0-9]{9}/]',
 		],
         'region_id' => [
 			'rules' => 'required',

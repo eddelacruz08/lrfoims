@@ -1,6 +1,7 @@
 <?php namespace Modules\ProductManagement\Models;
 
 use App\Models\BaseModel;
+use Modules\IngredientReportManagement\Models\IngredientReportModel;
 
 class ProductModel extends BaseModel
 {
@@ -29,7 +30,40 @@ class ProductModel extends BaseModel
 
         return $this->findAll();
     }
-    
+    public function inputDetailBulk($dataStocksIngredients = []){
+
+        $ingredientReportModel = new IngredientReportModel();
+        // $this->transBegin();
+        // foreach($dataStocksIngredients as $key => $value) {
+
+        //     $stocksData = [
+        //         'ingredient_id' => $data[$key]['ingredient_id'],
+        //         'unit_quantity' => $data[$key]['unit_quantity'],
+        //         'unit_price' => $data[$key]['unit_price'],
+        //         'product_description_id' => $data[$key]['product_description_id'],
+        //         'stock_status' => $data[$key]['stock_status'],
+        //         'date_expiration' => $data[$key]['date_expiration'],
+        //         'status' => $data[$key]['status']
+        //     ];
+
+        //     $ingredients = [
+        //         'unit_quantity' => $data[$key]['unit_quantity_ingredient'],
+        //         'price' => $data[$key]['price_ingredient'],
+        //         'stock_out_date' => $data[$key]['stock_out_date_ingredient'],
+        //         'product_status_id' => $data[$key]['product_status_id_ingredient'],
+        //     ];
+          
+        //     $ingredientReportModel->insert($stocksData);
+
+        //     if(!$this->update($data[$key]['ingredient_id'], $ingredients)) {
+        //       $this->transRollback();
+        //       return false;
+        //     }
+        // }
+        // $this->transCommit();
+        return true;
+    }
+
     public function getProduct($conditions = []){
         
         $this->select('lrfoims_products.*, pc.product_description, ps.name, pm.name as description, pm.low_stock_minimum_limit as limit');

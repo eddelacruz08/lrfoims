@@ -111,13 +111,13 @@
                                     <td>
                                         <?php foreach($getCartsFoodRates as $rates):?>
                                             <?php if($row['id'] == $rates['menu_id']):?>
-                                                <?=$rates['sum_per_rating_for_food']?>
+                                                <?=number_format($rates['sum_per_rating_for_food'], 4)?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </td>
                                     <?php foreach ($getTotalBestFoods as $total) : ?>
                                         <?php if ($total['menu_id'] == $row['id']) : ?>
-                                            <td><?= $total['count_per_best_food'] ?></td>
+                                            <td><?= number_format($total['count_per_best_food']) ?></td>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tr>

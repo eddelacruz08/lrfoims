@@ -108,6 +108,136 @@ class Product extends BaseController
         $this->ingredientsModel->update($id, $data);
     }
 
+    public function insertBatchSpreadsheet() {
+        if($this->validate('ingredients_spreadsheet')){
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($this->request->getFile('ingredients'));
+            $xlsx = new Xlsx($spreadsheet);
+            $array = $spreadsheet->getActiveSheet()->toArray();
+            $ctr = 1;
+            $is_ok = false;
+            for ($i = 1; $i <= count($array); $i++) {
+                $ingredients = $this->productsModel->get(['id' => $array[$i][0], 'status' => 'a'])[0];
+                $this->dateAndTime = new \DateTime($array[$i][3]);
+                $dataStocksIngredients[] = [
+                    'ingredient_id' =>  $array[$i][0],
+                    'unit_quantity' =>  $array[$i][1],
+                    'unit_price' =>  $array[$i][2],
+                    'product_description_id' => $ingredients['product_description_id'],
+                    'stock_status' =>  1,
+                    'date_expiration' => $this->dateAndTime->format('Y-m-d'),
+                    'status' =>  'a',
+                    'unit_quantity_ingredient' => $ingredients['unit_quantity'] + $array[$i][1],
+                    'price_ingredient' => $array[$i][2],
+                    'stock_out_date_ingredient' => $this->time->format('Y-m-d'),
+                    'product_status_id_ingredient' => 1,
+                ]; 
+                // if($this->productsModel->inputDetailBulk($dataStocksIngredients)){
+                //     $ctr++;
+                //     $is_ok = true;
+                // } else {
+                //     $is_ok = false;
+                // }
+            }
+            return $this->response->setJSON($dataStocksIngredients[]);
+            if($is_ok == true){
+                $response = [
+                  'status' => 'success',
+                  'inserted_count' => count($data),
+                  'insert_count' => count($array) - 1,
+                  'exisiting_count' => $ctr,
+                  'data' => json_encode($dataStocksIngredients),
+                  'message' => 'Successfully Inserted',
+  
+                ];
+                return $this->response->setJSON($response);
+            } else{
+                $response = [
+                  'status' => 'error',
+                  'inserted_count' => 0,
+                  'insert_count' => count($array) - 1,
+                  'exisiting_count' => $ctr,
+                  'data' => $dataStocksIngredients,
+                  'message' => 'Please check the format of each data in spreadsheet',
+                ];
+                return $this->response->setJSON($response);
+            }
+        } else {
+          $response = [
+            'status' => 'error',
+            'inserted_count' => 0,
+            'insert_count' => count($array),
+            'exisiting_count' => $ctr,
+            'message' => 'Wrong File Format',
+            'data' => json_encode($this->validation->getErrors()),
+          ];
+          return json_encode($response);
+        }
+    }
+    
+    public function importBackupSpreadsheet() {
+        if($this->validate('ingredients_spreadsheet')){
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($this->request->getFile('ingredients_backup'));
+            $xlsx = new Xlsx($spreadsheet);
+            $array = $spreadsheet->getActiveSheet()->toArray();
+            die(print_r($array));
+            $data = [];
+            $ctr = 0;
+            foreach($array as $key => $value)
+            {
+                $student = $this->userModel->getCount($value[0], $value[5]);
+                if ($student != 0) {
+                  $ctr++;
+                  continue;
+                }
+                if($key == 0)
+                    continue;
+                $temp = [
+                    'student_number' =>  $value[0],
+                    'firstname' =>  $value[1],
+                    'middlename' =>  $value[2],
+                    'lastname' =>  $value[3],
+                    'suffix' =>  $value[4],
+                    'email' =>  $value[5],
+
+                ];
+                array_push($data, $temp);
+            }
+            if($this->userModel->inputDetailBulk($data)){
+              $response = [
+                'status' => 'success',
+                'inserted_count' => count($data),
+                'insert_count' => count($array) - 1,
+                'exisiting_count' => $ctr,
+                'data' => json_encode($data),
+                'message' => 'Successfully Inserted',
+
+              ];
+
+              return json_encode($response);
+            } else {
+              $response = [
+                'status' => 'error',
+                'inserted_count' => 0,
+                'insert_count' => count($array),
+                'exisiting_count' => $ctr,
+                'data' => $data,
+                'message' => 'Please check the format of each data in spreadsheet',
+              ];
+              return json_encode($response);
+            }
+        } else {
+          $response = [
+            'status' => 'error',
+            'inserted_count' => 0,
+            'insert_count' => count($array),
+            'exisiting_count' => $ctr,
+            'message' => 'Wrong File Format',
+            'data' => json_encode($this->validation->getErrors()),
+          ];
+          return json_encode($response);
+        }
+    }
+
     public function importCsvFile() {
         $this->hasPermissionRedirect('ingredients/batch-upload/stock-in');
 
@@ -176,35 +306,55 @@ class Product extends BaseController
 
     public function exportIngredients() {
         $this->hasPermissionRedirect('ingredients/batch-upload/export');
-
-        // file name 
-        $filename = 'ingredients_'.date('Ymdhi').'.csv'; 
-        header("Content-Description: File Transfer"); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/csv; ");
-
+		
         $ingredientsData = $this->productsModel->getProduct(['lrfoims_products.status'=>'a']);
 
-        // file creation 
-        $file = fopen('php://output', 'w');
+		$file_name = 'ingredients_'.date('Ymdhi').'.xlsx';
 
-        $header = array("ID","Ingredient Name", "Category Name", "Unit of Measure", "Measurement", "Amount", "status", "Created Date"); 
-        fputcsv($file, $header);
-        foreach ($ingredientsData as $key){ 
-            $line = [
-                'id' => $key['id'],
-                'product_name' => $key['product_name'],
-                'product_description' => $key['product_description'],
-                'unit_quantity' => $key['unit_quantity'],
-                'product_description_id' => $key['description'],
-                'price' => number_format($key['price']),
-                'name' => $key['name'],
-                'created_at' => Date('F d, Y - h:i a', strtotime($key['created_at'])),
-            ];
-            fputcsv($file,$line); 
-        }
-        fclose($file); 
-        exit; 
+		$spreadsheet = new Spreadsheet();
+
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$sheet->setCellValue('A1', 'Id');
+		$sheet->setCellValue('B1', 'Ingredient Name');
+		$sheet->setCellValue('C1', 'Ingredient Category Id');
+		$sheet->setCellValue('D1', 'Ingredient Category');
+		$sheet->setCellValue('E1', 'Unit Quantity');
+		$sheet->setCellValue('F1', 'Ingredient Description Id');
+		$sheet->setCellValue('G1', 'Measures');
+		$sheet->setCellValue('H1', 'Price');
+		$sheet->setCellValue('I1', 'Stock Date');
+		$sheet->setCellValue('J1', 'Created Date');
+
+		$count = 2;
+
+		foreach($ingredientsData as $row) {
+			$sheet->setCellValue('A' . $count, $row['id']);
+			$sheet->setCellValue('B' . $count, $row['product_name']);
+			$sheet->setCellValue('C' . $count, $row['product_category_id']);
+			$sheet->setCellValue('D' . $count, $row['product_description']);
+			$sheet->setCellValue('E' . $count, $row['unit_quantity']);
+			$sheet->setCellValue('F' . $count, $row['product_description_id']);
+			$sheet->setCellValue('G' . $count, $row['name']);
+			$sheet->setCellValue('H' . $count, $row['price']);
+			$sheet->setCellValue('I' . $count, $row['stock_out_date']);
+			$sheet->setCellValue('J' . $count, $row['created_at']);
+
+			$count++;
+		}
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save($file_name);
+
+		header("Content-Type: application/vnd.ms-excel");
+		header('Content-Disposition: attachment; filename="' . basename($file_name) . '"');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		header('Content-Length:' . filesize($file_name));
+		flush();
+		readfile($file_name);
+		exit;
     }
 
     public function add() {

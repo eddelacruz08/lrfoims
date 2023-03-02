@@ -151,6 +151,7 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
+                        // console.log(data);
                         for(let i = 0; i < data.getStockIngredients.length; i++){ 
                             setInterval(
                                 getExpirationDate(
@@ -209,6 +210,7 @@
                             });
                         }
                     }
+                    
                     if(days <= 3 && status == 'a'){
                         const updated_at = moment(updated_at_date).format('YYYY-MM-DD');
                         const currentDate = moment(dateNow).format('YYYY-MM-DD');

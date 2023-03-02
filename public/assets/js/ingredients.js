@@ -79,7 +79,7 @@ function displayPendingOrders(){
 }
 displayPendingOrders();
 
-function returnIngredients(route, number){
+function returnIngredients(route, id){
 	Swal.fire({
 		title: 'Return Ingredients!',
 		text: "Are you sure you want to return ingredients?",
@@ -103,10 +103,9 @@ function returnIngredients(route, number){
 				},
 			}).then((result) => {
 				$.ajax({
-					url: route + number,
+					url: route + id,
 					success: function (response) {
 						displayPendingOrders();
-            alert(response.status_text);
 						alert_no_flash(response.status_text, response.status_icon);
 					}
 				});
@@ -381,4 +380,79 @@ function confirmCancelExpiredStocks(route, stockId){
 			});
 		}
 	});
+}
+
+function insertSpreadsheet(route){
+  var fd = new FormData();
+  var files = $('#file')[0].files;
+  if(files.length > 0 ){
+     fd.append('ingredients',files[0]);
+     $.ajax({
+        url: route,
+        type: 'post',
+        data: fd,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        beforeSend: function(){
+          Swal.showLoading();
+        },
+        success: function(response){
+          Swal.close()
+          console.log(response)
+          Swal.fire({
+            icon: response['status'],
+            title: response['message'],
+            html: 'To be insert: ' + response['insert_count'] + '<br> Successfully inserted: ' + response['inserted_count'] + '<br> Existing Data: ' + response['exisiting_count']
+          })
+        },
+        error: function (request, error) {
+          Swal.close()
+          console.log(request + ' : ' + error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong!'
+          })
+        },
+     });
+  }else{
+     alert("Please select a file.");
+  }
+}
+function importIngredientsBackupSpreadsheet(route){
+  var fd = new FormData();
+  var files = $('#file')[0].files;
+  if(files.length > 0 ){
+     fd.append('ingredients_backup',files[0]);
+     $.ajax({
+        url: route,
+        type: 'post',
+        data: fd,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        beforeSend: function(){
+          showLoading();
+        },
+        success: function(response){
+          swal.close()
+          console.log(response)
+          Swal.fire({
+            icon: response['status'],
+            title: response['message'],
+            html: 'To be insert: ' + response['insert_count'] + '<br> Successfully inserted: ' + response['inserted_count'] + '<br> Existing Data: ' + response['exisiting_count']
+          })
+        },
+        error: function (request, error) {
+          swal.close()
+          Swal.fire({
+            icon: 'error',
+            title: 'Something went wrong!'
+          })
+        },
+     });
+  }else{
+     alert("Please select a file.");
+  }
+
 }

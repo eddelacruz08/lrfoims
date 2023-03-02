@@ -297,14 +297,29 @@ class Security extends BaseController {
 		$data = $this->regionModel->where('status', 'a')->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
 	}
+    
+	public function getRegionsId($id) {
+		$data = $this->regionModel->where('region_code', $id)->orderBy('id', 'ASC')->findAll();
+		return $this->response->setJSON($data);
+	}
 
 	public function getProvinces($id) {
 		$data = $this->provinceModel->where('region_code', $id)->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
 	}
 
+	public function getProvincesId($id) {
+		$data = $this->provinceModel->where('province_code', $id)->orderBy('id', 'ASC')->findAll();
+		return $this->response->setJSON($data);
+	}
+
 	public function getCities($id) {
 		$data = $this->cityModel->where('province_code', $id)->orderBy('id', 'ASC')->findAll();
+		return $this->response->setJSON($data);
+	}
+    
+	public function getCitiesId($id) {
+		$data = $this->cityModel->where('city_code', $id)->orderBy('id', 'ASC')->findAll();
 		return $this->response->setJSON($data);
 	}
 

@@ -22,6 +22,7 @@ class Dashboard extends BaseController
 		$this->menuModel = new MenuManagement\MenuModel();
         $this->ingredientReportModel = new IngredientReportManagement\IngredientReportModel();
         $this->ingredientMeasureModel = new SystemSettings\ProductMeasureModel();
+		$this->menuIngredientModel = new SystemSettings\MenuIngredientModel();
 		helper(['form','link', 'paginater']);
 		$this->limitPerTable = 10;
 	}
@@ -60,9 +61,9 @@ class Dashboard extends BaseController
 		return view('Modules\DashboardManagement\Views\dashboard\pendingOrders', $data);
 	}
 	
-	public function returnIngredients($order_number) {
+	public function returnIngredients($id) {
 		$isDeleted = 0;
-		$cartDetails = $this->cartsModel->get(['order_id' => session()->get('local_admin_menu_order_id'), 'status' => 'a']);
+		$cartDetails = $this->cartsModel->get(['order_id' => $id, 'status' => 'a']);
 		if(!empty($cartDetails)){
 			foreach ($cartDetails as $cartDetailsValue) {
 				$menuIngredients = $this->menuIngredientModel->get(['menu_id' => $cartDetailsValue['menu_id'], 'status' => 'a']);
@@ -80,19 +81,16 @@ class Dashboard extends BaseController
 				}
 			}
 		}else{
-
 			$orderInfo = [
 				'order_status_id' => 6,
 			];
-			$this->ordersModel->update(session()->get('local_admin_menu_order_id'), $orderInfo);
-
-			$orderIdPerOrder = [
-				'local_admin_menu_order_id' => null,
+			$this->ordersModel->update($id, $orderInfo);
+			$data = [
+				'status'=> 'Returned Successfully',
+				'status_text' => 'Success!',
+				'status_icon' => 'success'
 			];
-			session()->set($orderIdPerOrder);
-			
-			$this->session->destroy();
-			return redirect()->to('/');
+			return $this->response->setJSON($data);
 		}
 		if($isDeleted == 1){
 			foreach ($ingredientsReturnData as $ingredientsDataValue) {
@@ -109,23 +107,24 @@ class Dashboard extends BaseController
 			$orderInfo = [
 				'order_status_id' => 6,
 			];
-			$this->ordersModel->update(session()->get('local_admin_menu_order_id'), $orderInfo);
+			$this->ordersModel->update($id, $orderInfo);
 
 			$data = [
 				'status'=> 'Added Successfully',
 				'status_text' => 'Success!',
 				'status_icon' => 'success'
 			];
-			$this->response->setJSON();
+			return $this->response->setJSON($data);
 		}else{
 			$data = [
 				'status'=> 'Opss',
 				'status_text' => 'Failed!',
 				'status_icon' => 'error'
 			];
-			$this->response->setJSON();
+			$this->response->setJSON($data);
 		}
 	}
+
 	public function getPendingOrdersPerPage(){
 		if(!empty($_GET['search'])){
 			$search = $_GET['search'];

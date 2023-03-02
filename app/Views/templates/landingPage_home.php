@@ -20,22 +20,18 @@
                     <?php endif; ?>
                     <?php if(user_link('menu', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link" href="/menu">Menu</a></li>
-                    <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Menu</a></li>
                     <?php endif; ?>
                     <?php if(user_link('cart', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link" href="/cart">Cart
                             <?php foreach ($_SESSION['getCustomerCountCarts']as $countCarts): ?>
-                                <span class="badge bg-warning rounded-pill"><?=$countCarts['customer_count_carts']?></span>
+                                <?=$countCarts['customer_count_carts'] == 0 ? 
+                                '<span class="badge bg-warning rounded-pill"><i class="mdi mdi-cart-outline"></i></span>' :
+                                '<span class="badge bg-warning rounded-pill">'.$countCarts['customer_count_carts'].'</span>'?>
                             <?php endforeach; ?>
                         </a></li>
-                    <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Cart</a></li>
                     <?php endif; ?>
                     <?php if(user_link('profile', session()->get('userPermissionView'))):?>
                         <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                    <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="javascript: void(0);">Profile</a></li>
                     <?php endif; ?>
                     <?php if(session()->get('role_id')==null):?>
                         <li class="nav-item"><a class="nav-link" href="/order-status-list">Order Status</a></li>

@@ -41,8 +41,11 @@ $routes->match(['get','post'],'register-submit-email-verification', 'Security::e
 $routes->get('/import', 'Import::index');
 $routes->get('/(:alpha)/403', 'Security::fileNotFound/$1');
 $routes->get('/get-regions', 'Security::getRegions');
+$routes->get('/get-regions/(:num)', 'Security::getRegionsId/$1');
 $routes->get('/get-provinces/(:num)', 'Security::getProvinces/$1');
+$routes->get('/get-provinces-code/(:num)', 'Security::getProvincesId/$1');
 $routes->get('/get-cities/(:num)', 'Security::getCities/$1');
+$routes->get('/get-cities-code/(:num)', 'Security::getCitiesId/$1');
 $routes->get('/get-barangay/(:num)', 'Security::getBarangay/$1'); 
 $routes->get('/submit-email-verification', 'Security::emailVerification');
 $routes->match(['get','post'],'submit', 'Security::send');

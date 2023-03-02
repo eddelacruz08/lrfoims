@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="order_menu_fullscreen_display">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
 
     </head>
 
-    <body class="loading" data-layout="topnav">
+    <body class="loading" data-layout="topnav" style="background-color: #fff">
   
         <?= $this->rendersection('content_order_status_list') ?>
         
