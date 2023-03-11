@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="order_menu_fullscreen_display">
+<html lang="en" data-layout-position="fixed"data-sidenav-size="full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,15 +29,56 @@
         <link href="/assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
         <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+        <style>
+            #loader {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                z-index: 9999;
+                text-align: center;
+            }
 
+            #loader img {
+                margin-top: 10%;
+            }
+        </style>
     </head>
 
-    <body class="loading" data-layout="topnav">
+    <body class="loading" data-layout="topnav" style="background-color: #eef2f7; color: black;">
   
+        <div id="loader">
+            <img src="https://i.pinimg.com/originals/f1/d1/75/f1d175885a9c26d93aaafbeaa8f6e204.gif">
+            <p>Loading...</p>
+        </div>
+
         <?= $this->rendersection('content') ?>
         
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+           var xhr = new XMLHttpRequest();
+            var start = new Date().getTime();
+            
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var end = new Date().getTime();
+                    var duration = end - start;
+                    
+                    setTimeout(function() {
+                        document.getElementById("loader").style.display = "none";
+                    }, duration);
+                }
+            };
+            var currentUrl = window.location.href;
+            xhr.open("GET", currentUrl, true);
+            xhr.send();
+
+            document.getElementById("loader").style.display = "block";
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
         <script src="https://kit.fontawesome.com/9cef9fee62.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>

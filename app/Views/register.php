@@ -120,7 +120,63 @@
                                 <a href="/login">Already have an account.</a>
                             </div>
                             <div class="col-6">
-                                <button type="submit" id="submitButton" class="btn btn-primary float-end">Sign Up</button>
+                                <button type="button" class="btn btn-info btn-sm float-end" data-bs-toggle="modal" data-bs-target="#info-alert-modal">Sign Up</button>
+                                <div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                            <div class="modal-body p-3">
+                                                <div class="text-start">
+                                                    <i class="ri-information-line h1 text-info"></i>
+                                                    <h5 class="mt-2">Terms and Conditions</h5>
+                                                </div>
+                                                <div class="text-start" style="overflow-y: scroll; max-height: 500px;">
+                                                    <p class="mt-2">1. INTRODUCTION</p>
+                                                    <p class="mt-2">
+                                                        1.1 Welcome to the Lamon Restaurant Food Ordering and Inventory System (LRFOIS) online website, the system takes its responsibilities under applicable privacy laws and regulations ("Privacy Laws") seriously and is committed to respecting the privacy rights and concerns of all Users of our website. Users refers to a user who registers for an account with us for use of the system. We recognize the importance of the personal data you have entrusted to us and believe that it is our responsibility to properly manage, protect and process your personal data. This Privacy Policy (“Privacy Policy” or “Policy”) is designed to assist you in understanding how we collect, use, disclose and/or process the personal data you have provided to us and/or we possess about you, whether now or in the future, as well as to assist you in making an informed decision before providing us with any of your personal data. 
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        1.2 "Personal Data" or "personal data" means data, whether true or not, about an individual who can be identified from that data, or from that data and other information to which an organisation has or is likely to have access. 
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        1.3 By using the system, registering for an account with us, you acknowledge and agree that you accept the requirements, and/or policies outlined in this Privacy Policy, and you hereby consent to us collecting, using, disclosing and/or processing your personal data as described herein. IF YOU DO NOT CONSENT TO THE PROCESSING OF YOUR PERSONAL DATA AS DESCRIBED IN THIS PRIVACY POLICY, PLEASE DO NOT USE OUR SYSTEM OR ACCESS OUR WEBSITE. If we change our Privacy Policy, we will notify you by posting those changes or the amended Privacy Policy on our website. We reserve the right to amend this Privacy Policy at any time. To the fullest extent permissible under applicable law, your continued use of the system, shall constitute your acknowledgment and acceptance of the changes made to this Privacy Policy.
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        1.4 This Policy applies to customers who use the system except where expressly stated otherwise.
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        2. WHEN WILL LRFOIS COLLECT PERSONAL DATA?
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        2.1 We will/may collect personal data about you:
+                                                            when you register and/or use our website, or open an account with us;
+                                                            when you enter into any agreement in respect of your interactions with us, or when you use our system;
+                                                            when you interact with us, such as via phone calls, face-to-face meetings, social media platforms and emails;
+                                                            when you use our electronic services, or interact with us via our application or use services on our system;
+                                                            when you carry out transactions through our Services;
+                                                            when you provide us with feedback;
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        3. WHAT PERSONAL DATA WILL LRFOIS COLLECT?
+                                                    </p>
+                                                    <p class="mt-2">
+                                                        3.1 The personal data that the system may collect includes but is not limited to:
+                                                            
+                                                            name;
+                                                            username;
+                                                            email address;
+                                                            contact number;
+                                                            billing and/or delivery address;
+                                                            password;
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer p-2">
+                                                    <button type="submit" id="submitButton" class="btn btn-sm btn-primary float-end my-2">I understand, continue!</button>
+                                                    <button type="button" class="btn btn-sm btn-default my-2" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

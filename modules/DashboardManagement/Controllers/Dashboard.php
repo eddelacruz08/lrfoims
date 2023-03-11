@@ -72,8 +72,7 @@ class Dashboard extends BaseController
 					$ingredientStatus = $ingredients['unit_quantity'] + ($menuIngredientsValue['unit_quantity'] * $cartDetailsValue['quantity']);
 					$ingredientsReturnData[] = [
 						'ingredient_id' => $ingredients['id'],
-						'unit_quantity' => $ingredients['unit_quantity'] + ($menuIngredientsValue['unit_quantity'] * $cartDetailsValue['quantity']),
-						'product_status_id' => ($ingredientStatus < 0.01 ? 2 : 1)
+						'unit_quantity' => $ingredients['unit_quantity'] + ($menuIngredientsValue['unit_quantity'] * $cartDetailsValue['quantity'])
 					];
 					$isDeleted = 1;
 						
@@ -86,8 +85,8 @@ class Dashboard extends BaseController
 			];
 			$this->ordersModel->update($id, $orderInfo);
 			$data = [
-				'status'=> 'Returned Successfully',
-				'status_text' => 'Success!',
+				'status'=> 'Success!',
+				'status_text' => 'Returned Successfully!',
 				'status_icon' => 'success'
 			];
 			return $this->response->setJSON($data);
@@ -95,8 +94,7 @@ class Dashboard extends BaseController
 		if($isDeleted == 1){
 			foreach ($ingredientsReturnData as $ingredientsDataValue) {
 				$ingredientInfo = [
-					'unit_quantity' => $ingredientsDataValue['unit_quantity'],
-					'product_status_id' => $ingredientsDataValue['product_status_id'],
+					'unit_quantity' => $ingredientsDataValue['unit_quantity']
 				];
 				$this->ingredientsModel->update($ingredientsDataValue['ingredient_id'], $ingredientInfo);
 			}
@@ -110,15 +108,15 @@ class Dashboard extends BaseController
 			$this->ordersModel->update($id, $orderInfo);
 
 			$data = [
-				'status'=> 'Added Successfully',
-				'status_text' => 'Success!',
+				'status'=> 'Success!',
+				'status_text' => 'Returned Successfully!',
 				'status_icon' => 'success'
 			];
 			return $this->response->setJSON($data);
 		}else{
 			$data = [
 				'status'=> 'Opss',
-				'status_text' => 'Failed!',
+				'status_text' => 'Failed to return!',
 				'status_icon' => 'error'
 			];
 			$this->response->setJSON($data);

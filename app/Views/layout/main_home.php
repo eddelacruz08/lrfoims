@@ -38,15 +38,56 @@
         <link rel="stylesheet" href="/assets/lamon-css/responsive.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/assets/lamon-css/custom.css">
+        <style>
+            #loader {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                z-index: 9999;
+                text-align: center;
+            }
 
-    </head>
+            #loader img {
+                margin-top: 10%;
+            }
+        </style>
+        </head>
 
     <body class="loading" data-layout="topnav">
   
+        <div id="loader">
+            <img src="https://i.pinimg.com/originals/f1/d1/75/f1d175885a9c26d93aaafbeaa8f6e204.gif">
+            <p>Loading...</p>
+        </div>
+
         <?= $this->rendersection('content_home') ?>
         
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+           var xhr = new XMLHttpRequest();
+            var start = new Date().getTime();
+            
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var end = new Date().getTime();
+                    var duration = end - start;
+                    
+                    setTimeout(function() {
+                        document.getElementById("loader").style.display = "none";
+                    }, duration);
+                }
+            };
+            var currentUrl = window.location.href;
+            xhr.open("GET", currentUrl, true);
+            xhr.send();
+
+            document.getElementById("loader").style.display = "block";
+        </script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
         <script src="https://kit.fontawesome.com/9cef9fee62.js"></script>

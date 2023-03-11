@@ -308,9 +308,11 @@ class OrderModel extends BaseModel
     
     public function getOrderReports($conditions = []){
 
-        $this->select('lrfoims_orders.*, os.order_status, ot.type');
+        $this->select('lrfoims_orders.*, os.order_status, ot.type, u.first_name, r.role_name');
         $this->join('lrfoims_order_status as os', 'lrfoims_orders.order_status_id = os.id', 'left');
         $this->join('lrfoims_order_type as ot', 'lrfoims_orders.order_type = ot.id', 'left');
+        $this->join('lrfoims_users as u', 'lrfoims_orders.user_id = u.id', 'left');
+        $this->join('lrfoims_roles as r', 'u.role_id = r.id', 'left');
 
         foreach($conditions as $field => $value){
             $this->where([$field => $value]);

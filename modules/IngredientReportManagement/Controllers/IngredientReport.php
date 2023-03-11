@@ -140,12 +140,20 @@ class IngredientReport extends BaseController
 					'title' => 'List of Reservations',
 					'type' => 'report',
 				];
+
+				$pdf = new MYPDF('landscape', PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
+				// set default header data
+				$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
+				// set margins
+				$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 				if($_POST['date_status'] == 1){
 					$ingredientDate = explode('/', $_POST['date']);
 					$strDate = $ingredientDate[2].'-'.$ingredientDate[0].'-'.$ingredientDate[1];
 					$data['ingredients'] = $this->ingredientsModel->getIngredientReports(['CAST(lrfoims_products.created_at AS DATE)' => $strDate, 'lrfoims_products.status' => 'a']);
 					$data['date'] = $_POST['date'];
 					$data['date_status'] = $_POST['date_status'];
+					$pdf->SetTitle('Ingredients Report as of '.$data['date']);
+					$pdf->SetSubject('Ingredients Report as of '.$data['date']);
 				}else{
 					$explodeDate = explode(" - ", $_POST['date']);
 					$startDate = explode('/', $explodeDate[0]);
@@ -156,13 +164,9 @@ class IngredientReport extends BaseController
 					$data['date_status'] = $_POST['date_status'];
 					$data['strStartDate'] = $strStartDate;
 					$data['strEndDate'] = $strEndDate;
+					$pdf->SetTitle('Ingredients Report as of '.$data['strStartDate'].' to '.$data['strEndDate']);
+					$pdf->SetSubject('Ingredients Report as of '.$data['strStartDate'].' to '.$data['strEndDate']);
 				}
-
-				$pdf = new MYPDF('landscape', PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
-				// set default header data
-				$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
-				// set margins
-				$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 				$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 				$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 				// set auto page breaks

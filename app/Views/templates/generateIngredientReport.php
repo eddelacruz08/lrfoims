@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/img/lamon_logo.png" />
+    <title>Ingredients Report</title>
     <style>               
         table,
         th,
@@ -63,7 +64,7 @@
                             <span><?= $row['product_status_id'] == 1 ? ucfirst($row['name']) : ucfirst($row['name']) ?></span>
                         </td>
                         <td style="text-align:center; font-size: 10pt">
-                            <?= Date('F d, Y - h:i a', strtotime($row['created_at']))?>
+                            <?= Date('M d, Y h:i a', strtotime($row['created_at']))?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

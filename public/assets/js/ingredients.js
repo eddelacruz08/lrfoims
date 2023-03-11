@@ -58,16 +58,10 @@ function submitAddStockForm(route, ingredient_id_value, category_id_value, unit_
 
 function displayPendingOrders(){
   var element = $('#display-pending-orders-table');
-  var spinner = '<div class="spinner-border text-center m-4" role="status">';
-      spinner += '<span class="visually-hidden">Loading...</span>';
-      spinner += '</div>';
   $.ajax({
     url: "/dashboard/get-pending-orders/v",
     type: 'GET',
     data: {},
-    beforeSend: function () {
-      element.html(spinner);
-    },
     success: function (html) {
       element.html(html);
     },

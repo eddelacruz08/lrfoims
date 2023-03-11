@@ -159,11 +159,19 @@ class OrderReport extends BaseController
 					'title' => 'Order Reports',
 					'type' => 'report',
 				];
+
+				$pdf = new MYPDF('landscape', PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
+				// set default header data
+				$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
+				// set margins
+				$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 				if($_POST['date_status'] == 1){
 					$data['orders'] = $this->ordersModel->getOrderReports(['lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
 					$data['ordersTotalAmount'] = $this->ordersModel->getTotalAmountOrderReports(['lrfoims_orders.order_status_id' => 7, 'lrfoims_orders.created_at' => $_POST['date'], 'lrfoims_orders.status' => 'a']);
 					$data['date'] = $_POST['date'];
 					$data['date_status'] = $_POST['date_status'];
+					$pdf->SetTitle('Order Report as of '.$data['date']);
+					$pdf->SetSubject('Order Report as of '.$data['date']);
 				}else{
 					$explodeDate = explode(" - ", $_POST['date']);
 					$startDate = explode('/', $explodeDate[0]);
@@ -175,13 +183,9 @@ class OrderReport extends BaseController
 					$data['date_status'] = $_POST['date_status'];
 					$data['strStartDate'] = $strStartDate;
 					$data['strEndDate'] = $strEndDate;
+					$pdf->SetTitle('Order Report as of '.$data['strStartDate'].' to '.$data['strEndDate']);
+					$pdf->SetSubject('Order Report as of '.$data['strStartDate'].' to '.$data['strEndDate']);
 				}
-
-				$pdf = new MYPDF('landscape', PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
-				// set default header data
-				$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
-				// set margins
-				$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 				$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 				$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 				// set auto page breaks

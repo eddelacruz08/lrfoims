@@ -774,7 +774,7 @@ class Order extends BaseController
                 $data = [
                     'total_amount_order' => $_POST['total_amount_order'],
                     'total_amount' =>$_POST['total_amount'],
-                    'discount_amount' =>isset($_POST['discount_amount']),
+                    'discount_amount' =>$_POST['discount_amount'],
                     'c_cash' => $_POST['c_cash'],
                     'c_balance' => $_POST['c_cash'] - $_POST['total_amount'],
                     'order_status_id' => 5

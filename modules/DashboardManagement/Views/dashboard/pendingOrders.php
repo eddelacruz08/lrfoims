@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <?php foreach ($getPendingOrders as $row): ?> 
-            <tr>
+            <tr class="border-bottom">
                 <td>Order#<?=$row['number']?></td>
                 <td><span class="badge bg-secondary"><?=$row['order_status']?></span></td>
                 <td><?= Date('M d, Y - h:i a', strtotime($row['created_at']))?></td>

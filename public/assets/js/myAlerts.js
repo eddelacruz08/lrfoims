@@ -459,7 +459,7 @@ function applyPayment(route, orderId, totalAmount, url, orderNumber, orderMaxLim
 					c_cash: inputValue,
 					total_amount_order: totalAmount,
 					total_amount: rest_param[0].toFixed(2),
-					discount_amount: rest_param[1],
+					discount_amount: (rest_param[1] == undefined ? 0 : rest_param[1]),
 
 				},
 				cache: false,

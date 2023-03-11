@@ -105,6 +105,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-sm btn-success float-end mt-2"><?= $action ?></button>
+                        <a href="/users" class="btn btn-sm btn-warning float-end mt-2 me-2">Cancel</a>
                     </form>
                 </div>
             </div>
